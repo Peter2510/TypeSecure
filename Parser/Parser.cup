@@ -1,0 +1,131 @@
+/* Codigo de usuario */
+
+// importaciones y paquetes
+
+package com.peter.typesecure.parser;
+
+import com.peter.typesecure.lexer.Lexer;
+import java_cup.runtime.Symbol;
+
+
+// Codigo para el parser, variables, metodos
+
+parser code {:
+
+    public Parser(Lexer lexer) {
+        super(lexer);
+    }
+
+    //Metodo llamado automaticamente al encontrar error sintanctico
+
+
+    public void syntax_error(Symbol s){
+
+    String lexema = s.value.toString();
+    int fila = s.right;
+    int columna = s.left;
+    
+    System.out.println("Error Sintactico hallado");
+    System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
+
+    }
+
+    //Metodo llamado cuando no se puede recuperar de un error
+    
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        
+    String lexema = s.value.toString();
+    int fila = s.right;
+    int columna = s.left;
+    
+    System.out.println("Error Sintactico hallado PANIC MODE");
+    System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
+        
+    }
+
+:}
+
+                                                    // CODIGO PARA LAS ACCIONES GRAMATICALES
+
+            /* Declaraciones de terminales y no terminales */
+
+    /* TERMINALES */
+
+/* NUMEROS */
+
+terminal NUMBER;
+
+terminal BIGINT;
+
+/* ID */
+terminal ID;
+
+/* TEXTO */
+terminal TEXTO;
+
+/* BOOLEANOS */
+terminal TRUE,FALSE;
+
+/* TIPOS DE DATOS */
+terminal RNUMBER,RBIGINT,RSTRING,RBOOLEAN,RVOID,RCONST,RLET;
+
+/* SIMBOLOS ARITMETICOS */
+
+terminal MAS,MENOS,MULTIPLICACION,DIVISION,MOD,UMENOS;
+terminal PARENTESIS_ABIERTO,PARENTESIS_CERRADO;
+terminal INCREMENTO,DECREMENTO;
+
+/* ASIGNACION */
+terminal ASIGNACION;
+
+
+/* NO TERMINALES */
+
+//no terminal que da inicio a todo
+non terminal inicio;
+
+non terminal incremento;
+
+
+// PRECEDENCIA
+precedence left MAS,MENOS;
+precedence left MULTIPLICACION,DIVISION;
+precedence left PARENTESIS_ABIERTO,PARENTESIS_CERRADO;
+precedence right UMENOS; 
+
+
+start with inicio;
+
+/* Reglas sintacticas */
+ 
+
+// Da inicio a las transiciones
+inicio ::= NUMBER:a   {: System.out.println("Encontro un number " + a ); :}
+        |  BIGINT:a   {: System.out.println("Encontro un bigint " + a ); :}
+        |  ID:a       {: System.out.println("Encontro un id " + a ); :}
+        | TEXTO:a     {: System.out.println("Encontro un texto " + a ); :}
+        | TRUE:a        {: System.out.println("Encontro un true " + a ); :}  
+        | FALSE:a       {: System.out.println("Encontro un false " + a ); :} 
+        | RNUMBER:a   {:System.out.println("Reservada " +a);:}
+        | RBIGINT:a   {:System.out.println("Reservada " +a);:}
+        | RSTRING:a   {:System.out.println("Reservada " +a);:}
+        | RBOOLEAN:a  {:System.out.println("Reservada " +a);:} 
+        | RVOID:a    {:System.out.println("Reservada " +a);:}
+        | RCONST:a   {:System.out.println("Reservada " +a);:}
+        | RLET:a    {:System.out.println("Reservada " +a);:}
+        | MAS:a {:System.out.println("op" + a);:}
+        | MENOS:a {:System.out.println("op" + a);:}
+        | MULTIPLICACION:a {:System.out.println("op" + a);:}
+        | DIVISION:a {:System.out.println("op" + a);:}
+        | MOD:a {:System.out.println("op" + a);:}
+        | PARENTESIS_ABIERTO:a {:System.out.println("op" + a);:}
+        | PARENTESIS_CERRADO:a {:System.out.println("op" + a);:}
+        | INCREMENTO:a {:System.out.println("op" + a);:}
+        | DECREMENTO:a {:System.out.println("op" + a);:}
+        | ASIGNACION:a {:System.out.println("op" + a);:}
+        | incremento
+        ;
+
+incremento ::= ID:a INCREMENTO {:System.out.println("Incremento " + a);:}
+           ;
+
