@@ -78,14 +78,54 @@ terminal INCREMENTO,DECREMENTO;
 /* ASIGNACION */
 terminal ASIGNACION;
 
+/* OPERADORES LOGICOS */
+terminal AND, OR, NOT;
+
+/* OPERADORES RELACIONALES */
+terminal MENOR_QUE, MENOR_IGUAL, MAYOR_QUE, MAYOR_IGUAL, COMPARACION, DISTINTO;
+
+/* SIMBOLOS DE PUNTUACION*/
+
+terminal PUNTO, COMA, DOS_PUNTOS, PUNTO_COMA;
+
+/* SIMBOLOS DE AGRUPACION */
+
+terminal CORCHETE_ABIERTO, CORCHETE_CERRADO;
+
+/* FUNCIONES */
+
+terminal FUNCTION;
+
+//CONVERSION DE TIPOS
+terminal FNUMBER, FBIGINT, FBOOLEAN, FSTRING;
+
+//ACCESO PROPIEDAD
+terminal LENGTH, CHARAT;
+
+//MAYUSCULA, MINUSCULA
+terminal TOLOWERCASE, TOUPPERCASE;
+
+//ACCIONES VARIAS
+terminal CONCAT, CONSOLELOG;
+
+//SENTENCIAS DE CONTROL
+
+terminal IF, ELSE, FOR, WHILE, DO, BREAK, CONTINUE, RETURN;
+
+//VALORES ESTATICOS 
+terminal MATHE, MATHPI, MATHSQRT2, MATHABS, MATHCEIL, MATHCCOS, MATHSIN, MATHTAN, MATHEXP, MATHFLOOR, MATHPOW, MATHSQRT, MATHRANDOM, PRINTAST, GETSYMBOLTABLE;
 
 /* NO TERMINALES */
 
 //no terminal que da inicio a todo
 non terminal inicio;
 
-non terminal incremento;
+//no terminal que contiene el lenguaje TypeSecure
+non terminal ts;
 
+//declaracion de variable
+non terminal declaracion_variables,declaracion_variable, tipo_acceso_variable, id_valor_variable_lista, id_valor_variable;
+non terminal tipo_dato_variable, variable_valor;
 
 // PRECEDENCIA
 precedence left MAS,MENOS;
@@ -100,32 +140,45 @@ start with inicio;
  
 
 // Da inicio a las transiciones
-inicio ::= NUMBER:a   {: System.out.println("Encontro un number " + a ); :}
-        |  BIGINT:a   {: System.out.println("Encontro un bigint " + a ); :}
-        |  ID:a       {: System.out.println("Encontro un id " + a ); :}
-        | TEXTO:a     {: System.out.println("Encontro un texto " + a ); :}
-        | TRUE:a        {: System.out.println("Encontro un true " + a ); :}  
-        | FALSE:a       {: System.out.println("Encontro un false " + a ); :} 
-        | RNUMBER:a   {:System.out.println("Reservada " +a);:}
-        | RBIGINT:a   {:System.out.println("Reservada " +a);:}
-        | RSTRING:a   {:System.out.println("Reservada " +a);:}
-        | RBOOLEAN:a  {:System.out.println("Reservada " +a);:} 
-        | RVOID:a    {:System.out.println("Reservada " +a);:}
-        | RCONST:a   {:System.out.println("Reservada " +a);:}
-        | RLET:a    {:System.out.println("Reservada " +a);:}
-        | MAS:a {:System.out.println("op" + a);:}
-        | MENOS:a {:System.out.println("op" + a);:}
-        | MULTIPLICACION:a {:System.out.println("op" + a);:}
-        | DIVISION:a {:System.out.println("op" + a);:}
-        | MOD:a {:System.out.println("op" + a);:}
-        | PARENTESIS_ABIERTO:a {:System.out.println("op" + a);:}
-        | PARENTESIS_CERRADO:a {:System.out.println("op" + a);:}
-        | INCREMENTO:a {:System.out.println("op" + a);:}
-        | DECREMENTO:a {:System.out.println("op" + a);:}
-        | ASIGNACION:a {:System.out.println("op" + a);:}
-        | incremento
-        ;
 
-incremento ::= ID:a INCREMENTO {:System.out.println("Incremento " + a);:}
-           ;
+inicio ::= ts
+       ;
 
+
+ts ::= declaracion_variables
+   ;
+
+declaracion_variables ::= declaracion_variable declaracion_variables
+                        | declaracion_variable
+                       ;
+
+declaracion_variable ::= tipo_acceso_variable id_valor_variable_lista PUNTO_COMA
+                      ;
+
+id_valor_variable_lista ::=  id_valor_variable_lista COMA id_valor_variable
+                         |   id_valor_variable
+                         ;
+
+id_valor_variable ::= ID:id DOS_PUNTOS tipo_dato_variable:tipoDato ASIGNACION variable_valor:valor {: System.out.println(id + " " + tipoDato + " " + valor); :}
+                    | ID:id ASIGNACION variable_valor:valor {: System.out.println(id + " " + valor); :}
+                    | ID:id DOS_PUNTOS tipo_dato_variable:tipoDato {: System.out.println(id + " " + tipoDato + " " + " undefined"); :}
+                   ;
+
+
+
+tipo_acceso_variable ::= RCONST:a {: RESULT = a; :} 
+                       | RLET:a   {: RESULT = a; :} 
+                      ;
+
+tipo_dato_variable ::= RNUMBER:a {: RESULT = a; :} 
+                    |  RBIGINT:a {: RESULT = a; :}
+                    |  RSTRING:a {: RESULT = a; :}
+                    | RBOOLEAN:a {: RESULT = a; :}
+                    ;
+
+variable_valor ::= NUMBER:a  {: RESULT = a; :}
+                |  BIGINT:a  {: RESULT = a; :}
+                |  TRUE:a    {: RESULT = a; :}
+                |  FALSE:a   {: RESULT = a; :}
+                |  TEXTO:a   {: RESULT = a; :}
+                ;    
