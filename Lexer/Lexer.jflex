@@ -42,7 +42,7 @@ comillaS = \'
 
     /* ID'S */
 
-id = ([a-zA-z]|"_")([a-zA-z]|{entero}|"_")+
+id = ([a-zA-z]|"_")([a-zA-z]|{entero}|"_")*
 
     /* ESPACIOS */
 
@@ -202,7 +202,9 @@ Let = "let"
 
 <YYINITIAL> "concat" { return new Symbol(sym.CONCAT,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "console.log" { return new Symbol(sym.CONSOLELOG,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "console" { return new Symbol(sym.CONSOLE,yycolumn+1,yyline+1, yytext()); }
+
+<YYINITIAL> "log" { return new Symbol(sym.LOG,yycolumn+1,yyline+1, yytext()); }
 
 <YYINITIAL> "if" { return new Symbol(sym.IF,yycolumn+1,yyline+1, yytext()); }
 

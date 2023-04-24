@@ -21,54 +21,55 @@ public class sym {
   public static final int CORCHETE_ABIERTO = 39;
   public static final int TEXTO = 5;
   public static final int FBOOLEAN = 44;
-  public static final int MATHCEIL = 64;
-  public static final int CONSOLELOG = 51;
+  public static final int MATHCEIL = 65;
   public static final int MAYOR_QUE = 31;
   public static final int DISTINTO = 34;
   public static final int RSTRING = 10;
-  public static final int MATHCCOS = 65;
+  public static final int MATHCCOS = 66;
   public static final int FALSE = 7;
   public static final int NOT = 28;
-  public static final int MATHPI = 61;
-  public static final int MATHABS = 63;
+  public static final int MATHPI = 62;
+  public static final int MATHABS = 64;
   public static final int DOS_PUNTOS = 37;
   public static final int PUNTO_COMA = 38;
   public static final int MOD = 18;
   public static final int FSTRING = 45;
+  public static final int LOG = 52;
   public static final int RBIGINT = 9;
   public static final int INCREMENTO = 23;
   public static final int NUMBER = 2;
   public static final int COMA = 36;
   public static final int TRUE = 6;
-  public static final int WHILE = 55;
-  public static final int MATHE = 60;
-  public static final int DO = 56;
-  public static final int FOR = 54;
+  public static final int WHILE = 56;
+  public static final int MATHE = 61;
+  public static final int DO = 57;
+  public static final int FOR = 55;
   public static final int DECREMENTO = 24;
   public static final int FBIGINT = 43;
-  public static final int RETURN = 59;
+  public static final int RETURN = 60;
   public static final int CONCAT = 50;
-  public static final int ELSE = 53;
+  public static final int ELSE = 54;
   public static final int MENOS = 16;
   public static final int MAS = 15;
-  public static final int BREAK = 57;
+  public static final int BREAK = 58;
   public static final int LENGTH = 46;
-  public static final int MATHEXP = 68;
-  public static final int MATHSIN = 66;
+  public static final int MATHEXP = 69;
+  public static final int MATHSIN = 67;
   public static final int EOF = 0;
   public static final int PUNTO = 35;
   public static final int FUNCTION = 41;
-  public static final int GETSYMBOLTABLE = 74;
-  public static final int PRINTAST = 73;
-  public static final int MATHSQRT2 = 62;
-  public static final int MATHPOW = 70;
+  public static final int GETSYMBOLTABLE = 75;
+  public static final int PRINTAST = 74;
+  public static final int MATHPOW = 71;
+  public static final int CONSOLE = 51;
+  public static final int MATHSQRT2 = 63;
   public static final int OR = 27;
-  public static final int MATHRANDOM = 72;
+  public static final int MATHRANDOM = 73;
   public static final int error = 1;
-  public static final int MATHSQRT = 71;
-  public static final int MATHFLOOR = 69;
-  public static final int CONTINUE = 58;
-  public static final int IF = 52;
+  public static final int MATHSQRT = 72;
+  public static final int MATHFLOOR = 70;
+  public static final int CONTINUE = 59;
+  public static final int IF = 53;
   public static final int PARENTESIS_CERRADO = 22;
   public static final int ID = 4;
   public static final int UMENOS = 20;
@@ -78,7 +79,7 @@ public class sym {
   public static final int COMPARACION = 33;
   public static final int ASIGNACION = 25;
   public static final int RNUMBER = 8;
-  public static final int MATHTAN = 67;
+  public static final int MATHTAN = 68;
   public static final int PARENTESIS_ABIERTO = 21;
   public static final int FNUMBER = 42;
   public static final int AND = 26;
@@ -135,7 +136,8 @@ public class sym {
   "TOLOWERCASE",
   "TOUPPERCASE",
   "CONCAT",
-  "CONSOLELOG",
+  "CONSOLE",
+  "LOG",
   "IF",
   "ELSE",
   "FOR",

@@ -8,3 +8,69 @@ const kod =                (45>3 && 48 > 2) || (45>3 && 48 > 2);
 let df = (45>3 && 48 > 2);
 const ads = !((xs > df && ys > gf) && (fx < 0 && yd < 0));
 let _flag: boolean = score1 > TOTAL;
+
+
+
+
+
+
+
+
+
+
+
+-*-*--*--*-* FUNCIONES --*--*-*
+
+let a = 100;
+let b = BigInt(a) / 100n;
+
+let a = BigInt(" -2 ");
+let a = BigInt(" ");
+let a = BigInt(true);
+let a = BigInt(true && false);
+
+let a = 100;
+let b = BigInt(a) / 100n;
+
+//booelan
+let _flag: string;
+
+let a = Boolean("true"); // true
+let a = Boolean("false"); // true
+let a = Boolean(""); // false
+let a = Boolean(" "); // true
+let a = Boolean(_flag); // false
+let a = Boolean(485); // false
+let a = Boolean(-485); // false
+let a = Boolean(45+87+396+48-45-sd4); // false
+
+let a = Boolean(-0); // true
+let a = Boolean(0); // true
+
+
+
+
+
+
+let a = String("hola");
+let a = String('hola');
+
+let a = String(s);
+
+let a = String(true);
+
+let a = String(true && false);
+
+let a = String(45);
+
+let a = String(-45);
+
+let a = String(45+87/id);
+
+let a = String(45+4n);
+
+let a = String(45+4n+48.8);
+
+let a = 454+a.length;
+
+let a = "hola".length;

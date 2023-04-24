@@ -106,7 +106,7 @@ terminal LENGTH, CHARAT;
 terminal TOLOWERCASE, TOUPPERCASE;
 
 //ACCIONES VARIAS
-terminal CONCAT, CONSOLELOG;
+terminal CONCAT, CONSOLE, LOG;
 
 //SENTENCIAS DE CONTROL
 
@@ -122,6 +122,12 @@ non terminal inicio;
 
 //no terminal que contiene el lenguaje TypeSecure
 non terminal ts;
+
+//opciones a ejecutar
+non terminal instrucciones, opciones_instrucciones;
+
+//instruccion
+non terminal instruccion;
 
 //declaracion de variable
 non terminal declaracion_variables,declaracion_variable, tipo_acceso_variable, id_valor_variable_lista, id_valor_variable;
@@ -140,16 +146,39 @@ non terminal incremento, decremento;
 non terminal operaciones_relacionales;
 
 //operaciones logicas
-non terminal operaciones_logicas,opcion_operacion_logica;
+non terminal operaciones_logicas;
 
 //concatenacion
 non terminal concatenacion;
+
+        /* FUNCIONES */
+
+//funcion number
+non terminal funcion_number;
+
+//funcion biging
+non terminal funcion_bigint;
+
+//funcion boolean
+non terminal funcion_boolean;
+
+//funcion string
+non terminal funcion_string;
+
+//funcion toLowerCase
+non terminal funcion_to_lower_case;
+
+//funcion toUpperCase
+non terminal funcion_to_upper_case;
+
+//funcion console log
+non terminal funcion_console_log,lista_instrucciones_console,instrucciones_console;
 
 // PRECEDENCIA
 precedence left AND;
 precedence left OR;
 precedence left NOT;
-precedence left COMPARACION, NOT, MENOR_QUE, MAYOR_QUE,MENOR_IGUAL,MAYOR_IGUAL;
+precedence left COMPARACION, MENOR_QUE, MAYOR_QUE,MENOR_IGUAL,MAYOR_IGUAL;
 precedence left MAS,MENOS,MOD;
 precedence left MULTIPLICACION,DIVISION;
 precedence left PARENTESIS_ABIERTO,PARENTESIS_CERRADO;
@@ -165,17 +194,20 @@ start with inicio;
 inicio ::= ts {: System.out.println("Doc ok"); :}
        ;
 
-
-ts ::= declaracion_variables
+ts ::= instrucciones
    ;
+
+instrucciones ::= instrucciones opciones_instrucciones
+                | opciones_instrucciones
+               ;
+
+opciones_instrucciones ::= declaracion_variable
+                        |  funcion_console_log
+                        ;
 
 dentro_bloque ::= incremento
                 | decremento
                 ;
-
-declaracion_variables ::= declaracion_variables declaracion_variable 
-                        | declaracion_variable
-                       ;
 
 declaracion_variable ::= tipo_acceso_variable id_valor_variable_lista PUNTO_COMA
                       ;
@@ -202,16 +234,23 @@ tipo_dato_variable ::= RNUMBER:a {: RESULT = a; :}
                     |  RVOID:a {: RESULT = a; :}
                     ;
 
-variable_valor ::= 
-                  operaciones_matematicas:a {: RESULT = a; :}
+variable_valor ::= instruccion
+                ;
+
+instruccion ::= operaciones_matematicas:a {: RESULT = a; :}
                 | TEXTO:a   {: RESULT = a; :}
                 | operaciones_logicas {: RESULT = "operacion logica"; :}
                 | concatenacion 
+                | funcion_boolean {: System.out.println("funcion booelan"); :}
+                | funcion_string {: System.out.println("funcion string"); :}
+                | funcion_to_lower_case
+                | funcion_to_upper_case
                 ;
 
 
-operaciones_matematicas ::= //MENOS operaciones_matematicas:a {: RESULT=a*-1;      :}%prec UMENOS 
-                         operaciones_matematicas:a MAS operaciones_matematicas:b
+operaciones_matematicas ::= MENOS operaciones_matematicas:a {:      :}%prec UMENOS 
+                        | MAS operaciones_matematicas:a {:      :}%prec UMENOS 
+                        | operaciones_matematicas:a MAS operaciones_matematicas:b
                         | operaciones_matematicas:a MENOS operaciones_matematicas:b
                         | operaciones_matematicas:a MULTIPLICACION operaciones_matematicas:b
                         | operaciones_matematicas:a DIVISION operaciones_matematicas:b
@@ -220,6 +259,10 @@ operaciones_matematicas ::= //MENOS operaciones_matematicas:a {: RESULT=a*-1;   
                         | NUMBER:a {: RESULT = a; :}
                         | BIGINT:a {: RESULT = a; :}
                         | ID:a         
+                        | funcion_number
+                        | funcion_bigint
+                        | ID PUNTO LENGTH
+                        | TEXTO PUNTO LENGTH
                         ;
 
 incremento ::= ID:a MAS MAS
@@ -234,6 +277,7 @@ operaciones_relacionales ::= operaciones_matematicas MAYOR_QUE operaciones_matem
                            | operaciones_matematicas MENOR_IGUAL operaciones_matematicas
                            | operaciones_matematicas COMPARACION operaciones_matematicas
                            | operaciones_matematicas DISTINTO operaciones_matematicas
+
                            | TRUE COMPARACION TRUE
                            | TRUE COMPARACION FALSE
                            | FALSE COMPARACION TRUE
@@ -242,6 +286,7 @@ operaciones_relacionales ::= operaciones_matematicas MAYOR_QUE operaciones_matem
                            | TRUE COMPARACION operaciones_matematicas
                            | operaciones_matematicas COMPARACION FALSE
                            | FALSE COMPARACION operaciones_matematicas
+
                            | TRUE DISTINTO TRUE
                            | TRUE DISTINTO FALSE
                            | FALSE DISTINTO TRUE
@@ -250,9 +295,40 @@ operaciones_relacionales ::= operaciones_matematicas MAYOR_QUE operaciones_matem
                            | TRUE DISTINTO operaciones_matematicas
                            | operaciones_matematicas DISTINTO FALSE
                            | FALSE DISTINTO operaciones_matematicas
-                           | PARENTESIS_ABIERTO operaciones_relacionales PARENTESIS_CERRADO
+                       
                            | TRUE {: RESULT = "true"; :}
                            | FALSE {: RESULT = "false"; :}
+
+                           | operaciones_matematicas COMPARACION TEXTO
+                           | TEXTO COMPARACION operaciones_matematicas
+                           | operaciones_matematicas DISTINTO TEXTO
+                           | TEXTO DISTINTO operaciones_matematicas
+
+                           | TEXTO COMPARACION TEXTO
+                           | TEXTO DISTINTO TEXTO
+
+                           | funcion_boolean COMPARACION TRUE
+                           | funcion_boolean COMPARACION FALSE
+                           | TRUE COMPARACION funcion_boolean
+                           | FALSE COMPARACION funcion_boolean
+                           | funcion_boolean DISTINTO TRUE
+                           | funcion_boolean DISTINTO FALSE
+                           | TRUE DISTINTO funcion_boolean
+                           | FALSE DISTINTO funcion_boolean
+                           | funcion_boolean COMPARACION funcion_boolean
+                           | funcion_boolean DISTINTO funcion_boolean
+
+                           | funcion_string COMPARACION funcion_string
+                           | funcion_string DISTINTO funcion_string
+
+                           | funcion_string COMPARACION operaciones_matematicas
+                           | funcion_string DISTINTO operaciones_matematicas
+
+                           | operaciones_matematicas COMPARACION funcion_string
+                           | operaciones_matematicas DISTINTO funcion_string
+
+
+                           | PARENTESIS_ABIERTO operaciones_relacionales PARENTESIS_CERRADO
                           ;  
 
 operaciones_logicas ::= operaciones_logicas AND operaciones_logicas
@@ -264,10 +340,57 @@ operaciones_logicas ::= operaciones_logicas AND operaciones_logicas
 
 concatenacion ::= TEXTO MAS TEXTO
                 | TEXTO MAS operaciones_logicas
-                | TEXTO MAS operaciones_matematicas
                 | operaciones_logicas MAS TEXTO 
                 | TEXTO MAS operaciones_matematicas
                ;                   
-                
 
-                
+
+funcion_number ::= FNUMBER PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                |  FNUMBER PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
+                |  FNUMBER PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
+                ;
+
+funcion_bigint  ::= FBIGINT PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                |   FBIGINT PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
+                |   FBIGINT PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
+                ;
+
+
+funcion_boolean  ::= FBOOLEAN PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                 |   FBOOLEAN PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
+                 |   FBOOLEAN PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
+                 ;
+
+
+funcion_string  ::= FSTRING PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                 |  FSTRING PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
+                 |  FSTRING PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
+                 ;
+
+funcion_to_lower_case ::= ID PUNTO TOLOWERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
+                       |  TEXTO PUNTO TOLOWERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
+                       ;
+
+funcion_to_upper_case ::= ID PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
+                       |  TEXTO PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
+                       ;
+
+funcion_console_log ::= CONSOLE PUNTO LOG PARENTESIS_ABIERTO lista_instrucciones_console PARENTESIS_CERRADO PUNTO_COMA
+            ;
+
+lista_instrucciones_console ::= lista_instrucciones_console COMA instrucciones_console
+                             |  instrucciones_console 
+                             ;
+
+
+instrucciones_console ::= operaciones_matematicas
+                       | TEXTO:a   
+                       | operaciones_logicas 
+                       | concatenacion 
+                       | funcion_boolean 
+                       | funcion_string 
+                       | funcion_to_lower_case
+                       | funcion_to_upper_case
+                       ;
+
+
