@@ -71,7 +71,7 @@ terminal RNUMBER,RBIGINT,RSTRING,RBOOLEAN,RVOID,RCONST,RLET;
 
 /* SIMBOLOS ARITMETICOS */
 
-terminal MAS,MENOS,MULTIPLICACION,DIVISION,MOD,UMENOS;
+terminal MAS,MENOS,MULTIPLICACION,MOD,DIVISION,UMENOS;
 terminal PARENTESIS_ABIERTO,PARENTESIS_CERRADO;
 terminal INCREMENTO,DECREMENTO;
 
@@ -127,12 +127,33 @@ non terminal ts;
 non terminal declaracion_variables,declaracion_variable, tipo_acceso_variable, id_valor_variable_lista, id_valor_variable;
 non terminal tipo_dato_variable, variable_valor;
 
+//operaciones matematicas
+non terminal operaciones_matematicas;
+
+//acciones dentro de parentesis o corchetes
+non terminal dentro_bloque;
+
+//incremento decremento
+non terminal incremento, decremento;
+
+//operaciones relacionales
+non terminal operaciones_relacionales;
+
+//operaciones logicas
+non terminal operaciones_logicas,opcion_operacion_logica;
+
+//concatenacion
+non terminal concatenacion;
+
 // PRECEDENCIA
-precedence left MAS,MENOS;
+precedence left AND;
+precedence left OR;
+precedence left NOT;
+precedence left COMPARACION, NOT, MENOR_QUE, MAYOR_QUE,MENOR_IGUAL,MAYOR_IGUAL;
+precedence left MAS,MENOS,MOD;
 precedence left MULTIPLICACION,DIVISION;
 precedence left PARENTESIS_ABIERTO,PARENTESIS_CERRADO;
 precedence right UMENOS; 
-
 
 start with inicio;
 
@@ -141,14 +162,18 @@ start with inicio;
 
 // Da inicio a las transiciones
 
-inicio ::= ts
+inicio ::= ts {: System.out.println("Doc ok"); :}
        ;
 
 
 ts ::= declaracion_variables
    ;
 
-declaracion_variables ::= declaracion_variable declaracion_variables
+dentro_bloque ::= incremento
+                | decremento
+                ;
+
+declaracion_variables ::= declaracion_variables declaracion_variable 
                         | declaracion_variable
                        ;
 
@@ -173,12 +198,76 @@ tipo_acceso_variable ::= RCONST:a {: RESULT = a; :}
 tipo_dato_variable ::= RNUMBER:a {: RESULT = a; :} 
                     |  RBIGINT:a {: RESULT = a; :}
                     |  RSTRING:a {: RESULT = a; :}
-                    | RBOOLEAN:a {: RESULT = a; :}
+                    |  RBOOLEAN:a {: RESULT = a; :}
+                    |  RVOID:a {: RESULT = a; :}
                     ;
 
-variable_valor ::= NUMBER:a  {: RESULT = a; :}
-                |  BIGINT:a  {: RESULT = a; :}
-                |  TRUE:a    {: RESULT = a; :}
-                |  FALSE:a   {: RESULT = a; :}
-                |  TEXTO:a   {: RESULT = a; :}
-                ;    
+variable_valor ::= 
+                  operaciones_matematicas:a {: RESULT = a; :}
+                | TEXTO:a   {: RESULT = a; :}
+                | operaciones_logicas {: RESULT = "operacion logica"; :}
+                | concatenacion 
+                ;
+
+
+operaciones_matematicas ::= //MENOS operaciones_matematicas:a {: RESULT=a*-1;      :}%prec UMENOS 
+                         operaciones_matematicas:a MAS operaciones_matematicas:b
+                        | operaciones_matematicas:a MENOS operaciones_matematicas:b
+                        | operaciones_matematicas:a MULTIPLICACION operaciones_matematicas:b
+                        | operaciones_matematicas:a DIVISION operaciones_matematicas:b
+                        | operaciones_matematicas:a MOD operaciones_matematicas:b
+                        | PARENTESIS_ABIERTO operaciones_matematicas:a PARENTESIS_CERRADO {: RESULT = a; :}
+                        | NUMBER:a {: RESULT = a; :}
+                        | BIGINT:a {: RESULT = a; :}
+                        | ID:a         
+                        ;
+
+incremento ::= ID:a MAS MAS
+           ;
+
+decremento ::= ID:a MENOS MENOS
+            ;
+
+operaciones_relacionales ::= operaciones_matematicas MAYOR_QUE operaciones_matematicas
+                           | operaciones_matematicas MAYOR_IGUAL operaciones_matematicas
+                           | operaciones_matematicas MENOR_QUE operaciones_matematicas
+                           | operaciones_matematicas MENOR_IGUAL operaciones_matematicas
+                           | operaciones_matematicas COMPARACION operaciones_matematicas
+                           | operaciones_matematicas DISTINTO operaciones_matematicas
+                           | TRUE COMPARACION TRUE
+                           | TRUE COMPARACION FALSE
+                           | FALSE COMPARACION TRUE
+                           | FALSE COMPARACION FALSE
+                           | operaciones_matematicas COMPARACION TRUE
+                           | TRUE COMPARACION operaciones_matematicas
+                           | operaciones_matematicas COMPARACION FALSE
+                           | FALSE COMPARACION operaciones_matematicas
+                           | TRUE DISTINTO TRUE
+                           | TRUE DISTINTO FALSE
+                           | FALSE DISTINTO TRUE
+                           | FALSE DISTINTO FALSE
+                           | operaciones_matematicas DISTINTO TRUE
+                           | TRUE DISTINTO operaciones_matematicas
+                           | operaciones_matematicas DISTINTO FALSE
+                           | FALSE DISTINTO operaciones_matematicas
+                           | PARENTESIS_ABIERTO operaciones_relacionales PARENTESIS_CERRADO
+                           | TRUE {: RESULT = "true"; :}
+                           | FALSE {: RESULT = "false"; :}
+                          ;  
+
+operaciones_logicas ::= operaciones_logicas AND operaciones_logicas
+                    | operaciones_logicas OR operaciones_logicas
+                    | NOT operaciones_logicas
+                    | PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
+                    | operaciones_relacionales 
+                    ;
+
+concatenacion ::= TEXTO MAS TEXTO
+                | TEXTO MAS operaciones_logicas
+                | TEXTO MAS operaciones_matematicas
+                | operaciones_logicas MAS TEXTO 
+                | TEXTO MAS operaciones_matematicas
+               ;                   
+                
+
+                

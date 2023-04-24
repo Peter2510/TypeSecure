@@ -9,7 +9,7 @@ package com.peter.typesecure.parser;
 public class sym {
   /* terminals */
   public static final int CORCHETE_CERRADO = 40;
-  public static final int DIVISION = 18;
+  public static final int DIVISION = 19;
   public static final int MENOR_IGUAL = 30;
   public static final int MENOR_QUE = 29;
   public static final int BIGINT = 3;
@@ -33,7 +33,7 @@ public class sym {
   public static final int MATHABS = 63;
   public static final int DOS_PUNTOS = 37;
   public static final int PUNTO_COMA = 38;
-  public static final int MOD = 19;
+  public static final int MOD = 18;
   public static final int FSTRING = 45;
   public static final int RBIGINT = 9;
   public static final int INCREMENTO = 23;
@@ -102,8 +102,8 @@ public class sym {
   "MAS",
   "MENOS",
   "MULTIPLICACION",
-  "DIVISION",
   "MOD",
+  "DIVISION",
   "UMENOS",
   "PARENTESIS_ABIERTO",
   "PARENTESIS_CERRADO",

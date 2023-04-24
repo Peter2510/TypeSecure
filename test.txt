@@ -1,0 +1,10 @@
+let adf = 45>3 && 48 > 2;
+let bgd =                 45>3 && id == true;
+const kod =                (45>3 && 48 > 2) || (45>3 && 48 > 2);
+
+
+
+//let as = 45>3 && id == true;
+let df = (45>3 && 48 > 2);
+const ads = !((xs > df && ys > gf) && (fx < 0 && yd < 0));
+let _flag: boolean = score1 > TOTAL;
