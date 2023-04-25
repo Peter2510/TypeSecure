@@ -113,7 +113,7 @@ terminal CONCAT, CONSOLE, LOG;
 terminal IF, ELSE, FOR, WHILE, DO, BREAK, CONTINUE, RETURN;
 
 //VALORES ESTATICOS 
-terminal MATHE, MATHPI, MATHSQRT2, MATHABS, MATHCEIL, MATHCCOS, MATHSIN, MATHTAN, MATHEXP, MATHFLOOR, MATHPOW, MATHSQRT, MATHRANDOM, PRINTAST, GETSYMBOLTABLE;
+terminal MATH, E, PI, SQRT2, ABS, CEIL, COS, SIN, TAN, EXP, FLOOR, POW, SQRT, RANDOM, PRINTAST, GETSYMBOLTABLE;
 
 /* NO TERMINALES */
 
@@ -130,11 +130,14 @@ non terminal instrucciones, opciones_instrucciones;
 non terminal instruccion;
 
 //declaracion de variable
-non terminal declaracion_variables,declaracion_variable, tipo_acceso_variable, id_valor_variable_lista, id_valor_variable;
+non terminal declaracion_variable, tipo_acceso_variable, id_valor_variable_lista, id_valor_variable;
 non terminal tipo_dato_variable, variable_valor;
 
+//asignacion
+non terminal asignacion;
+
 //operaciones matematicas
-non terminal operaciones_matematicas;
+non terminal operaciones_matematicas,funciones_numericas_estaticas;
 
 //acciones dentro de parentesis o corchetes
 non terminal dentro_bloque;
@@ -149,7 +152,9 @@ non terminal operaciones_relacionales;
 non terminal operaciones_logicas;
 
 //concatenacion
-non terminal concatenacion;
+non terminal operador_concatenacion;
+
+
 
         /* FUNCIONES */
 
@@ -165,14 +170,23 @@ non terminal funcion_boolean;
 //funcion string
 non terminal funcion_string;
 
+//funcion charAt
+non terminal funcion_char_at;
+
 //funcion toLowerCase
 non terminal funcion_to_lower_case;
 
 //funcion toUpperCase
 non terminal funcion_to_upper_case;
 
+//funcion concat
+non terminal variables_string, funcion_concat;
+
 //funcion console log
-non terminal funcion_console_log,lista_instrucciones_console,instrucciones_console;
+non terminal funcion_console_log,lista_instrucciones_console;
+
+//declaracion de funciones
+non terminal declaracion_funcion, parametros_funcion, parametro_funcion;
 
 // PRECEDENCIA
 precedence left AND;
@@ -202,12 +216,17 @@ instrucciones ::= instrucciones opciones_instrucciones
                ;
 
 opciones_instrucciones ::= declaracion_variable
+                        |  asignacion
                         |  funcion_console_log
+                        |  declaracion_funcion
                         ;
 
 dentro_bloque ::= incremento
                 | decremento
                 ;
+
+asignacion ::= ID ASIGNACION variable_valor PUNTO_COMA
+            ;
 
 declaracion_variable ::= tipo_acceso_variable id_valor_variable_lista PUNTO_COMA
                       ;
@@ -240,11 +259,13 @@ variable_valor ::= instruccion
 instruccion ::= operaciones_matematicas:a {: RESULT = a; :}
                 | TEXTO:a   {: RESULT = a; :}
                 | operaciones_logicas {: RESULT = "operacion logica"; :}
-                | concatenacion 
+                | operador_concatenacion 
                 | funcion_boolean {: System.out.println("funcion booelan"); :}
                 | funcion_string {: System.out.println("funcion string"); :}
+                | funcion_char_at
                 | funcion_to_lower_case
                 | funcion_to_upper_case
+                | funcion_concat
                 ;
 
 
@@ -256,14 +277,30 @@ operaciones_matematicas ::= MENOS operaciones_matematicas:a {:      :}%prec UMEN
                         | operaciones_matematicas:a DIVISION operaciones_matematicas:b
                         | operaciones_matematicas:a MOD operaciones_matematicas:b
                         | PARENTESIS_ABIERTO operaciones_matematicas:a PARENTESIS_CERRADO {: RESULT = a; :}
-                        | NUMBER:a {: RESULT = a; :}
-                        | BIGINT:a {: RESULT = a; :}
-                        | ID:a         
                         | funcion_number
                         | funcion_bigint
                         | ID PUNTO LENGTH
                         | TEXTO PUNTO LENGTH
+                        | funciones_numericas_estaticas
+                        | NUMBER:a {: RESULT = a; :}
+                        | BIGINT:a {: RESULT = a; :}
+                        | ID:a         
                         ;
+
+funciones_numericas_estaticas ::= MATH PUNTO ABS PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO CEIL PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO COS PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO SIN PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO TAN PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO EXP PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO FLOOR PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO POW PARENTESIS_ABIERTO operaciones_matematicas COMA operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO SQRT PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               |  MATH PUNTO RANDOM PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                               | MATH PUNTO E
+                               | MATH PUNTO PI
+                               | MATH PUNTO SQRT2
+                              ;
 
 incremento ::= ID:a MAS MAS
            ;
@@ -338,11 +375,9 @@ operaciones_logicas ::= operaciones_logicas AND operaciones_logicas
                     | operaciones_relacionales 
                     ;
 
-concatenacion ::= TEXTO MAS TEXTO
-                | TEXTO MAS operaciones_logicas
-                | operaciones_logicas MAS TEXTO 
-                | TEXTO MAS operaciones_matematicas
-               ;                   
+operador_concatenacion ::= TEXTO MAS instruccion
+                        |  instruccion MAS TEXTO 
+                        ;                   
 
 
 funcion_number ::= FNUMBER PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
@@ -367,30 +402,64 @@ funcion_string  ::= FSTRING PARENTESIS_ABIERTO operaciones_matematicas PARENTESI
                  |  FSTRING PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
                  ;
 
+funcion_char_at ::= ID PUNTO CHARAT PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                |   TEXTO PUNTO CHARAT PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+                ;
+
+
+funcion_concat ::= variables_string PUNTO CONCAT PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO  
+                |  TEXTO PUNTO CONCAT PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO  
+                |  ID PUNTO CONCAT PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO  
+                ;
+
+variables_string ::= funcion_string
+                 |  funcion_char_at   
+                 |  funcion_to_lower_case
+                 |  funcion_to_upper_case
+                 |  funcion_concat
+                 ;
+
+
 funcion_to_lower_case ::= ID PUNTO TOLOWERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
                        |  TEXTO PUNTO TOLOWERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
+                       |  variables_string PUNTO TOLOWERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
                        ;
 
 funcion_to_upper_case ::= ID PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
                        |  TEXTO PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
+                       |  variables_string PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
                        ;
 
 funcion_console_log ::= CONSOLE PUNTO LOG PARENTESIS_ABIERTO lista_instrucciones_console PARENTESIS_CERRADO PUNTO_COMA
             ;
 
-lista_instrucciones_console ::= lista_instrucciones_console COMA instrucciones_console
-                             |  instrucciones_console 
+lista_instrucciones_console ::= instruccion COMA instruccion
+                             |  instruccion 
                              ;
 
+declaracion_funcion ::= 
+                     /* funcion sin parametros y sin tipo de retorno  -- function hola(){ instrucciones } */
+                      FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones CORCHETE_CERRADO
 
-instrucciones_console ::= operaciones_matematicas
-                       | TEXTO:a   
-                       | operaciones_logicas 
-                       | concatenacion 
-                       | funcion_boolean 
-                       | funcion_string 
-                       | funcion_to_lower_case
-                       | funcion_to_upper_case
-                       ;
+                    /* funcion con parametros y sin tipo de retorno  -- function hola( parametros ){ instrucciones } */
+                    | FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones CORCHETE_CERRADO
+
+                    /* funcion sin parametros y con tipo de retorno  -- function hola():type{ instrucciones } */
+                    | FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones CORCHETE_CERRADO
+
+                    /* funcion con parametros y con tipo de retorno  -- function hola( parametros ):type{ instrucciones } */
+                    | FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones CORCHETE_CERRADO
+
+
+                    ;
+
+parametros_funcion ::= parametro_funcion COMA parametro_funcion
+                    |  parametro_funcion
+                    ;
+
+parametro_funcion ::= ID DOS_PUNTOS tipo_dato_variable
+                   ;
+
+
 
 

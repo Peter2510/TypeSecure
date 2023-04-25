@@ -9,30 +9,34 @@ package com.peter.typesecure.parser;
 public class sym {
   /* terminals */
   public static final int CORCHETE_CERRADO = 40;
+  public static final int SQRT2 = 64;
   public static final int DIVISION = 19;
   public static final int MENOR_IGUAL = 30;
   public static final int MENOR_QUE = 29;
+  public static final int FLOOR = 71;
   public static final int BIGINT = 3;
   public static final int CHARAT = 47;
   public static final int TOUPPERCASE = 49;
   public static final int RVOID = 12;
   public static final int RLET = 14;
   public static final int TOLOWERCASE = 48;
+  public static final int EXP = 70;
+  public static final int SIN = 68;
   public static final int CORCHETE_ABIERTO = 39;
   public static final int TEXTO = 5;
   public static final int FBOOLEAN = 44;
-  public static final int MATHCEIL = 65;
+  public static final int RANDOM = 74;
+  public static final int POW = 72;
   public static final int MAYOR_QUE = 31;
   public static final int DISTINTO = 34;
   public static final int RSTRING = 10;
-  public static final int MATHCCOS = 66;
   public static final int FALSE = 7;
   public static final int NOT = 28;
-  public static final int MATHPI = 62;
-  public static final int MATHABS = 64;
   public static final int DOS_PUNTOS = 37;
+  public static final int CEIL = 66;
   public static final int PUNTO_COMA = 38;
   public static final int MOD = 18;
+  public static final int TAN = 69;
   public static final int FSTRING = 45;
   public static final int LOG = 52;
   public static final int RBIGINT = 9;
@@ -41,7 +45,6 @@ public class sym {
   public static final int COMA = 36;
   public static final int TRUE = 6;
   public static final int WHILE = 56;
-  public static final int MATHE = 61;
   public static final int DO = 57;
   public static final int FOR = 55;
   public static final int DECREMENTO = 24;
@@ -53,36 +56,34 @@ public class sym {
   public static final int MAS = 15;
   public static final int BREAK = 58;
   public static final int LENGTH = 46;
-  public static final int MATHEXP = 69;
-  public static final int MATHSIN = 67;
+  public static final int PI = 63;
+  public static final int COS = 67;
+  public static final int E = 62;
   public static final int EOF = 0;
   public static final int PUNTO = 35;
   public static final int FUNCTION = 41;
-  public static final int GETSYMBOLTABLE = 75;
-  public static final int PRINTAST = 74;
-  public static final int MATHPOW = 71;
+  public static final int GETSYMBOLTABLE = 76;
+  public static final int PRINTAST = 75;
   public static final int CONSOLE = 51;
-  public static final int MATHSQRT2 = 63;
   public static final int OR = 27;
-  public static final int MATHRANDOM = 73;
   public static final int error = 1;
-  public static final int MATHSQRT = 72;
-  public static final int MATHFLOOR = 70;
   public static final int CONTINUE = 59;
   public static final int IF = 53;
   public static final int PARENTESIS_CERRADO = 22;
   public static final int ID = 4;
+  public static final int ABS = 65;
   public static final int UMENOS = 20;
   public static final int MULTIPLICACION = 17;
   public static final int RCONST = 13;
   public static final int RBOOLEAN = 11;
+  public static final int SQRT = 73;
   public static final int COMPARACION = 33;
   public static final int ASIGNACION = 25;
   public static final int RNUMBER = 8;
-  public static final int MATHTAN = 68;
   public static final int PARENTESIS_ABIERTO = 21;
   public static final int FNUMBER = 42;
   public static final int AND = 26;
+  public static final int MATH = 61;
   public static final int MAYOR_IGUAL = 32;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -146,19 +147,20 @@ public class sym {
   "BREAK",
   "CONTINUE",
   "RETURN",
-  "MATHE",
-  "MATHPI",
-  "MATHSQRT2",
-  "MATHABS",
-  "MATHCEIL",
-  "MATHCCOS",
-  "MATHSIN",
-  "MATHTAN",
-  "MATHEXP",
-  "MATHFLOOR",
-  "MATHPOW",
-  "MATHSQRT",
-  "MATHRANDOM",
+  "MATH",
+  "E",
+  "PI",
+  "SQRT2",
+  "ABS",
+  "CEIL",
+  "COS",
+  "SIN",
+  "TAN",
+  "EXP",
+  "FLOOR",
+  "POW",
+  "SQRT",
+  "RANDOM",
   "PRINTAST",
   "GETSYMBOLTABLE"
   };

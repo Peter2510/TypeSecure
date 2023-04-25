@@ -222,31 +222,33 @@ Let = "let"
 
 <YYINITIAL> "return" { return new Symbol(sym.RETURN,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.E" { return new Symbol(sym.MATHE,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "Math" { return new Symbol(sym.MATH,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.PI" { return new Symbol(sym.MATHPI,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "E" { return new Symbol(sym.E,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.SQRT2" { return new Symbol(sym.MATHSQRT2,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "PI" { return new Symbol(sym.PI,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.abs" { return new Symbol(sym.MATHABS,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "SQRT2" { return new Symbol(sym.SQRT2,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.ceil" { return new Symbol(sym.MATHCEIL,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "abs" { return new Symbol(sym.ABS,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.cos" { return new Symbol(sym.MATHCCOS,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "ceil" { return new Symbol(sym.CEIL,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.sin" { return new Symbol(sym.MATHSIN,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "cos" { return new Symbol(sym.COS,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.tan" { return new Symbol(sym.MATHTAN,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "sin" { return new Symbol(sym.SIN,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.exp" { return new Symbol(sym.MATHEXP,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "tan" { return new Symbol(sym.TAN,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.floor" { return new Symbol(sym.MATHFLOOR,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "exp" { return new Symbol(sym.EXP,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.pow" { return new Symbol(sym.MATHPOW,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "floor" { return new Symbol(sym.FLOOR,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.sqrt" { return new Symbol(sym.MATHSQRT,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "pow" { return new Symbol(sym.POW,yycolumn+1,yyline+1, yytext()); }
 
-<YYINITIAL> "Math.random" { return new Symbol(sym.MATHRANDOM,yycolumn+1,yyline+1, yytext()); }
+<YYINITIAL> "sqrt" { return new Symbol(sym.SQRT,yycolumn+1,yyline+1, yytext()); }
+
+<YYINITIAL> "random" { return new Symbol(sym.RANDOM,yycolumn+1,yyline+1, yytext()); }
 
 <YYINITIAL> "printAst" { return new Symbol(sym.PRINTAST,yycolumn+1,yyline+1, yytext()); }
 

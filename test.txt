@@ -74,3 +74,37 @@ let a = String(45+4n+48.8);
 let a = 454+a.length;
 
 let a = "hola".length;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//APLICANDO FUNCONIONES ENTRE FUNCIONES
+
+let str1 = "This is string one" ; 
+let str2 = "This is string two" ; 
+let strf = str1.concat(str2.length);
+console.log("str1 + str2 : "+str3);
+
+console.log(s1.concat(" ").concat(s2));
+
+
+// hello
+console.log(s1.toLowerCase());
+// WORLD
+console.log(s2.toUpperCase());
+// HELLO WORLD
+console.log(s1.concat(" ").concat(s2).toUpperCase());
+
+
+// APLICANDO LOS VALOES ESTATICOS NUMERICOS
+
