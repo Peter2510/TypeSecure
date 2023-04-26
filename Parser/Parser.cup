@@ -153,6 +153,9 @@ non terminal operaciones_logicas;
 
         /* FUNCIONES */
 
+//funcion length
+non terminal funcion_length;
+
 //funcion number
 non terminal funcion_number;
 
@@ -255,11 +258,10 @@ tipo_dato_variable ::= RNUMBER:a {: RESULT = a; :}
 variable_valor ::= instruccion
                 ;
 
-instruccion ::= operaciones_matematicas:a {: RESULT = a; :}
-                | operaciones_logicas {: RESULT = "operacion logica"; :}
-                
-                | funcion_boolean {: System.out.println("funcion booelan"); :}
-                | funcion_string {: System.out.println("funcion string"); :}
+instruccion ::= operaciones_matematicas:a 
+                | operaciones_logicas 
+                | funcion_boolean 
+                | funcion_string 
                 | funcion_char_at
                 | funcion_to_lower_case
                 | funcion_to_upper_case
@@ -270,21 +272,20 @@ instruccion ::= operaciones_matematicas:a {: RESULT = a; :}
 
 operaciones_matematicas ::= MENOS operaciones_matematicas:a {:      :}%prec UMENOS 
                         | MAS operaciones_matematicas:a {:      :}%prec UMENOS 
-                        | operaciones_matematicas:a MAS operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) +  Integer.parseInt(b.toString()) ;  :}
-                        | operaciones_matematicas:a MENOS operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) -  Integer.parseInt(b.toString()) ;  :}
-                        | operaciones_matematicas:a MULTIPLICACION operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) * Integer.parseInt(b.toString()) ;  :}
-                        | operaciones_matematicas:a DIVISION operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) /  Integer.parseInt(b.toString()) ;  :}
-                        | operaciones_matematicas:a MOD operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) %  Integer.parseInt(b.toString()) ;  :}
-                        | PARENTESIS_ABIERTO operaciones_matematicas:a PARENTESIS_CERRADO {: RESULT = Integer.parseInt(a.toString()); :}
+                        | operaciones_matematicas:a MAS operaciones_matematicas:b 
+                        | operaciones_matematicas:a MENOS operaciones_matematicas:b 
+                        | operaciones_matematicas:a MULTIPLICACION operaciones_matematicas:b 
+                        | operaciones_matematicas:a DIVISION operaciones_matematicas:b 
+                        | operaciones_matematicas:a MOD operaciones_matematicas:b 
+                        | PARENTESIS_ABIERTO operaciones_matematicas:a PARENTESIS_CERRADO 
                         | funcion_number
                         | funcion_bigint
-                        | ID PUNTO LENGTH
-                        | TEXTO PUNTO LENGTH
+                        | funcion_length
                         | funciones_numericas_estaticas
-                        | NUMBER:a {: RESULT = Integer.parseInt(a.toString()); :}
-                        | BIGINT:a {: RESULT = Integer.parseInt(a.toString()); :}
-                        | ID:a    {: RESULT = a.toString(); :}
-                        | TEXTO:a {: RESULT = a.toString(); :}
+                        | NUMBER:a 
+                        | BIGINT:a 
+                        | ID:a    
+                        | TEXTO:a 
                         ;
 
 funciones_numericas_estaticas ::= MATH PUNTO ABS PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
@@ -366,6 +367,11 @@ operaciones_logicas ::= operaciones_logicas AND operaciones_logicas
                     | PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
                     | operaciones_relacionales 
                     ;
+
+funcion_length ::= TEXTO PUNTO LENGTH
+                |  ID PUNTO LENGTH
+                |  variables_string PUNTO LENGTH
+                ;
 
 
 funcion_number ::= FNUMBER PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO

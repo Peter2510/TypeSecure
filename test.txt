@@ -117,3 +117,7 @@ console.log("El area es:", BigInt(Math.floor(area)));
 let a = Math.PI / 180;
 let a = rad / (Math.PI / 180);
 let a = area < Math.SQRT2 * Math.PI;
+
+
+
+let a = pedro.toUpperCase().concat(s1).length;
