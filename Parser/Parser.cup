@@ -184,7 +184,7 @@ non terminal variables_string, funcion_concat;
 non terminal funcion_console_log,lista_instrucciones_console;
 
 //declaracion de funciones
-non terminal declaracion_funcion, parametros_funcion, parametro_funcion;
+non terminal declaracion_funcion, parametros_funcion, parametro_funcion,instrucciones_funciones;
 
 //llamada de funciones
 non terminal llamada_funcion_asignacion, llamada_funcion_normal;
@@ -427,25 +427,27 @@ funcion_to_upper_case ::= ID PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CER
 funcion_console_log ::= CONSOLE PUNTO LOG PARENTESIS_ABIERTO lista_instrucciones_console:a PARENTESIS_CERRADO PUNTO_COMA {: System.out.println(a); :}
             ;
 
-lista_instrucciones_console ::= instruccion COMA instruccion
+lista_instrucciones_console ::= lista_instrucciones_console COMA instruccion:a {: RESULT = a; :}
                              |  instruccion:a {: RESULT = a; :}
                              ;
 
 declaracion_funcion ::= 
-                     /* funcion sin parametros y sin tipo de retorno  -- function hola(){ instrucciones } */
-                      FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones CORCHETE_CERRADO
+            /* funcion sin parametros y sin tipo de retorno  -- function hola(){ instrucciones } */
+            FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funciones CORCHETE_CERRADO
 
-                    /* funcion con parametros y sin tipo de retorno  -- function hola( parametros ){ instrucciones } */
-                    | FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones CORCHETE_CERRADO
+            /* funcion con parametros y sin tipo de retorno  -- function hola( parametros ){ instrucciones } */
+            | FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funciones CORCHETE_CERRADO
 
-                    /* funcion sin parametros y con tipo de retorno  -- function hola():type{ instrucciones } */
-                    | FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones CORCHETE_CERRADO
+            /* funcion sin parametros y con tipo de retorno  -- function hola():type{ instrucciones } */
+            | FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones_funciones CORCHETE_CERRADO
 
-                    /* funcion con parametros y con tipo de retorno  -- function hola( parametros ):type{ instrucciones } */
-                    | FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones CORCHETE_CERRADO
+            /* funcion con parametros y con tipo de retorno  -- function hola( parametros ):type{ instrucciones } */
+            | FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones_funciones CORCHETE_CERRADO
+            ;
 
-
-                    ;
+instrucciones_funciones ::= instrucciones
+                        |
+                        ;
 
 parametros_funcion ::= parametro_funcion COMA parametro_funcion
                     |  parametro_funcion
