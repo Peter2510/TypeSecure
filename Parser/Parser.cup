@@ -184,7 +184,8 @@ non terminal variables_string, funcion_concat;
 non terminal funcion_console_log,lista_instrucciones_console;
 
 //declaracion de funciones
-non terminal declaracion_funcion, parametros_funcion, parametro_funcion,instrucciones_funciones;
+non terminal declaracion_funcion, parametros_funcion, parametro_funcion;
+
 
 //llamada de funciones
 non terminal llamada_funcion_asignacion, llamada_funcion_normal;
@@ -252,13 +253,12 @@ tipo_dato_variable ::= RNUMBER:a {: RESULT = a; :}
                     |  RBIGINT:a {: RESULT = a; :}
                     |  RSTRING:a {: RESULT = a; :}
                     |  RBOOLEAN:a {: RESULT = a; :}
-                    |  RVOID:a {: RESULT = a; :}
                     ;
 
 variable_valor ::= instruccion
                 ;
 
-instruccion ::= operaciones_matematicas:a 
+instruccion ::=  operaciones_matematicas:a 
                 | operaciones_logicas 
                 | funcion_boolean 
                 | funcion_string 
@@ -432,36 +432,27 @@ lista_instrucciones_console ::= lista_instrucciones_console COMA instruccion:a {
                              ;
 
 declaracion_funcion ::= 
-            /* funcion sin parametros y sin tipo de retorno  -- function hola(){ instrucciones } */
-            FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funciones CORCHETE_CERRADO
 
-            /* funcion con parametros y sin tipo de retorno  -- function hola( parametros ){ instrucciones } */
-            | FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funciones CORCHETE_CERRADO
+ FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
 
-            /* funcion sin parametros y con tipo de retorno  -- function hola():type{ instrucciones } */
-            | FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones_funciones CORCHETE_CERRADO
+|FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
 
-            /* funcion con parametros y con tipo de retorno  -- function hola( parametros ):type{ instrucciones } */
-            | FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones_funciones CORCHETE_CERRADO
-            ;
+|FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
 
-instrucciones_funciones ::= instrucciones
-                        |
-                        ;
-
-parametros_funcion ::= parametro_funcion COMA parametro_funcion
-                    |  parametro_funcion
+|FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion RETURN instruccion PUNTO_COMA  CORCHETE_CERRADO
+            
                     ;
 
-parametro_funcion ::= ID DOS_PUNTOS tipo_dato_variable
-                   ;
+instrucciones_funcion ::= instrucciones
+                       |
+                       ;
 
 
-llamada_funcion_asignacion ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO
-                            |  ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO
-                           ;
 
-llamada_funcion_normal ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
-                        |  ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO PUNTO_COMA
-                        ;
+parametros_funcion_declaracion ::= parametros_funcion_declaracion COMA parametro_funcion_declaracion
+                    |  parametro_funcion_declaracion
+                    ;
+
+parametro_funcion_declaracion ::= ID DOS_PUNTOS tipo_dato_variable
+                                ;
 
