@@ -151,11 +151,6 @@ non terminal operaciones_relacionales;
 //operaciones logicas
 non terminal operaciones_logicas;
 
-//concatenacion
-non terminal operador_concatenacion;
-
-
-
         /* FUNCIONES */
 
 //funcion number
@@ -188,6 +183,9 @@ non terminal funcion_console_log,lista_instrucciones_console;
 //declaracion de funciones
 non terminal declaracion_funcion, parametros_funcion, parametro_funcion;
 
+//llamada de funciones
+non terminal llamada_funcion_asignacion, llamada_funcion_normal;
+
 // PRECEDENCIA
 precedence left AND;
 precedence left OR;
@@ -219,6 +217,7 @@ opciones_instrucciones ::= declaracion_variable
                         |  asignacion
                         |  funcion_console_log
                         |  declaracion_funcion
+                        |  llamada_funcion_normal
                         ;
 
 dentro_bloque ::= incremento
@@ -257,34 +256,35 @@ variable_valor ::= instruccion
                 ;
 
 instruccion ::= operaciones_matematicas:a {: RESULT = a; :}
-                | TEXTO:a   {: RESULT = a; :}
                 | operaciones_logicas {: RESULT = "operacion logica"; :}
-                | operador_concatenacion 
+                
                 | funcion_boolean {: System.out.println("funcion booelan"); :}
                 | funcion_string {: System.out.println("funcion string"); :}
                 | funcion_char_at
                 | funcion_to_lower_case
                 | funcion_to_upper_case
                 | funcion_concat
+                | llamada_funcion_asignacion
                 ;
 
 
 operaciones_matematicas ::= MENOS operaciones_matematicas:a {:      :}%prec UMENOS 
                         | MAS operaciones_matematicas:a {:      :}%prec UMENOS 
-                        | operaciones_matematicas:a MAS operaciones_matematicas:b
-                        | operaciones_matematicas:a MENOS operaciones_matematicas:b
-                        | operaciones_matematicas:a MULTIPLICACION operaciones_matematicas:b
-                        | operaciones_matematicas:a DIVISION operaciones_matematicas:b
-                        | operaciones_matematicas:a MOD operaciones_matematicas:b
-                        | PARENTESIS_ABIERTO operaciones_matematicas:a PARENTESIS_CERRADO {: RESULT = a; :}
+                        | operaciones_matematicas:a MAS operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) +  Integer.parseInt(b.toString()) ;  :}
+                        | operaciones_matematicas:a MENOS operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) -  Integer.parseInt(b.toString()) ;  :}
+                        | operaciones_matematicas:a MULTIPLICACION operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) * Integer.parseInt(b.toString()) ;  :}
+                        | operaciones_matematicas:a DIVISION operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) /  Integer.parseInt(b.toString()) ;  :}
+                        | operaciones_matematicas:a MOD operaciones_matematicas:b {: RESULT = Integer.parseInt(a.toString()) %  Integer.parseInt(b.toString()) ;  :}
+                        | PARENTESIS_ABIERTO operaciones_matematicas:a PARENTESIS_CERRADO {: RESULT = Integer.parseInt(a.toString()); :}
                         | funcion_number
                         | funcion_bigint
                         | ID PUNTO LENGTH
                         | TEXTO PUNTO LENGTH
                         | funciones_numericas_estaticas
-                        | NUMBER:a {: RESULT = a; :}
-                        | BIGINT:a {: RESULT = a; :}
-                        | ID:a         
+                        | NUMBER:a {: RESULT = Integer.parseInt(a.toString()); :}
+                        | BIGINT:a {: RESULT = Integer.parseInt(a.toString()); :}
+                        | ID:a    {: RESULT = a.toString(); :}
+                        | TEXTO:a {: RESULT = a.toString(); :}
                         ;
 
 funciones_numericas_estaticas ::= MATH PUNTO ABS PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
@@ -336,14 +336,6 @@ operaciones_relacionales ::= operaciones_matematicas MAYOR_QUE operaciones_matem
                            | TRUE {: RESULT = "true"; :}
                            | FALSE {: RESULT = "false"; :}
 
-                           | operaciones_matematicas COMPARACION TEXTO
-                           | TEXTO COMPARACION operaciones_matematicas
-                           | operaciones_matematicas DISTINTO TEXTO
-                           | TEXTO DISTINTO operaciones_matematicas
-
-                           | TEXTO COMPARACION TEXTO
-                           | TEXTO DISTINTO TEXTO
-
                            | funcion_boolean COMPARACION TRUE
                            | funcion_boolean COMPARACION FALSE
                            | TRUE COMPARACION funcion_boolean
@@ -374,10 +366,6 @@ operaciones_logicas ::= operaciones_logicas AND operaciones_logicas
                     | PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
                     | operaciones_relacionales 
                     ;
-
-operador_concatenacion ::= TEXTO MAS instruccion
-                        |  instruccion MAS TEXTO 
-                        ;                   
 
 
 funcion_number ::= FNUMBER PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
@@ -430,11 +418,11 @@ funcion_to_upper_case ::= ID PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CER
                        |  variables_string PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
                        ;
 
-funcion_console_log ::= CONSOLE PUNTO LOG PARENTESIS_ABIERTO lista_instrucciones_console PARENTESIS_CERRADO PUNTO_COMA
+funcion_console_log ::= CONSOLE PUNTO LOG PARENTESIS_ABIERTO lista_instrucciones_console:a PARENTESIS_CERRADO PUNTO_COMA {: System.out.println(a); :}
             ;
 
 lista_instrucciones_console ::= instruccion COMA instruccion
-                             |  instruccion 
+                             |  instruccion:a {: RESULT = a; :}
                              ;
 
 declaracion_funcion ::= 
@@ -461,5 +449,11 @@ parametro_funcion ::= ID DOS_PUNTOS tipo_dato_variable
                    ;
 
 
+llamada_funcion_asignacion ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO
+                            |  ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO
+                           ;
 
+llamada_funcion_normal ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
+                        |  ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO PUNTO_COMA
+                        ;
 
