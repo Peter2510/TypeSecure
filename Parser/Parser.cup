@@ -264,7 +264,7 @@ instruccion ::= operaciones_matematicas:a {: RESULT = a; :}
                 | funcion_to_lower_case
                 | funcion_to_upper_case
                 | funcion_concat
-                | llamada_funcion_asignacion
+                | llamada_funcion_asignacion 
                 ;
 
 
