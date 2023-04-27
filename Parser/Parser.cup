@@ -184,7 +184,11 @@ non terminal variables_string, funcion_concat;
 non terminal funcion_console_log,lista_instrucciones_console;
 
 //declaracion de funciones
-non terminal declaracion_funcion, parametros_funcion, parametro_funcion;
+non terminal declaracion_funcion, parametro_funcion_declaracion,parametros_funcion_declaracion, instrucciones_funcion;
+non terminal instrucciones_funciones_sin_return,opciones_instrucciones_sin_return;
+
+//funcion return
+non terminal funcion_return;
 
 
 //llamada de funciones
@@ -222,6 +226,7 @@ opciones_instrucciones ::= declaracion_variable
                         |  funcion_console_log
                         |  declaracion_funcion
                         |  llamada_funcion_normal
+                        |  funcion_return
                         ;
 
 dentro_bloque ::= incremento
@@ -431,23 +436,39 @@ lista_instrucciones_console ::= lista_instrucciones_console COMA instruccion:a {
                              |  instruccion:a {: RESULT = a; :}
                              ;
 
+ 
+
 declaracion_funcion ::= 
 
- FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+ FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funciones_sin_return CORCHETE_CERRADO
 
-|FUNCTION ID PARENTESIS_ABIERTO parametros_funcion PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+|FUNCTION ID PARENTESIS_ABIERTO parametros_funcion_declaracion PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funciones_sin_return CORCHETE_CERRADO
 
 |FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
 
-|FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion RETURN instruccion PUNTO_COMA  CORCHETE_CERRADO
-            
+|FUNCTION ID PARENTESIS_ABIERTO parametros_funcion_declaracion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+
+|FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+
+|FUNCTION ID PARENTESIS_ABIERTO parametros_funcion_declaracion PARENTESIS_CERRADO  DOS_PUNTOS tipo_dato_variable  CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+        
                     ;
+
+
+instrucciones_funciones_sin_return ::= instrucciones_funciones_sin_return opciones_instrucciones_sin_return 
+                                    | opciones_instrucciones_sin_return
+                                    ;
+
+opciones_instrucciones_sin_return ::= declaracion_variable
+                        |  asignacion
+                        |  funcion_console_log
+                        |  declaracion_funcion
+                        |  llamada_funcion_normal
+                        ;
 
 instrucciones_funcion ::= instrucciones
                        |
                        ;
-
-
 
 parametros_funcion_declaracion ::= parametros_funcion_declaracion COMA parametro_funcion_declaracion
                     |  parametro_funcion_declaracion
@@ -456,3 +477,16 @@ parametros_funcion_declaracion ::= parametros_funcion_declaracion COMA parametro
 parametro_funcion_declaracion ::= ID DOS_PUNTOS tipo_dato_variable
                                 ;
 
+
+funcion_return ::= RETURN instruccion PUNTO_COMA
+                | RETURN PUNTO_COMA
+                ;
+
+llamada_funcion_asignacion ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO 
+                            |  ID PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO 
+                            ;
+
+
+llamada_funcion_normal ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
+                        |  ID PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO PUNTO_COMA
+                        ;
