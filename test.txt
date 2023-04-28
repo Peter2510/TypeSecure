@@ -121,3 +121,10 @@ let a = area < Math.SQRT2 * Math.PI;
 
 
 let a = pedro.toUpperCase().concat(s1).length;
+
+let fullname = 'Jose Perez';
+let age = 21;
+// My name is Jose Perez
+console.log("My name is:", fullname);
+// My name is Jose Perez and I'm 21 years old
+console.log("My name is", fullname, "and I'm", age, "years old");

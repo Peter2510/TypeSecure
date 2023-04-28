@@ -139,9 +139,6 @@ non terminal asignacion;
 //operaciones matematicas
 non terminal operaciones_matematicas,funciones_numericas_estaticas;
 
-//acciones dentro de parentesis o corchetes
-non terminal dentro_bloque;
-
 //incremento decremento
 non terminal incremento, decremento;
 
@@ -190,9 +187,20 @@ non terminal instrucciones_funciones_sin_return,opciones_instrucciones_sin_retur
 //funcion return
 non terminal funcion_return;
 
+//funcion if
+non terminal funcion_if;
+
 
 //llamada de funciones
 non terminal llamada_funcion_asignacion, llamada_funcion_normal;
+
+//instruccion break
+
+non terminal instruccion_break;
+
+//instruccion continue
+
+non terminal instruccion_continue;
 
 // PRECEDENCIA
 precedence left AND;
@@ -226,12 +234,24 @@ opciones_instrucciones ::= declaracion_variable
                         |  funcion_console_log
                         |  declaracion_funcion
                         |  llamada_funcion_normal
+                        |  funcion_if
                         |  funcion_return
+                        |  instruccion_break
+                        |  instruccion_continue
                         ;
 
-dentro_bloque ::= incremento
-                | decremento
-                ;
+opciones_instrucciones_sin_return ::= 
+                        declaracion_variable
+                        |  asignacion
+                        |  funcion_console_log
+                        |  declaracion_funcion
+                        |  llamada_funcion_normal
+                        |  funcion_if
+                        |  instruccion_break
+                        |  instruccion_continue
+                        ;
+
+
 
 asignacion ::= ID ASIGNACION variable_valor PUNTO_COMA
             ;
@@ -459,12 +479,6 @@ instrucciones_funciones_sin_return ::= instrucciones_funciones_sin_return opcion
                                     | opciones_instrucciones_sin_return
                                     ;
 
-opciones_instrucciones_sin_return ::= declaracion_variable
-                        |  asignacion
-                        |  funcion_console_log
-                        |  declaracion_funcion
-                        |  llamada_funcion_normal
-                        ;
 
 instrucciones_funcion ::= instrucciones
                        |
@@ -490,3 +504,16 @@ llamada_funcion_asignacion ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO
 llamada_funcion_normal ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
                         |  ID PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO PUNTO_COMA
                         ;
+
+funcion_if ::= IF PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+            ;
+
+
+instruccion_break ::= BREAK PUNTO_COMA
+                  ;
+
+
+instruccion_continue ::= CONTINUE PUNTO_COMA
+                     ;
+
+
