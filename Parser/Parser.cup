@@ -142,6 +142,9 @@ non terminal operaciones_matematicas,funciones_numericas_estaticas;
 //incremento decremento
 non terminal incremento, decremento;
 
+//funcion incremento decremento
+non terminal funcion_incremento_decremento;
+
 //operaciones relacionales
 non terminal operaciones_relacionales;
 
@@ -188,11 +191,11 @@ non terminal instrucciones_funciones_sin_return,opciones_instrucciones_sin_retur
 non terminal funcion_return;
 
 //funcion if
-non terminal funcion_if;
+non terminal funcion_if, funcion_else, funcion_else_if, lista_else_if, opciones_if;
 
 
 //llamada de funciones
-non terminal llamada_funcion_asignacion, llamada_funcion_normal;
+non terminal llamada_funcion_asignacion, parametros_funcion_asignacion, llamada_funcion_normal;
 
 //instruccion break
 
@@ -234,10 +237,11 @@ opciones_instrucciones ::= declaracion_variable
                         |  funcion_console_log
                         |  declaracion_funcion
                         |  llamada_funcion_normal
-                        |  funcion_if
+                        |  opciones_if
                         |  funcion_return
                         |  instruccion_break
                         |  instruccion_continue
+                        |  funcion_incremento_decremento
                         ;
 
 opciones_instrucciones_sin_return ::= 
@@ -246,7 +250,7 @@ opciones_instrucciones_sin_return ::=
                         |  funcion_console_log
                         |  declaracion_funcion
                         |  llamada_funcion_normal
-                        |  funcion_if
+                        |  opciones_if
                         |  instruccion_break
                         |  instruccion_continue
                         ;
@@ -292,6 +296,8 @@ instruccion ::=  operaciones_matematicas:a
                 | funcion_to_upper_case
                 | funcion_concat
                 | llamada_funcion_asignacion 
+                | incremento
+                | decremento
                 ;
 
 
@@ -328,11 +334,15 @@ funciones_numericas_estaticas ::= MATH PUNTO ABS PARENTESIS_ABIERTO operaciones_
                                | MATH PUNTO SQRT2
                               ;
 
-incremento ::= ID:a MAS MAS
+incremento ::= ID:a INCREMENTO
            ;
 
-decremento ::= ID:a MENOS MENOS
+decremento ::= ID:a DECREMENTO
             ;
+
+funcion_incremento_decremento ::= ID INCREMENTO PUNTO_COMA
+                               |  ID DECREMENTO PUNTO_COMA
+                       ;
 
 operaciones_relacionales ::= operaciones_matematicas MAYOR_QUE operaciones_matematicas
                            | operaciones_matematicas MAYOR_IGUAL operaciones_matematicas
@@ -436,6 +446,7 @@ variables_string ::= funcion_string
                  |  funcion_to_lower_case
                  |  funcion_to_upper_case
                  |  funcion_concat
+                 |  llamada_funcion_asignacion
                  ;
 
 
@@ -497,8 +508,13 @@ funcion_return ::= RETURN instruccion PUNTO_COMA
                 ;
 
 llamada_funcion_asignacion ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO 
-                            |  ID PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO 
+                            |  ID PARENTESIS_ABIERTO parametros_funcion_asignacion PARENTESIS_CERRADO 
                             ;
+
+parametros_funcion_asignacion ::= parametros_funcion_asignacion COMA instruccion
+                               |  instruccion
+                               ;
+
 
 
 llamada_funcion_normal ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
@@ -507,6 +523,23 @@ llamada_funcion_normal ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
 
 funcion_if ::= IF PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
             ;
+
+funcion_else ::= ELSE CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+              ;  
+
+
+funcion_else_if ::= ELSE IF PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+                ;
+
+lista_else_if ::= lista_else_if funcion_else_if
+                | funcion_else_if
+                ;
+
+opciones_if ::=   funcion_if
+                | funcion_if funcion_else
+                | funcion_if lista_else_if funcion_else
+                | funcion_if lista_else_if
+                ;
 
 
 instruccion_break ::= BREAK PUNTO_COMA
