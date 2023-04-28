@@ -206,6 +206,9 @@ non terminal instruccion_continue;
 //instruccion for Loop
 non terminal funcion_for, accion_asignacion_for;
 
+//instruccion while
+non terminal funcion_while;
+
 // PRECEDENCIA
 precedence left AND;
 precedence left OR;
@@ -244,6 +247,7 @@ opciones_instrucciones ::= declaracion_variable
                         |  instruccion_continue
                         |  funcion_incremento_decremento
                         |  funcion_for
+                        |  funcion_while
                         ;
 
 opciones_instrucciones_sin_return ::= 
@@ -257,6 +261,7 @@ opciones_instrucciones_sin_return ::=
                         |  instruccion_continue
                         |  funcion_incremento_decremento
                         |  funcion_for
+                        |  funcion_while
                         ;
 
 
@@ -564,6 +569,10 @@ accion_asignacion_for ::= ID INCREMENTO
                        | ID DECREMENTO
                        | ID ASIGNACION instruccion
                        ;
+
+
+funcion_while ::= WHILE PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+              ;
 
 
 
