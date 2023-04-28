@@ -198,12 +198,13 @@ non terminal funcion_if, funcion_else, funcion_else_if, lista_else_if, opciones_
 non terminal llamada_funcion_asignacion, parametros_funcion_asignacion, llamada_funcion_normal;
 
 //instruccion break
-
 non terminal instruccion_break;
 
 //instruccion continue
-
 non terminal instruccion_continue;
+
+//instruccion for Loop
+non terminal funcion_for, accion_asignacion_for;
 
 // PRECEDENCIA
 precedence left AND;
@@ -242,6 +243,7 @@ opciones_instrucciones ::= declaracion_variable
                         |  instruccion_break
                         |  instruccion_continue
                         |  funcion_incremento_decremento
+                        |  funcion_for
                         ;
 
 opciones_instrucciones_sin_return ::= 
@@ -253,6 +255,8 @@ opciones_instrucciones_sin_return ::=
                         |  opciones_if
                         |  instruccion_break
                         |  instruccion_continue
+                        |  funcion_incremento_decremento
+                        |  funcion_for
                         ;
 
 
@@ -548,5 +552,25 @@ instruccion_break ::= BREAK PUNTO_COMA
 
 instruccion_continue ::= CONTINUE PUNTO_COMA
                      ;
+
+
+funcion_for ::= 
+FOR PARENTESIS_ABIERTO declaracion_variable operaciones_logicas PUNTO_COMA accion_asignacion_for  PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+|FOR PARENTESIS_ABIERTO asignacion operaciones_logicas PUNTO_COMA accion_asignacion_for  PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+            ;
+
+
+accion_asignacion_for ::= ID INCREMENTO
+                       | ID DECREMENTO
+                       | ID ASIGNACION instruccion
+                       ;
+
+
+
+
+
+
+
+
 
 
