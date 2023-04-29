@@ -7,6 +7,8 @@ package com.peter.typesecure.parser;
 
 import com.peter.typesecure.lexer.Lexer;
 import java_cup.runtime.Symbol;
+import com.peter.typesecure.error.Error_analizadores;
+import java.util.ArrayList;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -1188,32 +1190,57 @@ public class Parser extends java_cup.runtime.lr_parser {
         super(lexer);
     }
 
-    //Metodo llamado automaticamente al encontrar error sintanctico
 
+    //Array errores
+    
+    public static ArrayList<Error_analizadores> errores = Lexer.errores;
+
+    //Metodo llamado automaticamente al encontrar error sintanctico
 
     public void syntax_error(Symbol s){
 
-    String lexema = s.value.toString();
-    int fila = s.right;
-    int columna = s.left;
     
-    System.out.println("Error Sintactico hallado");
-    System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
 
+    if(s.sym == 0){
+
+    errores.add( new Error_analizadores("Sintactico", "No se esperaba el fin del archivo ") );
+
+    }else{
+
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+
+        errores.add( new Error_analizadores("Sintactico", lexema, fila, columna, "No se esperaba este token") );
+        //System.out.println("Error Sintactico hallado");
+        //System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
+    }
+
+    
     }
 
     //Metodo llamado cuando no se puede recuperar de un error
     
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
-        
-    String lexema = s.value.toString();
-    int fila = s.right;
-    int columna = s.left;
+
     
-    System.out.println("Error Sintactico hallado PANIC MODE");
-    System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
         
+    if(s.sym == 0){
+
+    errores.add( new Error_analizadores("Sintactico", "No se esperaba el fin del archivo ") );
+
+    }else{
+
+        String lexema = s.value.toString();
+        int fila = s.right;
+        int columna = s.left;
+
+        errores.add( new Error_analizadores("Sintactico", lexema, fila, columna, "No se esperaba este token") );
+        //System.out.println("Error Sintactico hallado");
+        //System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
     }
+        
+    } 
 
 
 

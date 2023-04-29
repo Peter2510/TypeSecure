@@ -4,10 +4,12 @@
  */
 package com.peter.typesecure.analisis;
 
+import com.peter.typesecure.archivos.ManejoArchivos;
 import com.peter.typesecure.lexer.Lexer;
 import com.peter.typesecure.parser.Parser;
 import java.io.BufferedReader;
 import java.io.StringReader;
+import com.peter.typesecure.error.Error_analizadores;
 
 /**
  *
@@ -31,6 +33,22 @@ public class Analisis {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+        
+        
+        if(parser.errores.isEmpty()){
+            System.out.println("No hay errores en los analizadores");
+        }else{
+            
+            ManejoArchivos ma = new ManejoArchivos();
+            ma.CrearErrorHTML("LexicoSintactico", parser.errores);
+            
+            parser.errores.clear();
+            
+            for(Error_analizadores errore : parser.errores){
+                System.out.println(errore);
+            }
+        }
+        
     }
 
 }

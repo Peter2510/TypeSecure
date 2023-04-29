@@ -11,6 +11,8 @@
 package com.peter.typesecure.lexer;
 import java_cup.runtime.*;  
 import com.peter.typesecure.parser.*;
+import com.peter.typesecure.error.Error_analizadores;
+import java.util.ArrayList;
 
 /*---- Opciones y declaraciones ----*/
 
@@ -477,6 +479,9 @@ public class Lexer implements java_cup.runtime.Scanner {
     //Codigo de usuario en sintaxis java
     String txt = "";
 
+    //Array errores
+    public static ArrayList<Error_analizadores> errores = new ArrayList();
+
    
 
 
@@ -886,7 +891,8 @@ public class Lexer implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { System.out.println(" ******* ERROR LEXICO " + yytext() + " linea " + (yyline+1) + " columna "  + (yycolumn+1) + "  ********" );
+            { //System.out.println(" ******* ERROR LEXICO " + yytext() + " linea " + (yyline+1) + " columna "  + (yycolumn+1) + "  ********" );
+            errores.add( new Error_analizadores( "Lexico", yytext(), yyline, yycolumn , " No se encuentra definido en la gramatica" ));
             }
             // fall through
           case 83: break;

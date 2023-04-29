@@ -7,6 +7,8 @@
 package com.peter.typesecure.lexer;
 import java_cup.runtime.*;  
 import com.peter.typesecure.parser.*;
+import com.peter.typesecure.error.Error_analizadores;
+import java.util.ArrayList;
 
 /*---- Opciones y declaraciones ----*/
 
@@ -15,6 +17,9 @@ import com.peter.typesecure.parser.*;
 %{
     //Codigo de usuario en sintaxis java
     String txt = "";
+
+    //Array errores
+    public static ArrayList<Error_analizadores> errores = new ArrayList();
 
    
 %}
@@ -258,7 +263,8 @@ Let = "let"
 
 
 [^] { 
-            System.out.println(" ******* ERROR LEXICO " + yytext() + " linea " + (yyline+1) + " columna "  + (yycolumn+1) + "  ********" );
+            //System.out.println(" ******* ERROR LEXICO " + yytext() + " linea " + (yyline+1) + " columna "  + (yycolumn+1) + "  ********" );
+            errores.add( new Error_analizadores( "Lexico", yytext(), yyline, yycolumn , " No se encuentra definido en la gramatica" ));
             
     }
 
