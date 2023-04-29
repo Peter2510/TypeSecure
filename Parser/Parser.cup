@@ -402,6 +402,7 @@ operaciones_relacionales ::= operaciones_matematicas MAYOR_QUE operaciones_matem
                            | operaciones_matematicas DISTINTO funcion_string
 
 
+
                            | PARENTESIS_ABIERTO operaciones_relacionales PARENTESIS_CERRADO
                           ;  
 
@@ -571,15 +572,6 @@ accion_asignacion_for ::= ID INCREMENTO
                        ;
 
 
-funcion_while ::= WHILE PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+funcion_while ::= WHILE PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
               ;
-
-
-
-
-
-
-
-
-
 
