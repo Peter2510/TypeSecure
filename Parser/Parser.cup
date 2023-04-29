@@ -206,8 +206,17 @@ non terminal instruccion_continue;
 //instruccion for Loop
 non terminal funcion_for, accion_asignacion_for;
 
+//instruccion do while
+non terminal funcion_do_while;
+
 //instruccion while
 non terminal funcion_while;
+
+//funcion printAst
+non terminal funcion_printAst;
+
+//funcion getSymbolTable
+non terminal funcion_getSymbolTable;
 
 // PRECEDENCIA
 precedence left AND;
@@ -248,6 +257,9 @@ opciones_instrucciones ::= declaracion_variable
                         |  funcion_incremento_decremento
                         |  funcion_for
                         |  funcion_while
+                        |  funcion_do_while
+                        |  funcion_printAst
+                        |  funcion_getSymbolTable
                         ;
 
 opciones_instrucciones_sin_return ::= 
@@ -262,9 +274,10 @@ opciones_instrucciones_sin_return ::=
                         |  funcion_incremento_decremento
                         |  funcion_for
                         |  funcion_while
+                        |  funcion_do_while
+                        |  funcion_printAst
+                        |  funcion_getSymbolTable
                         ;
-
-
 
 asignacion ::= ID ASIGNACION variable_valor PUNTO_COMA
             ;
@@ -545,7 +558,7 @@ lista_else_if ::= lista_else_if funcion_else_if
                 | funcion_else_if
                 ;
 
-opciones_if ::=   funcion_if
+opciones_if ::=  funcion_if
                 | funcion_if funcion_else
                 | funcion_if lista_else_if funcion_else
                 | funcion_if lista_else_if
@@ -574,4 +587,16 @@ accion_asignacion_for ::= ID INCREMENTO
 
 funcion_while ::= WHILE PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
               ;
+
+
+funcion_do_while ::= DO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO WHILE PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO PUNTO_COMA
+                  ;
+
+
+funcion_printAst ::= PRINTAST PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO PUNTO_COMA
+                  ;
+
+
+funcion_getSymbolTable ::= GETSYMBOLTABLE PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
+                        ;
 
