@@ -36,7 +36,9 @@ public class Analisis {
         
         
         if(parser.errores.isEmpty()){
+            
             System.out.println("No hay errores en los analizadores");
+            
         }else{
             
             ManejoArchivos ma = new ManejoArchivos();
@@ -44,9 +46,9 @@ public class Analisis {
             
             parser.errores.clear();
             
-            for(Error_analizadores errore : parser.errores){
+            /*for(Error_analizadores errore : parser.errores){
                 System.out.println(errore);
-            }
+            }*/
         }
         
     }
