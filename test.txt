@@ -19,7 +19,7 @@ let _flag: boolean = score1 > TOTAL;
 
 
 
--*-*--*--*-* FUNCIONES --*--*-*
+/*-*-*--*--*-* FUNCIONES --*--*-**/
 
 let a = 100;
 let b = BigInt(a) / 100n;
@@ -141,7 +141,7 @@ console.log("My name is", fullname, "and I'm", age, "years old");
 
 
 
-agregnaod if
+//agregnaod if
 
 const TOTAL: number = 100;
 let name: string = 'Jonh';
@@ -168,4 +168,3 @@ let sum = sumar(23,sumar(4,45).toUpperCase().length);
 
 
 
-agregando for

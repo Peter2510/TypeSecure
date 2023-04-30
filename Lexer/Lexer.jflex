@@ -264,7 +264,7 @@ Let = "let"
 
 [^] { 
             //System.out.println(" ******* ERROR LEXICO " + yytext() + " linea " + (yyline+1) + " columna "  + (yycolumn+1) + "  ********" );
-            errores.add( new Error_analizadores( "Lexico", yytext(), yyline, yycolumn , " No se encuentra definido en la gramatica" ));
+            errores.add( new Error_analizadores( "Lexico", yytext(), yyline+1, yycolumn+1 , " No se encuentra definido en la gramatica" ));
             
     }
 
