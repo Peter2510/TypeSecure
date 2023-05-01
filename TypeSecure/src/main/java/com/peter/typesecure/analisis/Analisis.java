@@ -39,6 +39,11 @@ public class Analisis {
             
             System.out.println("No hay errores en los analizadores");
             
+            for (int i = 0; i < parser.arbol.size(); i++) {
+                System.out.println(parser.arbol.get(i).getHijos().toString());
+            }
+            
+            
         }else{
             
             ManejoArchivos ma = new ManejoArchivos();

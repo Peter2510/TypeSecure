@@ -8,6 +8,7 @@ import com.peter.typesecure.lexer.Lexer;
 import java_cup.runtime.Symbol;
 import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
+import com.peter.typesecure.arbol.Nodo;
 
 
 // Codigo para el parser, variables, metodos
@@ -17,6 +18,9 @@ parser code {:
     public Parser(Lexer lexer) {
         super(lexer);
     }
+
+    //Array donde esta toda la produccion
+    public ArrayList<Nodo> arbol = new ArrayList<Nodo>();
 
 
     //Array errores
@@ -262,18 +266,35 @@ start with inicio;
 
 // Da inicio a las transiciones
 
-inicio ::= ts {: System.out.println("Doc ok"); :}
+inicio ::= ts:a {: System.out.println("Doc ok"); 
+                            ArrayList tmp = new ArrayList<>(); 
+                            tmp.add(a);
+                            arbol.add(new Nodo("Inicial", tmp ,aright,aleft));
+             :}
        ;
 
-ts ::= instrucciones
+ts ::= instrucciones:a {: RESULT = a; :}
    ;
 
-instrucciones ::= instrucciones opciones_instrucciones
-                | opciones_instrucciones
+instrucciones ::= instrucciones:a opciones_instrucciones:b {:  
+                                                            ArrayList tmp = new ArrayList<>(); 
+                                                            tmp.add(a);
+                                                            tmp.add(b);
+                                                            RESULT = new Nodo("instrucciones", tmp ,aright,aleft); 
+                                         :}
+                | opciones_instrucciones:a {:  
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instrucciones", tmp ,aright,aleft); 
+                                         :}
                ;
 
 opciones_instrucciones ::= declaracion_variable
-                        |  asignacion
+                        |  asignacion:a   {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
                         |  funcion_console_log
                         |  declaracion_funcion
                         |  llamada_funcion_normal
@@ -291,7 +312,9 @@ opciones_instrucciones ::= declaracion_variable
 
 opciones_instrucciones_sin_return ::= 
                         declaracion_variable
-                        |  asignacion
+                        |  asignacion:a {: 
+                                            RESULT = a;
+                                        :}
                         |  funcion_console_log
                         |  declaracion_funcion
                         |  llamada_funcion_normal
@@ -306,151 +329,836 @@ opciones_instrucciones_sin_return ::=
                         |  funcion_getSymbolTable
                         ;
 
-asignacion ::= ID ASIGNACION variable_valor PUNTO_COMA
+asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa {: 
+                                                                                    
+
+                                  ArrayList tmp2 = new ArrayList<>();   
+                                  tmp2.add(id);
+                                  Nodo nt = new Nodo("Id",tmp2,idright,idleft);
+                                  ArrayList tmp = new ArrayList<>(); 
+                                  tmp.add(nt);
+                                  tmp.add(igual);
+                                  tmp.add(value);
+                                  tmp.add(puntoComa);
+                                  RESULT = new Nodo("asignacion", tmp ,idright,idleft); 
+                                                                                :}
             ;
 
-declaracion_variable ::= tipo_acceso_variable id_valor_variable_lista PUNTO_COMA
+declaracion_variable ::= tipo_acceso_variable:a id_valor_variable_lista:b PUNTO_COMA:c
+                        {:
+
+
+
+                        :}
                       ;
 
 id_valor_variable_lista ::=  id_valor_variable_lista COMA id_valor_variable
                          |   id_valor_variable
                          ;
 
-id_valor_variable ::= ID:id DOS_PUNTOS tipo_dato_variable:tipoDato ASIGNACION variable_valor:valor {: System.out.println(id + " " + tipoDato + " " + valor); :}
+id_valor_variable ::= ID:id DOS_PUNTOS tipo_dato_variable:tipoDato ASIGNACION variable_valor:valor 
+
                     | ID:id ASIGNACION variable_valor:valor {: System.out.println(id + " " + valor); :}
                     | ID:id DOS_PUNTOS tipo_dato_variable:tipoDato {: System.out.println(id + " " + tipoDato + " " + " undefined"); :}
                    ;
 
 
 
-tipo_acceso_variable ::= RCONST:a {: RESULT = a; :} 
-                       | RLET:a   {: RESULT = a; :} 
+tipo_acceso_variable ::= RCONST:rconst {:
+                                     ArrayList tmp = new ArrayList<>(); 
+                                     tmp.add(rconst);
+                                     RESULT = new Nodo("Tipo_Acceso",tmp,rconstright,rconstleft);
+                                  :}
+
+                       | RLET:rlet   {: 
+                                     ArrayList tmp = new ArrayList<>(); 
+                                     tmp.add(rlet);
+                                     RESULT = new Nodo("Tipo_Acceso",tmp,rletright,rletleft);
+                                  :} 
                       ;
 
-tipo_dato_variable ::= RNUMBER:a {: RESULT = a; :} 
-                    |  RBIGINT:a {: RESULT = a; :}
-                    |  RSTRING:a {: RESULT = a; :}
-                    |  RBOOLEAN:a {: RESULT = a; :}
+tipo_dato_variable ::= RNUMBER:rnumber  {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(rnumber);
+                                            RESULT = new Nodo("Tipo_Variable",tmp,rnumberright,rnumberleft);
+                                  :} 
+
+                    |  RBIGINT:rbigint  {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(rbigint);
+                                            RESULT = new Nodo("Tipo_Variable",tmp,rbigintright,rbigintleft);
+                                 :}  
+                    |  RSTRING:rstring  {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(rstring);
+                                            RESULT = new Nodo("Tipo_Variable",tmp,rstringright,rstringleft);
+                                  :} 
+
+                    |  RBOOLEAN:rboolean {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(rboolean);
+                                            RESULT = new Nodo("Tipo_Variable",tmp,rbooleanright,rbooleanleft);
+                                        :}
                     ;
 
-variable_valor ::= instruccion
+variable_valor ::= instruccion:a {: 
+                                    ArrayList tmp = new ArrayList<>(); 
+                                    tmp.add(a);
+                                    RESULT = new Nodo("valor_de_la_variable",tmp,aright,aleft);
+                                 :}
                 ;
 
-instruccion ::=  operaciones_matematicas:a 
-                | operaciones_logicas 
-                | funcion_boolean 
-                | funcion_string 
-                | funcion_char_at
-                | funcion_to_lower_case
-                | funcion_to_upper_case
-                | funcion_concat
-                | llamada_funcion_asignacion 
-                | incremento
-                | decremento
+instruccion ::=  operaciones_matematicas:a {:
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("operacion_matematica",tmp,aright,aleft);
+
+                                           :}
+                | operaciones_logicas:a {:
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("operacion_logica",tmp,aright,aleft);
+                                      :}
+                | funcion_boolean:a {:
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("funcion_boolean",tmp,aright,aleft);
+                                 :}
+                | funcion_string:a  {:
+
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("funcion_string",tmp,aright,aleft);
+                                  :}
+                | funcion_char_at:a {: 
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("funcion_char_at",tmp,aright,aleft);
+
+                                  :}
+                | funcion_to_lower_case:a {:
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("funcion_to_lower_case",tmp,aright,aleft);
+                                        :}
+                | funcion_to_upper_case:a {:
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("funcion_to_upper_case",tmp,aright,aleft);
+                                        :}
+                | funcion_concat:a {:
+
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("funcion_concat",tmp,aright,aleft);
+                                 :}
+                | llamada_funcion_asignacion:a {:
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("llamada_funcion_asignacion",tmp,aright,aleft);
+                                              :}
+                | incremento:a {:
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("incremento",tmp,aright,aleft);
+                             :}
+                | decremento:a {:
+                                                ArrayList tmp = new ArrayList<>(); 
+                                                tmp.add(a);
+                                                RESULT = new Nodo("decremento",tmp,aright,aleft);
+                             :}
                 ;
 
 
-operaciones_matematicas ::= MENOS operaciones_matematicas:a {:      :}%prec UMENOS 
-                        | MAS operaciones_matematicas:a {:      :}%prec UMENOS 
-                        | operaciones_matematicas:a MAS operaciones_matematicas:b 
-                        | operaciones_matematicas:a MENOS operaciones_matematicas:b 
-                        | operaciones_matematicas:a MULTIPLICACION operaciones_matematicas:b 
-                        | operaciones_matematicas:a DIVISION operaciones_matematicas:b 
-                        | operaciones_matematicas:a MOD operaciones_matematicas:b 
-                        | PARENTESIS_ABIERTO operaciones_matematicas:a PARENTESIS_CERRADO 
-                        | funcion_number
-                        | funcion_bigint
-                        | funcion_length
-                        | funciones_numericas_estaticas
-                        | NUMBER:a 
-                        | BIGINT:a 
-                        | ID:a    
-                        | TEXTO:a 
+operaciones_matematicas ::= 
+                          MENOS:a operaciones_matematicas:b       
+                                        {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             tmp.add(b);
+                                             RESULT = new Nodo("operacion_matematica", tmp ,aright,aleft);                                               
+                                        :}%prec UMENOS 
+                        | MAS:a operaciones_matematicas:b 
+                                        {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             tmp.add(b);
+                                             RESULT = new Nodo("operacion_matematica", tmp ,aright,aleft);                                               
+                                        :}%prec UMENOS 
+                        | operaciones_matematicas:a MAS:b operaciones_matematicas:c
+                                        {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             tmp.add(b);
+                                             tmp.add(c);
+                                             RESULT = new Nodo("operacion_matematica", tmp ,aright,aleft);                                               
+                                        :}
+                        | operaciones_matematicas:a MENOS:b operaciones_matematicas:c
+                                        {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             tmp.add(b);
+                                             tmp.add(c);
+                                             RESULT = new Nodo("operacion_matematica", tmp ,aright,aleft);                                               
+                                        :}
+                        | operaciones_matematicas:a MULTIPLICACION:b operaciones_matematicas:c
+                                        {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             tmp.add(b);
+                                             tmp.add(c);
+                                             RESULT = new Nodo("operacion_matematica", tmp ,aright,aleft);                                               
+                                        :}                        
+                        | operaciones_matematicas:a DIVISION:b operaciones_matematicas:c
+                                        {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             tmp.add(b);
+                                             tmp.add(c);
+                                             RESULT = new Nodo("operacion_matematica", tmp ,aright,aleft);                                               
+                                        :}
+                        | operaciones_matematicas:a MOD:b operaciones_matematicas:c
+                                        {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             tmp.add(b);
+                                             tmp.add(c);
+                                             RESULT = new Nodo("operacion_matematica", tmp ,aright,aleft);                                               
+                                        :}
+                        | PARENTESIS_ABIERTO:a operaciones_matematicas:b PARENTESIS_CERRADO:c 
+                                            {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             tmp.add(b);
+                                             tmp.add(c);
+                                             RESULT = new Nodo("operaciones_matematicas_parentesis", tmp ,aright,aleft);                                               
+                                            :}
+                        | funcion_number:a {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             RESULT = new Nodo("funcion_number", tmp ,aright,aleft);                                               
+                                           :}
+                        | funcion_bigint:a {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             RESULT = new Nodo("funcion_bigint", tmp ,aright,aleft);                       
+                                           :}
+                        | funcion_length:a {:
+                                             ArrayList tmp = new ArrayList<>(); 
+                                             tmp.add(a);
+                                             RESULT = new Nodo("funcion_length", tmp ,aright,aleft);                       
+                                        :}
+
+                        | funciones_numericas_estaticas:a {:
+                                     ArrayList tmp = new ArrayList<>(); 
+                                     tmp.add(a);
+                                     RESULT = new Nodo("funciones_numericas_estaticas", tmp ,aright,aleft);                       
+                                                          :}
+                        | NUMBER:a {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        RESULT = new Nodo("Number", tmp ,aright,aleft);
+                                   :}
+                        | BIGINT:a {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        RESULT = new Nodo("BigInt", tmp ,aright,aleft);
+                                   :}
+                        | ID:a    {: 
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        Nodo nodoTmp = new Nodo("Id",tmp,aright,aleft);
+                                  :}
+                        | TEXTO:a {: 
+                                        
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        RESULT = new Nodo("String", tmp ,aright,aleft);
+                                  :}
                         ;
 
-funciones_numericas_estaticas ::= MATH PUNTO ABS PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO CEIL PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO COS PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO SIN PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO TAN PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO EXP PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO FLOOR PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO POW PARENTESIS_ABIERTO operaciones_matematicas COMA operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO SQRT PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               |  MATH PUNTO RANDOM PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                               | MATH PUNTO E
-                               | MATH PUNTO PI
-                               | MATH PUNTO SQRT2
+funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("ABS", tmp ,aright,aleft);
+                                :}
+                               |  MATH:a PUNTO:b CEIL:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("CEIL", tmp ,aright,aleft);
+                                :}
+                               |  MATH:a PUNTO:b COS:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                               {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("COS", tmp ,aright,aleft);
+                               :}
+                               |  MATH:a PUNTO:b SIN:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                               {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("SIN", tmp ,aright,aleft);
+                               :}
+                               |  MATH:a PUNTO:b TAN:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                               {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("TAN", tmp ,aright,aleft);
+
+                               :}
+                               |  MATH:a PUNTO:b EXP:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("EXP", tmp ,aright,aleft);
+
+                                :}
+                               |  MATH:a PUNTO:b FLOOR:c  PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("FLOOR", tmp ,aright,aleft);
+
+                                :}
+                               |  MATH:a PUNTO:b POW:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e COMA:f operaciones_matematicas:g PARENTESIS_CERRADO:h
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        tmp.add(g);
+                                        tmp.add(h);
+                                        RESULT = new Nodo("POW", tmp ,aright,aleft);
+
+                                :}
+                               |  MATH:a PUNTO:b SQRT:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("SQRT", tmp ,aright,aleft);
+
+                                :}
+                               |  MATH:a PUNTO:b RANDOM:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        tmp.add(d);
+                                        tmp.add(e);
+                                        tmp.add(f);
+                                        RESULT = new Nodo("RANDOM", tmp ,aright,aleft);
+
+                                :}
+                               |  MATH:a PUNTO:b E:c
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        RESULT = new Nodo("E", tmp ,aright,aleft);
+
+                                :}
+                               |  MATH:a PUNTO:b PI:c
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        RESULT = new Nodo("PI", tmp ,aright,aleft);
+
+                                :}
+                               |  MATH:a PUNTO:b SQRT2:c
+                                {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        tmp.add(b);
+                                        tmp.add(c);
+                                        RESULT = new Nodo("SQRT2", tmp ,aright,aleft);
+
+                                :}
                               ;
 
-incremento ::= ID:a INCREMENTO
+incremento ::= ID:id INCREMENTO:incremento
+                {:
+                    ArrayList tmp2 = new ArrayList<>();   
+                    tmp2.add(id);
+                    Nodo nt = new Nodo("Id",tmp2,idright,idleft);
+
+                    ArrayList tmp = new ArrayList<>(); 
+                    tmp.add(nt);
+                    tmp.add(incremento);
+                    RESULT = new Nodo("incremento", tmp ,incrementoright,incrementoleft); 
+                :}
+
            ;
 
-decremento ::= ID:a DECREMENTO
+decremento ::= ID:id DECREMENTO:decremento
+                {:
+                    ArrayList tmp2 = new ArrayList<>();   
+                    tmp2.add(id);
+                    Nodo nt = new Nodo("Id",tmp2,idright,idleft);
+
+                    ArrayList tmp = new ArrayList<>(); 
+                    tmp.add(nt);
+                    tmp.add(decremento);
+                    RESULT = new Nodo("decremento", tmp ,decrementoright,decrementoleft); 
+                :}
             ;
 
-funcion_incremento_decremento ::= ID INCREMENTO PUNTO_COMA
-                               |  ID DECREMENTO PUNTO_COMA
+funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
+                {:
+                    ArrayList tmp2 = new ArrayList<>();   
+                    tmp2.add(a);
+                    Nodo nt = new Nodo("Id",tmp2,aright,aleft);
+
+                    ArrayList tmp = new ArrayList<>(); 
+                    tmp.add(nt);
+                    tmp.add(b);
+                    tmp.add(c);
+                    RESULT = new Nodo("funcion_incremento", tmp ,bright,bleft); 
+                :}
+
+               |  ID:a DECREMENTO:b PUNTO_COMA:c
+               {:
+                    ArrayList tmp2 = new ArrayList<>();   
+                    tmp2.add(a);
+                    Nodo nt = new Nodo("Id",tmp2,aright,aleft);
+
+                    ArrayList tmp = new ArrayList<>(); 
+                    tmp.add(nt);
+                    tmp.add(b);
+                    tmp.add(c);
+                    RESULT = new Nodo("funcion_decremento", tmp ,bright,bleft); 
+                :}
                        ;
 
-operaciones_relacionales ::= operaciones_matematicas MAYOR_QUE operaciones_matematicas
-                           | operaciones_matematicas MAYOR_IGUAL operaciones_matematicas
-                           | operaciones_matematicas MENOR_QUE operaciones_matematicas
-                           | operaciones_matematicas MENOR_IGUAL operaciones_matematicas
-                           | operaciones_matematicas COMPARACION operaciones_matematicas
-                           | operaciones_matematicas DISTINTO operaciones_matematicas
+operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("mayor_que", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a MAYOR_IGUAL:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("mayor_igual", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a MENOR_QUE:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("menor_que", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a MENOR_IGUAL:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("menor_igual", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a COMPARACION:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a DISTINTO:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
 
-                           | TRUE COMPARACION TRUE
-                           | TRUE COMPARACION FALSE
-                           | FALSE COMPARACION TRUE
-                           | FALSE COMPARACION FALSE
-                           | operaciones_matematicas COMPARACION TRUE
-                           | TRUE COMPARACION operaciones_matematicas
-                           | operaciones_matematicas COMPARACION FALSE
-                           | FALSE COMPARACION operaciones_matematicas
+                           | TRUE:a COMPARACION:b TRUE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | TRUE:a COMPARACION:b FALSE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | FALSE:a COMPARACION:b TRUE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | FALSE:a COMPARACION:b FALSE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a COMPARACION:b TRUE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | TRUE:a COMPARACION:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a COMPARACION:b FALSE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | FALSE:a COMPARACION:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
 
-                           | TRUE DISTINTO TRUE
-                           | TRUE DISTINTO FALSE
-                           | FALSE DISTINTO TRUE
-                           | FALSE DISTINTO FALSE
-                           | operaciones_matematicas DISTINTO TRUE
-                           | TRUE DISTINTO operaciones_matematicas
-                           | operaciones_matematicas DISTINTO FALSE
-                           | FALSE DISTINTO operaciones_matematicas
+                           | TRUE:a DISTINTO:b TRUE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | TRUE:a DISTINTO:b FALSE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | FALSE:a DISTINTO:b TRUE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | FALSE:a DISTINTO:b FALSE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a DISTINTO:b TRUE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | TRUE:a DISTINTO:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | operaciones_matematicas:a DISTINTO:b FALSE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | FALSE:a DISTINTO:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
                        
-                           | TRUE {: RESULT = "true"; :}
-                           | FALSE {: RESULT = "false"; :}
-
-                           | funcion_boolean COMPARACION TRUE
-                           | funcion_boolean COMPARACION FALSE
-                           | TRUE COMPARACION funcion_boolean
-                           | FALSE COMPARACION funcion_boolean
-                           | funcion_boolean DISTINTO TRUE
-                           | funcion_boolean DISTINTO FALSE
-                           | TRUE DISTINTO funcion_boolean
-                           | FALSE DISTINTO funcion_boolean
-                           | funcion_boolean COMPARACION funcion_boolean
-                           | funcion_boolean DISTINTO funcion_boolean
-
-                           | funcion_string COMPARACION funcion_string
-                           | funcion_string DISTINTO funcion_string
-
-                           | funcion_string COMPARACION operaciones_matematicas
-                           | funcion_string DISTINTO operaciones_matematicas
-
-                           | operaciones_matematicas COMPARACION funcion_string
-                           | operaciones_matematicas DISTINTO funcion_string
+                           | TRUE:a 
+                           {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        RESULT = new Nodo("Boolean",tmp,aright,aleft);
+                           :}
+                           | FALSE:a 
+                           {:
+                                        ArrayList tmp = new ArrayList<>(); 
+                                        tmp.add(a);
+                                        RESULT =  new Nodo("Boolean",tmp,aright,aleft);
+                           :}
 
 
+                           
+                           | funcion_boolean:a COMPARACION:b TRUE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
 
-                           | PARENTESIS_ABIERTO operaciones_relacionales PARENTESIS_CERRADO
+                           | funcion_boolean:a COMPARACION:b FALSE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | TRUE:a COMPARACION:b funcion_boolean:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | FALSE:a COMPARACION:b funcion_boolean:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+
+
+                           | funcion_boolean:a DISTINTO:b TRUE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | funcion_boolean:a DISTINTO:b FALSE:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | TRUE:a DISTINTO:b funcion_boolean:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+                           | FALSE:a DISTINTO:b funcion_boolean:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+
+
+                           | funcion_boolean:a COMPARACION:b funcion_boolean:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | funcion_boolean:a DISTINTO:b funcion_boolean:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+
+                           | funcion_string:a COMPARACION:b funcion_string:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+                           | funcion_string:a DISTINTO:b funcion_string:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+
+                           | funcion_string:a COMPARACION:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+
+                           | funcion_string:a DISTINTO:b operaciones_matematicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+
+                           | operaciones_matematicas:a COMPARACION:b funcion_string:c
+                                                       {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                            :}
+
+                           | operaciones_matematicas:a DISTINTO:b funcion_string:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                            :}
+
+                           | PARENTESIS_ABIERTO:a operaciones_relacionales:b PARENTESIS_CERRADO:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("operaciones_relacionales_parentesis", tmp ,aright,aleft); 
+                            :}
                           ;  
 
-operaciones_logicas ::= operaciones_logicas AND operaciones_logicas
-                    | operaciones_logicas OR operaciones_logicas
-                    | NOT operaciones_logicas
-                    | PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
-                    | operaciones_relacionales 
+operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("AND", tmp ,aright,aleft); 
+                            :}
+                    | operaciones_logicas:a OR:b operaciones_logicas:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("OR", tmp ,aright,aleft); 
+                            :}
+                    | NOT:a operaciones_logicas:b
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                RESULT = new Nodo("NOT", tmp ,aright,aleft); 
+                            :}
+                    | PARENTESIS_ABIERTO:a operaciones_logicas:b PARENTESIS_CERRADO:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("operaciones_logicas_parentesis", tmp ,aright,aleft); 
+                            :}
+                    | operaciones_relacionales:a
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);                                
+                                RESULT = new Nodo("operaciones_relacionales", tmp ,aright,aleft); 
+                            :}
+
                     ;
 
 funcion_length ::= TEXTO PUNTO LENGTH
