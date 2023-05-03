@@ -289,44 +289,181 @@ instrucciones ::= instrucciones:a opciones_instrucciones:b {:
                                          :}
                ;
 
-opciones_instrucciones ::= declaracion_variable
+opciones_instrucciones ::= declaracion_variable:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
                         |  asignacion:a   {: 
                                             ArrayList tmp = new ArrayList<>(); 
                                             tmp.add(a);
                                             RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
                                            :}
-                        |  funcion_console_log
-                        |  declaracion_funcion
-                        |  llamada_funcion_normal
-                        |  opciones_if
-                        |  funcion_return
-                        |  instruccion_break
-                        |  instruccion_continue
-                        |  funcion_incremento_decremento
-                        |  funcion_for
-                        |  funcion_while
-                        |  funcion_do_while
-                        |  funcion_printAst
-                        |  funcion_getSymbolTable
+                        |  funcion_console_log:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  declaracion_funcion:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  llamada_funcion_normal:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  opciones_if:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_return:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  instruccion_break:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  instruccion_continue:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_incremento_decremento:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_for:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_while:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_do_while:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_printAst:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_getSymbolTable:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
                         ;
 
 opciones_instrucciones_sin_return ::= 
-                        declaracion_variable
-                        |  asignacion:a {: 
-                                            RESULT = a;
-                                        :}
-                        |  funcion_console_log
-                        |  declaracion_funcion
-                        |  llamada_funcion_normal
-                        |  opciones_if
-                        |  instruccion_break
-                        |  instruccion_continue
-                        |  funcion_incremento_decremento
-                        |  funcion_for
-                        |  funcion_while
-                        |  funcion_do_while
-                        |  funcion_printAst
-                        |  funcion_getSymbolTable
+                        declaracion_variable:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  asignacion:a   {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_console_log:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  declaracion_funcion:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  llamada_funcion_normal:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  opciones_if:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  instruccion_break:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  instruccion_continue:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_incremento_decremento:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_for:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_while:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_do_while:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_printAst:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
+                        |  funcion_getSymbolTable:a
+                                            {: 
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           :}
                         ;
 
 asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa {: 
@@ -345,21 +482,67 @@ asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa 
             ;
 
 declaracion_variable ::= tipo_acceso_variable:a id_valor_variable_lista:b PUNTO_COMA:c
-                        {:
-
-
-
-                        :}
+        {: 
+            ArrayList tmp = new ArrayList<>(); 
+            tmp.add(a);
+            tmp.add(b);
+            tmp.add(c);
+            RESULT = new Nodo("declaracion_variable", tmp ,aright,aleft); 
+        :}
                       ;
 
-id_valor_variable_lista ::=  id_valor_variable_lista COMA id_valor_variable
-                         |   id_valor_variable
+id_valor_variable_lista ::=  id_valor_variable_lista:a COMA:b id_valor_variable:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                RESULT = new Nodo("id_valor_variable_lista", tmp ,aright,aleft);                   
+                            :}
+                         |   id_valor_variable:a
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                RESULT = new Nodo("id_valor_variable_lista", tmp ,aright,aleft);                   
+                            :}
                          ;
 
-id_valor_variable ::= ID:id DOS_PUNTOS tipo_dato_variable:tipoDato ASIGNACION variable_valor:valor 
+id_valor_variable ::= ID:id DOS_PUNTOS:b tipo_dato_variable:tipoDato ASIGNACION:c variable_valor:valor 
+                    {:
+                                  ArrayList tmp = new ArrayList<>();   
+                                  tmp.add(id);
+                                  Nodo nid = new Nodo("Id",tmp,idright,idleft);
+                                  ArrayList tmp2 = new ArrayList<>(); 
+                                  tmp2.add(nid);
+                                  tmp2.add(b);
+                                  tmp2.add(tipoDato);
+                                  tmp2.add(c);
+                                  tmp2.add(valor);
+                                  RESULT = new Nodo("declaracion_variable", tmp2 ,idright,idleft); 
+                    :}
 
-                    | ID:id ASIGNACION variable_valor:valor {: System.out.println(id + " " + valor); :}
-                    | ID:id DOS_PUNTOS tipo_dato_variable:tipoDato {: System.out.println(id + " " + tipoDato + " " + " undefined"); :}
+                    | ID:id ASIGNACION:b variable_valor:valor 
+                    {:
+                                  ArrayList tmp = new ArrayList<>();   
+                                  tmp.add(id);
+                                  Nodo nid = new Nodo("Id",tmp,idright,idleft);
+                                  ArrayList tmp2 = new ArrayList<>(); 
+                                  tmp2.add(nid);
+                                  tmp2.add(b);
+                                  tmp2.add(valor);
+                                  RESULT = new Nodo("declaracion_variable", tmp2 ,idright,idleft); 
+                    :}
+                    | ID:id DOS_PUNTOS:b tipo_dato_variable:tipoDato 
+                    {:
+                                  ArrayList tmp = new ArrayList<>();   
+                                  tmp.add(id);
+                                  Nodo nid = new Nodo("Id",tmp,idright,idleft);
+                                  ArrayList tmp2 = new ArrayList<>(); 
+                                  tmp2.add(nid);
+                                  tmp2.add(b);
+                                  tmp2.add(tipoDato);
+                                  RESULT = new Nodo("declaracion_variable", tmp2 ,idright,idleft); 
+                    :}
                    ;
 
 
@@ -534,21 +717,14 @@ operaciones_matematicas ::=
                                              RESULT = new Nodo("operaciones_matematicas_parentesis", tmp ,aright,aleft);                                               
                                             :}
                         | funcion_number:a {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             RESULT = new Nodo("funcion_number", tmp ,aright,aleft);                                               
+                                             RESULT = a;
                                            :}
                         | funcion_bigint:a {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             RESULT = new Nodo("funcion_bigint", tmp ,aright,aleft);                       
+                                             RESULT = a;
                                            :}
                         | funcion_length:a {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             RESULT = new Nodo("funcion_length", tmp ,aright,aleft);                       
-                                        :}
-
+                                             RESULT = a;
+                                           :}
                         | funciones_numericas_estaticas:a {:
                                      ArrayList tmp = new ArrayList<>(); 
                                      tmp.add(a);
@@ -567,7 +743,7 @@ operaciones_matematicas ::=
                         | ID:a    {: 
                                         ArrayList tmp = new ArrayList<>(); 
                                         tmp.add(a);
-                                        Nodo nodoTmp = new Nodo("Id",tmp,aright,aleft);
+                                        RESULT = new Nodo("Id",tmp,aright,aleft);
                                   :}
                         | TEXTO:a {: 
                                         
@@ -1158,78 +1334,438 @@ operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                                 tmp.add(a);                                
                                 RESULT = new Nodo("operaciones_relacionales", tmp ,aright,aleft); 
                             :}
-
                     ;
 
-funcion_length ::= TEXTO PUNTO LENGTH
-                |  ID PUNTO LENGTH
-                |  variables_string PUNTO LENGTH
+funcion_length ::= TEXTO:a PUNTO:b LENGTH:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(nt);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                RESULT = new Nodo("funcion_length", tmp2 ,aright,aleft);                                
+                            :}
+                |  ID:a PUNTO:b LENGTH:c
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(nt);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                RESULT = new Nodo("funcion_length", tmp2 ,aright,aleft);                                
+                            :}
+                |  variables_string:a PUNTO:b LENGTH:c
+                            {:
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(a);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                RESULT = new Nodo("funcion_length", tmp2 ,aright,aleft);                                
+                            :}
                 ;
 
 
-funcion_number ::= FNUMBER PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                |  FNUMBER PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
-                |  FNUMBER PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
+funcion_number ::= FNUMBER:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_number", tmp ,aright,aleft);                                
+                            :}
+                |  FNUMBER:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_number", tmp ,aright,aleft);                                
+                            :}
+                |  FNUMBER:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(c);
+                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(a);
+                                tmp2.add(b);
+                                tmp2.add(nt);
+                                tmp2.add(d);
+                                RESULT = new Nodo("funcion_number", tmp2 ,aright,aleft);                                
+                            :}
+                |  FNUMBER:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
+                            {:
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(a);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                tmp2.add(d);
+                                RESULT = new Nodo("funcion_number", tmp2 ,aright,aleft);                                
+                            :}
                 ;
 
-funcion_bigint  ::= FBIGINT PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                |   FBIGINT PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
-                |   FBIGINT PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
+funcion_bigint  ::= FBIGINT:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_bigint", tmp ,aright,aleft);                                
+                            :}
+                |   FBIGINT:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_bigint", tmp ,aright,aleft);                                
+                            :}
+                |   FBIGINT:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(c);
+                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(a);
+                                tmp2.add(b);
+                                tmp2.add(nt);
+                                tmp2.add(d);
+                                RESULT = new Nodo("funcion_bigint", tmp2 ,aright,aleft);                                
+                            :}
+                |   FBIGINT:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(a);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                tmp2.add(d);
+                                RESULT = new Nodo("funcion_bigint", tmp2 ,aright,aleft);                                
+                            :}
                 ;
 
 
-funcion_boolean  ::= FBOOLEAN PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                 |   FBOOLEAN PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
-                 |   FBOOLEAN PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
+funcion_boolean  ::= FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
+                            :}
+                 |   FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
+                            :}
+                 |   FBOOLEAN:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(c);
+                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(a);
+                                tmp2.add(b);
+                                tmp2.add(nt);
+                                tmp2.add(d);
+                                RESULT = new Nodo("funcion_boolean", tmp2 ,aright,aleft);                                
+                            :}
+                 |   FBOOLEAN:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
+                            :}
                  ;
 
 
-funcion_string  ::= FSTRING PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                 |  FSTRING PARENTESIS_ABIERTO operaciones_logicas PARENTESIS_CERRADO
-                 |  FSTRING PARENTESIS_ABIERTO TEXTO PARENTESIS_CERRADO
+funcion_string  ::= FSTRING:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
+                            :}
+                 |  FSTRING:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
+                            :}
+                 |  FSTRING:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(c);
+                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(a);
+                                tmp2.add(b);
+                                tmp2.add(nt);
+                                tmp2.add(d);
+                                RESULT = new Nodo("funcion_string", tmp2 ,aright,aleft);                                
+                            :}
+                 |  FSTRING:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                tmp.add(b);
+                                tmp.add(c);
+                                tmp.add(d);
+                                RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
+                            :}
                  ;
 
-funcion_char_at ::= ID PUNTO CHARAT PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
-                |   TEXTO PUNTO CHARAT PARENTESIS_ABIERTO operaciones_matematicas PARENTESIS_CERRADO
+funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(nt);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                tmp2.add(d);
+                                tmp2.add(e);
+                                tmp2.add(f);
+
+                                RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
+                            :}
+                |   TEXTO:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                            {:
+                                ArrayList tmp = new ArrayList<>(); 
+                                tmp.add(a);
+                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
+
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(nt);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                tmp2.add(d);
+                                tmp2.add(e);
+                                tmp2.add(f);
+
+                                RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
+                            :}
+                |   variables_string:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                            {:
+                                ArrayList tmp2 = new ArrayList<>(); 
+                                tmp2.add(a);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                tmp2.add(d);
+                                tmp2.add(e);
+                                tmp2.add(f);
+                                RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
+                            :}
                 ;
 
 
-funcion_concat ::= variables_string PUNTO CONCAT PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO  
-                |  TEXTO PUNTO CONCAT PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO  
-                |  ID PUNTO CONCAT PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO  
+funcion_concat ::= variables_string:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
+                    {:
+                        ArrayList tmp2 = new ArrayList<>(); 
+                        tmp2.add(a);
+                        tmp2.add(b);
+                        tmp2.add(c);
+                        tmp2.add(d);
+                        tmp2.add(e);
+                        tmp2.add(f);
+                        RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
+                    :}
+                |  TEXTO:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
+                    {:
+                        ArrayList tmp = new ArrayList<>(); 
+                        tmp.add(a);
+                        Nodo nt = new Nodo("String", tmp ,aright,aleft);
+                        ArrayList tmp2 = new ArrayList<>(); 
+                        tmp2.add(nt);
+                        tmp2.add(b);
+                        tmp2.add(c);
+                        tmp2.add(d);
+                        tmp2.add(e);
+                        tmp2.add(f);
+                        RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
+                    :}
+                |  ID:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
+                    {:
+                        ArrayList tmp = new ArrayList<>(); 
+                        tmp.add(a);
+                        Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+                        ArrayList tmp2 = new ArrayList<>(); 
+                        tmp2.add(nt);
+                        tmp2.add(b);
+                        tmp2.add(c);
+                        tmp2.add(d);
+                        tmp2.add(e);
+                        tmp2.add(f);
+                        RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
+                    :}
                 ;
 
-variables_string ::= funcion_string
-                 |  funcion_char_at   
-                 |  funcion_to_lower_case
-                 |  funcion_to_upper_case
-                 |  funcion_concat
-                 |  llamada_funcion_asignacion
+variables_string ::= funcion_string:a
+                  {:
+                     RESULT = a;
+                  :}
+                 |  funcion_char_at:a   
+                  {:
+                     RESULT = a;
+                  :}
+                 |  funcion_to_lower_case:a
+                  {:
+                    RESULT = a;
+                  :}
+                 |  funcion_to_upper_case:a
+                  {:
+                    RESULT = a;
+                  :}
+                 |  funcion_concat:a
+                  {:
+                    RESULT = a;
+                  :}
+                 |  llamada_funcion_asignacion:a
+                  {:
+                    RESULT = a;
+                  :}
                  ;
 
 
-funcion_to_lower_case ::= ID PUNTO TOLOWERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
-                       |  TEXTO PUNTO TOLOWERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
-                       |  variables_string PUNTO TOLOWERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
+funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
+                        {:
+                            ArrayList tmp = new ArrayList<>(); 
+                            tmp.add(a);
+                            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+                            ArrayList tmp2 = new ArrayList<>(); 
+                            tmp2.add(nt);
+                            tmp2.add(b);
+                            tmp2.add(c);
+                            tmp2.add(d);
+                            tmp2.add(e);
+                            RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
+                        :}
+                       |  TEXTO:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
+                        {:
+                            ArrayList tmp = new ArrayList<>(); 
+                            tmp.add(a);
+                            Nodo nt = new Nodo("String", tmp ,aright,aleft);
+                            ArrayList tmp2 = new ArrayList<>(); 
+                            tmp2.add(nt);
+                            tmp2.add(b);
+                            tmp2.add(c);
+                            tmp2.add(d);
+                            tmp2.add(e);
+                            RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
+                        :}
+                       |  variables_string:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
+                        {:
+                            ArrayList tmp2 = new ArrayList<>(); 
+                            tmp2.add(a);
+                            tmp2.add(b);
+                            tmp2.add(c);
+                            tmp2.add(d);
+                            tmp2.add(e);
+                            RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
+                        :}
                        ;
 
-funcion_to_upper_case ::= ID PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
-                       |  TEXTO PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
-                       |  variables_string PUNTO TOUPPERCASE PARENTESIS_ABIERTO PARENTESIS_CERRADO
+funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
+                        {:
+                            ArrayList tmp = new ArrayList<>(); 
+                            tmp.add(a);
+                            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+                            ArrayList tmp2 = new ArrayList<>(); 
+                            tmp2.add(nt);
+                            tmp2.add(b);
+                            tmp2.add(c);
+                            tmp2.add(d);
+                            tmp2.add(e);
+                            RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
+                        :}
+                       |  TEXTO:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
+                        {:
+                            ArrayList tmp = new ArrayList<>(); 
+                            tmp.add(a);
+                            Nodo nt = new Nodo("String", tmp ,aright,aleft);
+                            ArrayList tmp2 = new ArrayList<>(); 
+                            tmp2.add(nt);
+                            tmp2.add(b);
+                            tmp2.add(c);
+                            tmp2.add(d);
+                            tmp2.add(e);
+                            RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
+                        :}
+                       |  variables_string:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
+                        {:
+                            ArrayList tmp2 = new ArrayList<>(); 
+                            tmp2.add(a);
+                            tmp2.add(b);
+                            tmp2.add(c);
+                            tmp2.add(d);
+                            tmp2.add(e);
+                            RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
+                        :}
                        ;
 
-funcion_console_log ::= CONSOLE PUNTO LOG PARENTESIS_ABIERTO lista_instrucciones_console:a PARENTESIS_CERRADO PUNTO_COMA {: System.out.println(a); :}
+funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instrucciones_console:e PARENTESIS_CERRADO:f PUNTO_COMA:g
+                    {:
+                        ArrayList tmp2 = new ArrayList<>(); 
+                        tmp2.add(a);
+                        tmp2.add(b);
+                        tmp2.add(c);
+                        tmp2.add(d);
+                        tmp2.add(e);
+                        tmp2.add(f);
+                        tmp2.add(g);
+                        RESULT = new Nodo("funcion_console_log", tmp2 ,aright,aleft);                                
+                    :}
             ;
 
-lista_instrucciones_console ::= lista_instrucciones_console COMA instruccion:a {: RESULT = a; :}
-                             |  instruccion:a {: RESULT = a; :}
+lista_instrucciones_console ::= lista_instrucciones_console:a COMA:b instruccion:c
+                            {: 
+                                
+                                
+
+                            :}
+                             |  instruccion:a 
+                                {: 
+                                    
+                                :}
                              ;
 
  
 
 declaracion_funcion ::= 
 
- FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funciones_sin_return CORCHETE_CERRADO
+ FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d DOS_PUNTOS:e RVOID:f CORCHETE_ABIERTO:g instrucciones_funciones_sin_return:h CORCHETE_CERRADO:i
+ {:
+
+ :}
 
 |FUNCTION ID PARENTESIS_ABIERTO parametros_funcion_declaracion PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funciones_sin_return CORCHETE_CERRADO
 

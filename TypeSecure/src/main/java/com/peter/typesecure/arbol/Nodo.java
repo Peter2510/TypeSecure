@@ -42,11 +42,9 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return "Nodo{" + "tipo=" + tipo + ", hijos=" + hijos + '}';
+        return tipo + " -> " + hijos;
     }
-    
-    
-    
+  
 }
 
 
