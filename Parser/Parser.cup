@@ -472,11 +472,13 @@ asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa 
                                   ArrayList tmp2 = new ArrayList<>();   
                                   tmp2.add(id);
                                   Nodo nt = new Nodo("Id",tmp2,idright,idleft);
+
                                   ArrayList tmp = new ArrayList<>(); 
                                   tmp.add(nt);
                                   tmp.add(igual);
                                   tmp.add(value);
                                   tmp.add(puntoComa);
+
                                   RESULT = new Nodo("asignacion", tmp ,idright,idleft); 
                                                                                 :}
             ;
@@ -1763,20 +1765,127 @@ lista_instrucciones_console ::= lista_instrucciones_console:a COMA:b instruccion
 declaracion_funcion ::= 
 
  FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d DOS_PUNTOS:e RVOID:f CORCHETE_ABIERTO:g instrucciones_funciones_sin_return:h CORCHETE_CERRADO:i
+ 
  {:
+            ArrayList tmp = new ArrayList<>(); 
+            tmp.add(b);
+            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+            
+            ArrayList tmp2 = new ArrayList<>(); 
+            tmp2.add(a);
+            tmp2.add(nt);
+            tmp2.add(c);
+            tmp2.add(d);
+            tmp2.add(e);
+            tmp2.add(f);
+            tmp2.add(g);
+            tmp2.add(h);
+            tmp2.add(i);
+
+            RESULT = new Nodo("declaracion_funcion_sin_parametros_void",tmp2,aright,aleft);
 
  :}
 
-|FUNCTION ID PARENTESIS_ABIERTO parametros_funcion_declaracion PARENTESIS_CERRADO DOS_PUNTOS RVOID CORCHETE_ABIERTO instrucciones_funciones_sin_return CORCHETE_CERRADO
+|FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e DOS_PUNTOS:f RVOID:g CORCHETE_ABIERTO:h instrucciones_funciones_sin_return:i CORCHETE_CERRADO:j
+{:
+            ArrayList tmp = new ArrayList<>(); 
+            tmp.add(b);
+            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+            
+            ArrayList tmp2 = new ArrayList<>(); 
+            tmp2.add(a);
+            tmp2.add(nt);
+            tmp2.add(c);
+            tmp2.add(d);
+            tmp2.add(e);
+            tmp2.add(f);
+            tmp2.add(g);
+            tmp2.add(h);
+            tmp2.add(i);
+            tmp2.add(j);
 
-|FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+            RESULT = new Nodo("declaracion_funcion_con_parametros_void",tmp2,aright,aleft);
 
-|FUNCTION ID PARENTESIS_ABIERTO parametros_funcion_declaracion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+ :}
 
-|FUNCTION ID PARENTESIS_ABIERTO PARENTESIS_CERRADO DOS_PUNTOS tipo_dato_variable CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+|FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
+{:
+            ArrayList tmp = new ArrayList<>(); 
+            tmp.add(b);
+            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+            
+            ArrayList tmp2 = new ArrayList<>(); 
+            tmp2.add(a);
+            tmp2.add(nt);
+            tmp2.add(c);
+            tmp2.add(d);
+            tmp2.add(e);
+            tmp2.add(f);
+            tmp2.add(g);
+            
+            RESULT = new Nodo("declaracion_funcion_sin_parametros_sin_tipo",tmp2,aright,aleft);
 
-|FUNCTION ID PARENTESIS_ABIERTO parametros_funcion_declaracion PARENTESIS_CERRADO  DOS_PUNTOS tipo_dato_variable  CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
-        
+ :}
+
+|FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e CORCHETE_ABIERTO:f instrucciones_funcion:g CORCHETE_CERRADO:h
+{:
+            ArrayList tmp = new ArrayList<>(); 
+            tmp.add(b);
+            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+            
+            ArrayList tmp2 = new ArrayList<>(); 
+            tmp2.add(a);
+            tmp2.add(nt);
+            tmp2.add(c);
+            tmp2.add(d);
+            tmp2.add(e);
+            tmp2.add(f);
+            tmp2.add(g);
+            tmp2.add(h);
+            
+            RESULT = new Nodo("declaracion_funcion_con_parametros_sin_tipo",tmp2,aright,aleft);
+ :}
+
+|FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d DOS_PUNTOS:e tipo_dato_variable:f CORCHETE_ABIERTO:g instrucciones_funcion:h CORCHETE_CERRADO:i
+{:
+            ArrayList tmp = new ArrayList<>(); 
+            tmp.add(b);
+            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+            
+            ArrayList tmp2 = new ArrayList<>(); 
+            tmp2.add(a);
+            tmp2.add(nt);
+            tmp2.add(c);
+            tmp2.add(d);
+            tmp2.add(e);
+            tmp2.add(f);
+            tmp2.add(g);
+            tmp2.add(h);
+            tmp2.add(i);
+            
+            RESULT = new Nodo("declaracion_funcion_sin_parametros_con_tipo",tmp2,aright,aleft);
+ :}
+
+|FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e DOS_PUNTOS:f tipo_dato_variable:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
+{:
+            ArrayList tmp = new ArrayList<>(); 
+            tmp.add(b);
+            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+            
+            ArrayList tmp2 = new ArrayList<>(); 
+            tmp2.add(a);
+            tmp2.add(nt);
+            tmp2.add(c);
+            tmp2.add(d);
+            tmp2.add(e);
+            tmp2.add(f);
+            tmp2.add(g);
+            tmp2.add(h);
+            tmp2.add(i);
+            tmp2.add(j);
+            
+            RESULT = new Nodo("declaracion_funcion_con_parametros_con_tipo",tmp2,aright,aleft);
+ :}        
                     ;
 
 
@@ -1785,24 +1894,87 @@ instrucciones_funciones_sin_return ::= instrucciones_funciones_sin_return opcion
                                     ;
 
 
-instrucciones_funcion ::= instrucciones
-                       |
+instrucciones_funcion ::= instrucciones:a 
+                            {: 
+                                RESULT = a; 
+                            :}
+                       | 
+                       {: 
+                            ArrayList tmp = new ArrayList<>(); 
+                            RESULT = new Nodo("vacio",tmp,0,0);
+                       :}
                        ;
 
 parametros_funcion_declaracion ::= parametros_funcion_declaracion COMA parametro_funcion_declaracion
                     |  parametro_funcion_declaracion
                     ;
 
-parametro_funcion_declaracion ::= ID DOS_PUNTOS tipo_dato_variable
+parametro_funcion_declaracion ::= ID:a DOS_PUNTOS:b tipo_dato_variable:c
+                                {:
+
+                                    ArrayList tmp = new ArrayList<>(); 
+                                    tmp.add(a);
+                                    Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+                                    ArrayList tmp2 = new ArrayList<>(); 
+                                    tmp2.add(nt);
+                                    tmp2.add(b);
+                                    tmp2.add(c);
+                                    RESULT = new Nodo("parametro_funcion_declaracion",tmp2,aright,aleft);
+                                :}
                                 ;
 
 
-funcion_return ::= RETURN instruccion PUNTO_COMA
-                | RETURN PUNTO_COMA
+funcion_return ::= RETURN:a instruccion:b PUNTO_COMA:c
+                    {:
+                        ArrayList tmp = new ArrayList<>();
+                        tmp.add(a);
+                        tmp.add(b);
+                        tmp.add(c);
+
+                        RESULT = new Nodo("return_con_instruccion",tmp,aright,aleft);
+
+                    :}
+                | RETURN:a PUNTO_COMA:b
+                    {:
+                        ArrayList tmp = new ArrayList<>();
+                        tmp.add(a);
+                        tmp.add(b);
+                        RESULT = new Nodo("return_sin_instruccion",tmp,aright,aleft);
+                    :}
                 ;
 
-llamada_funcion_asignacion ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO 
-                            |  ID PARENTESIS_ABIERTO parametros_funcion_asignacion PARENTESIS_CERRADO 
+llamada_funcion_asignacion ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
+                              {:
+
+                                ArrayList tmp = new ArrayList<>();
+                                tmp.add(a);
+                                Nodo nt = new Nodo("Id",tmp,aright, aleft);
+
+                                ArrayList tmp2 = new ArrayList<>();
+                                tmp2.add(nt);
+                                tmp2.add(b);
+                                tmp2.add(c);
+
+                                RESULT = new Nodo("llamada_funcion_asignacion_sin_parametros",tmp2,aright,aleft);
+
+                              :}
+                            |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d
+                              {:
+
+                                ArrayList tmp = new ArrayList<>();
+                                tmp.add(a);
+                                Nodo nt = new Nodo("Id",tmp,aright, aleft);
+
+                                ArrayList tmp2 = new ArrayList<>();
+                                tmp2.add(nt);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                tmp2.add(d);
+
+                                RESULT = new Nodo("llamada_funcion_asignacion_con_parametros",tmp2,aright,aleft);
+
+                              :}
                             ;
 
 parametros_funcion_asignacion ::= parametros_funcion_asignacion COMA instruccion
@@ -1811,63 +1983,284 @@ parametros_funcion_asignacion ::= parametros_funcion_asignacion COMA instruccion
 
 
 
-llamada_funcion_normal ::= ID PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
-                        |  ID PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO PUNTO_COMA
+llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_COMA:d
+                           {:
+    
+                                ArrayList tmp = new ArrayList<>();
+                                tmp.add(a);
+                                Nodo nt = new Nodo("Id",tmp,aright, aleft);
+
+                                ArrayList tmp2 = new ArrayList<>();
+                                tmp2.add(nt);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                tmp2.add(d);
+
+                                RESULT = new Nodo("llamada_funcion_sin_parametros",tmp2,aright,aleft);
+
+                           :}
+                        |  ID:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
+                           {:
+    
+                                ArrayList tmp = new ArrayList<>();
+                                tmp.add(a);
+                                Nodo nt = new Nodo("Id",tmp,aright, aleft);
+
+                                ArrayList tmp2 = new ArrayList<>();
+                                tmp2.add(nt);
+                                tmp2.add(b);
+                                tmp2.add(c);
+                                tmp2.add(d);
+                                tmp2.add(e);
+
+                                RESULT = new Nodo("llamada_funcion_con_parametros",tmp2,aright,aleft);
+
+                           :}
                         ;
 
-funcion_if ::= IF PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+funcion_if ::= IF:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
+              {:
+
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(b);
+                    tmp.add(c);
+                    tmp.add(d);
+                    tmp.add(e);
+                    tmp.add(f);
+                    tmp.add(g);
+
+                    RESULT = new Nodo("if",tmp,aright,aleft);                
+
+              :}
             ;
 
-funcion_else ::= ELSE CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+funcion_else ::= ELSE:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERRADO:d
+              {:
+
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(b);
+                    tmp.add(c);
+                    tmp.add(d);
+                    
+                    RESULT = new Nodo("else",tmp,aright,aleft);                
+
+              :}
               ;  
 
 
-funcion_else_if ::= ELSE IF PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+funcion_else_if ::= ELSE:a IF:b PARENTESIS_ABIERTO:c instruccion:d PARENTESIS_CERRADO:e CORCHETE_ABIERTO:f instrucciones_funcion:g CORCHETE_CERRADO:h
+              {:
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(b);
+                    tmp.add(c);
+                    tmp.add(d);
+                    tmp.add(e);
+                    tmp.add(f);
+                    tmp.add(g);
+                    tmp.add(h);
+                    
+                    RESULT = new Nodo("else_if",tmp,aright,aleft);                
+              :}
                 ;
 
 lista_else_if ::= lista_else_if funcion_else_if
                 | funcion_else_if
                 ;
 
-opciones_if ::=  funcion_if
-                | funcion_if funcion_else
-                | funcion_if lista_else_if funcion_else
-                | funcion_if lista_else_if
+opciones_if ::=  funcion_if:a
+                {:
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    RESULT = new Nodo("funcion_if",tmp,aright,aleft);
+                :}
+                | funcion_if:a funcion_else:b
+                {:
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(b);
+                    RESULT = new Nodo("funcion_if_else",tmp,aright,aleft);
+                :}
+                | funcion_if:a lista_else_if:b funcion_else:c
+                {:
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(b);
+                    tmp.add(c);
+                    RESULT = new Nodo("funcion_if_else_if_else",tmp,aright,aleft);
+                :}                
+                | funcion_if:a lista_else_if:b
+                {:
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(b);
+                    RESULT = new Nodo("funcion_if_else_if",tmp,aright,aleft);
+                :}                                
                 ;
 
 
-instruccion_break ::= BREAK PUNTO_COMA
+instruccion_break ::= BREAK:a PUNTO_COMA:b
+                    {: 
+                        ArrayList tmp = new ArrayList<>();
+                        tmp.add(a);
+                        tmp.add(b);
+
+                        RESULT = new Nodo("break",tmp,aright,aleft);
+
+                    :}
                   ;
 
 
-instruccion_continue ::= CONTINUE PUNTO_COMA
+instruccion_continue ::= CONTINUE:a PUNTO_COMA:b
+                    {: 
+                        ArrayList tmp = new ArrayList<>();
+                        tmp.add(a);
+                        tmp.add(b);
+
+                        RESULT = new Nodo("continue",tmp,aright,aleft);
+
+                    :}
                      ;
 
 
 funcion_for ::= 
-FOR PARENTESIS_ABIERTO declaracion_variable operaciones_logicas PUNTO_COMA accion_asignacion_for  PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
-|FOR PARENTESIS_ABIERTO asignacion operaciones_logicas PUNTO_COMA accion_asignacion_for  PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_COMA:e accion_asignacion_for:f PARENTESIS_CERRADO:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
+    {:
+
+        ArrayList tmp = new ArrayList<>();
+        tmp.add(a);
+        tmp.add(b);
+        tmp.add(c);
+        tmp.add(d);
+        tmp.add(e);
+        tmp.add(f);
+        tmp.add(g);
+        tmp.add(h);
+        tmp.add(i);
+        tmp.add(j);
+
+        RESULT = new Nodo("for_declaracion_variable",tmp,aright,aleft);
+
+    :}
+
+
+|FOR:a PARENTESIS_ABIERTO:b asignacion:c operaciones_logicas:d PUNTO_COMA:e accion_asignacion_for:f PARENTESIS_CERRADO:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
+    {:
+
+        ArrayList tmp = new ArrayList<>();
+        tmp.add(a);
+        tmp.add(b);
+        tmp.add(c);
+        tmp.add(d);
+        tmp.add(e);
+        tmp.add(f);
+        tmp.add(g);
+        tmp.add(h);
+        tmp.add(i);
+        tmp.add(j);
+
+        RESULT = new Nodo("for_asignacion_variable",tmp,aright,aleft);
+
+    :}
             ;
 
 
-accion_asignacion_for ::= ID INCREMENTO
-                       | ID DECREMENTO
-                       | ID ASIGNACION instruccion
+accion_asignacion_for ::= incremento:a
+                        {:
+                            RESULT = a;    
+                        :}
+
+                       | decremento:a
+                        {:
+                            RESULT = a;    
+                        :}                       
+                        
+                       | ID:a ASIGNACION:b instruccion:c
+                        
+                        {:
+                            ArrayList tmp = new ArrayList<>();
+                            tmp.add(a);
+                            Nodo nt = new Nodo("Id",tmp,aright, aleft);
+
+                            ArrayList tmp2 = new ArrayList<>();
+                            tmp2.add(nt);
+                            tmp2.add(b);
+                            tmp2.add(c);
+                                                        
+                            RESULT = new Nodo("asignacion_for",tmp2,aright,aleft);
+
+                        :}
+
                        ;
 
 
-funcion_while ::= WHILE PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO
+funcion_while ::= WHILE:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
+                {:
+
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(b);
+                    tmp.add(c);
+                    tmp.add(d);
+                    tmp.add(e);
+                    tmp.add(f);
+                    tmp.add(g);
+
+                    RESULT = new Nodo("while",tmp,aright,aleft);
+
+                :}
               ;
 
 
-funcion_do_while ::= DO CORCHETE_ABIERTO instrucciones_funcion CORCHETE_CERRADO WHILE PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO PUNTO_COMA
+funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERRADO:d WHILE:e PARENTESIS_ABIERTO:f instruccion:g PARENTESIS_CERRADO:h PUNTO_COMA:i
+                {:
+
+                    ArrayList tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(b);
+                    tmp.add(c);
+                    tmp.add(d);
+                    tmp.add(e);
+                    tmp.add(f);
+                    tmp.add(g);
+                    tmp.add(h);
+                    tmp.add(i);
+
+                    RESULT = new Nodo("do_while",tmp,aright,aleft);
+
+                :}
+                 ;
+
+
+funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
+                    {:
+
+                        ArrayList tmp = new ArrayList<>();
+                        tmp.add(a);
+                        tmp.add(b);
+                        tmp.add(c);
+                        tmp.add(d);
+                        tmp.add(e);
+
+                        RESULT = new Nodo("funcion_printAst",tmp,aright,aleft);
+
+                    :}
                   ;
 
 
-funcion_printAst ::= PRINTAST PARENTESIS_ABIERTO instruccion PARENTESIS_CERRADO PUNTO_COMA
-                  ;
+funcion_getSymbolTable ::= GETSYMBOLTABLE:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_COMA:d
+                    {:
 
+                        ArrayList tmp = new ArrayList<>();
+                        tmp.add(a);
+                        tmp.add(b);
+                        tmp.add(c);
+                        tmp.add(d);
+                        
+                        RESULT = new Nodo("funcion_getSymbolTable",tmp,aright,aleft);
 
-funcion_getSymbolTable ::= GETSYMBOLTABLE PARENTESIS_ABIERTO PARENTESIS_CERRADO PUNTO_COMA
-                        ;
+                    :}
+                     ;
 
