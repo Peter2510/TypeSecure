@@ -573,6 +573,7 @@ id_valor_variable ::= ID:id DOS_PUNTOS:b tipo_dato_variable:tipoDato ASIGNACION:
                                   ArrayList tmp = new ArrayList<>();   
                                   tmp.add(id);
                                   Nodo nid = new Nodo("Id",tmp,idright,idleft);
+
                                   ArrayList tmp2 = new ArrayList<>(); 
                                   tmp2.add(nid);
                                   tmp2.add(b);
@@ -683,57 +684,93 @@ instruccion ::=  operaciones_matematicas:a {:
 operaciones_matematicas ::= 
                           MENOS:a operaciones_matematicas:b       
                                         {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             tmp.add(b);
-                                             RESULT = new Nodo("menos_operacion_matematica", tmp ,aright,aleft);                                               
+                                             
+                                            ArrayList simbolMenos = new ArrayList<>();   
+                                            simbolMenos.add(a);
+                                            Nodo menos = new Nodo("menos",simbolMenos,aright,aleft);
+
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(menos);
+                                            tmp.add(b);
+                                            RESULT = new Nodo("menos_operacion_matematica", tmp ,aright,aleft);                                               
+
                                         :}%prec UMENOS 
                         | MAS:a operaciones_matematicas:b 
                                         {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             tmp.add(b);
-                                             RESULT = new Nodo("mas_operacion_matematica", tmp ,aright,aleft);                                               
+                                             
+                                            ArrayList simbolMas = new ArrayList<>();   
+                                            simbolMas.add(a);
+                                            Nodo mas = new Nodo("mas",simbolMas,aright,aleft);
+
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(mas);
+                                            tmp.add(b);
+                                            RESULT = new Nodo("mas_operacion_matematica", tmp ,aright,aleft);                                               
                                         :}%prec UMENOS 
                         | operaciones_matematicas:a MAS:b operaciones_matematicas:c
                                         {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             tmp.add(b);
-                                             tmp.add(c);
-                                             RESULT = new Nodo("suma", tmp ,aright,aleft);                                               
+                                             
+                                            ArrayList simbolMas = new ArrayList<>();   
+                                            simbolMas.add(b);
+                                            Nodo mas = new Nodo("mas",simbolMas,aright,aleft);
+
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            tmp.add(mas);
+                                            tmp.add(c);
+                                            RESULT = new Nodo("suma", tmp ,aright,aleft);                                               
                                         :}
                         | operaciones_matematicas:a MENOS:b operaciones_matematicas:c
                                         {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             tmp.add(b);
-                                             tmp.add(c);
-                                             RESULT = new Nodo("resta", tmp ,aright,aleft);
+                                             
+                                            ArrayList simbolMenos = new ArrayList<>();   
+                                            simbolMenos.add(b);
+                                            Nodo menos = new Nodo("menos",simbolMenos,aright,aleft);
+
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            tmp.add(menos);
+                                            tmp.add(c);
+                                            RESULT = new Nodo("resta", tmp ,aright,aleft);
                                         :}
                         | operaciones_matematicas:a MULTIPLICACION:b operaciones_matematicas:c
                                         {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             tmp.add(b);
-                                             tmp.add(c);
-                                             RESULT = new Nodo("multiplicacion", tmp ,aright,aleft);                                               
+                                             
+                                            ArrayList simbolPor = new ArrayList<>();   
+                                            simbolPor.add(b);
+                                            Nodo por = new Nodo("por",simbolPor,aright,aleft);
+
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            tmp.add(por);
+                                            tmp.add(c);
+                                            RESULT = new Nodo("multiplicacion", tmp ,aright,aleft);                                               
                                         :}                        
                         | operaciones_matematicas:a DIVISION:b operaciones_matematicas:c
                                         {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             tmp.add(b);
-                                             tmp.add(c);
-                                             RESULT = new Nodo("division", tmp ,aright,aleft);                                               
+                                             
+                                            ArrayList simbolDiv = new ArrayList<>();   
+                                            simbolDiv.add(b);
+                                            Nodo simbolo_division = new Nodo("simbolo_division",simbolDiv,aright,aleft);
+
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            tmp.add(simbolo_division);
+                                            tmp.add(c);
+                                            RESULT = new Nodo("division", tmp ,aright,aleft);                                               
                                         :}
                         | operaciones_matematicas:a MOD:b operaciones_matematicas:c
                                         {:
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(a);
-                                             tmp.add(b);
-                                             tmp.add(c);
-                                             RESULT = new Nodo("mod", tmp ,aright,aleft);                                               
+                                             
+                                            ArrayList simboloMod = new ArrayList<>();   
+                                            simboloMod.add(b);
+                                            Nodo simbolo_mod = new Nodo("simbolo_mod",simboloMod,aright,aleft);
+
+                                            ArrayList tmp = new ArrayList<>(); 
+                                            tmp.add(a);
+                                            tmp.add(simbolo_mod);
+                                            tmp.add(c);
+                                            RESULT = new Nodo("mod", tmp ,aright,aleft);                                               
                                         :}
                         | PARENTESIS_ABIERTO:a operaciones_matematicas:b PARENTESIS_CERRADO:c 
                                             {:
