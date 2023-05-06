@@ -2792,14 +2792,21 @@ class CUP$Parser$actions {
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
 
+                                        ArrayList parentesisA = new ArrayList<>();
+                                        parentesisA.add(d);
+                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                        ArrayList parentesisC = new ArrayList<>();
+                                        parentesisC.add(f);
+                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
                                         tmp.add(a);
                                         tmp.add(punto);
                                         tmp.add(c);
-                                        tmp.add(d);
+                                        tmp.add(parentesis_abierto);
                                         tmp.add(e);
-                                        tmp.add(f);
+                                        tmp.add(parentesis_cerrado);
                                         RESULT = new Nodo("COS", tmp ,aright,aleft);
                                
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funciones_numericas_estaticas",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -2835,13 +2842,21 @@ class CUP$Parser$actions {
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
 
 
+                                        ArrayList parentesisA = new ArrayList<>();
+                                        parentesisA.add(d);
+                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                        ArrayList parentesisC = new ArrayList<>();
+                                        parentesisC.add(f);
+                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                         ArrayList tmp = new ArrayList<>(); 
                                         tmp.add(a);
                                         tmp.add(punto);
                                         tmp.add(c);
-                                        tmp.add(d);
+                                        tmp.add(parentesis_abierto);
                                         tmp.add(e);
-                                        tmp.add(f);
+                                        tmp.add(parentesis_cerrado);
                                         RESULT = new Nodo("SIN", tmp ,aright,aleft);
                                
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funciones_numericas_estaticas",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -2877,13 +2892,21 @@ class CUP$Parser$actions {
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                                        ArrayList parentesisA = new ArrayList<>();
+                                        parentesisA.add(d);
+                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                        ArrayList parentesisC = new ArrayList<>();
+                                        parentesisC.add(f);
+                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                         ArrayList tmp = new ArrayList<>(); 
                                         tmp.add(a);
                                         tmp.add(punto);
                                         tmp.add(c);
-                                        tmp.add(d);
+                                        tmp.add(parentesis_abierto);
                                         tmp.add(e);
-                                        tmp.add(f);
+                                        tmp.add(parentesis_cerrado);
                                         RESULT = new Nodo("TAN", tmp ,aright,aleft);
 
                                
@@ -2919,14 +2942,22 @@ class CUP$Parser$actions {
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                                        ArrayList parentesisA = new ArrayList<>();
+                                        parentesisA.add(d);
+                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                        ArrayList parentesisC = new ArrayList<>();
+                                        parentesisC.add(f);
+                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
 
                                         ArrayList tmp = new ArrayList<>(); 
                                         tmp.add(a);
                                         tmp.add(punto);
                                         tmp.add(c);
-                                        tmp.add(d);
+                                        tmp.add(parentesis_abierto);
                                         tmp.add(e);
-                                        tmp.add(f);
+                                        tmp.add(parentesis_cerrado);
                                         RESULT = new Nodo("EXP", tmp ,aright,aleft);
 
                                 
@@ -2960,16 +2991,24 @@ class CUP$Parser$actions {
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
+                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);       
+
+                                        ArrayList parentesisA = new ArrayList<>();
+                                        parentesisA.add(d);
+                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                        ArrayList parentesisC = new ArrayList<>();
+                                        parentesisC.add(f);
+                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
 
                                         ArrayList tmp = new ArrayList<>(); 
                                         tmp.add(a);
                                         tmp.add(punto);
                                         tmp.add(c);
-                                        tmp.add(d);
+                                        tmp.add(parentesis_abierto);
                                         tmp.add(e);
-                                        tmp.add(f);
+                                        tmp.add(parentesis_cerrado);
                                         RESULT = new Nodo("FLOOR", tmp ,aright,aleft);
 
                                 
@@ -3011,6 +3050,14 @@ class CUP$Parser$actions {
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                                        ArrayList parentesisA = new ArrayList<>();
+                                        parentesisA.add(d);
+                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                        ArrayList parentesisC = new ArrayList<>();
+                                        parentesisC.add(h);
+                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                         ArrayList tmp5 = new ArrayList<>();
                                         tmp5.add(f);
                                         Nodo coma = new Nodo("coma",tmp5,aright,aleft);
@@ -3020,11 +3067,11 @@ class CUP$Parser$actions {
                                         tmp.add(a);
                                         tmp.add(punto);
                                         tmp.add(c);
-                                        tmp.add(d);
+                                        tmp.add(parentesis_abierto);
                                         tmp.add(e);
                                         tmp.add(coma);
                                         tmp.add(g);
-                                        tmp.add(h);
+                                        tmp.add(parentesis_cerrado);
                                         RESULT = new Nodo("POW", tmp ,aright,aleft);
 
                                 
@@ -3058,16 +3105,24 @@ class CUP$Parser$actions {
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
+                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);  
+
+                                        ArrayList parentesisA = new ArrayList<>();
+                                        parentesisA.add(d);
+                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                        ArrayList parentesisC = new ArrayList<>();
+                                        parentesisC.add(f);
+                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
 
                                         ArrayList tmp = new ArrayList<>(); 
                                         tmp.add(a);
                                         tmp.add(punto);
                                         tmp.add(c);
-                                        tmp.add(d);
+                                        tmp.add(parentesis_abierto);
                                         tmp.add(e);
-                                        tmp.add(f);
+                                        tmp.add(parentesis_cerrado);
                                         RESULT = new Nodo("SQRT", tmp ,aright,aleft);
 
                                 
@@ -3103,14 +3158,21 @@ class CUP$Parser$actions {
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                                        ArrayList parentesisA = new ArrayList<>();
+                                        parentesisA.add(d);
+                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                        ArrayList parentesisC = new ArrayList<>();
+                                        parentesisC.add(f);
+                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
                                         tmp.add(a);
                                         tmp.add(punto);
                                         tmp.add(c);
-                                        tmp.add(d);
+                                        tmp.add(parentesis_abierto);
                                         tmp.add(e);
-                                        tmp.add(f);
+                                        tmp.add(parentesis_cerrado);
                                         RESULT = new Nodo("RANDOM", tmp ,aright,aleft);
 
                                 
@@ -4273,10 +4335,19 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(a);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(c);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+
                                 ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(b);
-                                tmp.add(c);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("operaciones_relacionales_parentesis", tmp ,aright,aleft); 
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("operaciones_relacionales",17, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4365,10 +4436,19 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(a);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(c);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(b);
-                                tmp.add(c);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("operaciones_logicas_parentesis", tmp ,aright,aleft); 
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("operaciones_logicas",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4502,11 +4582,21 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_number", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_number",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4530,11 +4620,21 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_number", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_number",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4558,15 +4658,24 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(c);
                                 Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(nt);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_number", tmp2 ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_number",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4591,11 +4700,19 @@ class CUP$Parser$actions {
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_number", tmp2 ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_number",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4619,11 +4736,21 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_bigint", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_bigint",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4647,11 +4774,20 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_bigint", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_bigint",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4675,15 +4811,25 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(c);
                                 Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(nt);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_bigint", tmp2 ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_bigint",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4707,11 +4853,20 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                              
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_bigint", tmp2 ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_bigint",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4735,11 +4890,20 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_boolean",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4763,11 +4927,20 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_boolean",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4791,15 +4964,24 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(c);
                                 Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(nt);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_boolean", tmp2 ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_boolean",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4823,11 +5005,21 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_boolean",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4851,11 +5043,20 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_string",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4879,11 +5080,20 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_string",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4911,11 +5121,19 @@ class CUP$Parser$actions {
                                 tmp.add(c);
                                 Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(nt);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_string", tmp2 ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_string",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4939,11 +5157,20 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_string",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4977,6 +5204,14 @@ class CUP$Parser$actions {
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(d);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(f);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp4 = new ArrayList<>();                                         
                                 tmp4.add(b);
                                 Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -4985,9 +5220,9 @@ class CUP$Parser$actions {
                                 tmp2.add(nt);
                                 tmp2.add(punto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(e);
-                                tmp2.add(f);
+                                tmp2.add(parentesis_cerrado);
 
                                 RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
                             
@@ -5022,6 +5257,14 @@ class CUP$Parser$actions {
                                 tmp.add(a);
                                 Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(d);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(f);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp4 = new ArrayList<>();                                         
                                 tmp4.add(b);
                                 Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -5030,9 +5273,9 @@ class CUP$Parser$actions {
                                 tmp2.add(nt);
                                 tmp2.add(punto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(e);
-                                tmp2.add(f);
+                                tmp2.add(parentesis_cerrado);
 
                                 RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
                             
@@ -5068,13 +5311,21 @@ class CUP$Parser$actions {
                                 tmp4.add(b);
                                 Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(d);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(f);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
                                 tmp2.add(punto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(e);
-                                tmp2.add(f);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_char_at",24, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5107,15 +5358,23 @@ class CUP$Parser$actions {
 
                         ArrayList tmp4 = new ArrayList<>();                                         
                         tmp4.add(b);
-                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
+                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);    
+
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(d);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(f);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                         ArrayList tmp2 = new ArrayList<>(); 
                         tmp2.add(a);
                         tmp2.add(punto);
                         tmp2.add(c);
-                        tmp2.add(d);
+                        tmp2.add(parentesis_abierto);
                         tmp2.add(e);
-                        tmp2.add(f);
+                        tmp2.add(parentesis_cerrado);
                         RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
                     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_concat",28, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5146,9 +5405,6 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
-
-
-
                         ArrayList tmp = new ArrayList<>(); 
                         tmp.add(a);
                         Nodo nt = new Nodo("String", tmp ,aright,aleft);
@@ -5157,14 +5413,23 @@ class CUP$Parser$actions {
                         tmp4.add(b);
                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(d);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(f);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                         ArrayList tmp2 = new ArrayList<>(); 
                         tmp2.add(nt);
                         tmp2.add(punto);
                         tmp2.add(c);
-                        tmp2.add(d);
+                        tmp2.add(parentesis_abierto);
                         tmp2.add(e);
-                        tmp2.add(f);
+                        tmp2.add(parentesis_cerrado);
                         RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
+
                     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_concat",28, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5197,6 +5462,15 @@ class CUP$Parser$actions {
                         tmp.add(a);
                         Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
+
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(d);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(f);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                         ArrayList tmp4 = new ArrayList<>();                                         
                         tmp4.add(b);
                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -5205,9 +5479,9 @@ class CUP$Parser$actions {
                         tmp2.add(nt);
                         tmp2.add(punto);
                         tmp2.add(c);
-                        tmp2.add(d);
+                        tmp2.add(parentesis_abierto);
                         tmp2.add(e);
-                        tmp2.add(f);
+                        tmp2.add(parentesis_cerrado);
                         RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
                     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_concat",28, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5322,6 +5596,14 @@ class CUP$Parser$actions {
                             tmp.add(a);
                             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -5330,8 +5612,8 @@ class CUP$Parser$actions {
                             tmp2.add(nt);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_lower_case",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5362,6 +5644,14 @@ class CUP$Parser$actions {
                             tmp.add(a);
                             Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -5370,8 +5660,8 @@ class CUP$Parser$actions {
                             tmp2.add(nt);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_lower_case",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5402,14 +5692,21 @@ class CUP$Parser$actions {
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
+                                
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
 
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                             ArrayList tmp2 = new ArrayList<>(); 
                             tmp2.add(a);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_lower_case",25, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5440,18 +5737,24 @@ class CUP$Parser$actions {
                             tmp.add(a);
                             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
-
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                             ArrayList tmp2 = new ArrayList<>(); 
                             tmp2.add(nt);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_upper_case",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5482,6 +5785,13 @@ class CUP$Parser$actions {
                             tmp.add(a);
                             Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
@@ -5491,8 +5801,8 @@ class CUP$Parser$actions {
                             tmp2.add(nt);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_upper_case",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5524,12 +5834,20 @@ class CUP$Parser$actions {
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                             ArrayList tmp2 = new ArrayList<>(); 
                             tmp2.add(a);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_upper_case",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5573,15 +5891,23 @@ class CUP$Parser$actions {
 
                         ArrayList tmp3 = new ArrayList<>();                                         
                         tmp3.add(c);
-                        Nodo log =  new Nodo("log",tmp3,aright,aleft);                               
+                        Nodo log =  new Nodo("log",tmp3,aright,aleft);          
+
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(d);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(f);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                         ArrayList tmp2 = new ArrayList<>(); 
                         tmp2.add(console);
                         tmp2.add(punto);
                         tmp2.add(log);
-                        tmp2.add(d);
+                        tmp2.add(parentesis_abierto);
                         tmp2.add(e);
-                        tmp2.add(f);
+                        tmp2.add(parentesis_cerrado);
                         tmp2.add(g);
                         RESULT = new Nodo("funcion_console_log", tmp2 ,aright,aleft);                                
                     
@@ -5673,12 +5999,21 @@ class CUP$Parser$actions {
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(d);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
-            tmp2.add(d);
+            tmp2.add(parentesis_abierto);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(e);
             tmp2.add(f);
             tmp2.add(g);
@@ -5730,13 +6065,21 @@ class CUP$Parser$actions {
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(e);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);            
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
+            tmp2.add(parentesis_abierto);
             tmp2.add(d);
-            tmp2.add(e);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(f);
             tmp2.add(g);
             tmp2.add(h);
@@ -5779,12 +6122,20 @@ class CUP$Parser$actions {
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(d);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
-            tmp2.add(d);
+            tmp2.add(parentesis_abierto);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(e);
             tmp2.add(f);
             tmp2.add(g);
@@ -5828,13 +6179,21 @@ class CUP$Parser$actions {
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(e);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
+            tmp2.add(parentesis_abierto);
             tmp2.add(d);
-            tmp2.add(e);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(f);
             tmp2.add(g);
             tmp2.add(h);
@@ -5880,12 +6239,20 @@ class CUP$Parser$actions {
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(d);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
-            tmp2.add(d);
+            tmp2.add(parentesis_abierto);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(e);
             tmp2.add(f);
             tmp2.add(g);
@@ -5936,13 +6303,21 @@ class CUP$Parser$actions {
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(e);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
+            tmp2.add(parentesis_abierto);
             tmp2.add(d);
-            tmp2.add(e);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(f);
             tmp2.add(g);
             tmp2.add(h);
@@ -6161,10 +6536,18 @@ class CUP$Parser$actions {
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(c);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
-                                tmp2.add(b);
-                                tmp2.add(c);
+                                tmp2.add(parentesis_abierto);
+                                tmp2.add(parentesis_cerrado);
 
                                 RESULT = new Nodo("llamada_funcion_asignacion_sin_parametros",tmp2,aright,aleft);
 
@@ -6195,11 +6578,19 @@ class CUP$Parser$actions {
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);                                
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
 
                                 RESULT = new Nodo("llamada_funcion_asignacion_con_parametros",tmp2,aright,aleft);
 
@@ -6277,10 +6668,18 @@ class CUP$Parser$actions {
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(c);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
-                                tmp2.add(b);
-                                tmp2.add(c);
+                                tmp2.add(parentesis_abierto);
+                                tmp2.add(parentesis_cerrado);
                                 tmp2.add(d);
 
                                 RESULT = new Nodo("llamada_funcion_sin_parametros",tmp2,aright,aleft);
@@ -6315,11 +6714,19 @@ class CUP$Parser$actions {
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 tmp2.add(e);
 
                                 RESULT = new Nodo("llamada_funcion_con_parametros",tmp2,aright,aleft);
@@ -6356,11 +6763,19 @@ class CUP$Parser$actions {
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                    ArrayList parentesisA = new ArrayList<>();
+                    parentesisA.add(b);
+                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                    ArrayList parentesisC = new ArrayList<>();
+                    parentesisC.add(d);
+                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
-                    tmp.add(b);
+                    tmp.add(parentesis_abierto);
                     tmp.add(c);
-                    tmp.add(d);
+                    tmp.add(parentesis_cerrado);
                     tmp.add(e);
                     tmp.add(f);
                     tmp.add(g);
@@ -6432,12 +6847,22 @@ class CUP$Parser$actions {
 		int hright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                    
+
+                    ArrayList parentesisA = new ArrayList<>();
+                    parentesisA.add(c);
+                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                    ArrayList parentesisC = new ArrayList<>();
+                    parentesisC.add(e);
+                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
                     tmp.add(b);
-                    tmp.add(c);
+                    tmp.add(parentesis_abierto);
                     tmp.add(d);
-                    tmp.add(e);
+                    tmp.add(parentesis_cerrado);
                     tmp.add(f);
                     tmp.add(g);
                     tmp.add(h);
@@ -6644,14 +7069,23 @@ class CUP$Parser$actions {
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+
+        ArrayList parentesisA = new ArrayList<>();
+        parentesisA.add(b);
+        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+        ArrayList parentesisC = new ArrayList<>();
+        parentesisC.add(g);
+        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
         ArrayList tmp = new ArrayList<>();
         tmp.add(a);
-        tmp.add(b);
+        tmp.add(parentesis_abierto);
         tmp.add(c);
         tmp.add(d);
         tmp.add(e);
         tmp.add(f);
-        tmp.add(g);
+        tmp.add(parentesis_cerrado);
         tmp.add(h);
         tmp.add(i);
         tmp.add(j);
@@ -6699,14 +7133,23 @@ class CUP$Parser$actions {
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+
+        ArrayList parentesisA = new ArrayList<>();
+        parentesisA.add(b);
+        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+        ArrayList parentesisC = new ArrayList<>();
+        parentesisC.add(g);
+        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
         ArrayList tmp = new ArrayList<>();
         tmp.add(a);
-        tmp.add(b);
+        tmp.add(parentesis_abierto);
         tmp.add(c);
         tmp.add(d);
         tmp.add(e);
         tmp.add(f);
-        tmp.add(g);
+        tmp.add(parentesis_cerrado);
         tmp.add(h);
         tmp.add(i);
         tmp.add(j);
@@ -6807,11 +7250,19 @@ class CUP$Parser$actions {
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                    ArrayList parentesisA = new ArrayList<>();
+                    parentesisA.add(b);
+                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                    ArrayList parentesisC = new ArrayList<>();
+                    parentesisC.add(d);
+                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
-                    tmp.add(b);
+                    tmp.add(parentesis_abierto);
                     tmp.add(c);
-                    tmp.add(d);
+                    tmp.add(parentesis_cerrado);
                     tmp.add(e);
                     tmp.add(f);
                     tmp.add(g);
@@ -6856,15 +7307,24 @@ class CUP$Parser$actions {
 		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                    
+                    ArrayList parentesisA = new ArrayList<>();
+                    parentesisA.add(f);
+                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                    ArrayList parentesisC = new ArrayList<>();
+                    parentesisC.add(h);
+                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
                     tmp.add(b);
                     tmp.add(c);
                     tmp.add(d);
                     tmp.add(e);
-                    tmp.add(f);
+                    tmp.add(parentesis_abierto);
                     tmp.add(g);
-                    tmp.add(h);
+                    tmp.add(parentesis_cerrado);
                     tmp.add(i);
 
                     RESULT = new Nodo("do_while",tmp,aright,aleft);
@@ -6895,11 +7355,19 @@ class CUP$Parser$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(b);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(d);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
-                        tmp.add(b);
+                        tmp.add(parentesis_abierto);
                         tmp.add(c);
-                        tmp.add(d);
+                        tmp.add(parentesis_cerrado);
                         tmp.add(e);
 
                         RESULT = new Nodo("funcion_printAst",tmp,aright,aleft);
@@ -6927,10 +7395,19 @@ class CUP$Parser$actions {
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(b);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(c);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
-                        tmp.add(b);
-                        tmp.add(c);
+                        tmp.add(parentesis_abierto);
+                        tmp.add(parentesis_cerrado);
                         tmp.add(d);
                         
                         RESULT = new Nodo("funcion_getSymbolTable",tmp,aright,aleft);

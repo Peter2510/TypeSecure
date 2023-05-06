@@ -39,22 +39,8 @@ public class Logica {
               
        String igual = tipoDeclaracion.getHijos().get(1).toString();
        
-       Nodo valor_variable = tipoDeclaracion.getHijos().get(2);
-       Nodo tipo_valor_variable = valor_variable.getHijos().get(0);
-       Nodo tipo_valor_variable2 = tipo_valor_variable.getHijos().get(0);
-       String mat = tipo_valor_variable2.getHijos().get(0).toString();
        
-       
-       String pt = tipoInstruccion.getHijos().get(2).toString();
-       
-        System.out.println(tipoAcceso.toString());
-        System.out.println(id.toString());
-        System.out.println(igual);
-        System.out.println(tipo_valor_variable.toString());
-        System.out.println(tipo_valor_variable2.toString());
-        System.out.println(mat);
-        System.out.println(pt);
-        
+        System.out.println(tipoDeclaracion.toString());
         
         
         

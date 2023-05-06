@@ -1762,42 +1762,79 @@ funcion_bigint  ::= FBIGINT:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PAR
 
 funcion_boolean  ::= FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
                             {:
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
                             :}
                  |   FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
                             :}
                  |   FBOOLEAN:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
                             {:
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(c);
                                 Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(nt);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_boolean", tmp2 ,aright,aleft);                                
                             :}
                  |   FBOOLEAN:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
+                                
+
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
                             :}
                  ;
@@ -1805,20 +1842,38 @@ funcion_boolean  ::= FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_matematicas:c P
 
 funcion_string  ::= FSTRING:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
                             {:
+                                
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
                             :}
                  |  FSTRING:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
+                                
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
                             :}
                  |  FSTRING:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
@@ -1827,20 +1882,37 @@ funcion_string  ::= FSTRING:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PAR
                                 tmp.add(c);
                                 Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(nt);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_string", tmp2 ,aright,aleft);                                
                             :}
                  |  FSTRING:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
+                                
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(parentesis_abierto);
                                 tmp.add(c);
-                                tmp.add(d);
+                                tmp.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
                             :}
                  ;
@@ -1851,6 +1923,14 @@ funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matem
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(d);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(f);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp4 = new ArrayList<>();                                         
                                 tmp4.add(b);
                                 Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -1859,9 +1939,9 @@ funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matem
                                 tmp2.add(nt);
                                 tmp2.add(punto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(e);
-                                tmp2.add(f);
+                                tmp2.add(parentesis_cerrado);
 
                                 RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
                             :}
@@ -1871,6 +1951,14 @@ funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matem
                                 tmp.add(a);
                                 Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(d);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(f);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp4 = new ArrayList<>();                                         
                                 tmp4.add(b);
                                 Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -1879,9 +1967,9 @@ funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matem
                                 tmp2.add(nt);
                                 tmp2.add(punto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(e);
-                                tmp2.add(f);
+                                tmp2.add(parentesis_cerrado);
 
                                 RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
                             :}
@@ -1892,13 +1980,21 @@ funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matem
                                 tmp4.add(b);
                                 Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(d);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(f);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>(); 
                                 tmp2.add(a);
                                 tmp2.add(punto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(e);
-                                tmp2.add(f);
+                                tmp2.add(parentesis_cerrado);
                                 RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
                             :}
                 ;
@@ -1909,22 +2005,27 @@ funcion_concat ::= variables_string:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d inst
 
                         ArrayList tmp4 = new ArrayList<>();                                         
                         tmp4.add(b);
-                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
+                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);    
+
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(d);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(f);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                         ArrayList tmp2 = new ArrayList<>(); 
                         tmp2.add(a);
                         tmp2.add(punto);
                         tmp2.add(c);
-                        tmp2.add(d);
+                        tmp2.add(parentesis_abierto);
                         tmp2.add(e);
-                        tmp2.add(f);
+                        tmp2.add(parentesis_cerrado);
                         RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
                     :}
                 |  TEXTO:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
                     {:
-
-
-
 
                         ArrayList tmp = new ArrayList<>(); 
                         tmp.add(a);
@@ -1934,20 +2035,38 @@ funcion_concat ::= variables_string:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d inst
                         tmp4.add(b);
                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(d);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(f);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                         ArrayList tmp2 = new ArrayList<>(); 
                         tmp2.add(nt);
                         tmp2.add(punto);
                         tmp2.add(c);
-                        tmp2.add(d);
+                        tmp2.add(parentesis_abierto);
                         tmp2.add(e);
-                        tmp2.add(f);
+                        tmp2.add(parentesis_cerrado);
                         RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
+
                     :}
                 |  ID:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
                     {:
                         ArrayList tmp = new ArrayList<>(); 
                         tmp.add(a);
                         Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(d);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(f);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                         ArrayList tmp4 = new ArrayList<>();                                         
                         tmp4.add(b);
@@ -1957,9 +2076,9 @@ funcion_concat ::= variables_string:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d inst
                         tmp2.add(nt);
                         tmp2.add(punto);
                         tmp2.add(c);
-                        tmp2.add(d);
+                        tmp2.add(parentesis_abierto);
                         tmp2.add(e);
-                        tmp2.add(f);
+                        tmp2.add(parentesis_cerrado);
                         RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
                     :}
                 ;
@@ -1997,6 +2116,14 @@ funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENT
                             tmp.add(a);
                             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -2005,8 +2132,8 @@ funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENT
                             tmp2.add(nt);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
                         :}
                        |  TEXTO:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
@@ -2015,6 +2142,14 @@ funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENT
                             tmp.add(a);
                             Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -2023,8 +2158,8 @@ funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENT
                             tmp2.add(nt);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
                         :}
                        |  variables_string:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
@@ -2033,14 +2168,21 @@ funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENT
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
+                                
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
 
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                             ArrayList tmp2 = new ArrayList<>(); 
                             tmp2.add(a);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
                         :}
                        ;
@@ -2051,18 +2193,24 @@ funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENT
                             tmp.add(a);
                             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
-
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                             ArrayList tmp2 = new ArrayList<>(); 
                             tmp2.add(nt);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
                         :}
                        |  TEXTO:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
@@ -2071,6 +2219,13 @@ funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENT
                             tmp.add(a);
                             Nodo nt = new Nodo("String", tmp ,aright,aleft);
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                             ArrayList tmp4 = new ArrayList<>();                                         
                             tmp4.add(b);
@@ -2080,8 +2235,8 @@ funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENT
                             tmp2.add(nt);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
                         :}
                        |  variables_string:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
@@ -2091,12 +2246,20 @@ funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENT
                             tmp4.add(b);
                             Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                            ArrayList parentesisA = new ArrayList<>();
+                            parentesisA.add(d);
+                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                            ArrayList parentesisC = new ArrayList<>();
+                            parentesisC.add(e);
+                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                             ArrayList tmp2 = new ArrayList<>(); 
                             tmp2.add(a);
                             tmp2.add(punto);
                             tmp2.add(c);
-                            tmp2.add(d);
-                            tmp2.add(e);
+                            tmp2.add(parentesis_abierto);
+                            tmp2.add(parentesis_cerrado);
                             RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
                         :}
                        ;
@@ -2114,15 +2277,23 @@ funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instr
 
                         ArrayList tmp3 = new ArrayList<>();                                         
                         tmp3.add(c);
-                        Nodo log =  new Nodo("log",tmp3,aright,aleft);                               
+                        Nodo log =  new Nodo("log",tmp3,aright,aleft);          
+
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(d);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(f);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                         ArrayList tmp2 = new ArrayList<>(); 
                         tmp2.add(console);
                         tmp2.add(punto);
                         tmp2.add(log);
-                        tmp2.add(d);
+                        tmp2.add(parentesis_abierto);
                         tmp2.add(e);
-                        tmp2.add(f);
+                        tmp2.add(parentesis_cerrado);
                         tmp2.add(g);
                         RESULT = new Nodo("funcion_console_log", tmp2 ,aright,aleft);                                
                     :}
@@ -2163,12 +2334,21 @@ declaracion_funcion ::=
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(d);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
-            tmp2.add(d);
+            tmp2.add(parentesis_abierto);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(e);
             tmp2.add(f);
             tmp2.add(g);
@@ -2184,13 +2364,21 @@ declaracion_funcion ::=
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(e);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);            
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
+            tmp2.add(parentesis_abierto);
             tmp2.add(d);
-            tmp2.add(e);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(f);
             tmp2.add(g);
             tmp2.add(h);
@@ -2206,12 +2394,20 @@ declaracion_funcion ::=
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(d);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
-            tmp2.add(d);
+            tmp2.add(parentesis_abierto);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(e);
             tmp2.add(f);
             tmp2.add(g);
@@ -2225,13 +2421,21 @@ declaracion_funcion ::=
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(e);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
+            tmp2.add(parentesis_abierto);
             tmp2.add(d);
-            tmp2.add(e);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(f);
             tmp2.add(g);
             tmp2.add(h);
@@ -2244,12 +2448,20 @@ declaracion_funcion ::=
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(d);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
-            tmp2.add(d);
+            tmp2.add(parentesis_abierto);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(e);
             tmp2.add(f);
             tmp2.add(g);
@@ -2264,13 +2476,21 @@ declaracion_funcion ::=
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList parentesisA = new ArrayList<>();
+            parentesisA.add(c);
+            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+            ArrayList parentesisC = new ArrayList<>();
+            parentesisC.add(e);
+            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
-            tmp2.add(c);
+            tmp2.add(parentesis_abierto);
             tmp2.add(d);
-            tmp2.add(e);
+            tmp2.add(parentesis_cerrado);
             tmp2.add(f);
             tmp2.add(g);
             tmp2.add(h);
@@ -2381,10 +2601,18 @@ llamada_funcion_asignacion ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(c);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
-                                tmp2.add(b);
-                                tmp2.add(c);
+                                tmp2.add(parentesis_abierto);
+                                tmp2.add(parentesis_cerrado);
 
                                 RESULT = new Nodo("llamada_funcion_asignacion_sin_parametros",tmp2,aright,aleft);
 
@@ -2396,11 +2624,19 @@ llamada_funcion_asignacion ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);                                
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
 
                                 RESULT = new Nodo("llamada_funcion_asignacion_con_parametros",tmp2,aright,aleft);
 
@@ -2439,10 +2675,18 @@ llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(c);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
-                                tmp2.add(b);
-                                tmp2.add(c);
+                                tmp2.add(parentesis_abierto);
+                                tmp2.add(parentesis_cerrado);
                                 tmp2.add(d);
 
                                 RESULT = new Nodo("llamada_funcion_sin_parametros",tmp2,aright,aleft);
@@ -2455,11 +2699,19 @@ llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_
                                 tmp.add(a);
                                 Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                                ArrayList parentesisA = new ArrayList<>();
+                                parentesisA.add(b);
+                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                                ArrayList parentesisC = new ArrayList<>();
+                                parentesisC.add(d);
+                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
-                                tmp2.add(b);
+                                tmp2.add(parentesis_abierto);
                                 tmp2.add(c);
-                                tmp2.add(d);
+                                tmp2.add(parentesis_cerrado);
                                 tmp2.add(e);
 
                                 RESULT = new Nodo("llamada_funcion_con_parametros",tmp2,aright,aleft);
@@ -2470,11 +2722,19 @@ llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_
 funcion_if ::= IF:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
               {:
 
+                    ArrayList parentesisA = new ArrayList<>();
+                    parentesisA.add(b);
+                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                    ArrayList parentesisC = new ArrayList<>();
+                    parentesisC.add(d);
+                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
-                    tmp.add(b);
+                    tmp.add(parentesis_abierto);
                     tmp.add(c);
-                    tmp.add(d);
+                    tmp.add(parentesis_cerrado);
                     tmp.add(e);
                     tmp.add(f);
                     tmp.add(g);
@@ -2501,12 +2761,22 @@ funcion_else ::= ELSE:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERR
 
 funcion_else_if ::= ELSE:a IF:b PARENTESIS_ABIERTO:c instruccion:d PARENTESIS_CERRADO:e CORCHETE_ABIERTO:f instrucciones_funcion:g CORCHETE_CERRADO:h
               {:
+                    
+
+                    ArrayList parentesisA = new ArrayList<>();
+                    parentesisA.add(c);
+                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                    ArrayList parentesisC = new ArrayList<>();
+                    parentesisC.add(e);
+                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
                     tmp.add(b);
-                    tmp.add(c);
+                    tmp.add(parentesis_abierto);
                     tmp.add(d);
-                    tmp.add(e);
+                    tmp.add(parentesis_cerrado);
                     tmp.add(f);
                     tmp.add(g);
                     tmp.add(h);
@@ -2588,14 +2858,23 @@ funcion_for ::=
 FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_COMA:e accion_asignacion_for:f PARENTESIS_CERRADO:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
     {:
 
+
+        ArrayList parentesisA = new ArrayList<>();
+        parentesisA.add(b);
+        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+        ArrayList parentesisC = new ArrayList<>();
+        parentesisC.add(g);
+        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
         ArrayList tmp = new ArrayList<>();
         tmp.add(a);
-        tmp.add(b);
+        tmp.add(parentesis_abierto);
         tmp.add(c);
         tmp.add(d);
         tmp.add(e);
         tmp.add(f);
-        tmp.add(g);
+        tmp.add(parentesis_cerrado);
         tmp.add(h);
         tmp.add(i);
         tmp.add(j);
@@ -2608,14 +2887,23 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
 |FOR:a PARENTESIS_ABIERTO:b asignacion:c operaciones_logicas:d PUNTO_COMA:e accion_asignacion_for:f PARENTESIS_CERRADO:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
     {:
 
+
+        ArrayList parentesisA = new ArrayList<>();
+        parentesisA.add(b);
+        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+        ArrayList parentesisC = new ArrayList<>();
+        parentesisC.add(g);
+        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
         ArrayList tmp = new ArrayList<>();
         tmp.add(a);
-        tmp.add(b);
+        tmp.add(parentesis_abierto);
         tmp.add(c);
         tmp.add(d);
         tmp.add(e);
         tmp.add(f);
-        tmp.add(g);
+        tmp.add(parentesis_cerrado);
         tmp.add(h);
         tmp.add(i);
         tmp.add(j);
@@ -2662,11 +2950,19 @@ accion_asignacion_for ::= incremento:a
 funcion_while ::= WHILE:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
                 {:
 
+                    ArrayList parentesisA = new ArrayList<>();
+                    parentesisA.add(b);
+                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                    ArrayList parentesisC = new ArrayList<>();
+                    parentesisC.add(d);
+                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
-                    tmp.add(b);
+                    tmp.add(parentesis_abierto);
                     tmp.add(c);
-                    tmp.add(d);
+                    tmp.add(parentesis_cerrado);
                     tmp.add(e);
                     tmp.add(f);
                     tmp.add(g);
@@ -2680,15 +2976,24 @@ funcion_while ::= WHILE:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:
 funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERRADO:d WHILE:e PARENTESIS_ABIERTO:f instruccion:g PARENTESIS_CERRADO:h PUNTO_COMA:i
                 {:
 
+                    
+                    ArrayList parentesisA = new ArrayList<>();
+                    parentesisA.add(f);
+                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                    ArrayList parentesisC = new ArrayList<>();
+                    parentesisC.add(h);
+                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
                     tmp.add(b);
                     tmp.add(c);
                     tmp.add(d);
                     tmp.add(e);
-                    tmp.add(f);
+                    tmp.add(parentesis_abierto);
                     tmp.add(g);
-                    tmp.add(h);
+                    tmp.add(parentesis_cerrado);
                     tmp.add(i);
 
                     RESULT = new Nodo("do_while",tmp,aright,aleft);
@@ -2700,11 +3005,19 @@ funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CE
 funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
                     {:
 
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(b);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(d);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
-                        tmp.add(b);
+                        tmp.add(parentesis_abierto);
                         tmp.add(c);
-                        tmp.add(d);
+                        tmp.add(parentesis_cerrado);
                         tmp.add(e);
 
                         RESULT = new Nodo("funcion_printAst",tmp,aright,aleft);
@@ -2716,10 +3029,19 @@ funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CE
 funcion_getSymbolTable ::= GETSYMBOLTABLE:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_COMA:d
                     {:
 
+                        ArrayList parentesisA = new ArrayList<>();
+                        parentesisA.add(b);
+                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
+
+                        ArrayList parentesisC = new ArrayList<>();
+                        parentesisC.add(c);
+                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
-                        tmp.add(b);
-                        tmp.add(c);
+                        tmp.add(parentesis_abierto);
+                        tmp.add(parentesis_cerrado);
                         tmp.add(d);
                         
                         RESULT = new Nodo("funcion_getSymbolTable",tmp,aright,aleft);
