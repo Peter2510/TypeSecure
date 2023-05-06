@@ -480,15 +480,15 @@ asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa 
                                   tmp3.add(igual);
                                   Nodo equals = new Nodo("igual",tmp3,idright,idleft);
 
-                                  ArrayList tmp4 = new ArrayList<>();
-                                  tmp4.add(puntoComa);
-                                  Nodo pC = new Nodo("puntoComa",tmp3,idright,idleft);
+                                  ArrayList puntoC = new ArrayList<>(); 
+                                  puntoC.add(puntoComa);
+                                  Nodo punto_coma = new Nodo("punto_coma", puntoC ,idright,idleft);
 
                                   ArrayList tmp = new ArrayList<>(); 
                                   tmp.add(nt);
                                   tmp.add(equals);
                                   tmp.add(value);
-                                  tmp.add(pC);
+                                  tmp.add(punto_coma);
 
                                   RESULT = new Nodo("asignacion", tmp ,idright,idleft); 
                                                                                 :}
@@ -496,16 +496,15 @@ asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa 
 
 declaracion_variable ::= tipo_acceso_variable:a id_valor_variable_lista:b PUNTO_COMA:c
         {: 
+
+            ArrayList puntoC = new ArrayList<>(); 
+            puntoC.add(c);
+            Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(a);
             tmp.add(b);
-
-
-            ArrayList tmp3 = new ArrayList<>();
-            tmp3.add(c);
-            Nodo pC = new Nodo("punto_coma",tmp3,aright,aleft);
-
-            tmp.add(pC);
+            tmp.add(punto_coma);
 
             RESULT = new Nodo("declaracion_variable", tmp ,aright,aleft); 
         :}
@@ -1129,10 +1128,14 @@ funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
                     tmp2.add(a);
                     Nodo nt = new Nodo("Id",tmp2,aright,aleft);
 
+                    ArrayList puntoC = new ArrayList<>(); 
+                    puntoC.add(c);
+                    Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
                     tmp.add(b);
-                    tmp.add(c);
+                    tmp.add(punto_coma);
                     RESULT = new Nodo("funcion_incremento", tmp ,bright,bleft); 
                 :}
 
@@ -1142,10 +1145,14 @@ funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
                     tmp2.add(a);
                     Nodo nt = new Nodo("Id",tmp2,aright,aleft);
 
+                    ArrayList puntoC = new ArrayList<>(); 
+                    puntoC.add(c);
+                    Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
                     tmp.add(b);
-                    tmp.add(c);
+                    tmp.add(punto_coma);
                     RESULT = new Nodo("funcion_decremento", tmp ,bright,bleft); 
                 :}
                        ;
@@ -2287,6 +2294,10 @@ funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instr
                         parentesisC.add(f);
                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                        ArrayList puntoC = new ArrayList<>(); 
+                        puntoC.add(g);
+                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                         ArrayList tmp2 = new ArrayList<>(); 
                         tmp2.add(console);
                         tmp2.add(punto);
@@ -2294,7 +2305,7 @@ funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instr
                         tmp2.add(parentesis_abierto);
                         tmp2.add(e);
                         tmp2.add(parentesis_cerrado);
-                        tmp2.add(g);
+                        tmp2.add(punto_coma);
                         RESULT = new Nodo("funcion_console_log", tmp2 ,aright,aleft);                                
                     :}
             ;
@@ -2343,6 +2354,13 @@ declaracion_funcion ::=
             parentesisC.add(d);
             Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+            ArrayList corcheteA = new ArrayList<>();
+            corcheteA.add(g);
+            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+            ArrayList corcheteC = new ArrayList<>();
+            corcheteC.add(i);
+            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
@@ -2351,9 +2369,9 @@ declaracion_funcion ::=
             tmp2.add(parentesis_cerrado);
             tmp2.add(e);
             tmp2.add(f);
-            tmp2.add(g);
+            tmp2.add(corchete_abierto);
             tmp2.add(h);
-            tmp2.add(i);
+            tmp2.add(corchete_cerrado);
 
             RESULT = new Nodo("declaracion_funcion_sin_parametros_void",tmp2,aright,aleft);
 
@@ -2372,6 +2390,14 @@ declaracion_funcion ::=
             ArrayList parentesisC = new ArrayList<>();
             parentesisC.add(e);
             Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);            
+
+            ArrayList corcheteA = new ArrayList<>();
+            corcheteA.add(h);
+            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+            ArrayList corcheteC = new ArrayList<>();
+            corcheteC.add(j);
+            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
@@ -2381,9 +2407,9 @@ declaracion_funcion ::=
             tmp2.add(parentesis_cerrado);
             tmp2.add(f);
             tmp2.add(g);
-            tmp2.add(h);
+            tmp2.add(corchete_abierto);
             tmp2.add(i);
-            tmp2.add(j);
+            tmp2.add(corchete_cerrado);
 
             RESULT = new Nodo("declaracion_funcion_con_parametros_void",tmp2,aright,aleft);
 
@@ -2402,15 +2428,23 @@ declaracion_funcion ::=
             ArrayList parentesisC = new ArrayList<>();
             parentesisC.add(d);
             Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+            ArrayList corcheteA = new ArrayList<>();
+            corcheteA.add(e);
+            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+            ArrayList corcheteC = new ArrayList<>();
+            corcheteC.add(g);
+            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
             tmp2.add(nt);
             tmp2.add(parentesis_abierto);
             tmp2.add(parentesis_cerrado);
-            tmp2.add(e);
+            tmp2.add(corchete_abierto);
             tmp2.add(f);
-            tmp2.add(g);
+            tmp2.add(corchete_cerrado);
             
             RESULT = new Nodo("declaracion_funcion_sin_parametros_sin_tipo",tmp2,aright,aleft);
 
@@ -2429,6 +2463,14 @@ declaracion_funcion ::=
             ArrayList parentesisC = new ArrayList<>();
             parentesisC.add(e);
             Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+            ArrayList corcheteA = new ArrayList<>();
+            corcheteA.add(f);
+            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+            ArrayList corcheteC = new ArrayList<>();
+            corcheteC.add(h);
+            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
@@ -2436,9 +2478,9 @@ declaracion_funcion ::=
             tmp2.add(parentesis_abierto);
             tmp2.add(d);
             tmp2.add(parentesis_cerrado);
-            tmp2.add(f);
+            tmp2.add(corchete_abierto);
             tmp2.add(g);
-            tmp2.add(h);
+            tmp2.add(corchete_cerrado);
             
             RESULT = new Nodo("declaracion_funcion_con_parametros_sin_tipo",tmp2,aright,aleft);
  :}
@@ -2456,6 +2498,14 @@ declaracion_funcion ::=
             ArrayList parentesisC = new ArrayList<>();
             parentesisC.add(d);
             Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+            ArrayList corcheteA = new ArrayList<>();
+            corcheteA.add(g);
+            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+            ArrayList corcheteC = new ArrayList<>();
+            corcheteC.add(i);
+            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
@@ -2464,9 +2514,9 @@ declaracion_funcion ::=
             tmp2.add(parentesis_cerrado);
             tmp2.add(e);
             tmp2.add(f);
-            tmp2.add(g);
+            tmp2.add(corchete_abierto);
             tmp2.add(h);
-            tmp2.add(i);
+            tmp2.add(corchete_cerrado);
             
             RESULT = new Nodo("declaracion_funcion_sin_parametros_con_tipo",tmp2,aright,aleft);
  :}
@@ -2484,6 +2534,14 @@ declaracion_funcion ::=
             ArrayList parentesisC = new ArrayList<>();
             parentesisC.add(e);
             Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
+
+            ArrayList corcheteA = new ArrayList<>();
+            corcheteA.add(h);
+            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+            ArrayList corcheteC = new ArrayList<>();
+            corcheteC.add(j);
+            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
             ArrayList tmp2 = new ArrayList<>(); 
             tmp2.add(a);
@@ -2493,9 +2551,9 @@ declaracion_funcion ::=
             tmp2.add(parentesis_cerrado);
             tmp2.add(f);
             tmp2.add(g);
-            tmp2.add(h);
+            tmp2.add(corchete_abierto);
             tmp2.add(i);
-            tmp2.add(j);
+            tmp2.add(corchete_cerrado);
             
             RESULT = new Nodo("declaracion_funcion_con_parametros_con_tipo",tmp2,aright,aleft);
  :}        
@@ -2577,19 +2635,29 @@ parametro_funcion_declaracion ::= ID:a DOS_PUNTOS:b tipo_dato_variable:c
 
 funcion_return ::= RETURN:a instruccion:b PUNTO_COMA:c
                     {:
+
+                        ArrayList puntoC = new ArrayList<>(); 
+                        puntoC.add(c);
+                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+                        
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
                         tmp.add(b);
-                        tmp.add(c);
+                        tmp.add(punto_coma);
 
                         RESULT = new Nodo("return_con_instruccion",tmp,aright,aleft);
 
                     :}
                 | RETURN:a PUNTO_COMA:b
                     {:
+                        
+                        ArrayList puntoC = new ArrayList<>(); 
+                        puntoC.add(b);
+                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
-                        tmp.add(b);
+                        tmp.add(punto_coma);
                         RESULT = new Nodo("return_sin_instruccion",tmp,aright,aleft);
                     :}
                 ;
@@ -2683,11 +2751,15 @@ llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_
                                 parentesisC.add(c);
                                 Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                                ArrayList puntoC = new ArrayList<>(); 
+                                puntoC.add(d);
+                                Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
                                 tmp2.add(parentesis_abierto);
                                 tmp2.add(parentesis_cerrado);
-                                tmp2.add(d);
+                                tmp2.add(punto_coma);
 
                                 RESULT = new Nodo("llamada_funcion_sin_parametros",tmp2,aright,aleft);
 
@@ -2707,12 +2779,16 @@ llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_
                                 parentesisC.add(d);
                                 Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                                ArrayList puntoC = new ArrayList<>(); 
+                                puntoC.add(e);
+                                Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                                 ArrayList tmp2 = new ArrayList<>();
                                 tmp2.add(nt);
                                 tmp2.add(parentesis_abierto);
                                 tmp2.add(c);
                                 tmp2.add(parentesis_cerrado);
-                                tmp2.add(e);
+                                tmp2.add(punto_coma);
 
                                 RESULT = new Nodo("llamada_funcion_con_parametros",tmp2,aright,aleft);
 
@@ -2730,14 +2806,22 @@ funcion_if ::= IF:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORC
                     parentesisC.add(d);
                     Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                    ArrayList corcheteA = new ArrayList<>();
+                    corcheteA.add(e);
+                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+                    ArrayList corcheteC = new ArrayList<>();
+                    corcheteC.add(g);
+                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
                     tmp.add(parentesis_abierto);
                     tmp.add(c);
                     tmp.add(parentesis_cerrado);
-                    tmp.add(e);
+                    tmp.add(corchete_abierto);
                     tmp.add(f);
-                    tmp.add(g);
+                    tmp.add(corchete_cerrado);
 
                     RESULT = new Nodo("if",tmp,aright,aleft);                
 
@@ -2747,11 +2831,19 @@ funcion_if ::= IF:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORC
 funcion_else ::= ELSE:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERRADO:d
               {:
 
+                    ArrayList corcheteA = new ArrayList<>();
+                    corcheteA.add(b);
+                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+                    ArrayList corcheteC = new ArrayList<>();
+                    corcheteC.add(d);
+                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
-                    tmp.add(b);
+                    tmp.add(corchete_abierto);
                     tmp.add(c);
-                    tmp.add(d);
+                    tmp.add(corchete_cerrado);
                     
                     RESULT = new Nodo("else",tmp,aright,aleft);                
 
@@ -2771,15 +2863,23 @@ funcion_else_if ::= ELSE:a IF:b PARENTESIS_ABIERTO:c instruccion:d PARENTESIS_CE
                     parentesisC.add(e);
                     Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                    ArrayList corcheteA = new ArrayList<>();
+                    corcheteA.add(f);
+                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+                    ArrayList corcheteC = new ArrayList<>();
+                    corcheteC.add(h);
+                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
                     tmp.add(b);
                     tmp.add(parentesis_abierto);
                     tmp.add(d);
                     tmp.add(parentesis_cerrado);
-                    tmp.add(f);
+                    tmp.add(corchete_abierto);
                     tmp.add(g);
-                    tmp.add(h);
+                    tmp.add(corchete_cerrado);
                     
                     RESULT = new Nodo("else_if",tmp,aright,aleft);                
               :}
@@ -2832,9 +2932,14 @@ opciones_if ::=  funcion_if:a
 
 instruccion_break ::= BREAK:a PUNTO_COMA:b
                     {: 
+                                
+                        ArrayList puntoC = new ArrayList<>(); 
+                        puntoC.add(b);
+                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
-                        tmp.add(b);
+                        tmp.add(punto_coma);
 
                         RESULT = new Nodo("break",tmp,aright,aleft);
 
@@ -2844,9 +2949,14 @@ instruccion_break ::= BREAK:a PUNTO_COMA:b
 
 instruccion_continue ::= CONTINUE:a PUNTO_COMA:b
                     {: 
+                        
+                        ArrayList puntoC = new ArrayList<>(); 
+                        puntoC.add(b);
+                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
-                        tmp.add(b);
+                        tmp.add(punto_coma);
 
                         RESULT = new Nodo("continue",tmp,aright,aleft);
 
@@ -2867,17 +2977,29 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
         parentesisC.add(g);
         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+        ArrayList corcheteA = new ArrayList<>();
+        corcheteA.add(h);
+        Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+        ArrayList corcheteC = new ArrayList<>();
+        corcheteC.add(j);
+        Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
+
+        ArrayList puntoC = new ArrayList<>(); 
+        puntoC.add(e);
+        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
         ArrayList tmp = new ArrayList<>();
         tmp.add(a);
         tmp.add(parentesis_abierto);
         tmp.add(c);
         tmp.add(d);
-        tmp.add(e);
+        tmp.add(punto_coma);
         tmp.add(f);
         tmp.add(parentesis_cerrado);
-        tmp.add(h);
+        tmp.add(corchete_abierto);
         tmp.add(i);
-        tmp.add(j);
+        tmp.add(corchete_cerrado);
 
         RESULT = new Nodo("for_declaracion_variable",tmp,aright,aleft);
 
@@ -2896,17 +3018,29 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
         parentesisC.add(g);
         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+        ArrayList corcheteA = new ArrayList<>();
+        corcheteA.add(h);
+        Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+        ArrayList corcheteC = new ArrayList<>();
+        corcheteC.add(j);
+        Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
+
+        ArrayList puntoC = new ArrayList<>(); 
+        puntoC.add(e);
+        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
         ArrayList tmp = new ArrayList<>();
         tmp.add(a);
         tmp.add(parentesis_abierto);
         tmp.add(c);
         tmp.add(d);
-        tmp.add(e);
+        tmp.add(punto_coma);
         tmp.add(f);
         tmp.add(parentesis_cerrado);
-        tmp.add(h);
+        tmp.add(corchete_abierto);
         tmp.add(i);
-        tmp.add(j);
+        tmp.add(corchete_cerrado);
 
         RESULT = new Nodo("for_asignacion_variable",tmp,aright,aleft);
 
@@ -2958,14 +3092,22 @@ funcion_while ::= WHILE:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:
                     parentesisC.add(d);
                     Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                    ArrayList corcheteA = new ArrayList<>();
+                    corcheteA.add(e);
+                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+                    ArrayList corcheteC = new ArrayList<>();
+                    corcheteC.add(g);
+                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
                     tmp.add(parentesis_abierto);
                     tmp.add(c);
                     tmp.add(parentesis_cerrado);
-                    tmp.add(e);
+                    tmp.add(corchete_abierto);
                     tmp.add(f);
-                    tmp.add(g);
+                    tmp.add(corchete_cerrado);
 
                     RESULT = new Nodo("while",tmp,aright,aleft);
 
@@ -2985,16 +3127,28 @@ funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CE
                     parentesisC.add(h);
                     Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                    ArrayList corcheteA = new ArrayList<>();
+                    corcheteA.add(b);
+                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
+
+                    ArrayList corcheteC = new ArrayList<>();
+                    corcheteC.add(d);
+                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
+
+                    ArrayList puntoC = new ArrayList<>(); 
+                    puntoC.add(i);
+                    Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                     ArrayList tmp = new ArrayList<>();
                     tmp.add(a);
-                    tmp.add(b);
+                    tmp.add(corchete_abierto);
                     tmp.add(c);
-                    tmp.add(d);
+                    tmp.add(corchete_cerrado);
                     tmp.add(e);
                     tmp.add(parentesis_abierto);
                     tmp.add(g);
                     tmp.add(parentesis_cerrado);
-                    tmp.add(i);
+                    tmp.add(punto_coma);
 
                     RESULT = new Nodo("do_while",tmp,aright,aleft);
 
@@ -3013,12 +3167,16 @@ funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CE
                         parentesisC.add(d);
                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                        ArrayList puntoC = new ArrayList<>(); 
+                        puntoC.add(e);
+                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
                         tmp.add(parentesis_abierto);
                         tmp.add(c);
                         tmp.add(parentesis_cerrado);
-                        tmp.add(e);
+                        tmp.add(punto_coma);
 
                         RESULT = new Nodo("funcion_printAst",tmp,aright,aleft);
 
@@ -3037,12 +3195,15 @@ funcion_getSymbolTable ::= GETSYMBOLTABLE:a PARENTESIS_ABIERTO:b PARENTESIS_CERR
                         parentesisC.add(c);
                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
+                        ArrayList puntoC = new ArrayList<>(); 
+                        puntoC.add(d);
+                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
 
                         ArrayList tmp = new ArrayList<>();
                         tmp.add(a);
                         tmp.add(parentesis_abierto);
                         tmp.add(parentesis_cerrado);
-                        tmp.add(d);
+                        tmp.add(punto_coma);
                         
                         RESULT = new Nodo("funcion_getSymbolTable",tmp,aright,aleft);
 
