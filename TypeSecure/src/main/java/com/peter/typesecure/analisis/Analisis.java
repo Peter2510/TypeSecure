@@ -10,6 +10,7 @@ import com.peter.typesecure.parser.Parser;
 import java.io.BufferedReader;
 import java.io.StringReader;
 import com.peter.typesecure.error.Error_analizadores;
+import com.peter.typesecure.logica.Logica;
 
 /**
  *
@@ -39,11 +40,9 @@ public class Analisis {
             
             System.out.println("No hay errores en los analizadores");
             
-            for (int i = 0; i < parser.arbol.size(); i++) {
-                System.out.println(parser.arbol.get(i).getHijos().toString());
-            }
-            
-            
+            Logica logic = new Logica(parser.arbol);
+            logic.analizar();
+                        
         }else{
             
             ManejoArchivos ma = new ManejoArchivos();

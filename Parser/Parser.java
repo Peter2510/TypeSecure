@@ -1861,11 +1861,19 @@ class CUP$Parser$actions {
                                   tmp2.add(id);
                                   Nodo nt = new Nodo("Id",tmp2,idright,idleft);
 
+                                  ArrayList tmp3 = new ArrayList<>();
+                                  tmp3.add(igual);
+                                  Nodo equals = new Nodo("igual",tmp3,idright,idleft);
+
+                                  ArrayList tmp4 = new ArrayList<>();
+                                  tmp4.add(puntoComa);
+                                  Nodo pC = new Nodo("puntoComa",tmp3,idright,idleft);
+
                                   ArrayList tmp = new ArrayList<>(); 
                                   tmp.add(nt);
-                                  tmp.add(igual);
+                                  tmp.add(equals);
                                   tmp.add(value);
-                                  tmp.add(puntoComa);
+                                  tmp.add(pC);
 
                                   RESULT = new Nodo("asignacion", tmp ,idright,idleft); 
                                                                                 
@@ -1890,7 +1898,13 @@ class CUP$Parser$actions {
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(a);
             tmp.add(b);
-            tmp.add(c);
+
+
+            ArrayList tmp3 = new ArrayList<>();
+            tmp3.add(c);
+            Nodo pC = new Nodo("punto_coma",tmp3,aright,aleft);
+
+            tmp.add(pC);
 
             RESULT = new Nodo("declaracion_variable", tmp ,aright,aleft); 
         
@@ -1962,11 +1976,15 @@ class CUP$Parser$actions {
                                   tmp.add(id);
                                   Nodo nid = new Nodo("Id",tmp,idright,idleft);
 
+                                  ArrayList tmp3 = new ArrayList<>();
+                                  tmp3.add(c);
+                                  Nodo equals = new Nodo("igual",tmp3,idright,idleft);
+
                                   ArrayList tmp2 = new ArrayList<>(); 
                                   tmp2.add(nid);
                                   tmp2.add(b);
                                   tmp2.add(tipoDato);
-                                  tmp2.add(c);
+                                  tmp2.add(equals);
                                   tmp2.add(valor);
 
                                   RESULT = new Nodo("declaracion_variable_con_tipo_con_valor", tmp2 ,idright,idleft); 
@@ -1992,9 +2010,14 @@ class CUP$Parser$actions {
                                   ArrayList tmp = new ArrayList<>();   
                                   tmp.add(id);
                                   Nodo nid = new Nodo("Id",tmp,idright,idleft);
+
+                                  ArrayList tmp3 = new ArrayList<>();
+                                  tmp3.add(b);
+                                  Nodo equals = new Nodo("igual",tmp3,idright,idleft);
+
                                   ArrayList tmp2 = new ArrayList<>(); 
                                   tmp2.add(nid);
-                                  tmp2.add(b);
+                                  tmp2.add(equals);
                                   tmp2.add(valor);
                                   RESULT = new Nodo("declaracion_variable_sin_tipo_con_valor", tmp2 ,idright,idleft); 
                     
@@ -6524,9 +6547,13 @@ class CUP$Parser$actions {
                             tmp.add(a);
                             Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
+                            ArrayList tmp3 = new ArrayList<>();
+                            tmp3.add(b);
+                            Nodo equals = new Nodo("igual",tmp3,aright,aleft);
+
                             ArrayList tmp2 = new ArrayList<>();
                             tmp2.add(nt);
-                            tmp2.add(b);
+                            tmp2.add(equals);
                             tmp2.add(c);
                                                         
                             RESULT = new Nodo("asignacion_for",tmp2,aright,aleft);

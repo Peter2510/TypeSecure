@@ -12,12 +12,12 @@ import java.util.ArrayList;
  */
 public class Nodo {
     private String tipo;
-    private ArrayList<Object> hijos;
+    private ArrayList<Nodo> hijos;
     private int linea;
     private int columna;
     
     
-    public Nodo(String tipo, ArrayList<Object> hijos,int linea,int columna){
+    public Nodo(String tipo, ArrayList<Nodo> hijos,int linea,int columna){
         this.tipo = tipo;
         this.hijos = hijos;
         this.linea = linea;
@@ -32,11 +32,11 @@ public class Nodo {
         this.tipo = tipo;
     }
 
-    public ArrayList<Object> getHijos() {
+    public ArrayList<Nodo> getHijos() {
         return hijos;
     }
 
-    public void setHijos(ArrayList<Object> hijos) {
+    public void setHijos(ArrayList<Nodo> hijos) {
         this.hijos = hijos;
     }
 
