@@ -26,13 +26,10 @@ public class Logica {
     }
     
     public void analizar(){
-        System.out.println(raiz.toString());
-       
-       
        
         
-        
-        
+            System.out.println(raiz.getHijos().get(0).getHijos().get(0).getHijos().get(0).toString());
+            
         
         
     }

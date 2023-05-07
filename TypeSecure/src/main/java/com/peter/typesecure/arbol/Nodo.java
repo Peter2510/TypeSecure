@@ -16,12 +16,19 @@ public class Nodo {
     private int linea;
     private int columna;
     
+    public Nodo(){
+    }
     
     public Nodo(String tipo, ArrayList<Nodo> hijos,int linea,int columna){
         this.tipo = tipo;
         this.hijos = hijos;
         this.linea = linea;
         this.columna = columna;
+    }
+    
+    public void addHijo(Nodo hijo){
+        hijos = new ArrayList();
+        this.hijos.add(hijo);
     }
 
     public String getTipo() {
@@ -42,8 +49,10 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return tipo + " -> " + hijos + "\n";
+        return "Nodo{" + "tipo=" + tipo + ", hijos=" + hijos + ", linea=" + linea + ", columna=" + columna + '}';
     }
+
+
   
 }
 
