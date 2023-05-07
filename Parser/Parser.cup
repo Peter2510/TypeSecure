@@ -542,9 +542,13 @@ id_valor_variable ::= ID:id DOS_PUNTOS:b tipo_dato_variable:tipoDato ASIGNACION:
                                   tmp3.add(c);
                                   Nodo equals = new Nodo("igual",tmp3,idright,idleft);
 
+                                  ArrayList dosP = new ArrayList<>();
+                                  dosP.add(b);
+                                  Nodo dos_puntos = new Nodo("dos_puntos",dosP,idright,idleft);
+
                                   ArrayList tmp2 = new ArrayList<>(); 
                                   tmp2.add(nid);
-                                  tmp2.add(b);
+                                  tmp2.add(dos_puntos);
                                   tmp2.add(tipoDato);
                                   tmp2.add(equals);
                                   tmp2.add(valor);
@@ -574,9 +578,13 @@ id_valor_variable ::= ID:id DOS_PUNTOS:b tipo_dato_variable:tipoDato ASIGNACION:
                                   tmp.add(id);
                                   Nodo nid = new Nodo("Id",tmp,idright,idleft);
 
+                                  ArrayList dosP = new ArrayList<>();
+                                  dosP.add(b);
+                                  Nodo dos_puntos = new Nodo("dos_puntos",dosP,idright,idleft);
+
                                   ArrayList tmp2 = new ArrayList<>(); 
                                   tmp2.add(nid);
-                                  tmp2.add(b);
+                                  tmp2.add(dos_puntos);
                                   tmp2.add(tipoDato);
                                   RESULT = new Nodo("declaracion_variable_con_tipo_sin_valor", tmp2 ,idright,idleft); 
                     :}
@@ -2383,6 +2391,10 @@ declaracion_funcion ::=
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
+            ArrayList dosP = new ArrayList<>();
+            dosP.add(e);
+            Nodo dos_puntos = new Nodo("dos_puntos",dosP,aright,aleft);
+
             ArrayList parentesisA = new ArrayList<>();
             parentesisA.add(c);
             Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
@@ -2404,7 +2416,7 @@ declaracion_funcion ::=
             tmp2.add(nt);
             tmp2.add(parentesis_abierto);
             tmp2.add(parentesis_cerrado);
-            tmp2.add(e);
+            tmp2.add(dos_puntos);
             tmp2.add(f);
             tmp2.add(corchete_abierto);
             tmp2.add(h);
@@ -2419,6 +2431,10 @@ declaracion_funcion ::=
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList dosP = new ArrayList<>();
+            dosP.add(f);
+            Nodo dos_puntos = new Nodo("dos_puntos",dosP,fright,fleft);
 
             ArrayList parentesisA = new ArrayList<>();
             parentesisA.add(c);
@@ -2442,7 +2458,7 @@ declaracion_funcion ::=
             tmp2.add(parentesis_abierto);
             tmp2.add(d);
             tmp2.add(parentesis_cerrado);
-            tmp2.add(f);
+            tmp2.add(dos_puntos);
             tmp2.add(g);
             tmp2.add(corchete_abierto);
             tmp2.add(i);
@@ -2528,6 +2544,10 @@ declaracion_funcion ::=
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
+            ArrayList dosP = new ArrayList<>();
+            dosP.add(e);
+            Nodo dos_puntos = new Nodo("dos_puntos",dosP,eright,eleft);
+
             ArrayList parentesisA = new ArrayList<>();
             parentesisA.add(c);
             Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
@@ -2549,7 +2569,7 @@ declaracion_funcion ::=
             tmp2.add(nt);
             tmp2.add(parentesis_abierto);
             tmp2.add(parentesis_cerrado);
-            tmp2.add(e);
+            tmp2.add(dos_puntos);
             tmp2.add(f);
             tmp2.add(corchete_abierto);
             tmp2.add(h);
@@ -2563,6 +2583,10 @@ declaracion_funcion ::=
             ArrayList tmp = new ArrayList<>(); 
             tmp.add(b);
             Nodo nt = new Nodo("Id", tmp ,aright,aleft);
+
+            ArrayList dosP = new ArrayList<>();
+            dosP.add(f);
+            Nodo dos_puntos = new Nodo("dos_puntos",dosP,fright,fleft);
 
             ArrayList parentesisA = new ArrayList<>();
             parentesisA.add(c);
@@ -2586,7 +2610,7 @@ declaracion_funcion ::=
             tmp2.add(parentesis_abierto);
             tmp2.add(d);
             tmp2.add(parentesis_cerrado);
-            tmp2.add(f);
+            tmp2.add(dos_puntos);
             tmp2.add(g);
             tmp2.add(corchete_abierto);
             tmp2.add(i);
@@ -2661,9 +2685,13 @@ parametro_funcion_declaracion ::= ID:a DOS_PUNTOS:b tipo_dato_variable:c
                                     tmp.add(a);
                                     Nodo nt = new Nodo("Id", tmp ,aright,aleft);
 
+                                    ArrayList dosP = new ArrayList<>();
+                                    dosP.add(b);
+                                    Nodo dos_puntos = new Nodo("dos_puntos",dosP,bright,bleft);
+
                                     ArrayList tmp2 = new ArrayList<>(); 
                                     tmp2.add(nt);
-                                    tmp2.add(b);
+                                    tmp2.add(dos_puntos);
                                     tmp2.add(c);
                                     RESULT = new Nodo("parametro_funcion_declaracion",tmp2,aright,aleft);
                                 :}
