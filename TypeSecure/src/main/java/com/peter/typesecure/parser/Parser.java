@@ -2733,7 +2733,11 @@ class CUP$Parser$actions {
 		int fright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                        
+
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList parentesisA = new ArrayList<>();
                                         parentesisA.add(d);
                                         Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
@@ -2748,7 +2752,7 @@ class CUP$Parser$actions {
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -2783,6 +2787,11 @@ class CUP$Parser$actions {
 		int fright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                        
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
@@ -2796,7 +2805,7 @@ class CUP$Parser$actions {
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -2832,6 +2841,10 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                                         
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
@@ -2845,7 +2858,7 @@ class CUP$Parser$actions {
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -2881,10 +2894,13 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                                         
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
-
 
                                         ArrayList parentesisA = new ArrayList<>();
                                         parentesisA.add(d);
@@ -2895,7 +2911,7 @@ class CUP$Parser$actions {
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -2931,6 +2947,9 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
                                
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
@@ -2945,7 +2964,7 @@ class CUP$Parser$actions {
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -2982,6 +3001,10 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -2996,7 +3019,7 @@ class CUP$Parser$actions {
 
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -3033,6 +3056,10 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);       
@@ -3047,7 +3074,7 @@ class CUP$Parser$actions {
 
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -3090,6 +3117,10 @@ class CUP$Parser$actions {
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -3108,7 +3139,7 @@ class CUP$Parser$actions {
 
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -3147,6 +3178,10 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);  
@@ -3161,7 +3196,7 @@ class CUP$Parser$actions {
 
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -3198,6 +3233,10 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
@@ -3211,7 +3250,7 @@ class CUP$Parser$actions {
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -3238,14 +3277,16 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
-
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         RESULT = new Nodo("E", tmp ,aright,aleft);
@@ -3270,15 +3311,22 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
+                                        ArrayList symbol_pi = new ArrayList<>();
+                                        symbol_pi.add(c);
+                                        Nodo simbolo_pi = new Nodo("simbolo_pi",symbol_pi,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
-
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
-                                        tmp.add(c);
+                                        tmp.add(simbolo_pi);
                                         RESULT = new Nodo("PI", tmp ,aright,aleft);
 
                                 
@@ -3301,13 +3349,16 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
-
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         RESULT = new Nodo("SQRT2", tmp ,aright,aleft);
@@ -3332,9 +3383,13 @@ class CUP$Parser$actions {
                     tmp2.add(id);
                     Nodo nt = new Nodo("Id",tmp2,idright,idleft);
 
+                    ArrayList symbol_incremento = new ArrayList<>();   
+                    symbol_incremento.add(incremento);
+                    Nodo simbolo_incremento = new Nodo("simbolo_incremento",symbol_incremento,idright,idleft);                    
+
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
-                    tmp.add(incremento);
+                    tmp.add(simbolo_incremento);
                     RESULT = new Nodo("incremento", tmp ,incrementoright,incrementoleft); 
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("incremento",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -3356,9 +3411,13 @@ class CUP$Parser$actions {
                     tmp2.add(id);
                     Nodo nt = new Nodo("Id",tmp2,idright,idleft);
 
+                    ArrayList symbol_decremento = new ArrayList<>();   
+                    symbol_decremento.add(decremento);
+                    Nodo simbolo_decremento = new Nodo("simbolo_decremento",symbol_decremento,idright,idleft);                    
+
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
-                    tmp.add(decremento);
+                    tmp.add(simbolo_decremento);
                     RESULT = new Nodo("decremento", tmp ,decrementoright,decrementoleft); 
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("decremento",15, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -3383,13 +3442,17 @@ class CUP$Parser$actions {
                     tmp2.add(a);
                     Nodo nt = new Nodo("Id",tmp2,aright,aleft);
 
+                    ArrayList symbol_incremento = new ArrayList<>();   
+                    symbol_incremento.add(b);
+                    Nodo simbolo_incremento = new Nodo("simbolo_incremento",symbol_incremento,aright,aleft);                    
+
                     ArrayList puntoC = new ArrayList<>(); 
                     puntoC.add(c);
                     Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
 
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
-                    tmp.add(b);
+                    tmp.add(simbolo_incremento);
                     tmp.add(punto_coma);
                     RESULT = new Nodo("funcion_incremento", tmp ,bright,bleft); 
                 
@@ -3415,13 +3478,17 @@ class CUP$Parser$actions {
                     tmp2.add(a);
                     Nodo nt = new Nodo("Id",tmp2,aright,aleft);
 
+                    ArrayList symbol_decremento = new ArrayList<>();   
+                    symbol_decremento.add(b);
+                    Nodo simbolo_decremento = new Nodo("simbolo_decremento",symbol_decremento,aright,aleft);                    
+
                     ArrayList puntoC = new ArrayList<>(); 
                     puntoC.add(c);
                     Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
 
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
-                    tmp.add(b);
+                    tmp.add(simbolo_decremento);
                     tmp.add(punto_coma);
                     RESULT = new Nodo("funcion_decremento", tmp ,bright,bleft); 
                 
@@ -3443,9 +3510,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_mayor = new ArrayList<>(); 
+                                symbol_mayor.add(b);
+                                Nodo simbolo_mayor_que = new Nodo("simbolo_mayor_que", symbol_mayor ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_mayor_que);
                                 tmp.add(c);
                                 RESULT = new Nodo("mayor_que", tmp ,aright,aleft); 
                             
@@ -3467,9 +3539,13 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                ArrayList symbol_mayor_igual = new ArrayList<>(); 
+                                symbol_mayor_igual.add(b);
+                                Nodo simbolo_mayor_igual = new Nodo("simbolo_mayor_igual", symbol_mayor_igual ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_mayor_igual);
                                 tmp.add(c);
                                 RESULT = new Nodo("mayor_igual", tmp ,aright,aleft); 
                             
@@ -3491,9 +3567,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                                
+                                ArrayList symbol_menor = new ArrayList<>(); 
+                                symbol_menor.add(b);
+                                Nodo simbolo_menor_que = new Nodo("simbolo_menor_que", symbol_menor ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_menor_que);
                                 tmp.add(c);
                                 RESULT = new Nodo("menor_que", tmp ,aright,aleft); 
                             
@@ -3515,9 +3596,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_menor_igual = new ArrayList<>(); 
+                                symbol_menor_igual.add(b);
+                                Nodo simbolo_menor_igual = new Nodo("simbolo_menor_igual", symbol_menor_igual ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_menor_igual);
                                 tmp.add(c);
                                 RESULT = new Nodo("menor_igual", tmp ,aright,aleft); 
                             
@@ -3539,9 +3625,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+                                
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3563,9 +3654,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo distinto = new Nodo("distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -3587,9 +3683,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3611,9 +3712,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3635,9 +3741,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3659,9 +3770,13 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3683,9 +3798,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3707,9 +3827,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3731,9 +3856,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3755,9 +3885,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -3779,9 +3914,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -3803,9 +3943,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -3827,9 +3972,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -3851,9 +4001,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -3875,6 +4030,11 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
                                 tmp.add(b);
@@ -3899,9 +4059,13 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -3923,9 +4087,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -3947,9 +4116,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4003,9 +4177,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -4027,9 +4206,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -4051,9 +4235,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -4075,9 +4264,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -4099,9 +4293,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4123,9 +4322,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4147,9 +4351,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4171,9 +4380,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4195,9 +4409,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -4219,9 +4438,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4243,9 +4467,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                              
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -4267,9 +4496,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4291,9 +4525,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -4315,9 +4554,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4339,9 +4583,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             
@@ -4363,9 +4612,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             
@@ -4420,9 +4674,14 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_and = new ArrayList<>();
+                                symbol_and.add(b);
+                                Nodo simbolo_and = new Nodo("simbolo_and",symbol_and,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_and);
                                 tmp.add(c);
                                 RESULT = new Nodo("AND", tmp ,aright,aleft); 
                             
@@ -4444,6 +4703,11 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+                                
+                                ArrayList symbol_or = new ArrayList<>();
+                                symbol_or.add(b);
+                                Nodo simbolo_or = new Nodo("simbolo_or",symbol_or,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
                                 tmp.add(b);
@@ -4465,8 +4729,13 @@ class CUP$Parser$actions {
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
+
+                                ArrayList symbol_not = new ArrayList<>();
+                                symbol_not.add(a);
+                                Nodo simbolo_not = new Nodo("simbolo_not",symbol_not,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
+                                tmp.add(simbolo_not);
                                 tmp.add(b);
                                 RESULT = new Nodo("NOT", tmp ,aright,aleft); 
                             

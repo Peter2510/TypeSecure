@@ -837,7 +837,11 @@ operaciones_matematicas ::=
 
 funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
-                                        
+
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList parentesisA = new ArrayList<>();
                                         parentesisA.add(d);
                                         Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
@@ -852,7 +856,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -862,6 +866,11 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                 :}
                                |  MATH:a PUNTO:b CEIL:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
+                                        
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
@@ -875,7 +884,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -886,6 +895,10 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                |  MATH:a PUNTO:b COS:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
                                         
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
@@ -899,7 +912,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -910,10 +923,13 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                |  MATH:a PUNTO:b SIN:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
                                         
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);
-
 
                                         ArrayList parentesisA = new ArrayList<>();
                                         parentesisA.add(d);
@@ -924,7 +940,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -935,6 +951,9 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                |  MATH:a PUNTO:b TAN:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
                                
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
@@ -949,7 +968,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -960,6 +979,10 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                :}
                                |  MATH:a PUNTO:b EXP:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
+
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
@@ -975,7 +998,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
 
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -986,6 +1009,10 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                 :}
                                |  MATH:a PUNTO:b FLOOR:c  PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
+
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
@@ -1001,7 +1028,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
 
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -1012,6 +1039,10 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                 :}
                                |  MATH:a PUNTO:b POW:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e COMA:f operaciones_matematicas:g PARENTESIS_CERRADO:h
                                 {:
+
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
@@ -1031,7 +1062,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
 
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -1044,6 +1075,10 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                 :}
                                |  MATH:a PUNTO:b SQRT:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
+
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
@@ -1059,7 +1094,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
 
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -1070,6 +1105,10 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                 :}
                                |  MATH:a PUNTO:b RANDOM:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
+
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
@@ -1084,7 +1123,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                         Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
                                         tmp.add(c);
                                         tmp.add(parentesis_abierto);
@@ -1095,46 +1134,66 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                 :}
                                |  MATH:a PUNTO:b E:c
                                 {:
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
+                                        ArrayList symbol_e = new ArrayList<>();
+                                        symbol_e.add(c);
+                                        Nodo simbolo_e = new Nodo("simbolo_e",symbol_e,aright,aleft);
 
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
-
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
-                                        tmp.add(c);
+                                        tmp.add(simbolo_e);
                                         RESULT = new Nodo("E", tmp ,aright,aleft);
 
                                 :}
                                |  MATH:a PUNTO:b PI:c
                                 {:
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
+                                        ArrayList symbol_pi = new ArrayList<>();
+                                        symbol_pi.add(c);
+                                        Nodo simbolo_pi = new Nodo("simbolo_pi",symbol_pi,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
-
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
-                                        tmp.add(c);
+                                        tmp.add(simbolo_pi);
                                         RESULT = new Nodo("PI", tmp ,aright,aleft);
 
                                 :}
                                |  MATH:a PUNTO:b SQRT2:c
                                 {:
 
+                                        ArrayList math_ = new ArrayList<>();
+                                        math_.add(a);
+                                        Nodo math = new Nodo("math",math_,aright,aleft);
+
                                         ArrayList tmp4 = new ArrayList<>();                                         
                                         tmp4.add(b);
                                         Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
 
+                                        ArrayList symbol_sqrt2 = new ArrayList<>();
+                                        symbol_sqrt2.add(c);
+                                        Nodo simbolo_sqrt2 = new Nodo("simbolo_sqrt2",symbol_sqrt2,aright,aleft);
 
                                         ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
+                                        tmp.add(math);
                                         tmp.add(punto);
-                                        tmp.add(c);
+                                        tmp.add(simbolo_sqrt2);
                                         RESULT = new Nodo("SQRT2", tmp ,aright,aleft);
 
                                 :}
@@ -1146,9 +1205,13 @@ incremento ::= ID:id INCREMENTO:incremento
                     tmp2.add(id);
                     Nodo nt = new Nodo("Id",tmp2,idright,idleft);
 
+                    ArrayList symbol_incremento = new ArrayList<>();   
+                    symbol_incremento.add(incremento);
+                    Nodo simbolo_incremento = new Nodo("simbolo_incremento",symbol_incremento,idright,idleft);                    
+
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
-                    tmp.add(incremento);
+                    tmp.add(simbolo_incremento);
                     RESULT = new Nodo("incremento", tmp ,incrementoright,incrementoleft); 
                 :}
 
@@ -1160,9 +1223,13 @@ decremento ::= ID:id DECREMENTO:decremento
                     tmp2.add(id);
                     Nodo nt = new Nodo("Id",tmp2,idright,idleft);
 
+                    ArrayList symbol_decremento = new ArrayList<>();   
+                    symbol_decremento.add(decremento);
+                    Nodo simbolo_decremento = new Nodo("simbolo_decremento",symbol_decremento,idright,idleft);                    
+
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
-                    tmp.add(decremento);
+                    tmp.add(simbolo_decremento);
                     RESULT = new Nodo("decremento", tmp ,decrementoright,decrementoleft); 
                 :}
             ;
@@ -1173,13 +1240,17 @@ funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
                     tmp2.add(a);
                     Nodo nt = new Nodo("Id",tmp2,aright,aleft);
 
+                    ArrayList symbol_incremento = new ArrayList<>();   
+                    symbol_incremento.add(b);
+                    Nodo simbolo_incremento = new Nodo("simbolo_incremento",symbol_incremento,aright,aleft);                    
+
                     ArrayList puntoC = new ArrayList<>(); 
                     puntoC.add(c);
                     Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
 
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
-                    tmp.add(b);
+                    tmp.add(simbolo_incremento);
                     tmp.add(punto_coma);
                     RESULT = new Nodo("funcion_incremento", tmp ,bright,bleft); 
                 :}
@@ -1190,13 +1261,17 @@ funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
                     tmp2.add(a);
                     Nodo nt = new Nodo("Id",tmp2,aright,aleft);
 
+                    ArrayList symbol_decremento = new ArrayList<>();   
+                    symbol_decremento.add(b);
+                    Nodo simbolo_decremento = new Nodo("simbolo_decremento",symbol_decremento,aright,aleft);                    
+
                     ArrayList puntoC = new ArrayList<>(); 
                     puntoC.add(c);
                     Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
 
                     ArrayList tmp = new ArrayList<>(); 
                     tmp.add(nt);
-                    tmp.add(b);
+                    tmp.add(simbolo_decremento);
                     tmp.add(punto_coma);
                     RESULT = new Nodo("funcion_decremento", tmp ,bright,bleft); 
                 :}
@@ -1204,152 +1279,245 @@ funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
 
 operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_matematicas:c
                             {:
+                                
+                                ArrayList symbol_mayor = new ArrayList<>(); 
+                                symbol_mayor.add(b);
+                                Nodo simbolo_mayor_que = new Nodo("simbolo_mayor_que", symbol_mayor ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_mayor_que);
                                 tmp.add(c);
                                 RESULT = new Nodo("mayor_que", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a MAYOR_IGUAL:b operaciones_matematicas:c
                             {:
+                                ArrayList symbol_mayor_igual = new ArrayList<>(); 
+                                symbol_mayor_igual.add(b);
+                                Nodo simbolo_mayor_igual = new Nodo("simbolo_mayor_igual", symbol_mayor_igual ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_mayor_igual);
                                 tmp.add(c);
                                 RESULT = new Nodo("mayor_igual", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a MENOR_QUE:b operaciones_matematicas:c
                             {:
+                                                
+                                ArrayList symbol_menor = new ArrayList<>(); 
+                                symbol_menor.add(b);
+                                Nodo simbolo_menor_que = new Nodo("simbolo_menor_que", symbol_menor ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_menor_que);
                                 tmp.add(c);
                                 RESULT = new Nodo("menor_que", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a MENOR_IGUAL:b operaciones_matematicas:c
                             {:
+
+                                ArrayList symbol_menor_igual = new ArrayList<>(); 
+                                symbol_menor_igual.add(b);
+                                Nodo simbolo_menor_igual = new Nodo("simbolo_menor_igual", symbol_menor_igual ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_menor_igual);
                                 tmp.add(c);
                                 RESULT = new Nodo("menor_igual", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a COMPARACION:b operaciones_matematicas:c
                             {:
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+                                
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a DISTINTO:b operaciones_matematicas:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo distinto = new Nodo("distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
 
                            | TRUE:a COMPARACION:b TRUE:c
                             {:
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | TRUE:a COMPARACION:b FALSE:c
                             {:
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | FALSE:a COMPARACION:b TRUE:c
                             {:
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | FALSE:a COMPARACION:b FALSE:c
                             {:
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a COMPARACION:b TRUE:c
                             {:
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | TRUE:a COMPARACION:b operaciones_matematicas:c
                             {:
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a COMPARACION:b FALSE:c
                             {:
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | FALSE:a COMPARACION:b operaciones_matematicas:c
                             {:
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
 
                            | TRUE:a DISTINTO:b TRUE:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | TRUE:a DISTINTO:b FALSE:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | FALSE:a DISTINTO:b TRUE:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | FALSE:a DISTINTO:b FALSE:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a DISTINTO:b TRUE:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
                                 tmp.add(b);
@@ -1358,25 +1526,39 @@ operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_m
                             :}
                            | TRUE:a DISTINTO:b operaciones_matematicas:c
                             {:
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a DISTINTO:b FALSE:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | FALSE:a DISTINTO:b operaciones_matematicas:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
@@ -1398,34 +1580,54 @@ operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_m
                            
                            | funcion_boolean:a COMPARACION:b TRUE:c
                             {:
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
 
                            | funcion_boolean:a COMPARACION:b FALSE:c
                             {:
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | TRUE:a COMPARACION:b funcion_boolean:c
                             {:
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | FALSE:a COMPARACION:b funcion_boolean:c
                             {:
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
@@ -1433,33 +1635,53 @@ operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_m
 
                            | funcion_boolean:a DISTINTO:b TRUE:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | funcion_boolean:a DISTINTO:b FALSE:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | TRUE:a DISTINTO:b funcion_boolean:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
                            | FALSE:a DISTINTO:b funcion_boolean:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
@@ -1467,70 +1689,110 @@ operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_m
 
                            | funcion_boolean:a COMPARACION:b funcion_boolean:c
                             {:
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | funcion_boolean:a DISTINTO:b funcion_boolean:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
 
                            | funcion_string:a COMPARACION:b funcion_string:c
                             {:
+                              
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | funcion_string:a DISTINTO:b funcion_string:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
 
                            | funcion_string:a COMPARACION:b operaciones_matematicas:c
                             {:
+                                
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
 
                            | funcion_string:a DISTINTO:b operaciones_matematicas:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
 
                            | operaciones_matematicas:a COMPARACION:b funcion_string:c
-                                                       {:
+                            {:
+
+                                ArrayList symbol_comparacion = new ArrayList<>(); 
+                                symbol_comparacion.add(b);
+                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_comparacion);
                                 tmp.add(c);
                                 RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
 
                            | operaciones_matematicas:a DISTINTO:b funcion_string:c
                             {:
+                                
+                                ArrayList symbol_distinto = new ArrayList<>(); 
+                                symbol_distinto.add(b);
+                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_distinto);
                                 tmp.add(c);
                                 RESULT = new Nodo("distinto", tmp ,aright,aleft); 
                             :}
@@ -1556,14 +1818,24 @@ operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_m
 
 operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                             {:
+                                
+                                ArrayList symbol_and = new ArrayList<>();
+                                symbol_and.add(b);
+                                Nodo simbolo_and = new Nodo("simbolo_and",symbol_and,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
-                                tmp.add(b);
+                                tmp.add(simbolo_and);
                                 tmp.add(c);
                                 RESULT = new Nodo("AND", tmp ,aright,aleft); 
                             :}
                     | operaciones_logicas:a OR:b operaciones_logicas:c
                             {:
+                                
+                                ArrayList symbol_or = new ArrayList<>();
+                                symbol_or.add(b);
+                                Nodo simbolo_or = new Nodo("simbolo_or",symbol_or,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
                                 tmp.add(a);
                                 tmp.add(b);
@@ -1572,8 +1844,13 @@ operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                             :}
                     | NOT:a operaciones_logicas:b
                             {:
+
+                                ArrayList symbol_not = new ArrayList<>();
+                                symbol_not.add(a);
+                                Nodo simbolo_not = new Nodo("simbolo_not",symbol_not,aright,aleft);
+
                                 ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
+                                tmp.add(simbolo_not);
                                 tmp.add(b);
                                 RESULT = new Nodo("NOT", tmp ,aright,aleft); 
                             :}

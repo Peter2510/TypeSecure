@@ -203,7 +203,16 @@ public class Archivos {
     }
     
     public void seleccionarTodo(){
-        listaAreaDeTexto.get(TabbedPane.getSelectedIndex()).selectAll();
+        
+        try {
+            listaAreaDeTexto.get(TabbedPane.getSelectedIndex()).selectAll();
+        } catch (Exception e) {
+            System.out.println("");
+        }
+            
+            
+        
+        
         
     }
     

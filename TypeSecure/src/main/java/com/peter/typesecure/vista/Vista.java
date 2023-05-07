@@ -39,7 +39,19 @@ public class Vista extends javax.swing.JFrame {
         
     }
 
-    
+    private void compilar(){
+        if(ach.hayPestaña()){
+            if(ach.textoCompilar().length()>0){
+                String texto = ach.textoCompilar();
+                Analisis analisis = new Analisis();
+                analisis.analizar(texto);
+            }else{
+                JOptionPane.showMessageDialog(null,"El archivo a compilar no debe estar vacio");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"No se ha seleccionado un archivo a compilar");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,6 +88,7 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenu2.setText("jMenu2");
 
@@ -203,6 +216,15 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem7);
 
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem8.setText("Compilar");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem8);
+
         jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
@@ -257,22 +279,12 @@ public class Vista extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Compilar
-        
-        if(ach.hayPestaña()){
-            if(ach.textoCompilar().length()>0){
-                String texto = ach.textoCompilar();
-                Analisis analisis = new Analisis();
-                analisis.analizar(texto);
-            }else{
-                JOptionPane.showMessageDialog(null,"El archivo a compilar no debe estar vacio");
-            }
-        }else{
-            JOptionPane.showMessageDialog(null,"No se ha seleccionado un archivo a compilar");
-        }
-        
-        
-        
+       compilar();   
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        compilar();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,6 +346,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

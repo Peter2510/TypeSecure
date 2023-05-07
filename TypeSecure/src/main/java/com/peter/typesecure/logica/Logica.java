@@ -26,21 +26,11 @@ public class Logica {
     }
     
     public void analizar(){
-        Nodo instrucciones = raiz.getHijos().get(0);
-        Nodo instruccion1 = instrucciones.getHijos().get(0);
-        Nodo tipoInstruccion = instruccion1.getHijos().get(0);
+        System.out.println(raiz.toString());
+       
+       
+       
         
-       Nodo tipoAcceso = tipoInstruccion.getHijos().get(0);
-       Nodo id_valor_variable = tipoInstruccion.getHijos().get(1);
-        
-       Nodo tipoDeclaracion = id_valor_variable.getHijos().get(0);
-       
-       Nodo id = tipoDeclaracion.getHijos().get(0);
-              
-       String igual = tipoDeclaracion.getHijos().get(1).toString();
-       
-       
-        System.out.println(tipoDeclaracion.toString());
         
         
         
