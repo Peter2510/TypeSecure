@@ -4,10 +4,22 @@
  */
 package com.peter.typesecure.ejecucion.Condicionales;
 
+import com.peter.typesecure.ejecucion.Genericos.Instruction;
+import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+
 /**
  *
  * @author GORDILLOG
  */
-public class If {
-    
+public class If extends Instruction {
+
+    public If(int linea, int columna) {
+        super(linea, columna);
+    }
+
+    @Override
+    public Object ejecutar(SymbolTable table) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+   
 }

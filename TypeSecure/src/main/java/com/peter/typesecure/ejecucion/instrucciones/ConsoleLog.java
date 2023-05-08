@@ -25,7 +25,7 @@ public class ConsoleLog extends Instruction{
         this.instruccion = instruccion;
     }
 
-    @Override
+    
     public void ejecutar_1(SymbolTable table) {
         String tmp = "";
         for(int i = 0; i< instruccion.size() ;i++){

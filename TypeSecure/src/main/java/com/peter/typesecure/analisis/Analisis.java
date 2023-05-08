@@ -5,12 +5,14 @@
 package com.peter.typesecure.analisis;
 
 import com.peter.typesecure.archivos.ManejoArchivos;
+import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.lexer.Lexer;
 import com.peter.typesecure.parser.Parser;
 import java.io.BufferedReader;
 import java.io.StringReader;
 import com.peter.typesecure.error.Error_analizadores;
 import com.peter.typesecure.logica.Logica;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,20 +30,20 @@ public class Analisis {
         Parser parser = new Parser(lexer);
 
         try {
-
+            
             parser.parse();
 
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
         
         
         if(parser.errores.isEmpty()){
             
             System.out.println("No hay errores en los analizadores");
+            Logica a = new Logica();
+            a.hola(parser.instructions);
             
-            Logica logic = new Logica(parser.arbol);
-            logic.analizar();
                         
         }else{
             

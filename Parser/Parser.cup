@@ -4,11 +4,14 @@
 
 package com.peter.typesecure.parser;
 
+import com.peter.typesecure.analisis.ejecucion.auxiliares.Variable_Aux;
+import com.peter.typesecure.ejecucion.Genericos.*;
 import com.peter.typesecure.lexer.Lexer;
 import java_cup.runtime.Symbol;
 import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
-import com.peter.typesecure.arbol.Nodo;
+
+
 
 
 // Codigo para el parser, variables, metodos
@@ -19,9 +22,7 @@ parser code {:
         super(lexer);
     }
 
-    //Array donde esta toda la produccion
-    public ArrayList<Nodo> arbol = new ArrayList<Nodo>();
-
+    public ArrayList<Instruction> instructions = new ArrayList<>();
 
     //Array errores
     
@@ -161,7 +162,8 @@ non terminal instrucciones, opciones_instrucciones;
 non terminal instruccion;
 
 //declaracion de variable
-non terminal declaracion_variable, tipo_acceso_variable, id_valor_variable_lista, id_valor_variable;
+non terminal declaracion_variable, tipo_acceso_variable, id_valor_variable;
+non terminal ArrayList id_valor_variable_lista;
 non terminal tipo_dato_variable, variable_valor;
 
 //asignacion
@@ -270,246 +272,165 @@ start with inicio;
 // Da inicio a las transiciones
 
 inicio ::= ts:a {: System.out.println("Doc ok"); 
-                            ArrayList tmp = new ArrayList<>(); 
-                            tmp.add(a);
-                            arbol.add(new Nodo("Inicial", tmp ,aright,aleft));
+                   
+                
+
              :}
        ;
 
-ts ::= instrucciones:a {: RESULT = a; :}
+ts ::= instrucciones:a {:   :}
    ;
 
 instrucciones ::= instrucciones:a opciones_instrucciones:b {:
 
                                             
                                             
-                                                            ArrayList tmp = new ArrayList<>(); 
-                                                            tmp.add(a.getHijos());
-                                                            tmp.add(b.getHijos());
-                                                            RESULT = new Nodo("instrucciones", tmp ,aright,aleft); 
+                                                            
                                          :}
                 | opciones_instrucciones:a {:  
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a.getHijos());
-                                            RESULT = new Nodo("instrucciones", tmp ,aright,aleft); 
+                                            
                                          :}
                ;
 
 opciones_instrucciones ::= declaracion_variable:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
+
                                            :}
                         |  asignacion:a   {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
+
                                            :}
                         |  funcion_console_log:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           
                                            :}
                         |  declaracion_funcion:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  llamada_funcion_normal:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           
                                            :}
                         |  opciones_if:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_return:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  instruccion_break:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           
                                            :}
                         |  instruccion_continue:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           
                                            :}
                         |  funcion_incremento_decremento:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_for:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                          
                                            :}
                         |  funcion_while:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           
                                            :}
                         |  funcion_do_while:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                             
                                            :}
                         |  funcion_printAst:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                           
                                            :}
                         |  funcion_getSymbolTable:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         ;
 
 opciones_instrucciones_sin_return ::= 
                         declaracion_variable:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  asignacion:a   {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_console_log:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  declaracion_funcion:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  llamada_funcion_normal:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  opciones_if:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  instruccion_break:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  instruccion_continue:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_incremento_decremento:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_for:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_while:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_do_while:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_printAst:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         |  funcion_getSymbolTable:a
                                             {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            RESULT = new Nodo("instruccion", tmp ,aright,aleft); 
+                                            
                                            :}
                         ;
 
 asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa {: 
                                                                                     
 
-                                  ArrayList tmp2 = new ArrayList<>();   
-                                  tmp2.add(id);
-                                  Nodo nt = new Nodo("Id",tmp2,idright,idleft);
-
-                                  ArrayList tmp3 = new ArrayList<>();
-                                  tmp3.add(igual);
-                                  Nodo equals = new Nodo("igual",tmp3,idright,idleft);
-
-                                  ArrayList puntoC = new ArrayList<>(); 
-                                  puntoC.add(puntoComa);
-                                  Nodo punto_coma = new Nodo("punto_coma", puntoC ,idright,idleft);
-
-                                  ArrayList tmp = new ArrayList<>(); 
-                                  tmp.add(nt);
-                                  tmp.add(equals);
-                                  tmp.add(value);
-                                  tmp.add(punto_coma);
-
-                                  RESULT = new Nodo("asignacion", tmp ,idright,idleft); 
+                                
                                                                                 :}
             ;
 
 declaracion_variable ::= tipo_acceso_variable:a id_valor_variable_lista:b PUNTO_COMA:c
         {: 
 
-            ArrayList puntoC = new ArrayList<>(); 
-            puntoC.add(c);
-            Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
+        
 
-            ArrayList tmp = new ArrayList<>(); 
-            tmp.add(a);
-            tmp.add(b);
-            tmp.add(punto_coma);
+                for(int i = 0;i<b.size();i++){
 
-            RESULT = new Nodo("declaracion_variable", tmp ,aright,aleft); 
+                    Variable_Aux variable = (Variable_Aux) b.get(i);    
+                    instructions.add(new Declaration(aright,aleft,a,variable.getType(),variable.getId(),variable.getValue()));
+                }
+           
         :}
 
                       ;
@@ -517,177 +438,116 @@ declaracion_variable ::= tipo_acceso_variable:a id_valor_variable_lista:b PUNTO_
 id_valor_variable_lista ::=  id_valor_variable_lista:a COMA:b id_valor_variable:c
                             {:
 
-                                ArrayList tmp5 = new ArrayList<>();
-                                tmp5.add(b);
-                                Nodo coma = new Nodo("coma",tmp5,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(coma);
-                                tmp.add(c);
-                                RESULT = new Nodo("id_valor_variable_lista", tmp ,aright,aleft);                   
+                            a.add(c);
+                            RESULT = a;
+                                                  
                             :}
                          |   id_valor_variable:a
                             {:
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                RESULT = new Nodo("id_valor_variable_lista", tmp ,aright,aleft);                   
+                            
+                                RESULT = new ArrayList<>(); RESULT.add(a);
+
                             :}
                          ;
 
 id_valor_variable ::= ID:id DOS_PUNTOS:b tipo_dato_variable:tipoDato ASIGNACION:c variable_valor:valor 
                     {:
-                                  ArrayList tmp = new ArrayList<>();   
-                                  tmp.add(id);
-                                  Nodo nid = new Nodo("Id",tmp,idright,idleft);
+                          //id:number = 34;
+                          RESULT = new Variable_Aux(id,tipoDato,valor);
 
-                                  ArrayList tmp3 = new ArrayList<>();
-                                  tmp3.add(c);
-                                  Nodo equals = new Nodo("igual",tmp3,idright,idleft);
-
-                                  ArrayList dosP = new ArrayList<>();
-                                  dosP.add(b);
-                                  Nodo dos_puntos = new Nodo("dos_puntos",dosP,idright,idleft);
-
-                                  ArrayList tmp2 = new ArrayList<>(); 
-                                  tmp2.add(nid);
-                                  tmp2.add(dos_puntos);
-                                  tmp2.add(tipoDato);
-                                  tmp2.add(equals);
-                                  tmp2.add(valor);
-
-                                  RESULT = new Nodo("declaracion_variable_con_tipo_con_valor", tmp2 ,idright,idleft); 
                     :}
 
                     | ID:id ASIGNACION:b variable_valor:valor 
                     {:
-                                  ArrayList tmp = new ArrayList<>();   
-                                  tmp.add(id);
-                                  Nodo nid = new Nodo("Id",tmp,idright,idleft);
+                           //id = 34;                   
 
-                                  ArrayList tmp3 = new ArrayList<>();
-                                  tmp3.add(b);
-                                  Nodo equals = new Nodo("igual",tmp3,idright,idleft);
-
-                                  ArrayList tmp2 = new ArrayList<>(); 
-                                  tmp2.add(nid);
-                                  tmp2.add(equals);
-                                  tmp2.add(valor);
-                                  RESULT = new Nodo("declaracion_variable_sin_tipo_con_valor", tmp2 ,idright,idleft); 
+                        RESULT = new Variable_Aux(id,VariableType.PENDIENTE,valor);                        
+                           
                     :}
                     | ID:id DOS_PUNTOS:b tipo_dato_variable:tipoDato 
                     {:
-                                  ArrayList tmp = new ArrayList<>();   
-                                  tmp.add(id);
-                                  Nodo nid = new Nodo("Id",tmp,idright,idleft);
-
-                                  ArrayList dosP = new ArrayList<>();
-                                  dosP.add(b);
-                                  Nodo dos_puntos = new Nodo("dos_puntos",dosP,idright,idleft);
-
-                                  ArrayList tmp2 = new ArrayList<>(); 
-                                  tmp2.add(nid);
-                                  tmp2.add(dos_puntos);
-                                  tmp2.add(tipoDato);
-                                  RESULT = new Nodo("declaracion_variable_con_tipo_sin_valor", tmp2 ,idright,idleft); 
-                    :}
-                    | ID:id
-                    {:
-                                ArrayList tmp = new ArrayList<>();   
-                                tmp.add(id);
-                                Nodo nid = new Nodo("Id",tmp,idright,idleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(nid);
-                                
-                                RESULT = new Nodo("declaracion_variable_sin_tipo_sin_valor", tmp2 ,idright,idleft); 
-
+                        //let hola:number;
+                        Value value = new Value(idright,idleft,"undefined",ValueType.UNDEFINED);
+                        RESULT = new Variable_Aux(id,tipoDato,value);                        
+                        
                     :}
                    ;
 
 
 
-tipo_acceso_variable ::= RCONST:rconst {:
-                                     ArrayList tmp = new ArrayList<>(); 
-                                     tmp.add(rconst);
-                                     RESULT = new Nodo("Tipo_Acceso",tmp,rconstright,rconstleft);
-                                  :}
+tipo_acceso_variable ::= RCONST {:
+                                    RESULT = AccessType.CONST;
+                               :}
 
-                       | RLET:rlet   {: 
-                                     ArrayList tmp = new ArrayList<>(); 
-                                     tmp.add(rlet);
-                                     RESULT = new Nodo("Tipo_Acceso",tmp,rletright,rletleft);
-                                  :} 
+                       | RLET   {: 
+                                     RESULT = AccessType.LET;
+                                :} 
                       ;
 
 tipo_dato_variable ::= RNUMBER:rnumber  {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(rnumber);
-                                            RESULT = new Nodo("Tipo_Variable",tmp,rnumberright,rnumberleft);
+                                           RESULT = VariableType.NUMBER; 
                                   :} 
 
                     |  RBIGINT:rbigint  {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(rbigint);
-                                            RESULT = new Nodo("Tipo_Variable",tmp,rbigintright,rbigintleft);
-                                 :}  
+                                     
+                                            RESULT = VariableType.BIGINT;        
+                                        :}  
+
                     |  RSTRING:rstring  {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(rstring);
-                                            RESULT = new Nodo("Tipo_Variable",tmp,rstringright,rstringleft);
-                                  :} 
+                                        
+                                            RESULT = VariableType.STRING;     
+
+                                        :} 
 
                     |  RBOOLEAN:rboolean {: 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(rboolean);
-                                            RESULT = new Nodo("Tipo_Variable",tmp,rbooleanright,rbooleanleft);
+
+                                            RESULT = VariableType.BOOLEAN;                                                 
+
                                         :}
                     ;
 
 variable_valor ::= instruccion:a {: 
-                                    ArrayList tmp = new ArrayList<>(); 
-                                    tmp.add(a);
-                                    RESULT = new Nodo("valor_de_la_variable",tmp,aright,aleft);
+                                    RESULT = a;
                                  :}
                 ;
 
 instruccion ::=  operaciones_matematicas:a {:
                                                 
-                                                RESULT = a;
+                                            RESULT = a;
 
                                            :}
                 | operaciones_logicas:a {:
-                                                RESULT = a;
+                                                
                                         :}
 
                 | funcion_boolean:a {:
-                                                RESULT = a;
+                                                
                                  :}
                 | funcion_string:a  {:
 
-                                                RESULT = a;
+                                                
                                   :}
                 | funcion_char_at:a {: 
-                                                RESULT = a;
+                                                
 
                                   :}
                 | funcion_to_lower_case:a {:
-                                                RESULT = a;
+                                                
                                         :}
                 | funcion_to_upper_case:a {:
-                                                RESULT = a;
+                                                
                                         :}
                 | funcion_concat:a {:
-                                                RESULT = a;
+                                                
                                  :}
                 | llamada_funcion_asignacion:a {:
-                                                RESULT = a;
+                                                
                                               :}
                 | incremento:a {:
-                                                RESULT = a;
+                                                
                              :}
                 | decremento:a {:
-                                                RESULT = a;
+                                                
                              :}
                 ;
 
@@ -696,926 +556,301 @@ operaciones_matematicas ::=
                           MENOS:a operaciones_matematicas:b       
                                         {:
                                              
-                                            ArrayList simbolMenos = new ArrayList<>();   
-                                            simbolMenos.add(a);
-                                            Nodo menos = new Nodo("menos",simbolMenos,aright,aleft);
-
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(menos);
-                                            tmp.add(b);
-                                            RESULT = new Nodo("menos_operacion_matematica", tmp ,aright,aleft);                                               
+                                        
 
                                         :}%prec UMENOS 
                         | MAS:a operaciones_matematicas:b 
                                         {:
                                              
-                                            ArrayList simbolMas = new ArrayList<>();   
-                                            simbolMas.add(a);
-                                            Nodo mas = new Nodo("mas",simbolMas,aright,aleft);
-
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(mas);
-                                            tmp.add(b);
-                                            RESULT = new Nodo("mas_operacion_matematica", tmp ,aright,aleft);                                               
+                                            
                                         :}%prec UMENOS 
                         | operaciones_matematicas:a MAS:b operaciones_matematicas:c
                                         {:
-                                             
-                                            ArrayList simbolMas = new ArrayList<>();   
-                                            simbolMas.add(b);
-                                            Nodo mas = new Nodo("mas",simbolMas,aright,aleft);
+                                          
+                                        RESULT = new BinaryOperation(aright,aleft,OperationType.SUMA,a,c);
 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            tmp.add(mas);
-                                            tmp.add(c);
-                                            RESULT = new Nodo("suma", tmp ,aright,aleft);                                               
                                         :}
                         | operaciones_matematicas:a MENOS:b operaciones_matematicas:c
                                         {:
-                                             
-                                            ArrayList simbolMenos = new ArrayList<>();   
-                                            simbolMenos.add(b);
-                                            Nodo menos = new Nodo("menos",simbolMenos,aright,aleft);
-
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            tmp.add(menos);
-                                            tmp.add(c);
-                                            RESULT = new Nodo("resta", tmp ,aright,aleft);
+                                        
+                                        RESULT = new BinaryOperation(aright,aleft,OperationType.RESTA,a,c);                                             
+                                            
                                         :}
                         | operaciones_matematicas:a MULTIPLICACION:b operaciones_matematicas:c
                                         {:
-                                             
-                                            ArrayList simbolPor = new ArrayList<>();   
-                                            simbolPor.add(b);
-                                            Nodo por = new Nodo("por",simbolPor,aright,aleft);
-
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            tmp.add(por);
-                                            tmp.add(c);
-                                            RESULT = new Nodo("multiplicacion", tmp ,aright,aleft);                                               
+                                            
+                                        RESULT = new BinaryOperation(aright,aleft,OperationType.MULTIPLICACION,a,c);                                              
+                                            
                                         :}                        
                         | operaciones_matematicas:a DIVISION:b operaciones_matematicas:c
                                         {:
                                              
-                                            ArrayList simbolDiv = new ArrayList<>();   
-                                            simbolDiv.add(b);
-                                            Nodo simbolo_division = new Nodo("simbolo_division",simbolDiv,aright,aleft);
+                                        RESULT = new BinaryOperation(aright,aleft,OperationType.DIVISION,a,c);                                             
 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            tmp.add(simbolo_division);
-                                            tmp.add(c);
-                                            RESULT = new Nodo("division", tmp ,aright,aleft);                                               
                                         :}
                         | operaciones_matematicas:a MOD:b operaciones_matematicas:c
                                         {:
-                                             
-                                            ArrayList simboloMod = new ArrayList<>();   
-                                            simboloMod.add(b);
-                                            Nodo simbolo_mod = new Nodo("simbolo_mod",simboloMod,aright,aleft);
+                                        
+                                        RESULT = new BinaryOperation(aright,aleft,OperationType.MOD,a,c);
 
-                                            ArrayList tmp = new ArrayList<>(); 
-                                            tmp.add(a);
-                                            tmp.add(simbolo_mod);
-                                            tmp.add(c);
-                                            RESULT = new Nodo("mod", tmp ,aright,aleft);                                               
                                         :}
                         | PARENTESIS_ABIERTO:a operaciones_matematicas:b PARENTESIS_CERRADO:c 
                                             {:
                                              
-
-                                            ArrayList parentesisA = new ArrayList<>();
-                                            parentesisA.add(a);
-                                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                            ArrayList parentesisC = new ArrayList<>();
-                                            parentesisC.add(c);
-                                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                             ArrayList tmp = new ArrayList<>(); 
-                                             tmp.add(parentesis_abierto);
-                                             tmp.add(b);
-                                             tmp.add(parentesis_cerrado);
-                                             RESULT = new Nodo("operaciones_matematicas_parentesis", tmp ,aright,aleft);                                               
+                                    RESULT = b;
+                                            
                                             :}
                         | funcion_number:a {:
-                                             RESULT = a;
+                                             
                                            :}
                         | funcion_bigint:a {:
-                                             RESULT = a;
+                                             
                                            :}
                         | funcion_length:a {:
-                                             RESULT = a;
+                                             
                                            :}
                         | funciones_numericas_estaticas:a {:
-                                     ArrayList tmp = new ArrayList<>(); 
-                                     tmp.add(a);
-                                     RESULT = new Nodo("funciones_numericas_estaticas", tmp ,aright,aleft);                       
+                                     
                                                           :}
                         | NUMBER:a {:
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
-                                        RESULT = new Nodo("Number", tmp ,aright,aleft);
+                                     
+                                     RESULT = new Value(aright,aleft,a,ValueType.NUMBER);
+
                                    :}
                         | BIGINT:a {:
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
-                                        RESULT = new Nodo("BigInt", tmp ,aright,aleft);
+                                     
+                                     RESULT = new Value(aright,aleft,a,ValueType.BIGINT);   
+
                                    :}
                         | ID:a    {: 
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
-                                        RESULT = new Nodo("Id",tmp,aright,aleft);
+                                    
+                                    RESULT = new Value(aright,aleft,a,ValueType.ID);
+
                                   :}
                         | TEXTO:a {: 
+                                    
+                                    RESULT = new Value(aright,aleft,a,ValueType.TEXTO);
                                         
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
-                                        RESULT = new Nodo("String", tmp ,aright,aleft);
                                   :}
                         ;
 
 funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
 
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_abs = new ArrayList<>();
-                                        symbol_abs.add(c);
-                                        Nodo simbolo_abs = new Nodo("simbolo_abs",symbol_abs,aright,aleft);
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                        
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_abs);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("ABS", tmp ,aright,aleft);
+                                        
                                 :}
                                |  MATH:a PUNTO:b CEIL:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
                                         
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_ceil = new ArrayList<>();
-                                        symbol_ceil.add(c);
-                                        Nodo simbolo_ceil = new Nodo("simbolo_ceil",symbol_ceil,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_ceil);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("CEIL", tmp ,aright,aleft);
+                                        
                                 :}
                                |  MATH:a PUNTO:b COS:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
                                         
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_cos = new ArrayList<>();
-                                        symbol_cos.add(c);
-                                        Nodo simbolo_cos = new Nodo("simbolo_cos",symbol_cos,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_cos);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("COS", tmp ,aright,aleft);
+                                        
                                :}
                                |  MATH:a PUNTO:b SIN:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
                                         
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_sen = new ArrayList<>();
-                                        symbol_sen.add(c);
-                                        Nodo simbolo_sen = new Nodo("simbolo_sen",symbol_sen,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_sen);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("SIN", tmp ,aright,aleft);
+                                        
                                :}
                                |  MATH:a PUNTO:b TAN:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
 
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_tan = new ArrayList<>();
-                                        symbol_tan.add(c);
-                                        Nodo simbolo_tan = new Nodo("simbolo_tan",symbol_tan,aright,aleft);
-                               
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_tan);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("TAN", tmp ,aright,aleft);
+                                        
 
                                :}
                                |  MATH:a PUNTO:b EXP:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
 
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_exp = new ArrayList<>();
-                                        symbol_exp.add(c);
-                                        Nodo simbolo_exp = new Nodo("simbolo_exp",symbol_exp,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_exp);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("EXP", tmp ,aright,aleft);
+                                        
 
                                 :}
                                |  MATH:a PUNTO:b FLOOR:c  PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
 
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_floor = new ArrayList<>();
-                                        symbol_floor.add(c);
-                                        Nodo simbolo_floor = new Nodo("simbolo_floor",symbol_floor,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);       
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_floor);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("FLOOR", tmp ,aright,aleft);
+                                        
 
                                 :}
                                |  MATH:a PUNTO:b POW:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e COMA:f operaciones_matematicas:g PARENTESIS_CERRADO:h
                                 {:
 
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_pow = new ArrayList<>();
-                                        symbol_pow.add(c);
-                                        Nodo simbolo_pow = new Nodo("simbolo_pow",symbol_pow,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(h);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                        ArrayList tmp5 = new ArrayList<>();
-                                        tmp5.add(f);
-                                        Nodo coma = new Nodo("coma",tmp5,aright,aleft);
-
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_pow);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(coma);
-                                        tmp.add(g);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("POW", tmp ,aright,aleft);
+                                        
 
                                 :}
                                |  MATH:a PUNTO:b SQRT:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
-
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_sqrt = new ArrayList<>();
-                                        symbol_sqrt.add(c);
-                                        Nodo simbolo_sqrt = new Nodo("simbolo_sqrt",symbol_sqrt,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);  
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_sqrt);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("SQRT", tmp ,aright,aleft);
+                            
+                                
 
                                 :}
                                |  MATH:a PUNTO:b RANDOM:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
 
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_random = new ArrayList<>();
-                                        symbol_random.add(c);
-                                        Nodo simbolo_random = new Nodo("simbolo_random",symbol_random,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                        ArrayList parentesisA = new ArrayList<>();
-                                        parentesisA.add(d);
-                                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                        ArrayList parentesisC = new ArrayList<>();
-                                        parentesisC.add(f);
-                                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_random);
-                                        tmp.add(parentesis_abierto);
-                                        tmp.add(e);
-                                        tmp.add(parentesis_cerrado);
-                                        RESULT = new Nodo("RANDOM", tmp ,aright,aleft);
+                                    
+                                    RESULT = new Value(aright,aleft,Math.random(),ValueType.NUMBER);    
 
                                 :}
                                |  MATH:a PUNTO:b E:c
                                 {:
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_e = new ArrayList<>();
-                                        symbol_e.add(c);
-                                        Nodo simbolo_e = new Nodo("simbolo_e",symbol_e,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_e);
-                                        RESULT = new Nodo("E", tmp ,aright,aleft);
-
+                                        
+                                    RESULT = new Value(aright,aleft,Math.E,ValueType.NUMBER);    
                                 :}
                                |  MATH:a PUNTO:b PI:c
                                 {:
 
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList symbol_pi = new ArrayList<>();
-                                        symbol_pi.add(c);
-                                        Nodo simbolo_pi = new Nodo("simbolo_pi",symbol_pi,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_pi);
-                                        RESULT = new Nodo("PI", tmp ,aright,aleft);
+                                    RESULT = new Value(aright,aleft,Math.PI,ValueType.NUMBER);    
 
                                 :}
                                |  MATH:a PUNTO:b SQRT2:c
                                 {:
-
-                                        ArrayList math_ = new ArrayList<>();
-                                        math_.add(a);
-                                        Nodo math = new Nodo("math",math_,aright,aleft);
-
-                                        ArrayList tmp4 = new ArrayList<>();                                         
-                                        tmp4.add(b);
-                                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                        ArrayList symbol_sqrt2 = new ArrayList<>();
-                                        symbol_sqrt2.add(c);
-                                        Nodo simbolo_sqrt2 = new Nodo("simbolo_sqrt2",symbol_sqrt2,aright,aleft);
-
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(math);
-                                        tmp.add(punto);
-                                        tmp.add(simbolo_sqrt2);
-                                        RESULT = new Nodo("SQRT2", tmp ,aright,aleft);
-
+                                    
+                                    RESULT = new Value(aright,aleft,Math.sqrt(2),ValueType.NUMBER);
+                                        
                                 :}
                               ;
 
 incremento ::= ID:id INCREMENTO:incremento
                 {:
-                    ArrayList tmp2 = new ArrayList<>();   
-                    tmp2.add(id);
-                    Nodo nt = new Nodo("Id",tmp2,idright,idleft);
 
-                    ArrayList symbol_incremento = new ArrayList<>();   
-                    symbol_incremento.add(incremento);
-                    Nodo simbolo_incremento = new Nodo("simbolo_incremento",symbol_incremento,idright,idleft);                    
-
-                    ArrayList tmp = new ArrayList<>(); 
-                    tmp.add(nt);
-                    tmp.add(simbolo_incremento);
-                    RESULT = new Nodo("incremento", tmp ,incrementoright,incrementoleft); 
                 :}
 
            ;
 
 decremento ::= ID:id DECREMENTO:decremento
                 {:
-                    ArrayList tmp2 = new ArrayList<>();   
-                    tmp2.add(id);
-                    Nodo nt = new Nodo("Id",tmp2,idright,idleft);
-
-                    ArrayList symbol_decremento = new ArrayList<>();   
-                    symbol_decremento.add(decremento);
-                    Nodo simbolo_decremento = new Nodo("simbolo_decremento",symbol_decremento,idright,idleft);                    
-
-                    ArrayList tmp = new ArrayList<>(); 
-                    tmp.add(nt);
-                    tmp.add(simbolo_decremento);
-                    RESULT = new Nodo("decremento", tmp ,decrementoright,decrementoleft); 
+                     
                 :}
             ;
 
 funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
                 {:
-                    ArrayList tmp2 = new ArrayList<>();   
-                    tmp2.add(a);
-                    Nodo nt = new Nodo("Id",tmp2,aright,aleft);
-
-                    ArrayList symbol_incremento = new ArrayList<>();   
-                    symbol_incremento.add(b);
-                    Nodo simbolo_incremento = new Nodo("simbolo_incremento",symbol_incremento,aright,aleft);                    
-
-                    ArrayList puntoC = new ArrayList<>(); 
-                    puntoC.add(c);
-                    Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                    ArrayList tmp = new ArrayList<>(); 
-                    tmp.add(nt);
-                    tmp.add(simbolo_incremento);
-                    tmp.add(punto_coma);
-                    RESULT = new Nodo("funcion_incremento", tmp ,bright,bleft); 
+                    
                 :}
 
                |  ID:a DECREMENTO:b PUNTO_COMA:c
                {:
-                    ArrayList tmp2 = new ArrayList<>();   
-                    tmp2.add(a);
-                    Nodo nt = new Nodo("Id",tmp2,aright,aleft);
-
-                    ArrayList symbol_decremento = new ArrayList<>();   
-                    symbol_decremento.add(b);
-                    Nodo simbolo_decremento = new Nodo("simbolo_decremento",symbol_decremento,aright,aleft);                    
-
-                    ArrayList puntoC = new ArrayList<>(); 
-                    puntoC.add(c);
-                    Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                    ArrayList tmp = new ArrayList<>(); 
-                    tmp.add(nt);
-                    tmp.add(simbolo_decremento);
-                    tmp.add(punto_coma);
-                    RESULT = new Nodo("funcion_decremento", tmp ,bright,bleft); 
+                    
                 :}
                        ;
 
 operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_matematicas:c
                             {:
                                 
-                                ArrayList symbol_mayor = new ArrayList<>(); 
-                                symbol_mayor.add(b);
-                                Nodo simbolo_mayor_que = new Nodo("simbolo_mayor_que", symbol_mayor ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_mayor_que);
-                                tmp.add(c);
-                                RESULT = new Nodo("mayor_que", tmp ,aright,aleft); 
+                                
                             :}
                            | operaciones_matematicas:a MAYOR_IGUAL:b operaciones_matematicas:c
                             {:
-                                ArrayList symbol_mayor_igual = new ArrayList<>(); 
-                                symbol_mayor_igual.add(b);
-                                Nodo simbolo_mayor_igual = new Nodo("simbolo_mayor_igual", symbol_mayor_igual ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_mayor_igual);
-                                tmp.add(c);
-                                RESULT = new Nodo("mayor_igual", tmp ,aright,aleft); 
+                                
                             :}
                            | operaciones_matematicas:a MENOR_QUE:b operaciones_matematicas:c
                             {:
                                                 
-                                ArrayList symbol_menor = new ArrayList<>(); 
-                                symbol_menor.add(b);
-                                Nodo simbolo_menor_que = new Nodo("simbolo_menor_que", symbol_menor ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_menor_que);
-                                tmp.add(c);
-                                RESULT = new Nodo("menor_que", tmp ,aright,aleft); 
+                                
                             :}
                            | operaciones_matematicas:a MENOR_IGUAL:b operaciones_matematicas:c
                             {:
 
-                                ArrayList symbol_menor_igual = new ArrayList<>(); 
-                                symbol_menor_igual.add(b);
-                                Nodo simbolo_menor_igual = new Nodo("simbolo_menor_igual", symbol_menor_igual ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_menor_igual);
-                                tmp.add(c);
-                                RESULT = new Nodo("menor_igual", tmp ,aright,aleft); 
+                                
                             :}
                            | operaciones_matematicas:a COMPARACION:b operaciones_matematicas:c
                             {:
 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
                                 
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | operaciones_matematicas:a DISTINTO:b operaciones_matematicas:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo distinto = new Nodo("distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
 
                            | TRUE:a COMPARACION:b TRUE:c
                             {:
 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
                            | TRUE:a COMPARACION:b FALSE:c
                             {:
 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
                            | FALSE:a COMPARACION:b TRUE:c
                             {:
                                 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
                            | FALSE:a COMPARACION:b FALSE:c
                             {:
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
                            | operaciones_matematicas:a COMPARACION:b TRUE:c
                             {:
                                 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
                            | TRUE:a COMPARACION:b operaciones_matematicas:c
                             {:
 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
                            | operaciones_matematicas:a COMPARACION:b FALSE:c
                             {:
 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
                            | FALSE:a COMPARACION:b operaciones_matematicas:c
                             {:
 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
 
                            | TRUE:a DISTINTO:b TRUE:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | TRUE:a DISTINTO:b FALSE:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | FALSE:a DISTINTO:b TRUE:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | FALSE:a DISTINTO:b FALSE:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | operaciones_matematicas:a DISTINTO:b TRUE:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(b);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | TRUE:a DISTINTO:b operaciones_matematicas:c
                             {:
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | operaciones_matematicas:a DISTINTO:b FALSE:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | FALSE:a DISTINTO:b operaciones_matematicas:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                        
                            | TRUE:a 
                            {:
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
-                                        RESULT = new Nodo("Boolean",tmp,aright,aleft);
+                                    RESULT = new Value(aright,aleft,a,ValueType.TRUE);
                            :}
                            | FALSE:a 
                            {:
-                                        ArrayList tmp = new ArrayList<>(); 
-                                        tmp.add(a);
-                                        RESULT =  new Nodo("Boolean",tmp,aright,aleft);
+                                    RESULT = new Value(aright,aleft,a,ValueType.FALSE);
                            :}
 
 
@@ -1623,349 +858,138 @@ operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_m
                            | funcion_boolean:a COMPARACION:b TRUE:c
                             {:
                                 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
 
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
 
                            | funcion_boolean:a COMPARACION:b FALSE:c
                             {:
                                 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                               
                             :}
                            | TRUE:a COMPARACION:b funcion_boolean:c
                             {:
 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
                            | FALSE:a COMPARACION:b funcion_boolean:c
                             {:
                                 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
 
 
                            | funcion_boolean:a DISTINTO:b TRUE:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | funcion_boolean:a DISTINTO:b FALSE:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | TRUE:a DISTINTO:b funcion_boolean:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
                            | FALSE:a DISTINTO:b funcion_boolean:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                               
                             :}
 
 
                            | funcion_boolean:a COMPARACION:b funcion_boolean:c
                             {:
                                 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                 
                             :}
                            | funcion_boolean:a DISTINTO:b funcion_boolean:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
 
                            | funcion_string:a COMPARACION:b funcion_string:c
                             {:
                               
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
 
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
                             :}
                            | funcion_string:a DISTINTO:b funcion_string:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
 
                            | funcion_string:a COMPARACION:b operaciones_matematicas:c
                             {:
                                 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
 
                            | funcion_string:a DISTINTO:b operaciones_matematicas:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
 
                            | operaciones_matematicas:a COMPARACION:b funcion_string:c
                             {:
 
-                                ArrayList symbol_comparacion = new ArrayList<>(); 
-                                symbol_comparacion.add(b);
-                                Nodo simbolo_comparacion = new Nodo("simbolo_comparacion", symbol_comparacion ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_comparacion);
-                                tmp.add(c);
-                                RESULT = new Nodo("comparacion", tmp ,aright,aleft); 
+                                
                             :}
 
                            | operaciones_matematicas:a DISTINTO:b funcion_string:c
                             {:
                                 
-                                ArrayList symbol_distinto = new ArrayList<>(); 
-                                symbol_distinto.add(b);
-                                Nodo simbolo_distinto = new Nodo("simbolo_distinto", symbol_distinto ,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_distinto);
-                                tmp.add(c);
-                                RESULT = new Nodo("distinto", tmp ,aright,aleft); 
+                                
                             :}
 
                            | PARENTESIS_ABIERTO:a operaciones_relacionales:b PARENTESIS_CERRADO:c
                             {:
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(a);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(c);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(parentesis_abierto);
-                                tmp.add(b);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("operaciones_relacionales_parentesis", tmp ,aright,aleft); 
+                                
                             :}
                           ;  
 
 operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                             {:
                                 
-                                ArrayList symbol_and = new ArrayList<>();
-                                symbol_and.add(b);
-                                Nodo simbolo_and = new Nodo("simbolo_and",symbol_and,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(simbolo_and);
-                                tmp.add(c);
-                                RESULT = new Nodo("AND", tmp ,aright,aleft); 
+                                
                             :}
                     | operaciones_logicas:a OR:b operaciones_logicas:c
                             {:
                                 
-                                ArrayList symbol_or = new ArrayList<>();
-                                symbol_or.add(b);
-                                Nodo simbolo_or = new Nodo("simbolo_or",symbol_or,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(b);
-                                tmp.add(c);
-                                RESULT = new Nodo("OR", tmp ,aright,aleft); 
+                                
                             :}
                     | NOT:a operaciones_logicas:b
                             {:
 
-                                ArrayList symbol_not = new ArrayList<>();
-                                symbol_not.add(a);
-                                Nodo simbolo_not = new Nodo("simbolo_not",symbol_not,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(simbolo_not);
-                                tmp.add(b);
-                                RESULT = new Nodo("NOT", tmp ,aright,aleft); 
+                                
                             :}
                     | PARENTESIS_ABIERTO:a operaciones_logicas:b PARENTESIS_CERRADO:c
                             {:
                                 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(a);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(c);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(parentesis_abierto);
-                                tmp.add(b);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("operaciones_logicas_parentesis", tmp ,aright,aleft); 
+                                
                             :}
                     | operaciones_relacionales:a
                             {:
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);                                
-                                RESULT = new Nodo("operaciones_relacionales", tmp ,aright,aleft); 
+                                
                             :}
                     ;
 
 funcion_length ::= TEXTO:a PUNTO:b LENGTH:c
                             {:
 
-                                ArrayList tmp4 = new ArrayList<>();                                         
-                                tmp4.add(b);
-                                Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(nt);
-                                tmp2.add(punto);
-                                tmp2.add(c);
-                                RESULT = new Nodo("funcion_length", tmp2 ,aright,aleft);                                
+                                
                             :}
                 |  ID:a PUNTO:b LENGTH:c
                             {:
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-                                ArrayList tmp4 = new ArrayList<>();                                         
-                                tmp4.add(b);
-                                Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(nt);
-                                tmp2.add(punto);
-                                tmp2.add(c);
-                                RESULT = new Nodo("funcion_length", tmp2 ,aright,aleft);                                
+                                
                             :}
                 |  variables_string:a PUNTO:b LENGTH:c
                             {:
-                                ArrayList tmp4 = new ArrayList<>();                                         
-                                tmp4.add(b);
-                                Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(a);
-                                tmp2.add(punto);
-                                tmp2.add(c);
-                                RESULT = new Nodo("funcion_length", tmp2 ,aright,aleft);                                
+                                
                             :}
                 ;
 
@@ -1974,79 +998,22 @@ funcion_number ::= FNUMBER:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARE
                             {:
                                 
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_number", tmp ,aright,aleft);                                
+                                
                             :}
                 |  FNUMBER:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_number", tmp ,aright,aleft);                                
+                                
                             :}
                 |  FNUMBER:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
                             {:
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(c);
-                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(a);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(nt);
-                                tmp2.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_number", tmp2 ,aright,aleft);                                
+                                
                             :}
                 |  FNUMBER:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(a);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(c);
-                                tmp2.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_number", tmp2 ,aright,aleft);                                
+                                
                             :}
                 ;
 
@@ -2054,79 +1021,22 @@ funcion_bigint  ::= FBIGINT:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PAR
                             {:
 
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_bigint", tmp ,aright,aleft);                                
+                                
                             :}
                 |   FBIGINT:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_bigint", tmp ,aright,aleft);                                
+                                
                             :}
                 |   FBIGINT:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
                             {:
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(c);
-                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(a);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(nt);
-                                tmp2.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_bigint", tmp2 ,aright,aleft);                                
+                                
                             :}
                 |   FBIGINT:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
                               
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(a);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(c);
-                                tmp2.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_bigint", tmp2 ,aright,aleft);                                
+                              
                             :}
                 ;
 
@@ -2134,79 +1044,23 @@ funcion_bigint  ::= FBIGINT:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PAR
 funcion_boolean  ::= FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
                             {:
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
+                                                               
                             :}
                  |   FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
+                                                              
                             :}
                  |   FBOOLEAN:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
                             {:
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(c);
-                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(a);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(nt);
-                                tmp2.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_boolean", tmp2 ,aright,aleft);                                
+                               
                             :}
                  |   FBOOLEAN:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
                                 
 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_boolean", tmp ,aright,aleft);                                
+                               
                             :}
                  ;
 
@@ -2214,159 +1068,35 @@ funcion_boolean  ::= FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_matematicas:c P
 funcion_string  ::= FSTRING:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
                             {:
                                 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
+                               
                             :}
                  |  FSTRING:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
-                                
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
+                                                 
                             :}
                  |  FSTRING:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
                             {:
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(c);
-                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(a);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(nt);
-                                tmp2.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_string", tmp2 ,aright,aleft);                                
+                                
                             :}
                  |  FSTRING:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
                                 
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                tmp.add(parentesis_abierto);
-                                tmp.add(c);
-                                tmp.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_string", tmp ,aright,aleft);                                
+                                
                             :}
                  ;
 
 funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                             {:
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(d);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(f);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp4 = new ArrayList<>();                                         
-                                tmp4.add(b);
-                                Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(nt);
-                                tmp2.add(punto);
-                                tmp2.add(c);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(e);
-                                tmp2.add(parentesis_cerrado);
-
-                                RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
+                                
                             :}
                 |   TEXTO:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                             {:
-                                ArrayList tmp = new ArrayList<>(); 
-                                tmp.add(a);
-                                Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(d);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(f);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp4 = new ArrayList<>();                                         
-                                tmp4.add(b);
-                                Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(nt);
-                                tmp2.add(punto);
-                                tmp2.add(c);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(e);
-                                tmp2.add(parentesis_cerrado);
-
-                                RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
+                                
                             :}
                 |   variables_string:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                             {:
                                 
-                                ArrayList tmp4 = new ArrayList<>();                                         
-                                tmp4.add(b);
-                                Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(d);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(f);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>(); 
-                                tmp2.add(a);
-                                tmp2.add(punto);
-                                tmp2.add(c);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(e);
-                                tmp2.add(parentesis_cerrado);
-                                RESULT = new Nodo("funcion_char_at", tmp2 ,aright,aleft);                                
+                                
                             :}
                 ;
 
@@ -2374,363 +1104,94 @@ funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matem
 funcion_concat ::= variables_string:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
                     {:
 
-                        ArrayList tmp4 = new ArrayList<>();                                         
-                        tmp4.add(b);
-                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);    
-
-                        ArrayList a_concat = new ArrayList<>();                                         
-                        a_concat.add(c);
-                        Nodo concat = new Nodo("concat",a_concat,aright,aleft);                            
-
-                        ArrayList parentesisA = new ArrayList<>();
-                        parentesisA.add(d);
-                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                        ArrayList parentesisC = new ArrayList<>();
-                        parentesisC.add(f);
-                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                        ArrayList tmp2 = new ArrayList<>(); 
-                        tmp2.add(a);
-                        tmp2.add(punto);
-                        tmp2.add(concat);
-                        tmp2.add(parentesis_abierto);
-                        tmp2.add(e);
-                        tmp2.add(parentesis_cerrado);
-                        RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
+                        
                     :}
                 |  TEXTO:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
                     {:
 
-                        ArrayList tmp = new ArrayList<>(); 
-                        tmp.add(a);
-                        Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                        ArrayList a_concat = new ArrayList<>();                                         
-                        a_concat.add(c);
-                        Nodo concat = new Nodo("concat",a_concat,aright,aleft);                            
-
-                        ArrayList tmp4 = new ArrayList<>();                                         
-                        tmp4.add(b);
-                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                        ArrayList parentesisA = new ArrayList<>();
-                        parentesisA.add(d);
-                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                        ArrayList parentesisC = new ArrayList<>();
-                        parentesisC.add(f);
-                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                        ArrayList tmp2 = new ArrayList<>(); 
-                        tmp2.add(nt);
-                        tmp2.add(punto);
-                        tmp2.add(concat);
-                        tmp2.add(parentesis_abierto);
-                        tmp2.add(e);
-                        tmp2.add(parentesis_cerrado);
-                        RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
+                        
 
                     :}
                 |  ID:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
                     {:
-                        ArrayList tmp = new ArrayList<>(); 
-                        tmp.add(a);
-                        Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-                        ArrayList a_concat = new ArrayList<>();                                         
-                        a_concat.add(c);
-                        Nodo concat = new Nodo("concat",a_concat,aright,aleft);                            
-
-
-                        ArrayList parentesisA = new ArrayList<>();
-                        parentesisA.add(d);
-                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                        ArrayList parentesisC = new ArrayList<>();
-                        parentesisC.add(f);
-                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                        ArrayList tmp4 = new ArrayList<>();                                         
-                        tmp4.add(b);
-                        Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                        ArrayList tmp2 = new ArrayList<>(); 
-                        tmp2.add(nt);
-                        tmp2.add(punto);
-                        tmp2.add(concat);
-                        tmp2.add(parentesis_abierto);
-                        tmp2.add(e);
-                        tmp2.add(parentesis_cerrado);
-                        RESULT = new Nodo("funcion_concat", tmp2 ,aright,aleft);                                
+                        
                     :}
                 ;
 
 variables_string ::= funcion_string:a
                   {:
-                     RESULT = a;
+                     
                   :}
                  |  funcion_char_at:a   
                   {:
-                     RESULT = a;
+                     
                   :}
                  |  funcion_to_lower_case:a
                   {:
-                    RESULT = a;
+                    
                   :}
                  |  funcion_to_upper_case:a
                   {:
-                    RESULT = a;
+                    
                   :}
                  |  funcion_concat:a
                   {:
-                    RESULT = a;
+                    
                   :}
                  |  llamada_funcion_asignacion:a
                   {:
-                    RESULT = a;
+                    
                   :}
                  ;
 
 
 funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                            ArrayList tmp = new ArrayList<>(); 
-                            tmp.add(a);
-                            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-                            ArrayList a_lower_case = new ArrayList<>();                                         
-                            a_lower_case.add(c);
-                            Nodo to_lower_case = new Nodo("to_lower_case",a_lower_case,aright,aleft);                                                     
-
-                            ArrayList parentesisA = new ArrayList<>();
-                            parentesisA.add(d);
-                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                            ArrayList parentesisC = new ArrayList<>();
-                            parentesisC.add(e);
-                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                            ArrayList tmp4 = new ArrayList<>();                                         
-                            tmp4.add(b);
-                            Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                            ArrayList tmp2 = new ArrayList<>(); 
-                            tmp2.add(nt);
-                            tmp2.add(punto);
-                            tmp2.add(to_lower_case);
-                            tmp2.add(parentesis_abierto);
-                            tmp2.add(parentesis_cerrado);
-                            RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
+                                                          
                         :}
                        |  TEXTO:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                            ArrayList tmp = new ArrayList<>(); 
-                            tmp.add(a);
-                            Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                            ArrayList a_lower_case = new ArrayList<>();                                         
-                            a_lower_case.add(c);
-                            Nodo to_lower_case = new Nodo("to_lower_case",a_lower_case,aright,aleft);                                                     
-
-                            ArrayList parentesisA = new ArrayList<>();
-                            parentesisA.add(d);
-                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                            ArrayList parentesisC = new ArrayList<>();
-                            parentesisC.add(e);
-                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                            ArrayList tmp4 = new ArrayList<>();                                         
-                            tmp4.add(b);
-                            Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                            ArrayList tmp2 = new ArrayList<>(); 
-                            tmp2.add(nt);
-                            tmp2.add(punto);
-                            tmp2.add(to_lower_case);
-                            tmp2.add(parentesis_abierto);
-                            tmp2.add(parentesis_cerrado);
-                            RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
+                                                           
                         :}
                        |  variables_string:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
 
-                            ArrayList tmp4 = new ArrayList<>();                                         
-                            tmp4.add(b);
-                            Nodo punto = new Nodo("punto",tmp4,aright,aleft); 
-
-                            ArrayList a_lower_case = new ArrayList<>();                                         
-                            a_lower_case.add(c);
-                            Nodo to_lower_case = new Nodo("to_lower_case",a_lower_case,aright,aleft);                                                     
-                                
-                            ArrayList parentesisA = new ArrayList<>();
-                            parentesisA.add(d);
-                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                            ArrayList parentesisC = new ArrayList<>();
-                            parentesisC.add(e);
-                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                            ArrayList tmp2 = new ArrayList<>(); 
-                            tmp2.add(a);
-                            tmp2.add(punto);
-                            tmp2.add(to_lower_case);
-                            tmp2.add(parentesis_abierto);
-                            tmp2.add(parentesis_cerrado);
-                            RESULT = new Nodo("funcion_to_lower_case", tmp2 ,aright,aleft);                                
+                                                         
                         :}
                        ;
 
 funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                            ArrayList tmp = new ArrayList<>(); 
-                            tmp.add(a);
-                            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-                            ArrayList a_upper_case = new ArrayList<>();                                         
-                            a_upper_case.add(c);
-                            Nodo to_upper_case = new Nodo("to_upper_case",a_upper_case,aright,aleft);                            
-
-                            ArrayList tmp4 = new ArrayList<>();                                         
-                            tmp4.add(b);
-                            Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                            ArrayList parentesisA = new ArrayList<>();
-                            parentesisA.add(d);
-                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                            ArrayList parentesisC = new ArrayList<>();
-                            parentesisC.add(e);
-                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                            ArrayList tmp2 = new ArrayList<>(); 
-                            tmp2.add(nt);
-                            tmp2.add(punto);
-                            tmp2.add(to_upper_case);
-                            tmp2.add(parentesis_abierto);
-                            tmp2.add(parentesis_cerrado);
-                            RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
+                                                          
                         :}
                        |  TEXTO:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                            ArrayList tmp = new ArrayList<>(); 
-                            tmp.add(a);
-                            Nodo nt = new Nodo("String", tmp ,aright,aleft);
-
-                            ArrayList a_upper_case = new ArrayList<>();                                         
-                            a_upper_case.add(c);
-                            Nodo to_upper_case = new Nodo("to_upper_case",a_upper_case,aright,aleft);                            
-
-                            ArrayList parentesisA = new ArrayList<>();
-                            parentesisA.add(d);
-                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                            ArrayList parentesisC = new ArrayList<>();
-                            parentesisC.add(e);
-                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                            ArrayList tmp4 = new ArrayList<>();                                         
-                            tmp4.add(b);
-                            Nodo punto = new Nodo("punto",tmp4,aright,aleft);                               
-
-                            ArrayList tmp2 = new ArrayList<>(); 
-                            tmp2.add(nt);
-                            tmp2.add(punto);
-                            tmp2.add(to_upper_case);
-                            tmp2.add(parentesis_abierto);
-                            tmp2.add(parentesis_cerrado);
-                            RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
+                                                          
                         :}
                        |  variables_string:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
                             
-                            ArrayList tmp4 = new ArrayList<>();                                         
-                            tmp4.add(b);
-                            Nodo punto = new Nodo("punto",tmp4,aright,aleft);      
-
-                            ArrayList a_upper_case = new ArrayList<>();                                         
-                            a_upper_case.add(c);
-                            Nodo to_upper_case = new Nodo("to_upper_case",a_upper_case,aright,aleft);                                                     
-
-                            ArrayList parentesisA = new ArrayList<>();
-                            parentesisA.add(d);
-                            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                            ArrayList parentesisC = new ArrayList<>();
-                            parentesisC.add(e);
-                            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                            ArrayList tmp2 = new ArrayList<>(); 
-                            tmp2.add(a);
-                            tmp2.add(punto);
-                            tmp2.add(to_upper_case);
-                            tmp2.add(parentesis_abierto);
-                            tmp2.add(parentesis_cerrado);
-                            RESULT = new Nodo("funcion_to_upper_case", tmp2 ,aright,aleft);                                
+                                                            
                         :}
                        ;
 
 funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instrucciones_console:e PARENTESIS_CERRADO:f PUNTO_COMA:g
                     {:
                         
-                        ArrayList tmp = new ArrayList<>();                                         
-                        tmp.add(a);
-                        Nodo console = new Nodo("console",tmp,aright,aleft);                               
-
-                        ArrayList tmp1 = new ArrayList<>();                                         
-                        tmp1.add(b);
-                        Nodo punto = new Nodo("punto",tmp1,aright,aleft);                               
-
-                        ArrayList tmp3 = new ArrayList<>();                                         
-                        tmp3.add(c);
-                        Nodo log =  new Nodo("log",tmp3,aright,aleft);          
-
-                        ArrayList parentesisA = new ArrayList<>();
-                        parentesisA.add(d);
-                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                        ArrayList parentesisC = new ArrayList<>();
-                        parentesisC.add(f);
-                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                        ArrayList puntoC = new ArrayList<>(); 
-                        puntoC.add(g);
-                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                        ArrayList tmp2 = new ArrayList<>(); 
-                        tmp2.add(console);
-                        tmp2.add(punto);
-                        tmp2.add(log);
-                        tmp2.add(parentesis_abierto);
-                        tmp2.add(e);
-                        tmp2.add(parentesis_cerrado);
-                        tmp2.add(punto_coma);
-                        RESULT = new Nodo("funcion_console_log", tmp2 ,aright,aleft);                                
+                                                        
                     :}
             ;
 
 lista_instrucciones_console ::= lista_instrucciones_console:a COMA:b instruccion:c
                             {: 
                                 
-                                ArrayList tmp5 = new ArrayList<>();
-                                tmp5.add(b);
-                                Nodo coma = new Nodo("coma",tmp5,aright,aleft);
-
-                                ArrayList tmp = new ArrayList<>();
-                                tmp.add(a);
-                                tmp.add(coma);
-                                tmp.add(c);
-                                RESULT = new Nodo("lista_instrucciones_console",tmp,aright,aleft);
+                                
                               
                             :}
                              |  instruccion:a 
                                 {: 
                                   
-                                  ArrayList tmp = new ArrayList<>();
-                                  tmp.add(a);
-
-                                  RESULT = new Nodo("lista_instrucciones_console",tmp,aright,aleft);
+                                  
 
                                 :}
                              ;
@@ -2742,270 +1203,59 @@ declaracion_funcion ::=
  FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d DOS_PUNTOS:e RVOID:f CORCHETE_ABIERTO:g instrucciones_funciones_sin_return:h CORCHETE_CERRADO:i
  
  {:
-            ArrayList tmp = new ArrayList<>(); 
-            tmp.add(b);
-            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-            ArrayList dosP = new ArrayList<>();
-            dosP.add(e);
-            Nodo dos_puntos = new Nodo("dos_puntos",dosP,aright,aleft);
-
-            ArrayList parentesisA = new ArrayList<>();
-            parentesisA.add(c);
-            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-            ArrayList parentesisC = new ArrayList<>();
-            parentesisC.add(d);
-            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-            ArrayList corcheteA = new ArrayList<>();
-            corcheteA.add(g);
-            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-            ArrayList corcheteC = new ArrayList<>();
-            corcheteC.add(i);
-            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
-            ArrayList tmp2 = new ArrayList<>(); 
-            tmp2.add(a);
-            tmp2.add(nt);
-            tmp2.add(parentesis_abierto);
-            tmp2.add(parentesis_cerrado);
-            tmp2.add(dos_puntos);
-            tmp2.add(f);
-            tmp2.add(corchete_abierto);
-            tmp2.add(h);
-            tmp2.add(corchete_cerrado);
-
-            RESULT = new Nodo("declaracion_funcion_sin_parametros_void",tmp2,aright,aleft);
 
  :}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e DOS_PUNTOS:f RVOID:g CORCHETE_ABIERTO:h instrucciones_funciones_sin_return:i CORCHETE_CERRADO:j
 {:
-            ArrayList tmp = new ArrayList<>(); 
-            tmp.add(b);
-            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-            ArrayList dosP = new ArrayList<>();
-            dosP.add(f);
-            Nodo dos_puntos = new Nodo("dos_puntos",dosP,fright,fleft);
-
-            ArrayList parentesisA = new ArrayList<>();
-            parentesisA.add(c);
-            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-            ArrayList parentesisC = new ArrayList<>();
-            parentesisC.add(e);
-            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);            
-
-            ArrayList corcheteA = new ArrayList<>();
-            corcheteA.add(h);
-            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-            ArrayList corcheteC = new ArrayList<>();
-            corcheteC.add(j);
-            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
-            ArrayList tmp2 = new ArrayList<>(); 
-            tmp2.add(a);
-            tmp2.add(nt);
-            tmp2.add(parentesis_abierto);
-            tmp2.add(d);
-            tmp2.add(parentesis_cerrado);
-            tmp2.add(dos_puntos);
-            tmp2.add(g);
-            tmp2.add(corchete_abierto);
-            tmp2.add(i);
-            tmp2.add(corchete_cerrado);
-
-            RESULT = new Nodo("declaracion_funcion_con_parametros_void",tmp2,aright,aleft);
 
  :}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
 {:
-            ArrayList tmp = new ArrayList<>(); 
-            tmp.add(b);
-            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-            ArrayList parentesisA = new ArrayList<>();
-            parentesisA.add(c);
-            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-            ArrayList parentesisC = new ArrayList<>();
-            parentesisC.add(d);
-            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-            ArrayList corcheteA = new ArrayList<>();
-            corcheteA.add(e);
-            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-            ArrayList corcheteC = new ArrayList<>();
-            corcheteC.add(g);
-            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
-            ArrayList tmp2 = new ArrayList<>(); 
-            tmp2.add(a);
-            tmp2.add(nt);
-            tmp2.add(parentesis_abierto);
-            tmp2.add(parentesis_cerrado);
-            tmp2.add(corchete_abierto);
-            tmp2.add(f);
-            tmp2.add(corchete_cerrado);
-            
-            RESULT = new Nodo("declaracion_funcion_sin_parametros_sin_tipo",tmp2,aright,aleft);
 
  :}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e CORCHETE_ABIERTO:f instrucciones_funcion:g CORCHETE_CERRADO:h
 {:
-            ArrayList tmp = new ArrayList<>(); 
-            tmp.add(b);
-            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-            ArrayList parentesisA = new ArrayList<>();
-            parentesisA.add(c);
-            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-            ArrayList parentesisC = new ArrayList<>();
-            parentesisC.add(e);
-            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-            ArrayList corcheteA = new ArrayList<>();
-            corcheteA.add(f);
-            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-            ArrayList corcheteC = new ArrayList<>();
-            corcheteC.add(h);
-            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
-            ArrayList tmp2 = new ArrayList<>(); 
-            tmp2.add(a);
-            tmp2.add(nt);
-            tmp2.add(parentesis_abierto);
-            tmp2.add(d);
-            tmp2.add(parentesis_cerrado);
-            tmp2.add(corchete_abierto);
-            tmp2.add(g);
-            tmp2.add(corchete_cerrado);
-            
-            RESULT = new Nodo("declaracion_funcion_con_parametros_sin_tipo",tmp2,aright,aleft);
  :}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d DOS_PUNTOS:e tipo_dato_variable:f CORCHETE_ABIERTO:g instrucciones_funcion:h CORCHETE_CERRADO:i
 {:
-            ArrayList tmp = new ArrayList<>(); 
-            tmp.add(b);
-            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-            ArrayList dosP = new ArrayList<>();
-            dosP.add(e);
-            Nodo dos_puntos = new Nodo("dos_puntos",dosP,eright,eleft);
-
-            ArrayList parentesisA = new ArrayList<>();
-            parentesisA.add(c);
-            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-            ArrayList parentesisC = new ArrayList<>();
-            parentesisC.add(d);
-            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-            ArrayList corcheteA = new ArrayList<>();
-            corcheteA.add(g);
-            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-            ArrayList corcheteC = new ArrayList<>();
-            corcheteC.add(i);
-            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
-            ArrayList tmp2 = new ArrayList<>(); 
-            tmp2.add(a);
-            tmp2.add(nt);
-            tmp2.add(parentesis_abierto);
-            tmp2.add(parentesis_cerrado);
-            tmp2.add(dos_puntos);
-            tmp2.add(f);
-            tmp2.add(corchete_abierto);
-            tmp2.add(h);
-            tmp2.add(corchete_cerrado);
-            
-            RESULT = new Nodo("declaracion_funcion_sin_parametros_con_tipo",tmp2,aright,aleft);
  :}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e DOS_PUNTOS:f tipo_dato_variable:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
 {:
-            ArrayList tmp = new ArrayList<>(); 
-            tmp.add(b);
-            Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-            ArrayList dosP = new ArrayList<>();
-            dosP.add(f);
-            Nodo dos_puntos = new Nodo("dos_puntos",dosP,fright,fleft);
-
-            ArrayList parentesisA = new ArrayList<>();
-            parentesisA.add(c);
-            Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-            ArrayList parentesisC = new ArrayList<>();
-            parentesisC.add(e);
-            Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-            ArrayList corcheteA = new ArrayList<>();
-            corcheteA.add(h);
-            Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-            ArrayList corcheteC = new ArrayList<>();
-            corcheteC.add(j);
-            Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
             
-            ArrayList tmp2 = new ArrayList<>(); 
-            tmp2.add(a);
-            tmp2.add(nt);
-            tmp2.add(parentesis_abierto);
-            tmp2.add(d);
-            tmp2.add(parentesis_cerrado);
-            tmp2.add(dos_puntos);
-            tmp2.add(g);
-            tmp2.add(corchete_abierto);
-            tmp2.add(i);
-            tmp2.add(corchete_cerrado);
-            
-            RESULT = new Nodo("declaracion_funcion_con_parametros_con_tipo",tmp2,aright,aleft);
  :}        
                     ;
 
 
 instrucciones_funciones_sin_return ::= instrucciones_funciones_sin_return:a opciones_instrucciones_sin_return:b
                                     {:
-                                        ArrayList tmp = new ArrayList<>();
-                                        tmp.add(a);
-                                        tmp.add(a);
 
-                                        RESULT = new Nodo("instrucciones_funciones_sin_return",tmp,aright,aleft);
                                     :}
                                     | opciones_instrucciones_sin_return:a
                                     {:
-                                        ArrayList tmp = new ArrayList<>();
-                                        tmp.add(a);
-
-                                        RESULT = new Nodo("instrucciones_funciones_sin_return",tmp,aright,aleft);
+                                        
                                     :}
                                     ;
 
 
 instrucciones_funcion ::= instrucciones:a 
                       {: 
-                            ArrayList tmp = new ArrayList<>(); 
-                            tmp.add(a);
-                            RESULT = new Nodo("instrucciones_funcion",tmp,aright,aleft);      
+                            
                       :}
 
                        | 
                        
                        {: 
-                            ArrayList tmp = new ArrayList<>(); 
-                            RESULT = new Nodo("vacio",tmp,0,0);
+                            
                        :}
 
                        ;
@@ -3013,42 +1263,20 @@ instrucciones_funcion ::= instrucciones:a
 parametros_funcion_declaracion ::= parametros_funcion_declaracion:a COMA:b parametro_funcion_declaracion:c
                                 {:
 
-                                    ArrayList tmp5 = new ArrayList<>();
-                                    tmp5.add(b);
-                                    Nodo coma = new Nodo("coma",tmp5,aright,aleft);
-
-                                    ArrayList tmp = new ArrayList<>(); 
-                                    tmp.add(a);
-                                    tmp.add(coma);
-                                    tmp.add(b);
-                                    Nodo nt = new Nodo("parametros_funcion_declaracion", tmp ,aright,aleft);                    
+                                    
 
                                 :}
 
                                 |  parametro_funcion_declaracion:a
                                 {:
-                                    ArrayList tmp = new ArrayList<>(); 
-                                    tmp.add(a);
-                                    Nodo nt = new Nodo("parametros_funcion_declaracion", tmp ,aright,aleft);                    
+
                                 :}
                                 ;
 
 parametro_funcion_declaracion ::= ID:a DOS_PUNTOS:b tipo_dato_variable:c
                                 {:
 
-                                    ArrayList tmp = new ArrayList<>(); 
-                                    tmp.add(a);
-                                    Nodo nt = new Nodo("Id", tmp ,aright,aleft);
-
-                                    ArrayList dosP = new ArrayList<>();
-                                    dosP.add(b);
-                                    Nodo dos_puntos = new Nodo("dos_puntos",dosP,bright,bleft);
-
-                                    ArrayList tmp2 = new ArrayList<>(); 
-                                    tmp2.add(nt);
-                                    tmp2.add(dos_puntos);
-                                    tmp2.add(c);
-                                    RESULT = new Nodo("parametro_funcion_declaracion",tmp2,aright,aleft);
+                                    
                                 :}
                                 ;
 
@@ -3056,77 +1284,26 @@ parametro_funcion_declaracion ::= ID:a DOS_PUNTOS:b tipo_dato_variable:c
 funcion_return ::= RETURN:a instruccion:b PUNTO_COMA:c
                     {:
 
-                        ArrayList puntoC = new ArrayList<>(); 
-                        puntoC.add(c);
-                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-                        
-                        ArrayList tmp = new ArrayList<>();
-                        tmp.add(a);
-                        tmp.add(b);
-                        tmp.add(punto_coma);
 
-                        RESULT = new Nodo("return_con_instruccion",tmp,aright,aleft);
 
                     :}
                 | RETURN:a PUNTO_COMA:b
                     {:
                         
-                        ArrayList puntoC = new ArrayList<>(); 
-                        puntoC.add(b);
-                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                        ArrayList tmp = new ArrayList<>();
-                        tmp.add(a);
-                        tmp.add(punto_coma);
-                        RESULT = new Nodo("return_sin_instruccion",tmp,aright,aleft);
+ 
                     :}
                 ;
 
 llamada_funcion_asignacion ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
                               {:
 
-                                ArrayList tmp = new ArrayList<>();
-                                tmp.add(a);
-                                Nodo nt = new Nodo("Id",tmp,aright, aleft);
-
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(c);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>();
-                                tmp2.add(nt);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(parentesis_cerrado);
-
-                                RESULT = new Nodo("llamada_funcion_asignacion_sin_parametros",tmp2,aright,aleft);
+                              
 
                               :}
                             |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d
                               {:
 
-                                ArrayList tmp = new ArrayList<>();
-                                tmp.add(a);
-                                Nodo nt = new Nodo("Id",tmp,aright, aleft);
-
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);                                
-
-                                ArrayList tmp2 = new ArrayList<>();
-                                tmp2.add(nt);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(c);
-                                tmp2.add(parentesis_cerrado);
-
-                                RESULT = new Nodo("llamada_funcion_asignacion_con_parametros",tmp2,aright,aleft);
+                         
 
                               :}
                             ;
@@ -3134,23 +1311,11 @@ llamada_funcion_asignacion ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
 parametros_funcion_asignacion ::= parametros_funcion_asignacion:a COMA:b instruccion:c
                                {:
                                     
-                                    ArrayList tmp5 = new ArrayList<>();
-                                    tmp5.add(b);
-                                    Nodo coma = new Nodo("coma",tmp5,aright,aleft);
-
-                                    ArrayList tmp = new ArrayList<>();
-                                    tmp.add(a);
-                                    tmp.add(coma);
-                                    tmp.add(c);
-                                                                
-                                    RESULT = new Nodo("parametros_funcion_asignacion",tmp,aright,aleft);
+                              
                                :}
                                |  instruccion:a
                                {:
-                                    ArrayList tmp = new ArrayList<>();
-                                    tmp.add(a);
-                                                                
-                                    RESULT = new Nodo("parametros_funcion_asignacion",tmp,aright,aleft);
+                                   
                                :}
                                ;
 
@@ -3159,58 +1324,11 @@ parametros_funcion_asignacion ::= parametros_funcion_asignacion:a COMA:b instruc
 llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_COMA:d
                            {:
     
-                                ArrayList tmp = new ArrayList<>();
-                                tmp.add(a);
-                                Nodo nt = new Nodo("Id",tmp,aright, aleft);
-
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(c);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList puntoC = new ArrayList<>(); 
-                                puntoC.add(d);
-                                Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>();
-                                tmp2.add(nt);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(parentesis_cerrado);
-                                tmp2.add(punto_coma);
-
-                                RESULT = new Nodo("llamada_funcion_sin_parametros",tmp2,aright,aleft);
 
                            :}
                         |  ID:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
                            {:
     
-                                ArrayList tmp = new ArrayList<>();
-                                tmp.add(a);
-                                Nodo nt = new Nodo("Id",tmp,aright, aleft);
-
-                                ArrayList parentesisA = new ArrayList<>();
-                                parentesisA.add(b);
-                                Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                                ArrayList parentesisC = new ArrayList<>();
-                                parentesisC.add(d);
-                                Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                                ArrayList puntoC = new ArrayList<>(); 
-                                puntoC.add(e);
-                                Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                                ArrayList tmp2 = new ArrayList<>();
-                                tmp2.add(nt);
-                                tmp2.add(parentesis_abierto);
-                                tmp2.add(c);
-                                tmp2.add(parentesis_cerrado);
-                                tmp2.add(punto_coma);
-
-                                RESULT = new Nodo("llamada_funcion_con_parametros",tmp2,aright,aleft);
 
                            :}
                         ;
@@ -3218,32 +1336,7 @@ llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_
 funcion_if ::= IF:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
               {:
 
-                    ArrayList parentesisA = new ArrayList<>();
-                    parentesisA.add(b);
-                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                    ArrayList parentesisC = new ArrayList<>();
-                    parentesisC.add(d);
-                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                    ArrayList corcheteA = new ArrayList<>();
-                    corcheteA.add(e);
-                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-                    ArrayList corcheteC = new ArrayList<>();
-                    corcheteC.add(g);
-                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
-
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    tmp.add(parentesis_abierto);
-                    tmp.add(c);
-                    tmp.add(parentesis_cerrado);
-                    tmp.add(corchete_abierto);
-                    tmp.add(f);
-                    tmp.add(corchete_cerrado);
-
-                    RESULT = new Nodo("if",tmp,aright,aleft);                
+                         
 
               :}
             ;
@@ -3251,21 +1344,6 @@ funcion_if ::= IF:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORC
 funcion_else ::= ELSE:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERRADO:d
               {:
 
-                    ArrayList corcheteA = new ArrayList<>();
-                    corcheteA.add(b);
-                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-                    ArrayList corcheteC = new ArrayList<>();
-                    corcheteC.add(d);
-                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
-
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    tmp.add(corchete_abierto);
-                    tmp.add(c);
-                    tmp.add(corchete_cerrado);
-                    
-                    RESULT = new Nodo("else",tmp,aright,aleft);                
 
               :}
               ;  
@@ -3275,77 +1353,34 @@ funcion_else_if ::= ELSE:a IF:b PARENTESIS_ABIERTO:c instruccion:d PARENTESIS_CE
               {:
                     
 
-                    ArrayList parentesisA = new ArrayList<>();
-                    parentesisA.add(c);
-                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                    ArrayList parentesisC = new ArrayList<>();
-                    parentesisC.add(e);
-                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                    ArrayList corcheteA = new ArrayList<>();
-                    corcheteA.add(f);
-                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-                    ArrayList corcheteC = new ArrayList<>();
-                    corcheteC.add(h);
-                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
-
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    tmp.add(b);
-                    tmp.add(parentesis_abierto);
-                    tmp.add(d);
-                    tmp.add(parentesis_cerrado);
-                    tmp.add(corchete_abierto);
-                    tmp.add(g);
-                    tmp.add(corchete_cerrado);
-                    
-                    RESULT = new Nodo("else_if",tmp,aright,aleft);                
+                            
               :}
                 ;
 
 lista_else_if ::= lista_else_if:a funcion_else_if:b
                   {:
-                            ArrayList tmp = new ArrayList<>();
-                            tmp.add(a);
-                            tmp.add(b);
-                            RESULT = new Nodo("lista_else_if",tmp,aright,aleft);
+                     
                   :}
                 | funcion_else_if:a {:
-                            ArrayList tmp = new ArrayList<>();
-                            tmp.add(a);
-                            RESULT = new Nodo("lista_else_if",tmp,aright,aleft);
+                          
                                   :}
                 ;
 
 opciones_if ::=  funcion_if:a
                 {:
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    RESULT = new Nodo("funcion_if",tmp,aright,aleft);
+                
                 :}
                 | funcion_if:a funcion_else:b
                 {:
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    tmp.add(b);
-                    RESULT = new Nodo("funcion_if_else",tmp,aright,aleft);
+                   
                 :}
                 | funcion_if:a lista_else_if:b funcion_else:c
                 {:
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    tmp.add(b);
-                    tmp.add(c);
-                    RESULT = new Nodo("funcion_if_else_if_else",tmp,aright,aleft);
+                 
                 :}                
                 | funcion_if:a lista_else_if:b
                 {:
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    tmp.add(b);
-                    RESULT = new Nodo("funcion_if_else_if",tmp,aright,aleft);
+                  
                 :}                                
                 ;
 
@@ -3353,15 +1388,7 @@ opciones_if ::=  funcion_if:a
 instruccion_break ::= BREAK:a PUNTO_COMA:b
                     {: 
                                 
-                        ArrayList puntoC = new ArrayList<>(); 
-                        puntoC.add(b);
-                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                        ArrayList tmp = new ArrayList<>();
-                        tmp.add(a);
-                        tmp.add(punto_coma);
-
-                        RESULT = new Nodo("break",tmp,aright,aleft);
+                   
 
                     :}
                   ;
@@ -3370,15 +1397,7 @@ instruccion_break ::= BREAK:a PUNTO_COMA:b
 instruccion_continue ::= CONTINUE:a PUNTO_COMA:b
                     {: 
                         
-                        ArrayList puntoC = new ArrayList<>(); 
-                        puntoC.add(b);
-                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                        ArrayList tmp = new ArrayList<>();
-                        tmp.add(a);
-                        tmp.add(punto_coma);
-
-                        RESULT = new Nodo("continue",tmp,aright,aleft);
+                   
 
                     :}
                      ;
@@ -3389,39 +1408,7 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
     {:
 
 
-        ArrayList parentesisA = new ArrayList<>();
-        parentesisA.add(b);
-        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-        ArrayList parentesisC = new ArrayList<>();
-        parentesisC.add(g);
-        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-        ArrayList corcheteA = new ArrayList<>();
-        corcheteA.add(h);
-        Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-        ArrayList corcheteC = new ArrayList<>();
-        corcheteC.add(j);
-        Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
-
-        ArrayList puntoC = new ArrayList<>(); 
-        puntoC.add(e);
-        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-        ArrayList tmp = new ArrayList<>();
-        tmp.add(a);
-        tmp.add(parentesis_abierto);
-        tmp.add(c);
-        tmp.add(d);
-        tmp.add(punto_coma);
-        tmp.add(f);
-        tmp.add(parentesis_cerrado);
-        tmp.add(corchete_abierto);
-        tmp.add(i);
-        tmp.add(corchete_cerrado);
-
-        RESULT = new Nodo("for_declaracion_variable",tmp,aright,aleft);
+ 
 
     :}
 
@@ -3430,39 +1417,7 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
     {:
 
 
-        ArrayList parentesisA = new ArrayList<>();
-        parentesisA.add(b);
-        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
 
-        ArrayList parentesisC = new ArrayList<>();
-        parentesisC.add(g);
-        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-        ArrayList corcheteA = new ArrayList<>();
-        corcheteA.add(h);
-        Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-        ArrayList corcheteC = new ArrayList<>();
-        corcheteC.add(j);
-        Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
-
-        ArrayList puntoC = new ArrayList<>(); 
-        puntoC.add(e);
-        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-        ArrayList tmp = new ArrayList<>();
-        tmp.add(a);
-        tmp.add(parentesis_abierto);
-        tmp.add(c);
-        tmp.add(d);
-        tmp.add(punto_coma);
-        tmp.add(f);
-        tmp.add(parentesis_cerrado);
-        tmp.add(corchete_abierto);
-        tmp.add(i);
-        tmp.add(corchete_cerrado);
-
-        RESULT = new Nodo("for_asignacion_variable",tmp,aright,aleft);
 
     :}
             ;
@@ -3470,31 +1425,18 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
 
 accion_asignacion_for ::= incremento:a
                         {:
-                            RESULT = a;    
+                            
                         :}
 
                        | decremento:a
                         {:
-                            RESULT = a;    
+                            
                         :}                       
                         
                        | ID:a ASIGNACION:b instruccion:c
                         
                         {:
-                            ArrayList tmp = new ArrayList<>();
-                            tmp.add(a);
-                            Nodo nt = new Nodo("Id",tmp,aright, aleft);
 
-                            ArrayList tmp3 = new ArrayList<>();
-                            tmp3.add(b);
-                            Nodo equals = new Nodo("igual",tmp3,aright,aleft);
-
-                            ArrayList tmp2 = new ArrayList<>();
-                            tmp2.add(nt);
-                            tmp2.add(equals);
-                            tmp2.add(c);
-                                                        
-                            RESULT = new Nodo("asignacion_for",tmp2,aright,aleft);
 
                         :}
 
@@ -3504,32 +1446,7 @@ accion_asignacion_for ::= incremento:a
 funcion_while ::= WHILE:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
                 {:
 
-                    ArrayList parentesisA = new ArrayList<>();
-                    parentesisA.add(b);
-                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                    ArrayList parentesisC = new ArrayList<>();
-                    parentesisC.add(d);
-                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                    ArrayList corcheteA = new ArrayList<>();
-                    corcheteA.add(e);
-                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-                    ArrayList corcheteC = new ArrayList<>();
-                    corcheteC.add(g);
-                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
-
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    tmp.add(parentesis_abierto);
-                    tmp.add(c);
-                    tmp.add(parentesis_cerrado);
-                    tmp.add(corchete_abierto);
-                    tmp.add(f);
-                    tmp.add(corchete_cerrado);
-
-                    RESULT = new Nodo("while",tmp,aright,aleft);
+                    
 
                 :}
               ;
@@ -3539,38 +1456,7 @@ funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CE
                 {:
 
                     
-                    ArrayList parentesisA = new ArrayList<>();
-                    parentesisA.add(f);
-                    Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                    ArrayList parentesisC = new ArrayList<>();
-                    parentesisC.add(h);
-                    Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                    ArrayList corcheteA = new ArrayList<>();
-                    corcheteA.add(b);
-                    Nodo corchete_abierto = new Nodo("corchete_abierto",corcheteA,aright,aleft);
-
-                    ArrayList corcheteC = new ArrayList<>();
-                    corcheteC.add(d);
-                    Nodo corchete_cerrado = new Nodo("corchete_cerrado",corcheteC,aright,aleft);
-
-                    ArrayList puntoC = new ArrayList<>(); 
-                    puntoC.add(i);
-                    Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                    ArrayList tmp = new ArrayList<>();
-                    tmp.add(a);
-                    tmp.add(corchete_abierto);
-                    tmp.add(c);
-                    tmp.add(corchete_cerrado);
-                    tmp.add(e);
-                    tmp.add(parentesis_abierto);
-                    tmp.add(g);
-                    tmp.add(parentesis_cerrado);
-                    tmp.add(punto_coma);
-
-                    RESULT = new Nodo("do_while",tmp,aright,aleft);
+      
 
                 :}
                  ;
@@ -3579,26 +1465,6 @@ funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CE
 funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
                     {:
 
-                        ArrayList parentesisA = new ArrayList<>();
-                        parentesisA.add(b);
-                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
-
-                        ArrayList parentesisC = new ArrayList<>();
-                        parentesisC.add(d);
-                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                        ArrayList puntoC = new ArrayList<>(); 
-                        puntoC.add(e);
-                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                        ArrayList tmp = new ArrayList<>();
-                        tmp.add(a);
-                        tmp.add(parentesis_abierto);
-                        tmp.add(c);
-                        tmp.add(parentesis_cerrado);
-                        tmp.add(punto_coma);
-
-                        RESULT = new Nodo("funcion_printAst",tmp,aright,aleft);
 
                     :}
                   ;
@@ -3607,25 +1473,9 @@ funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CE
 funcion_getSymbolTable ::= GETSYMBOLTABLE:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_COMA:d
                     {:
 
-                        ArrayList parentesisA = new ArrayList<>();
-                        parentesisA.add(b);
-                        Nodo parentesis_abierto = new Nodo("parentesis_abierto",parentesisA,aright,aleft);
 
-                        ArrayList parentesisC = new ArrayList<>();
-                        parentesisC.add(c);
-                        Nodo parentesis_cerrado = new Nodo("parentesis_cerrado",parentesisC,aright,aleft);
-
-                        ArrayList puntoC = new ArrayList<>(); 
-                        puntoC.add(d);
-                        Nodo punto_coma = new Nodo("punto_coma", puntoC ,aright,aleft);
-
-                        ArrayList tmp = new ArrayList<>();
-                        tmp.add(a);
-                        tmp.add(parentesis_abierto);
-                        tmp.add(parentesis_cerrado);
-                        tmp.add(punto_coma);
                         
-                        RESULT = new Nodo("funcion_getSymbolTable",tmp,aright,aleft);
+                        
 
                     :}
                      ;

@@ -12,15 +12,13 @@ public abstract class Instruction {
     private int linea;
     private int columna;
     
-    public Instruction(int linea, int columna){
-        this.linea = linea;
-        this.columna = columna;
+    public Instruction(Object linea, Object columna){
+        this.linea = (int) linea;
+        this.columna = (int) columna;
     }
     
     public abstract Object ejecutar(SymbolTable table);
     
-    public abstract void ejecutar_1(SymbolTable table);
-
     public int getLinea() {
         return linea;
     }

@@ -15,6 +15,10 @@ public class SymbolTable extends ArrayList<Variable> {
     
     private ArrayList<Error_analizadores> errores = new ArrayList();
     
+    public SymbolTable(){
+        
+    }
+    
     public SymbolTable(SymbolTable padre){
         super();
         if(padre!=null){

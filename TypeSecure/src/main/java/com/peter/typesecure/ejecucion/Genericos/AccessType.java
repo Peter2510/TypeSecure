@@ -8,11 +8,7 @@ package com.peter.typesecure.ejecucion.Genericos;
  *
  * @author GORDILLOG
  */
-public enum VariableType {
-    NUMBER,
-    BIGINT,
-    STRING,
-    BOOLEAN,
-    VOID,
-    PENDIENTE
+public enum AccessType {
+    CONST,
+    LET
 }

@@ -5,6 +5,8 @@
 package com.peter.typesecure.logica;
 
 import com.peter.typesecure.arbol.Nodo;
+import com.peter.typesecure.ejecucion.Genericos.Instruction;
+import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import java.util.ArrayList;
 
 /**
@@ -12,27 +14,14 @@ import java.util.ArrayList;
  * @author GORDILLOG
  */
 public class Logica {
-    
-    private Nodo raiz;
-    private String dot = "";
-       
-    
-    public Logica(ArrayList raiz){
-        if(raiz.get(0)!=null){
-            this.raiz = (Nodo) raiz.get(0);
-        }else{
-            this.raiz = null;
+
+    public void  hola(ArrayList<Instruction> aa) {
+        for (int i = 0; i < aa.size(); i++) {
+            SymbolTable a = new SymbolTable();
+            aa.get(i).ejecutar(a);
         }
     }
     
-    public void analizar(){
-       
-        
-            System.out.println(raiz.getHijos().get(0).getHijos().get(0).getHijos().get(0).toString());
-            
-        
-        
-    }
     
     
 }

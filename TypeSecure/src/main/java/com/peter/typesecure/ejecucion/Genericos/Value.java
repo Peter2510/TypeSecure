@@ -13,10 +13,10 @@ public class Value extends Instruction {
     private Object value;
     private ValueType type;
     
-    public Value(int linea,int columna,Object value, ValueType type){
+    public Value(Object linea,Object columna,Object value, Object type){
         super(linea,columna);
         this.value = value;
-        this.type = type;
+        this.type = (ValueType)type;
     }
 
     @Override
@@ -25,8 +25,10 @@ public class Value extends Instruction {
     }
 
     @Override
-    public void ejecutar_1(SymbolTable st) {
-        //nada
+    public String toString() {
+        return "Value{" + "value=" + value + ", type=" + type + '}';
     }
+
+
     
 }
