@@ -3938,7 +3938,7 @@ class CUP$Parser$actions {
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                RESULT = new BinaryOperation(aright,aleft,OperationType.NOT,a,b);
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.NOT,null,b);
                                 
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("operaciones_logicas",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
