@@ -215,7 +215,8 @@ non terminal funcion_to_upper_case;
 non terminal variables_string, funcion_concat;
 
 //funcion console log
-non terminal funcion_console_log,lista_instrucciones_console;
+non terminal funcion_console_log;
+non terminal ArrayList<Instruction> lista_instrucciones_console;
 
 //declaracion de funciones
 non terminal declaracion_funcion, parametro_funcion_declaracion,parametros_funcion_declaracion, instrucciones_funcion;
@@ -1287,32 +1288,28 @@ funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENT
 
 funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instrucciones_console:e PARENTESIS_CERRADO:f PUNTO_COMA:g
                     {:
-                        
-                                                        
+                         
+                         instructions.add(new Function_Console_Log(aright,aleft,e));
+
                     :}
             ;
 
 lista_instrucciones_console ::= lista_instrucciones_console:a COMA:b instruccion:c
                             {: 
-                                
-                                
-                              
+                                a.add((Instruction) c);
+                                RESULT = a;                           
                             :}
                              |  instruccion:a 
-                                {: 
-                                  
-                                  
-
-                                :}
+                             {: 
+                                RESULT = new ArrayList<>(); RESULT.add((Instruction) a);
+                            :}
                              ;
-
- 
 
 declaracion_funcion ::= 
 
  FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d DOS_PUNTOS:e RVOID:f CORCHETE_ABIERTO:g instrucciones_funciones_sin_return:h CORCHETE_CERRADO:i
- 
  {:
+
             
 
  :}

@@ -4787,7 +4787,7 @@ class CUP$Parser$actions {
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
 		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		ArrayList<Instruction> e = (ArrayList<Instruction>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int fleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int fright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
@@ -4795,8 +4795,9 @@ class CUP$Parser$actions {
 		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                        
-                                                        
+                         
+                         instructions.add(new Function_Console_Log(aright,aleft,e));
+                         
                     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_console_log",30, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4805,10 +4806,10 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 174: // lista_instrucciones_console ::= lista_instrucciones_console COMA instruccion 
             {
-              Object RESULT =null;
+              ArrayList<Instruction> RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		ArrayList<Instruction> a = (ArrayList<Instruction>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
@@ -4817,7 +4818,8 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
                                 
-                                
+                                a.add((Instruction) c);
+                                RESULT = a;
                               
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("lista_instrucciones_console",31, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4827,15 +4829,15 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 175: // lista_instrucciones_console ::= instruccion 
             {
-              Object RESULT =null;
+              ArrayList<Instruction> RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
                                   
-                                  
+                                RESULT = new ArrayList<>(); RESULT.add((Instruction) a);
 
-                                
+                            
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("lista_instrucciones_console",31, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
