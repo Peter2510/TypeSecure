@@ -569,7 +569,7 @@ operaciones_matematicas ::=
                                         {:
                                              
 
-                                            RESULT = new BinaryOperation(aright,aleft,OperationType.UMINUS,a,b);
+                                            RESULT = new BinaryOperation(aright,aleft,OperationType.UMINUS,null,b);
 
                                         :}%prec UMENOS 
                         | MAS:a operaciones_matematicas:b 
@@ -1086,16 +1086,18 @@ operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
 
 funcion_length ::= TEXTO:a PUNTO:b LENGTH:c
                             {:
-
+                                Value value = new Value(cright,cleft,c,ValueType.TEXTO);
+                                RESULT = new Function_Number(aright,aleft,value);
                                 
                             :}
                 |  ID:a PUNTO:b LENGTH:c
                             {:
-                                
+                                Value value = new Value(aright,aleft,a,ValueType.ID);
+                                RESULT = new Function_Number(aright,aleft,value);
                             :}
                 |  variables_string:a PUNTO:b LENGTH:c
                             {:
-                                
+                                RESULT = new Function_Number(aright,aleft,a);
                             :}
                 ;
 

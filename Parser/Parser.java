@@ -2219,7 +2219,7 @@ class CUP$Parser$actions {
 		
                                              
 
-                                            RESULT = new BinaryOperation(aright,aleft,OperationType.UMINUS,a,b);
+                                            RESULT = new BinaryOperation(aright,aleft,OperationType.UMINUS,null,b);
 
                                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("operaciones_matematicas",12, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -3994,7 +3994,8 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
+                                Value value = new Value(cright,cleft,c,ValueType.TEXTO);
+                                RESULT = new Function_Number(aright,aleft,value);
                                 
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_length",19, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4015,7 +4016,8 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                
+                                Value value = new Value(aright,aleft,a,ValueType.ID);
+                                RESULT = new Function_Number(aright,aleft,value);
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_length",19, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4035,7 +4037,7 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                
+                                RESULT = new Function_Number(aright,aleft,a);
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_length",19, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
