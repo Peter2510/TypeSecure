@@ -8,23 +8,14 @@ package com.peter.typesecure.ejecucion.Genericos;
  *
  * @author GORDILLOG
  */
-public enum OperationType {
-    AND,
-    OR,
-    MAYOR_QUE,
-    MENOR_QUE,
-    MAYOR_IGUAL,
-    MENOR_IGUAL,
-    COMPARACION,
-    DISTINTO,
-    NOT,
-    SUMA,
-    RESTA,
-    MULTIPLICACION,
-    DIVISION,
-    MOD,
-    UMINUS,
-    CONCATENACION,
-    INCREMENTO,
-    DECREMENTO
+public enum MathType {
+    ABS,
+    CEIL,
+    COS,
+    SIN,
+    TAN,
+    EXP,
+    FLOOR,
+    POW,
+    SQRT
 }

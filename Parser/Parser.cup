@@ -4,8 +4,9 @@
 
 package com.peter.typesecure.parser;
 
-import com.peter.typesecure.analisis.ejecucion.auxiliares.Variable_Aux;
+import com.peter.typesecure.analisis.ejecucion.auxiliares.*;
 import com.peter.typesecure.ejecucion.Genericos.*;
+import com.peter.typesecure.ejecucion.instrucciones.*;
 import com.peter.typesecure.lexer.Lexer;
 import java_cup.runtime.Symbol;
 import com.peter.typesecure.error.Error_analizadores;
@@ -518,36 +519,47 @@ instruccion ::=  operaciones_matematicas:a {:
                                            :}
                 | operaciones_logicas:a {:
                                                 
+                                            RESULT = a;
                                         :}
 
                 | funcion_boolean:a {:
-                                                
-                                 :}
+                                          RESULT = a;      
+                                    :}
                 | funcion_string:a  {:
 
-                                                
+                                                RESULT = a;
                                   :}
+
                 | funcion_char_at:a {: 
                                                 
+                                                RESULT = a;
 
                                   :}
                 | funcion_to_lower_case:a {:
                                                 
+                                                RESULT = a;
+
                                         :}
                 | funcion_to_upper_case:a {:
                                                 
+                                                RESULT = a;
+
                                         :}
                 | funcion_concat:a {:
                                                 
+                                                RESULT = a;
+
                                  :}
                 | llamada_funcion_asignacion:a {:
+
+                                                RESULT = a;
                                                 
                                               :}
                 | incremento:a {:
-                                                
+                                                RESULT = a;
                              :}
                 | decremento:a {:
-                                                
+                                                RESULT = a;
                              :}
                 ;
 
@@ -556,12 +568,13 @@ operaciones_matematicas ::=
                           MENOS:a operaciones_matematicas:b       
                                         {:
                                              
-                                        
+
+                                            RESULT = new BinaryOperation(aright,aleft,OperationType.UMINUS,a,b);
 
                                         :}%prec UMENOS 
                         | MAS:a operaciones_matematicas:b 
                                         {:
-                                             
+                                             RESULT = b;
                                             
                                         :}%prec UMENOS 
                         | operaciones_matematicas:a MAS:b operaciones_matematicas:c
@@ -585,7 +598,7 @@ operaciones_matematicas ::=
                         | operaciones_matematicas:a DIVISION:b operaciones_matematicas:c
                                         {:
                                              
-                                        RESULT = new BinaryOperation(aright,aleft,OperationType.DIVISION,a,c);                                             
+                                        RESULT = new BinaryOperation(aright,aleft,OperationType.DIVISION,a,c);
 
                                         :}
                         | operaciones_matematicas:a MOD:b operaciones_matematicas:c
@@ -601,16 +614,16 @@ operaciones_matematicas ::=
                                             
                                             :}
                         | funcion_number:a {:
-                                             
+                                             RESULT = a;
                                            :}
                         | funcion_bigint:a {:
-                                             
+                                             RESULT = a;
                                            :}
                         | funcion_length:a {:
-                                             
+                                             RESULT = a;
                                            :}
                         | funciones_numericas_estaticas:a {:
-                                     
+                                     RESULT = a;
                                                           :}
                         | NUMBER:a {:
                                      
@@ -636,57 +649,55 @@ operaciones_matematicas ::=
 
 funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
-
-                                        
+                                    RESULT = new Function_Math(aright,aleft,MathType.ABS,e);
                                 :}
                                |  MATH:a PUNTO:b CEIL:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
-                                        
+                                    RESULT = new Function_Math(aright,aleft,MathType.CEIL,e);
                                         
                                 :}
                                |  MATH:a PUNTO:b COS:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
-                                        
+                                    RESULT = new Function_Math(aright,aleft,MathType.COS,e);
                                         
                                :}
                                |  MATH:a PUNTO:b SIN:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
-                                        
+                                    RESULT = new Function_Math(aright,aleft,MathType.SIN,e);
                                         
                                :}
                                |  MATH:a PUNTO:b TAN:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                {:
 
-                                        
+                                    RESULT = new Function_Math(aright,aleft,MathType.TAN,e);
 
                                :}
                                |  MATH:a PUNTO:b EXP:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
 
-                                        
+                                    RESULT = new Function_Math(aright,aleft,MathType.EXP,e);
 
                                 :}
                                |  MATH:a PUNTO:b FLOOR:c  PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
 
-                                        
+                                    RESULT = new Function_Math(aright,aleft,MathType.FLOOR,e);
 
                                 :}
                                |  MATH:a PUNTO:b POW:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e COMA:f operaciones_matematicas:g PARENTESIS_CERRADO:h
                                 {:
 
-                                        
+                                    RESULT = new Function_Math(aright,aleft,MathType.POW,e,f);
 
                                 :}
                                |  MATH:a PUNTO:b SQRT:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
                                 {:
                             
-                                
+                                    RESULT = new Function_Math(aright,aleft,MathType.SQRT,e);
 
                                 :}
-                               |  MATH:a PUNTO:b RANDOM:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                               |  MATH:a PUNTO:b RANDOM:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:f
                                 {:
-
                                     
                                     RESULT = new Value(aright,aleft,Math.random(),ValueType.NUMBER);    
 
@@ -736,112 +747,162 @@ funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
 
 operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_matematicas:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.MAYOR_QUE,a,c);
                                 
                             :}
                            | operaciones_matematicas:a MAYOR_IGUAL:b operaciones_matematicas:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.MAYOR_IGUAL,a,c);
                             :}
                            | operaciones_matematicas:a MENOR_QUE:b operaciones_matematicas:c
                             {:
-                                                
-                                
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.MENOR_QUE,a,c);
                             :}
                            | operaciones_matematicas:a MENOR_IGUAL:b operaciones_matematicas:c
                             {:
 
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.MENOR_QUE,a,c);
                                 
                             :}
                            | operaciones_matematicas:a COMPARACION:b operaciones_matematicas:c
                             {:
-
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.COMPARACION,a,c);
                                 
                             :}
                            | operaciones_matematicas:a DISTINTO:b operaciones_matematicas:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.DISTINTO,a,c);
                                 
                             :}
 
                            | TRUE:a COMPARACION:b TRUE:c
                             {:
 
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                new Value(aright,aleft,a,ValueType.TRUE),
+                                new Value(aright,aleft,c,ValueType.TRUE));
                                 
                             :}
                            | TRUE:a COMPARACION:b FALSE:c
                             {:
-
                                 
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                new Value(aright,aleft,a,ValueType.TRUE),
+                                new Value(aright,aleft,c,ValueType.FALSE));
+                                                                
                             :}
                            | FALSE:a COMPARACION:b TRUE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                new Value(aright,aleft,a,ValueType.FALSE),
+                                new Value(aright,aleft,c,ValueType.TRUE));
                                 
                             :}
                            | FALSE:a COMPARACION:b FALSE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                new Value(aright,aleft,a,ValueType.FALSE),
+                                new Value(aright,aleft,c,ValueType.FALSE));
                             :}
                            | operaciones_matematicas:a COMPARACION:b TRUE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                a,
+                                new Value(aright,aleft,c,ValueType.TRUE));
                                 
                             :}
                            | TRUE:a COMPARACION:b operaciones_matematicas:c
                             {:
-
+                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                new Value(aright,aleft,c,ValueType.TRUE),
+                                c);
                                 
                             :}
                            | operaciones_matematicas:a COMPARACION:b FALSE:c
                             {:
-
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                a,
+                                new Value(aright,aleft,c,ValueType.FALSE));
                                 
                             :}
                            | FALSE:a COMPARACION:b operaciones_matematicas:c
                             {:
-
+                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                new Value(aright,aleft,c,ValueType.FALSE),
+                                c);
                                 
                             :}
 
                            | TRUE:a DISTINTO:b TRUE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                new Value(aright,aleft,a,ValueType.TRUE),
+                                new Value(aright,aleft,c,ValueType.TRUE));
                                 
                             :}
                            | TRUE:a DISTINTO:b FALSE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                new Value(aright,aleft,a,ValueType.TRUE),
+                                new Value(aright,aleft,c,ValueType.FALSE));
                                 
                             :}
                            | FALSE:a DISTINTO:b TRUE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                new Value(aright,aleft,a,ValueType.FALSE),
+                                new Value(aright,aleft,c,ValueType.TRUE));
                                 
                             :}
                            | FALSE:a DISTINTO:b FALSE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                new Value(aright,aleft,a,ValueType.FALSE),
+                                new Value(aright,aleft,c,ValueType.FALSE));
                                 
                             :}
                            | operaciones_matematicas:a DISTINTO:b TRUE:c
                             {:
-                                
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                a,
+                                new Value(aright,aleft,c,ValueType.TRUE));
+
                             :}
                            | TRUE:a DISTINTO:b operaciones_matematicas:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                new Value(aright,aleft,c,ValueType.TRUE),
+                                c);                                  
                             :}
                            | operaciones_matematicas:a DISTINTO:b FALSE:c
                             {:
-                                
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                a,
+                                new Value(aright,aleft,c,ValueType.FALSE));  
                             :}
                            | FALSE:a DISTINTO:b operaciones_matematicas:c
                             {:
-                                
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                new Value(aright,aleft,c,ValueType.FALSE),
+                                c);                                  
                             :}
                        
                            | TRUE:a 
@@ -852,129 +913,174 @@ operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_m
                            {:
                                     RESULT = new Value(aright,aleft,a,ValueType.FALSE);
                            :}
-
-
-                           
+                          
                            | funcion_boolean:a COMPARACION:b TRUE:c
                             {:
                                 
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                a,
+                                new Value(aright,aleft,c,ValueType.TRUE));    
 
                             :}
 
                            | funcion_boolean:a COMPARACION:b FALSE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                a,
+                                new Value(aright,aleft,c,ValueType.FALSE));    
                                
                             :}
                            | TRUE:a COMPARACION:b funcion_boolean:c
                             {:
 
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                new Value(aright,aleft,c,ValueType.TRUE),
+                                c);
+
                             :}
                            | FALSE:a COMPARACION:b funcion_boolean:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                new Value(aright,aleft,c,ValueType.FALSE),
+                                c);
                                 
                             :}
 
-
                            | funcion_boolean:a DISTINTO:b TRUE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                a,
+                                new Value(aright,aleft,c,ValueType.TRUE));
                                 
                             :}
                            | funcion_boolean:a DISTINTO:b FALSE:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                a,
+                                new Value(aright,aleft,c,ValueType.FALSE));
                                 
                             :}
                            | TRUE:a DISTINTO:b funcion_boolean:c
                             {:
-                                
-                                
+
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                new Value(aright,aleft,c,ValueType.TRUE),
+                                c);
+
                             :}
                            | FALSE:a DISTINTO:b funcion_boolean:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                new Value(aright,aleft,c,ValueType.FALSE),
+                                c);
                                
                             :}
 
-
                            | funcion_boolean:a COMPARACION:b funcion_boolean:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                a,
+                                c);
                                  
                             :}
                            | funcion_boolean:a DISTINTO:b funcion_boolean:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                a,
+                                c);
                                 
                             :}
 
                            | funcion_string:a COMPARACION:b funcion_string:c
                             {:
-                              
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                a,
+                                c);
 
                             :}
                            | funcion_string:a DISTINTO:b funcion_string:c
                             {:
-                                
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                a,
+                                c);
                             :}
 
                            | funcion_string:a COMPARACION:b operaciones_matematicas:c
                             {:
-                                
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                a,
+                                c);
                             :}
 
                            | funcion_string:a DISTINTO:b operaciones_matematicas:c
                             {:
-                                
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                a,
+                                c);
                             :}
 
                            | operaciones_matematicas:a COMPARACION:b funcion_string:c
                             {:
 
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.COMPARACION,
+                                a,
+                                c);
                                 
                             :}
 
                            | operaciones_matematicas:a DISTINTO:b funcion_string:c
                             {:
-                                
-                                
+                                RESULT = new BinaryOperation(aright,aleft,
+                                OperationType.DISTINTO,
+                                a,
+                                c);
                             :}
 
                            | PARENTESIS_ABIERTO:a operaciones_relacionales:b PARENTESIS_CERRADO:c
                             {:
-                                
+                                RESULT = b;
                             :}
                           ;  
 
 operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                             {:
                                 
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.AND,a,c);
                                 
                             :}
                     | operaciones_logicas:a OR:b operaciones_logicas:c
                             {:
-                                
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.OR,a,c);
                                 
                             :}
                     | NOT:a operaciones_logicas:b
                             {:
-
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.NOT,a,b);
                                 
                             :}
                     | PARENTESIS_ABIERTO:a operaciones_logicas:b PARENTESIS_CERRADO:c
                             {:
-                                
+                                RESULT = b;
                                 
                             :}
                     | operaciones_relacionales:a
                             {:
-                                
+                             RESULT = a;   
                             :}
                     ;
 
