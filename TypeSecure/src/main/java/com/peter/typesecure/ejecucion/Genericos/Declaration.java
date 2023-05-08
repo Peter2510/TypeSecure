@@ -10,10 +10,10 @@ package com.peter.typesecure.ejecucion.Genericos;
  */
 public class Declaration extends Instruction {
 
-    AccessType access;
-    VariableType type;
-    String id;
-    Instruction operation;
+    private AccessType access;
+    private VariableType type;
+    private String id;
+    private Instruction operation;
     
     
     public Declaration(Object linea, Object columna,Object access,Object type,String id, Object operation) {
@@ -33,6 +33,38 @@ public class Declaration extends Instruction {
         return null;
     }
 
+    public AccessType getAccess() {
+        return access;
+    }
+
+    public void setAccess(AccessType access) {
+        this.access = access;
+    }
+
+    public VariableType getType() {
+        return type;
+    }
+
+    public void setType(VariableType type) {
+        this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Instruction getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Instruction operation) {
+        this.operation = operation;
+    }
+   
     @Override
     public String toString() {
         return "Declaration{" + "access=" + access + ", type=" + type + ", id=" + id + ", operation=" + operation + '}';

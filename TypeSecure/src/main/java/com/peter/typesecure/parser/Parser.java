@@ -4058,9 +4058,8 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                
-
-                                
+                               RESULT = new Function_Number(aright,aleft,c);
+                               
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_number",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4084,6 +4083,7 @@ class CUP$Parser$actions {
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                RESULT = new Function_Number(aright,aleft,c);
                                 
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_number",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4107,7 +4107,8 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
+                                Value value = new Value(cright,cleft,c,ValueType.TEXTO);
+                                RESULT = new Function_Number(aright,aleft,value);
                                 
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_number",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4131,7 +4132,7 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
+                                RESULT = new Function_Number(aright,aleft,c);
                                 
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_number",20, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4155,8 +4156,7 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
-
+                                RESULT = new Function_BigInt(aright,aleft,c);
                                 
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_bigint",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -4180,8 +4180,7 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
-                                
+                                RESULT = new Function_BigInt(aright,aleft,c);
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_bigint",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4204,8 +4203,8 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
-                                
+                                Value value = new Value(cright,cleft,c,ValueType.TEXTO);
+                                RESULT = new Function_BigInt(aright,aleft,value);                               
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_bigint",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4228,8 +4227,7 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                              
-                              
+                              RESULT = new Function_BigInt(aright,aleft,c);
                             
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_bigint",21, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

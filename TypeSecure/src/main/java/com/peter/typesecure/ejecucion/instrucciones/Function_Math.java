@@ -36,9 +36,33 @@ public class Function_Math extends Instruction {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public MathType getType() {
+        return type;
+    }
+
+    public void setType(MathType type) {
+        this.type = type;
+    }
+
+    public Instruction getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Instruction operation) {
+        this.operation = operation;
+    }
+
+    public Instruction getOperation1() {
+        return operation1;
+    }
+
+    public void setOperation1(Instruction operation1) {
+        this.operation1 = operation1;
+    }
+    
     @Override
     public String toString() {
         return "Math{" + "type=" + type + ", operation=" + operation + ", operation1=" + operation1 + '}';
-    }
+    }    
             
 }

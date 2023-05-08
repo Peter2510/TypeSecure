@@ -1102,47 +1102,45 @@ funcion_length ::= TEXTO:a PUNTO:b LENGTH:c
 
 funcion_number ::= FNUMBER:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
                             {:
-                                
-
-                                
+                               RESULT = new Function_Number(aright,aleft,c);
+                               
                             :}
                 |  FNUMBER:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
 
+                                RESULT = new Function_Number(aright,aleft,c);
                                 
                             :}
                 |  FNUMBER:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
                             {:
-
+                                Value value = new Value(cright,cleft,c,ValueType.TEXTO);
+                                RESULT = new Function_Number(aright,aleft,value);
                                 
                             :}
                 |  FNUMBER:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
-
+                                RESULT = new Function_Number(aright,aleft,c);
                                 
                             :}
                 ;
 
 funcion_bigint  ::= FBIGINT:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
                             {:
-
-
+                                RESULT = new Function_BigInt(aright,aleft,c);
                                 
                             :}
                 |   FBIGINT:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
-
-                                
+                                RESULT = new Function_BigInt(aright,aleft,c);
                             :}
                 |   FBIGINT:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
                             {:
-
-                                
+                                Value value = new Value(cright,cleft,c,ValueType.TEXTO);
+                                RESULT = new Function_BigInt(aright,aleft,value);                               
                             :}
                 |   FBIGINT:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
-                              
-                              
+                              RESULT = new Function_BigInt(aright,aleft,c);
                             :}
                 ;
 

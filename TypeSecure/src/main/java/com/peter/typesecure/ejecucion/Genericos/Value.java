@@ -24,6 +24,24 @@ public class Value extends Instruction {
         return null;
     }
 
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
+    public ValueType getType() {
+        return type;
+    }
+
+    public void setType(ValueType type) {
+        this.type = type;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Value{" + "value=" + value + ", type=" + type + '}';

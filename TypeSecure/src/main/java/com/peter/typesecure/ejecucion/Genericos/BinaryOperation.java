@@ -10,9 +10,9 @@ package com.peter.typesecure.ejecucion.Genericos;
  */
 public class BinaryOperation extends Instruction{
 
-   OperationType type;
-   Instruction leftOperator;
-   Instruction rightOperator;
+   private OperationType type;
+   private Instruction leftOperator;
+   private Instruction rightOperator;
     
     public BinaryOperation(Object linea, Object columna,Object type, Object leftOperator, Object rigthOperator) {
         super(linea, columna);
@@ -27,11 +27,33 @@ public class BinaryOperation extends Instruction{
         return null;
     }
 
+    public OperationType getType() {
+        return type;
+    }
+
+    public void setType(OperationType type) {
+        this.type = type;
+    }
+
+    public Instruction getLeftOperator() {
+        return leftOperator;
+    }
+
+    public void setLeftOperator(Instruction leftOperator) {
+        this.leftOperator = leftOperator;
+    }
+
+    public Instruction getRightOperator() {
+        return rightOperator;
+    }
+
+    public void setRightOperator(Instruction rightOperator) {
+        this.rightOperator = rightOperator;
+    }
+    
     @Override
     public String toString() {
         return "BinaryOperation{" + "type=" + type + ", leftOperator=" + leftOperator + ", rightOperator=" + rightOperator + '}';
-    }
-    
-    
+    }    
     
 }
