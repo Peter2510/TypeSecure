@@ -203,7 +203,7 @@ non terminal funcion_boolean;
 non terminal funcion_string;
 
 //funcion charAt
-non terminal funcion_char_at;
+non terminal funcion_char_at,index_char_at;
 
 //funcion toLowerCase
 non terminal funcion_to_lower_case;
@@ -295,6 +295,7 @@ instrucciones ::= instrucciones:a opciones_instrucciones:b {:
 
 opciones_instrucciones ::= declaracion_variable:a
                                             {: 
+                                            
                                             
 
                                            :}
@@ -610,7 +611,7 @@ operaciones_matematicas ::=
                         | PARENTESIS_ABIERTO:a operaciones_matematicas:b PARENTESIS_CERRADO:c 
                                             {:
                                              
-                                    RESULT = b;
+                                            RESULT = b;
                                             
                                             :}
                         | funcion_number:a {:
@@ -1113,12 +1114,7 @@ funcion_number ::= FNUMBER:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARE
                                 RESULT = new Function_Number(aright,aleft,c);
                                 
                             :}
-                |  FNUMBER:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
-                            {:
-                                Value value = new Value(cright,cleft,c,ValueType.TEXTO);
-                                RESULT = new Function_Number(aright,aleft,value);
-                                
-                            :}
+
                 |  FNUMBER:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
                                 RESULT = new Function_Number(aright,aleft,c);
@@ -1135,11 +1131,7 @@ funcion_bigint  ::= FBIGINT:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PAR
                             {:
                                 RESULT = new Function_BigInt(aright,aleft,c);
                             :}
-                |   FBIGINT:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
-                            {:
-                                Value value = new Value(cright,cleft,c,ValueType.TEXTO);
-                                RESULT = new Function_BigInt(aright,aleft,value);                               
-                            :}
+
                 |   FBIGINT:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
                               RESULT = new Function_BigInt(aright,aleft,c);
@@ -1150,22 +1142,20 @@ funcion_bigint  ::= FBIGINT:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PAR
 funcion_boolean  ::= FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
                             {:
 
-                                                               
+                                RESULT = new Function_Boolean(aright,aleft,c);
+
                             :}
                  |   FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
-
+                                
+                                RESULT = new Function_Boolean(aright,aleft,c);
                                                               
                             :}
-                 |   FBOOLEAN:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
-                            {:
-
-                               
-                            :}
+                 
                  |   FBOOLEAN:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
                                 
-
+                                RESULT = new Function_Boolean(aright,aleft,c);
                                
                             :}
                  ;
@@ -1174,79 +1164,90 @@ funcion_boolean  ::= FBOOLEAN:a PARENTESIS_ABIERTO:b operaciones_matematicas:c P
 funcion_string  ::= FSTRING:a PARENTESIS_ABIERTO:b operaciones_matematicas:c PARENTESIS_CERRADO:d
                             {:
                                 
+                                RESULT = new Function_String(aright,aleft,c);
                                
                             :}
                  |  FSTRING:a PARENTESIS_ABIERTO:b operaciones_logicas:c PARENTESIS_CERRADO:d
                             {:
                                                  
-                            :}
-                 |  FSTRING:a PARENTESIS_ABIERTO:b TEXTO:c PARENTESIS_CERRADO:d
-                            {:
-                                
+                                RESULT = new Function_String(aright,aleft,c);
+
                             :}
                  |  FSTRING:a PARENTESIS_ABIERTO:b variables_string:c PARENTESIS_CERRADO:d
                             {:
                                 
+                                RESULT = new Function_String(aright,aleft,c);
                                 
                             :}
                  ;
 
-funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d index_char_at:e PARENTESIS_CERRADO:f
                             {:
-                                
+                                Value value = new Value(aright,aleft,a,ValueType.ID);
+                                RESULT = new Function_Char_At(aright,aleft,value,e);
                             :}
-                |   TEXTO:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                |   TEXTO:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d index_char_at:e PARENTESIS_CERRADO:f
                             {:
-                                
+                                Value value = new Value(aright,aleft,a,ValueType.TEXTO);
+                                RESULT = new Function_Char_At(aright,aleft,value,e);
                             :}
-                |   variables_string:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
+                |   variables_string:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d index_char_at:e PARENTESIS_CERRADO:f
                             {:
-                                
-                                
+                                RESULT = new Function_Char_At(aright,aleft,a,e);
                             :}
                 ;
+
+index_char_at ::= operaciones_matematicas:a
+                {:
+                    RESULT = a;
+                :}
+                | llamada_funcion_asignacion:a
+                {:
+                    RESULT = a;
+                :}
+               ;
 
 
 funcion_concat ::= variables_string:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
                     {:
-
-                        
+                        RESULT = new Function_Concat(aright,aleft,a,e);
                     :}
                 |  TEXTO:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
                     {:
-
-                        
+                        Value value = new Value(aright,aleft,a,ValueType.TEXTO);
+                        RESULT = new Function_Concat(aright,aleft,value,e);
 
                     :}
                 |  ID:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d instruccion:e PARENTESIS_CERRADO:f
                     {:
-                        
+                        Value value = new Value(aright,aleft,a,ValueType.ID);
+                        RESULT = new Function_Concat(aright,aleft,value,e);
                     :}
                 ;
 
 variables_string ::= funcion_string:a
                   {:
-                     
+                     RESULT = a;
                   :}
                  |  funcion_char_at:a   
                   {:
-                     
+                     RESULT = a;
                   :}
                  |  funcion_to_lower_case:a
                   {:
-                    
+                    RESULT = a;
                   :}
                  |  funcion_to_upper_case:a
                   {:
-                    
+                    RESULT = a;
                   :}
                  |  funcion_concat:a
                   {:
-                    
+                    RESULT = a;
                   :}
                  |  llamada_funcion_asignacion:a
                   {:
-                    
+                    RESULT = a;
                   :}
                  ;
 
