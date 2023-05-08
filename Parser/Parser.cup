@@ -1254,30 +1254,33 @@ variables_string ::= funcion_string:a
 
 funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                                                          
+                            Value value = new Value(aright,aleft,a,ValueType.ID);
+                            RESULT = new Function_Lower(aright,aleft,value);
                         :}
                        |  TEXTO:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                                                           
+                            Value value = new Value(aright,aleft,a,ValueType.TEXTO);
+                            RESULT = new Function_Lower(aright,aleft,value);
                         :}
                        |  variables_string:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-
-                                                         
+                            RESULT = new Function_Lower(aright,aleft,a);
                         :}
                        ;
 
 funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                                                          
+                            Value value = new Value(aright,aleft,a,ValueType.ID);
+                            RESULT = new Function_Upper(aright,aleft,value);
                         :}
                        |  TEXTO:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                                                          
+                            Value value = new Value(aright,aleft,a,ValueType.TEXTO);
+                            RESULT = new Function_Upper(aright,aleft,value);                              
                         :}
                        |  variables_string:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
-                            
+                            RESULT = new Function_Upper(aright,aleft,a);
                                                             
                         :}
                        ;

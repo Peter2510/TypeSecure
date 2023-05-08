@@ -4628,7 +4628,8 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                                          
+                            Value value = new Value(aright,aleft,a,ValueType.ID);
+                            RESULT = new Function_Lower(aright,aleft,value);
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_lower_case",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4654,7 +4655,8 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                                           
+                            Value value = new Value(aright,aleft,a,ValueType.TEXTO);
+                            RESULT = new Function_Lower(aright,aleft,value);
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_lower_case",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4680,8 +4682,7 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
-                                                         
+                            RESULT = new Function_Lower(aright,aleft,a);
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_lower_case",26, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4707,7 +4708,8 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                                          
+                            Value value = new Value(aright,aleft,a,ValueType.ID);
+                            RESULT = new Function_Upper(aright,aleft,value);
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_upper_case",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4733,7 +4735,8 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                                                          
+                            Value value = new Value(aright,aleft,a,ValueType.TEXTO);
+                            RESULT = new Function_Upper(aright,aleft,value);                              
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_upper_case",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4759,7 +4762,7 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                            
+                            RESULT = new Function_Upper(aright,aleft,a);
                                                             
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_to_upper_case",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
