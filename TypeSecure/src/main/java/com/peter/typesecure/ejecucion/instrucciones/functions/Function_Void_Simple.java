@@ -4,21 +4,60 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones.functions;
 
+import com.peter.typesecure.ejecucion.Genericos.Instruction;
+import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import java.util.ArrayList;
+
 /**
  *
  * @author GORDILLOG
  */
-public class Function_Void_Simple {
-    //verificar que los nombres de las varialbles no se repitan
-    //verificar que el metodo no haya sido ya definido en el documento
-    //verificar que la funcion pueda tener el mismo nombre pero distintos parametros
-    public void j(){
-        
-    }
-    
-    public void j(String a,int aa){
-        
-    }
-    
+public class Function_Void_Simple extends Instruction{
 
+    private VariableType type;
+    private String name;
+    private ArrayList<Instruction> instruccions;
+        
+    public Function_Void_Simple(Object linea, Object columna,Object name,VariableType type, ArrayList<Instruction> instructions ) {
+        super(linea, columna);
+        this.name = (String)name;
+        this.type = type;
+        this.instruccions = instructions;
+       
+    }
+
+    @Override
+    public Object ejecutar(SymbolTable table) {
+        //verificar que los nombres de las varialbles no se repitan
+        //verificar que el metodo no haya sido ya definido en el documento
+        //verificar que la funcion pueda tener el mismo nombre pero distintos parametros
+        System.out.println("Function_void_simple");
+        System.out.println(name);
+        System.out.println(type);
+        System.out.println(instruccions);
+        return null;
+    }
+
+    public VariableType getType() {
+        return type;
+    }
+
+    public void setType(VariableType type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Function_Void_Simple{" + "type=" + type + ", name=" + name + ", instruccions=" + instruccions + '}';
+    }
+    
 }

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Function_Console_Log extends Instruction{
 
-    ArrayList<Instruction> instruccions;
+    private ArrayList<Instruction> instruccions;
     int contadorError = 0;
     
     

@@ -4,9 +4,11 @@
 
 package com.peter.typesecure.parser;
 
+
 import com.peter.typesecure.analisis.ejecucion.auxiliares.*;
 import com.peter.typesecure.ejecucion.Genericos.*;
 import com.peter.typesecure.ejecucion.instrucciones.*;
+import com.peter.typesecure.ejecucion.instrucciones.functions.Function_Void_Simple;
 import com.peter.typesecure.lexer.Lexer;
 import java_cup.runtime.Symbol;
 import com.peter.typesecure.error.Error_analizadores;
@@ -157,18 +159,19 @@ non terminal inicio;
 non terminal ts;
 
 //opciones a ejecutar
-non terminal instrucciones, opciones_instrucciones;
+non terminal ArrayList instrucciones, opciones_instrucciones;
 
 //instruccion
 non terminal instruccion;
 
 //declaracion de variable
-non terminal declaracion_variable, tipo_acceso_variable, id_valor_variable;
+non terminal ArrayList declaracion_variable;
+non terminal tipo_acceso_variable, id_valor_variable;
 non terminal ArrayList id_valor_variable_lista;
 non terminal tipo_dato_variable, variable_valor;
 
 //asignacion
-non terminal asignacion;
+non terminal ArrayList asignacion;
 
 //operaciones matematicas
 non terminal operaciones_matematicas,funciones_numericas_estaticas;
@@ -177,7 +180,7 @@ non terminal operaciones_matematicas,funciones_numericas_estaticas;
 non terminal incremento, decremento;
 
 //funcion incremento decremento
-non terminal funcion_incremento_decremento;
+non terminal ArrayList funcion_incremento_decremento;
 
 //operaciones relacionales
 non terminal operaciones_relacionales;
@@ -215,43 +218,47 @@ non terminal funcion_to_upper_case;
 non terminal variables_string, funcion_concat;
 
 //funcion console log
-non terminal funcion_console_log;
+non terminal ArrayList funcion_console_log;
 non terminal ArrayList<Instruction> lista_instrucciones_console;
 
 //declaracion de funciones
-non terminal declaracion_funcion, parametro_funcion_declaracion,parametros_funcion_declaracion, instrucciones_funcion;
-non terminal instrucciones_funciones_sin_return,opciones_instrucciones_sin_return;
+non terminal ArrayList declaracion_funcion;
+non terminal parametro_funcion_declaracion,parametros_funcion_declaracion, instrucciones_funcion;
+non terminal ArrayList instrucciones_funciones_sin_return;
+non terminal ArrayList opciones_instrucciones_sin_return;
 
 //funcion return
-non terminal funcion_return;
+non terminal ArrayList funcion_return;
 
 //funcion if
-non terminal funcion_if, funcion_else, funcion_else_if, lista_else_if, opciones_if;
-
+non terminal funcion_if, funcion_else, funcion_else_if, lista_else_if;
+non terminal ArrayList opciones_if;
 
 //llamada de funciones
-non terminal llamada_funcion_asignacion, parametros_funcion_asignacion, llamada_funcion_normal;
+non terminal llamada_funcion_asignacion, parametros_funcion_asignacion;
+non terminal ArrayList llamada_funcion_normal;
 
 //instruccion break
-non terminal instruccion_break;
+non terminal ArrayList instruccion_break;
 
 //instruccion continue
-non terminal instruccion_continue;
+non terminal ArrayList instruccion_continue;
 
 //instruccion for Loop
-non terminal funcion_for, accion_asignacion_for;
+non terminal ArrayList funcion_for;
+non terminal accion_asignacion_for;
 
 //instruccion do while
-non terminal funcion_do_while;
+non terminal ArrayList funcion_do_while;
 
 //instruccion while
-non terminal funcion_while;
+non terminal ArrayList funcion_while;
 
 //funcion printAst
-non terminal funcion_printAst;
+non terminal ArrayList funcion_printAst;
 
 //funcion getSymbolTable
-non terminal funcion_getSymbolTable;
+non terminal ArrayList funcion_getSymbolTable;
 
 // PRECEDENCIA
 
@@ -280,139 +287,157 @@ inicio ::= ts:a {: System.out.println("Doc ok");
              :}
        ;
 
-ts ::= instrucciones:a {:   :}
+ts ::= instrucciones:a {: 
+                                        for(int i =0; i<a.size();i++){
+                                            instructions.add((Instruction) a.get(i));
+                                       }
+
+  :}
    ;
 
 instrucciones ::= instrucciones:a opciones_instrucciones:b {:
 
-                                            
+                                        for(int i =0; i<b.size();i++){
+                                            a.add(b.get(i));
+                                       }
+
+                                       RESULT = a;                             
                                             
                                                             
                                          :}
                 | opciones_instrucciones:a {:  
-                                            
-                                         :}
+
+                                       //cae arrayList   
+                                       ArrayList tmp_instrucciones = new ArrayList()  ;
+                                       for(int i =0; i<a.size();i++){
+                                            tmp_instrucciones.add(a.get(i));
+                                       }
+
+                                       RESULT = tmp_instrucciones;
+                                         
+                                          :}
                ;
 
 opciones_instrucciones ::= declaracion_variable:a
                                             {: 
                                             
-                                            
+                                            RESULT = a;
 
                                            :}
                         |  asignacion:a   {: 
                                             
+                                            RESULT = a;
 
                                            :}
                         |  funcion_console_log:a
                                             {: 
-                                           
+                                           RESULT = a;
                                            :}
                         |  declaracion_funcion:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  llamada_funcion_normal:a
                                             {: 
-                                           
+                                           RESULT = a;
                                            :}
                         |  opciones_if:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_return:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  instruccion_break:a
                                             {: 
-                                           
+                                           RESULT = a;
                                            :}
                         |  instruccion_continue:a
                                             {: 
-                                           
+                                           RESULT = a;
                                            :}
                         |  funcion_incremento_decremento:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_for:a
                                             {: 
-                                          
+                                          RESULT = a;
                                            :}
                         |  funcion_while:a
                                             {: 
-                                           
+                                           RESULT = a;
                                            :}
                         |  funcion_do_while:a
                                             {: 
-                                             
+                                             RESULT = a;
                                            :}
                         |  funcion_printAst:a
                                             {: 
-                                           
+                                           RESULT = a;
                                            :}
                         |  funcion_getSymbolTable:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         ;
 
 opciones_instrucciones_sin_return ::= 
                         declaracion_variable:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  asignacion:a   {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_console_log:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  declaracion_funcion:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  llamada_funcion_normal:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  opciones_if:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  instruccion_break:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  instruccion_continue:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_incremento_decremento:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_for:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_while:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_do_while:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_printAst:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         |  funcion_getSymbolTable:a
                                             {: 
-                                            
+                                            RESULT = a;
                                            :}
                         ;
 
@@ -426,13 +451,15 @@ asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa 
 declaracion_variable ::= tipo_acceso_variable:a id_valor_variable_lista:b PUNTO_COMA:c
         {: 
 
-        
+                ArrayList tmp_declaracion = new ArrayList();
 
                 for(int i = 0;i<b.size();i++){
 
                     Variable_Aux variable = (Variable_Aux) b.get(i);    
-                    instructions.add(new Declaration(aright,aleft,a,variable.getType(),variable.getId(),variable.getValue()));
+                    tmp_declaracion.add(new Declaration(aright,aleft,a,variable.getType(),variable.getId(),variable.getValue()));
                 }
+
+                RESULT = tmp_declaracion;
            
         :}
 
@@ -1289,7 +1316,10 @@ funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENT
 funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instrucciones_console:e PARENTESIS_CERRADO:f PUNTO_COMA:g
                     {:
                          
-                         instructions.add(new Function_Console_Log(aright,aleft,e));
+                        
+                        ArrayList tmp_console = new ArrayList();
+                        tmp_console.add(new Function_Console_Log(aright,aleft,e));
+                        RESULT = tmp_console;
 
                     :}
             ;
@@ -1309,8 +1339,13 @@ declaracion_funcion ::=
 
  FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d DOS_PUNTOS:e RVOID:f CORCHETE_ABIERTO:g instrucciones_funciones_sin_return:h CORCHETE_CERRADO:i
  {:
-
-            
+    //function id ():void{instructions}
+    
+    //RESULT = new Function_Void_Simple(aright,aleft,b,VariableType.VOID,h);
+                        ArrayList tmp_function = new ArrayList();
+                        tmp_function.add(new Function_Void_Simple(aright,aleft,b,VariableType.VOID,h));
+                        RESULT = tmp_function;
+    
 
  :}
 
@@ -1339,17 +1374,35 @@ declaracion_funcion ::=
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e DOS_PUNTOS:f tipo_dato_variable:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
 {:
             
- :}        
+:}        
                     ;
 
 
 instrucciones_funciones_sin_return ::= instrucciones_funciones_sin_return:a opciones_instrucciones_sin_return:b
                                     {:
+                                       
+                                       
+                                        for(int i =0;i<b.size();i++){
+
+                                            a.add(b.get(i));
+
+                                        }
+
+                                        RESULT = a;
 
                                     :}
                                     | opciones_instrucciones_sin_return:a
                                     {:
-                                        
+
+                                    ArrayList tmp = new ArrayList();
+
+                                        for(int i =0;i<a.size();i++){
+
+                                            tmp.add(a.get(i));
+
+                                        }
+                                        RESULT = tmp;
+
                                     :}
                                     ;
 
