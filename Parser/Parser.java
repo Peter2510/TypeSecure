@@ -1801,8 +1801,9 @@ class CUP$Parser$actions {
 		Object puntoComa = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
                                                                                     
-
-                                
+            ArrayList tmp_asignacion = new ArrayList();
+            tmp_asignacion.add(new Assignment(idright,idleft,id,value));
+            RESULT = tmp_asignacion;
                                                                                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("asignacion",11, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

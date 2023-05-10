@@ -452,8 +452,9 @@ opciones_instrucciones_sin_return ::=
 
 asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa {: 
                                                                                     
-
-                                
+            ArrayList tmp_asignacion = new ArrayList();
+            tmp_asignacion.add(new Assignment(idright,idleft,id,value));
+            RESULT = tmp_asignacion;
                                                                                 :}
             ;
 
