@@ -38,7 +38,7 @@ public class Analisis {
         }
         
         
-        if(parser.errores.isEmpty()){
+        if(parser.errores.isEmpty()&&parser.erroresSemanticos.isEmpty()){ 
             
             System.out.println("No hay errores en los analizadores");
             Logica a = new Logica();
@@ -48,7 +48,18 @@ public class Analisis {
         }else{
             
             ManejoArchivos ma = new ManejoArchivos();
-            ma.CrearErrorHTML("LexicoSintactico", parser.errores);
+            
+            if(parser.contador_errores_lexico_sintacticos>0){
+                ma.CrearErrorHTML("LexicoSintactico", parser.errores);
+                if(parser.contador_errores_semanticos>0){
+                    ma.CrearErrorHTML("Semanticos", parser.erroresSemanticos);
+                }
+            }else if(parser.erroresSemanticos.size()>0){
+                ma.CrearErrorHTML("Semanticos", parser.erroresSemanticos);
+                if(parser.errores.size()>0){
+                    ma.CrearErrorHTML("LexicoSintactico", parser.errores);
+                }
+            }
             
             parser.errores.clear();
             

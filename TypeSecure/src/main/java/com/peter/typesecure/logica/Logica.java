@@ -15,10 +15,10 @@ import java.util.ArrayList;
  */
 public class Logica {
 
-    public void  hola(ArrayList<Instruction> aa) {
-        for (int i = 0; i < aa.size(); i++) {
-            SymbolTable a = new SymbolTable();
-            aa.get(i).ejecutar(a);
+    public void  hola(ArrayList<Instruction> instruciones) {
+        for (int i = 0; i < instruciones.size(); i++) {
+            SymbolTable tablaE = new SymbolTable();
+            instruciones.get(i).ejecutar(tablaE);
         }
     }
     

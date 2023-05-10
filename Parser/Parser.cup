@@ -8,12 +8,13 @@ package com.peter.typesecure.parser;
 import com.peter.typesecure.analisis.ejecucion.auxiliares.*;
 import com.peter.typesecure.ejecucion.Genericos.*;
 import com.peter.typesecure.ejecucion.instrucciones.*;
-import com.peter.typesecure.ejecucion.instrucciones.functions.Function_Void_Simple;
+import com.peter.typesecure.ejecucion.instrucciones.functions.*;
 import com.peter.typesecure.lexer.Lexer;
 import java_cup.runtime.Symbol;
 import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
-
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 
@@ -30,6 +31,9 @@ parser code {:
     //Array errores
     
     public static ArrayList<Error_analizadores> errores = Lexer.errores;
+    public int contador_errores_lexico_sintacticos = 0;
+    public ArrayList<Error_analizadores> erroresSemanticos = new ArrayList<>();
+    public int contador_errores_semanticos = 0;
 
     //Metodo llamado automaticamente al encontrar error sintanctico
 
@@ -40,6 +44,7 @@ parser code {:
     if(s.sym == 0){
 
     errores.add( new Error_analizadores("Sintactico", "No se esperaba el fin del archivo ") );
+    contador_errores_lexico_sintacticos++;
 
     }else{
 
@@ -48,6 +53,7 @@ parser code {:
         int columna = s.left;
 
         errores.add( new Error_analizadores("Sintactico", lexema, fila, columna, "No se esperaba este token") );
+        contador_errores_lexico_sintacticos++;
         //System.out.println("Error Sintactico hallado");
         //System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
     }
@@ -64,13 +70,14 @@ parser code {:
     if(s.sym == 0){
 
     errores.add( new Error_analizadores("Sintactico", "No se esperaba el fin del archivo ") );
+    contador_errores_lexico_sintacticos++;
 
     }else{
 
         String lexema = s.value.toString();
         int fila = s.right;
         int columna = s.left;
-
+        contador_errores_lexico_sintacticos++;
         errores.add( new Error_analizadores("Sintactico", lexema, fila, columna, "No se esperaba este token") );
         //System.out.println("Error Sintactico hallado");
         //System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
@@ -223,7 +230,9 @@ non terminal ArrayList<Instruction> lista_instrucciones_console;
 
 //declaracion de funciones
 non terminal ArrayList declaracion_funcion;
-non terminal parametro_funcion_declaracion,parametros_funcion_declaracion, instrucciones_funcion;
+non terminal Parameter parametro_funcion_declaracion;
+non terminal ArrayList<Parameter> parametros_funcion_declaracion;
+non terminal ArrayList instrucciones_funcion;
 non terminal ArrayList instrucciones_funciones_sin_return;
 non terminal ArrayList opciones_instrucciones_sin_return;
 
@@ -1351,29 +1360,105 @@ declaracion_funcion ::=
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e DOS_PUNTOS:f RVOID:g CORCHETE_ABIERTO:h instrucciones_funciones_sin_return:i CORCHETE_CERRADO:j
 {:
-            
+    //function id (parametros):void{parametros}
+    /* verificar que los nombres de los parametros no se repitan, si hay repetidos lanzar errro semantico*/
+    /*Function_Void_Parameters*/
+    Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
 
+    parametros.put(d.get(0).getId(),d.get(0).getType());
+    for(int p = 1; p<d.size();p++){
+
+        if(parametros.containsKey(d.get(p).getId())){
+            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
+            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
+            contador_errores_semanticos++;
+        }else{
+            parametros.put(d.get(p).getId(),d.get(p).getType());
+        }
+
+    }
+
+    if(contador_errores_semanticos==0){
+            ArrayList tmp_function = new ArrayList();
+            tmp_function.add(new Function_Void_Parameters(aright,aleft,b,VariableType.VOID,parametros,i));
+            RESULT = tmp_function;
+    }
+    
+    
  :}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
 {:
-            
+        //function id (){parametros}
+        //Function_Without_Type_Simple
+        
+        ArrayList tmp_function = new ArrayList();
+        tmp_function.add(new Function_Without_Type_Simple(aright,aleft,b,VariableType.PENDIENTE,f));
+        RESULT = tmp_function;
 
- :}
+:}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e CORCHETE_ABIERTO:f instrucciones_funcion:g CORCHETE_CERRADO:h
 {:
-            
- :}
+        //function id (parametros){parametros}
+        //Function_Without_Type_Parameters
+        /* verificar que los nombres de los parametros no se repitan, si hay repetidos lanzar errro semantico*/
+        Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
+
+    parametros.put(d.get(0).getId(),d.get(0).getType());
+    for(int p = 1; p<d.size();p++){
+
+        if(parametros.containsKey(d.get(p).getId())){
+            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
+            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
+            contador_errores_semanticos++;
+        }else{
+            parametros.put(d.get(p).getId(),d.get(p).getType());
+        }
+
+    }
+
+    if(contador_errores_semanticos==0){
+            ArrayList tmp_function = new ArrayList();
+            tmp_function.add(new Function_Without_Type_Parameters(aright,aleft,b,VariableType.PENDIENTE,parametros,g));
+            RESULT = tmp_function;
+    }
+        
+:}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c PARENTESIS_CERRADO:d DOS_PUNTOS:e tipo_dato_variable:f CORCHETE_ABIERTO:g instrucciones_funcion:h CORCHETE_CERRADO:i
 {:
-            
- :}
+        //function id ():tipoValor{parametros}            
+        //Function_With_Type_Simple
+            ArrayList tmp_function = new ArrayList();
+            tmp_function.add(new Function_With_Type_Simple(aright,aleft,b, (VariableType) f,h));
+            RESULT = tmp_function;
+:}
 
 |FUNCTION:a ID:b PARENTESIS_ABIERTO:c parametros_funcion_declaracion:d PARENTESIS_CERRADO:e DOS_PUNTOS:f tipo_dato_variable:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
 {:
-            
+        //function id (parametros):tipoDato{parametros}
+        //Function_With_Type_Parameters
+    Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
+
+    parametros.put(d.get(0).getId(),d.get(0).getType());
+    for(int p = 1; p<d.size();p++){
+
+        if(parametros.containsKey(d.get(p).getId())){
+            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
+            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
+            contador_errores_semanticos++;
+        }else{
+            parametros.put(d.get(p).getId(),d.get(p).getType());
+        }
+
+    }
+
+    if(contador_errores_semanticos==0){
+            ArrayList tmp_function = new ArrayList();
+            tmp_function.add(new Function_With_Type_Parameters(aright,aleft,b,(VariableType) g,parametros,i));
+            RESULT = tmp_function;
+    }
 :}        
                     ;
 
@@ -1404,18 +1489,19 @@ instrucciones_funciones_sin_return ::= instrucciones_funciones_sin_return:a opci
                                         RESULT = tmp;
 
                                     :}
+
                                     ;
 
 
 instrucciones_funcion ::= instrucciones:a 
                       {: 
-                            
+                            RESULT = a;
                       :}
 
                        | 
                        
                        {: 
-                            
+                            RESULT = new ArrayList<>();
                        :}
 
                        ;
@@ -1423,19 +1509,23 @@ instrucciones_funcion ::= instrucciones:a
 parametros_funcion_declaracion ::= parametros_funcion_declaracion:a COMA:b parametro_funcion_declaracion:c
                                 {:
 
-                                    
+                                    a.add(c);
+                                    RESULT = a;
 
                                 :}
 
                                 |  parametro_funcion_declaracion:a
                                 {:
-
+                                    ArrayList parametros = new ArrayList<>();
+                                    parametros.add(a);
+                                    RESULT = parametros;
                                 :}
                                 ;
 
 parametro_funcion_declaracion ::= ID:a DOS_PUNTOS:b tipo_dato_variable:c
                                 {:
 
+                                    RESULT = new Parameter((String) a,(VariableType)c);
                                     
                                 :}
                                 ;

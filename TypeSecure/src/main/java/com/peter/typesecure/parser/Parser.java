@@ -8,11 +8,13 @@ package com.peter.typesecure.parser;
 import com.peter.typesecure.analisis.ejecucion.auxiliares.*;
 import com.peter.typesecure.ejecucion.Genericos.*;
 import com.peter.typesecure.ejecucion.instrucciones.*;
-import com.peter.typesecure.ejecucion.instrucciones.functions.Function_Void_Simple;
+import com.peter.typesecure.ejecucion.instrucciones.functions.*;
 import com.peter.typesecure.lexer.Lexer;
 import java_cup.runtime.Symbol;
 import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -1198,6 +1200,9 @@ public class Parser extends java_cup.runtime.lr_parser {
     //Array errores
     
     public static ArrayList<Error_analizadores> errores = Lexer.errores;
+    public int contador_errores_lexico_sintacticos = 0;
+    public ArrayList<Error_analizadores> erroresSemanticos = new ArrayList<>();
+    public int contador_errores_semanticos = 0;
 
     //Metodo llamado automaticamente al encontrar error sintanctico
 
@@ -1208,6 +1213,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     if(s.sym == 0){
 
     errores.add( new Error_analizadores("Sintactico", "No se esperaba el fin del archivo ") );
+    contador_errores_lexico_sintacticos++;
 
     }else{
 
@@ -1216,6 +1222,7 @@ public class Parser extends java_cup.runtime.lr_parser {
         int columna = s.left;
 
         errores.add( new Error_analizadores("Sintactico", lexema, fila, columna, "No se esperaba este token") );
+        contador_errores_lexico_sintacticos++;
         //System.out.println("Error Sintactico hallado");
         //System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
     }
@@ -1232,13 +1239,14 @@ public class Parser extends java_cup.runtime.lr_parser {
     if(s.sym == 0){
 
     errores.add( new Error_analizadores("Sintactico", "No se esperaba el fin del archivo ") );
+    contador_errores_lexico_sintacticos++;
 
     }else{
 
         String lexema = s.value.toString();
         int fila = s.right;
         int columna = s.left;
-
+        contador_errores_lexico_sintacticos++;
         errores.add( new Error_analizadores("Sintactico", lexema, fila, columna, "No se esperaba este token") );
         //System.out.println("Error Sintactico hallado");
         //System.out.println("Lexema " + lexema + " linea"  + fila + " columna " + columna);
@@ -4922,7 +4930,7 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).right;
-		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
+		ArrayList<Parameter> d = (ArrayList<Parameter>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
 		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
@@ -4942,8 +4950,31 @@ class CUP$Parser$actions {
 		int jright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-            
+    //function id (parametros):void{parametros}
+    /* verificar que los nombres de los parametros no se repitan, si hay repetidos lanzar errro semantico*/
+    /*Function_Void_Parameters*/
+    Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
 
+    parametros.put(d.get(0).getId(),d.get(0).getType());
+    for(int p = 1; p<d.size();p++){
+
+        if(parametros.containsKey(d.get(p).getId())){
+            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
+            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
+            contador_errores_semanticos++;
+        }else{
+            parametros.put(d.get(p).getId(),d.get(p).getType());
+        }
+
+    }
+
+    if(contador_errores_semanticos==0){
+            ArrayList tmp_function = new ArrayList();
+            tmp_function.add(new Function_Void_Parameters(aright,aleft,b,VariableType.VOID,parametros,i));
+            RESULT = tmp_function;
+    }
+    
+    
  
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declaracion_funcion",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -4970,14 +5001,19 @@ class CUP$Parser$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int fleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int fright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList f = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int gleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-            
+        //function id (){parametros}
+        //Function_Without_Type_Simple
+        
+        ArrayList tmp_function = new ArrayList();
+        tmp_function.add(new Function_Without_Type_Simple(aright,aleft,b,VariableType.PENDIENTE,f));
+        RESULT = tmp_function;
 
- 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declaracion_funcion",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -4997,7 +5033,7 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).right;
-		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
+		ArrayList<Parameter> d = (ArrayList<Parameter>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
 		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
@@ -5006,13 +5042,36 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int gleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList g = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int hleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int hright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-            
- 
+        //function id (parametros){parametros}
+        //Function_Without_Type_Parameters
+        /* verificar que los nombres de los parametros no se repitan, si hay repetidos lanzar errro semantico*/
+        Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
+
+    parametros.put(d.get(0).getId(),d.get(0).getType());
+    for(int p = 1; p<d.size();p++){
+
+        if(parametros.containsKey(d.get(p).getId())){
+            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
+            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
+            contador_errores_semanticos++;
+        }else{
+            parametros.put(d.get(p).getId(),d.get(p).getType());
+        }
+
+    }
+
+    if(contador_errores_semanticos==0){
+            ArrayList tmp_function = new ArrayList();
+            tmp_function.add(new Function_Without_Type_Parameters(aright,aleft,b,VariableType.PENDIENTE,parametros,g));
+            RESULT = tmp_function;
+    }
+        
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declaracion_funcion",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -5044,13 +5103,17 @@ class CUP$Parser$actions {
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int hleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int hright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList h = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-            
- 
+        //function id ():tipoValor{parametros}            
+        //Function_With_Type_Simple
+            ArrayList tmp_function = new ArrayList();
+            tmp_function.add(new Function_With_Type_Simple(aright,aleft,b, (VariableType) f,h));
+            RESULT = tmp_function;
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declaracion_funcion",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-8)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -5070,7 +5133,7 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).right;
-		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
+		ArrayList<Parameter> d = (ArrayList<Parameter>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
 		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
@@ -5085,12 +5148,33 @@ class CUP$Parser$actions {
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList i = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int jleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int jright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-            
+        //function id (parametros):tipoDato{parametros}
+        //Function_With_Type_Parameters
+    Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
+
+    parametros.put(d.get(0).getId(),d.get(0).getType());
+    for(int p = 1; p<d.size();p++){
+
+        if(parametros.containsKey(d.get(p).getId())){
+            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
+            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
+            contador_errores_semanticos++;
+        }else{
+            parametros.put(d.get(p).getId(),d.get(p).getType());
+        }
+
+    }
+
+    if(contador_errores_semanticos==0){
+            ArrayList tmp_function = new ArrayList();
+            tmp_function.add(new Function_With_Type_Parameters(aright,aleft,b,(VariableType) g,parametros,i));
+            RESULT = tmp_function;
+    }
 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("declaracion_funcion",32, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5148,12 +5232,12 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 184: // instrucciones_funcion ::= instrucciones 
             {
-              Object RESULT =null;
+              ArrayList RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		ArrayList a = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
-                            
+                            RESULT = a;
                       
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("instrucciones_funcion",35, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5162,9 +5246,9 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 185: // instrucciones_funcion ::= 
             {
-              Object RESULT =null;
+              ArrayList RESULT =null;
 		 
-                            
+                            RESULT = new ArrayList<>();
                        
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("instrucciones_funcion",35, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5173,19 +5257,20 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 186: // parametros_funcion_declaracion ::= parametros_funcion_declaracion COMA parametro_funcion_declaracion 
             {
-              Object RESULT =null;
+              ArrayList<Parameter> RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		ArrayList<Parameter> a = (ArrayList<Parameter>)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		Parameter c = (Parameter)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
-                                    
+                                    a.add(c);
+                                    RESULT = a;
 
                                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("parametros_funcion_declaracion",34, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5195,12 +5280,14 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 187: // parametros_funcion_declaracion ::= parametro_funcion_declaracion 
             {
-              Object RESULT =null;
+              ArrayList<Parameter> RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		Parameter a = (Parameter)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
+                                    ArrayList parametros = new ArrayList<>();
+                                    parametros.add(a);
+                                    RESULT = parametros;
                                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("parametros_funcion_declaracion",34, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5209,7 +5296,7 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 188: // parametro_funcion_declaracion ::= ID DOS_PUNTOS tipo_dato_variable 
             {
-              Object RESULT =null;
+              Parameter RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
@@ -5221,6 +5308,7 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                                    RESULT = new Parameter((String) a,(VariableType)c);
                                     
                                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("parametro_funcion_declaracion",33, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5421,7 +5509,7 @@ class CUP$Parser$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int fleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int fright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList f = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int gleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
@@ -5446,7 +5534,7 @@ class CUP$Parser$actions {
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList c = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
@@ -5482,7 +5570,7 @@ class CUP$Parser$actions {
 		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int gleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList g = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int hleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int hright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
@@ -5662,7 +5750,7 @@ class CUP$Parser$actions {
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList i = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int jleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int jright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
@@ -5706,7 +5794,7 @@ class CUP$Parser$actions {
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList i = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int jleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int jright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
@@ -5790,7 +5878,7 @@ class CUP$Parser$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int fleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int fright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object f = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList f = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int gleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
@@ -5815,7 +5903,7 @@ class CUP$Parser$actions {
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).right;
-		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
+		ArrayList c = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
