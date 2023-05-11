@@ -12,12 +12,21 @@ public class Variable {
 
     private String id;
     private VariableType type;
-    private Instruction value;
+    private Object value;
+    private AccessType access;
 
     public Variable() {
 
     }
 
+    public AccessType getAccess() {
+        return access;
+    }
+
+    public void setAccess(AccessType access) {
+        this.access = access;
+    }
+    
     public String getId() {
         return id;
     }
@@ -38,7 +47,7 @@ public class Variable {
         return value;
     }
 
-    public void setValue(Instruction value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 

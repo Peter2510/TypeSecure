@@ -50,8 +50,25 @@ public class Function_Console_Log extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Console.log");
-        System.out.println(instruccions);
+        String tmp = "";
+        for(int i = 0; i< instruccions.size() ;i++){
+            
+            Variable v = (Variable) instruccions.get(i).ejecutar(table);
+            
+            if(v.getValue()!=null){
+                tmp+= v.getValue() + " ";
+                
+            }else{
+                //contadorError++;
+                //table.agrearErrores(new Error_analizadores( "Semantico",instruccions.get(i).getLinea(),instruccion.get(i).getColumna(),"La variable " + v.getId() +" no tiene un valor asignado"));
+                
+            }
+            
+        }
+        
+        if(contadorError==0){
+            System.out.println(tmp);
+        }
         return null;
     }
 

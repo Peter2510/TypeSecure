@@ -26,10 +26,12 @@ public class Declaration extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println(access);
-        System.out.println(type);
-        System.out.println(id);
-        System.out.println(operation);
+        Variable a = (Variable) operation.ejecutar(table);
+        Variable ab = new Variable();
+        ab.setId(this.id);
+        ab.setType(type);
+        ab.setValue(a.getValue());
+        table.add(ab);
         return null;
     }
 

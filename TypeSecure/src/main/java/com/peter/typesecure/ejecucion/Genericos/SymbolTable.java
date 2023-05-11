@@ -12,37 +12,53 @@ import java.util.ArrayList;
  * @author GORDILLOG
  */
 public class SymbolTable extends ArrayList<Variable> {
-    
+
     private ArrayList<Error_analizadores> errores = new ArrayList();
-    
-    public SymbolTable(){
-        
+
+    public SymbolTable() {
+
     }
-    
-    public SymbolTable(SymbolTable padre){
+
+    public SymbolTable(SymbolTable padre) {
         super();
-        if(padre!=null){
+        if (padre != null) {
             this.addAll(padre);
         }
     }
-    
-    public void _add(Variable variable){
+
+    public void _add(Variable variable) {
         this.add(variable);
     }
-    
+
     public Object getById(String id) {
-    return this.stream().filter(v -> v.getId().equals(id)).findFirst().orElse(null);
+        System.out.println(this);
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i).getId().equals(id)) {
+                System.out.println("existe el id " + this.get(i) );
+                return this.get(i);
+            } else {
+                return null;
+            }
+        }
+        return null;
     }
 
     public boolean contains(String id) {
-    return this.stream().anyMatch(v -> v.getId().equals(id));
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i).getId() == id) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
-    public void agrearErrores(Error_analizadores error){
+    public void agrearErrores(Error_analizadores error) {
         this.errores.add(error);
     }
-    
-    public ArrayList<Error_analizadores> getErrores(){
+
+    public ArrayList<Error_analizadores> getErrores() {
         return this.errores;
     }
 }

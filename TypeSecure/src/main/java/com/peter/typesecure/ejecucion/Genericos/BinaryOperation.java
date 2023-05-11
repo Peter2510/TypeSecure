@@ -24,6 +24,27 @@ public class BinaryOperation extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
+        Variable left = (Variable) leftOperator.ejecutar(table);
+        Variable right = (Variable) rightOperator.ejecutar(table);
+        
+        Variable variable = new Variable();
+        
+        if(left != null &&right != null){
+            
+            switch (type) {
+                case SUMA:
+                    variable.setValue(Integer.parseInt((String) left.getValue())+Integer.parseInt((String) right.getValue()));
+                    variable.setType(VariableType.NUMBER);
+                    return variable;
+                    //verificar que los valores a sumar sean del mismo tipo
+                    //si uno de ellos es string, se realiza la concatenacion
+                
+            }
+            
+        }else{
+            //hay error en las operaciones binarias
+        }
+        
         return null;
     }
 

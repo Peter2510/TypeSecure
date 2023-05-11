@@ -16,8 +16,9 @@ import java.util.ArrayList;
 public class Logica {
 
     public void  hola(ArrayList<Instruction> instruciones) {
+        SymbolTable tablaE = new SymbolTable();
         for (int i = 0; i < instruciones.size(); i++) {
-            SymbolTable tablaE = new SymbolTable();
+            
             instruciones.get(i).ejecutar(tablaE);
         }
     }
