@@ -27,12 +27,17 @@ public class Declaration extends Instruction {
     @Override
     public Object ejecutar(SymbolTable table) {
         //verificar repitencias
-        Variable a = (Variable) operation.ejecutar(table);
+      /*  Variable a = (Variable) operation.ejecutar(table);
         Variable ab = new Variable();
         ab.setId(this.id);
         ab.setType(type);
         ab.setValue(a.getValue());
-        table.add(ab);
+        table.add(ab);*/
+        System.out.println("Declaration");
+        System.out.println(access);
+        System.out.println(type);
+        System.out.println(id);
+        System.out.println(operation);
         return null;
     }
 

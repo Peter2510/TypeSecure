@@ -24,7 +24,7 @@ public class BinaryOperation extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        Variable left = (Variable) leftOperator.ejecutar(table);
+       /* Variable left = (Variable) leftOperator.ejecutar(table);
         Variable right = (Variable) rightOperator.ejecutar(table);
 
         Variable variable = new Variable();
@@ -163,7 +163,7 @@ public class BinaryOperation extends Instruction {
 
         } else {
             //hay error en las operaciones binarias
-        }
+        }*/
 
         return null;
     }

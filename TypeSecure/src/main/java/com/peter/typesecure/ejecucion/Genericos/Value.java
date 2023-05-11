@@ -21,7 +21,7 @@ public class Value extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        Variable variable = new Variable();
+    /*    Variable variable = new Variable();
         
         switch (this.type) {
             case NUMBER:
@@ -61,7 +61,8 @@ public class Value extends Instruction {
                 }
         }
         
-        return variable;
+        return variable;*/
+        return null;
     }
 
     public Object getValue() {

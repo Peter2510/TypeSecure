@@ -2891,7 +2891,8 @@ class CUP$Parser$actions {
 		int incrementoright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object incremento = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
+                //id++
+                    RESULT = new Increase(idright,idleft,id);
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("incremento",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -2908,7 +2909,8 @@ class CUP$Parser$actions {
 		int decrementoright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object decremento = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                     
+                     //id--
+                     RESULT = new Decrement(idright,idleft,id);
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("decremento",15, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -2928,7 +2930,10 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                    
+                    //id++;
+                    ArrayList tmp_function_increase = new ArrayList();
+                    tmp_function_increase.add(new Function_Increase(aright,aleft,a));
+                    RESULT = tmp_function_increase;
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_incremento_decremento",16, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -2948,7 +2953,11 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                    
+                    //id--;
+                    ArrayList tmp_function_decrement = new ArrayList();
+                    tmp_function_decrement.add(new Function_Decrement(aright,aleft,a));
+                    RESULT = tmp_function_decrement;
+
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_incremento_decremento",16, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

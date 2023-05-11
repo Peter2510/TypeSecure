@@ -762,27 +762,36 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
 
 incremento ::= ID:id INCREMENTO:incremento
                 {:
-
+                //id++
+                    RESULT = new Increase(idright,idleft,id);
                 :}
 
            ;
 
 decremento ::= ID:id DECREMENTO:decremento
                 {:
-                     
+                     //id--
+                     RESULT = new Decrement(idright,idleft,id);
                 :}
             ;
 
 funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
                 {:
-                    
+                    //id++;
+                    ArrayList tmp_function_increase = new ArrayList();
+                    tmp_function_increase.add(new Function_Increase(aright,aleft,a));
+                    RESULT = tmp_function_increase;
                 :}
 
                |  ID:a DECREMENTO:b PUNTO_COMA:c
                {:
-                    
+                    //id--;
+                    ArrayList tmp_function_decrement = new ArrayList();
+                    tmp_function_decrement.add(new Function_Decrement(aright,aleft,a));
+                    RESULT = tmp_function_decrement;
+
                 :}
-                       ;
+                ;
 
 operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_matematicas:c
                             {:

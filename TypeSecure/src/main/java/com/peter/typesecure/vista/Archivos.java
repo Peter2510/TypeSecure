@@ -133,11 +133,17 @@ public class Archivos {
 
     public void cerrarArchivo() {
         if (numeroPanel > 0) {
+            listaAreaDeTexto.remove(TabbedPane.getSelectedIndex());
+            listaDeScroll.remove(TabbedPane.getSelectedIndex());
+            listaDeFiles.remove(TabbedPane.getSelectedIndex());
+            TabbedPane.remove(TabbedPane.getSelectedIndex());
+            numeroPanel--;
+            /*
             listaAreaDeTexto.remove(TabbedPane.getTabCount() - 1);
             listaDeScroll.remove(TabbedPane.getTabCount() - 1);
             listaDeFiles.remove(TabbedPane.getTabCount() - 1);
             TabbedPane.remove(TabbedPane.getTabCount() - 1);
-            numeroPanel--;
+            numeroPanel--;*/
         }
 
     }
