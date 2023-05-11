@@ -33,7 +33,7 @@ public class BinaryOperation extends Instruction{
             
             switch (type) {
                 case SUMA:
-                    variable.setValue(Integer.parseInt((String) left.getValue())+Integer.parseInt((String) right.getValue()));
+                    variable.setValue((Double)left.getValue() + (Double)right.getValue());
                     variable.setType(VariableType.NUMBER);
                     return variable;
                     //verificar que los valores a sumar sean del mismo tipo

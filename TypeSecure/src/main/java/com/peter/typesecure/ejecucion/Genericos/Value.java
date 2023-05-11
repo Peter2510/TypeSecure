@@ -26,7 +26,7 @@ public class Value extends Instruction {
         switch (this.type) {
             case NUMBER:
                 variable.setType(VariableType.NUMBER);
-                variable.setValue(value);
+                variable.setValue(Double.parseDouble((String) value));
                 return variable;
             case BIGINT:
                 variable.setType(VariableType.BIGINT);
