@@ -685,6 +685,7 @@ operaciones_matematicas ::=
                                     RESULT = new Value(aright,aleft,a,ValueType.TEXTO);
                                         
                                   :}
+                        
                         ;
 
 funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f
@@ -1661,18 +1662,18 @@ opciones_if ::=  funcion_if:a
 
 instruccion_break ::= BREAK:a PUNTO_COMA:b
                     {: 
-                                
-                   
-
+                        ArrayList tmp_BREAK = new ArrayList();
+                        tmp_BREAK.add(new Instruction_Break(aright,aleft));
+                        RESULT = tmp_BREAK;    
                     :}
                   ;
 
 
 instruccion_continue ::= CONTINUE:a PUNTO_COMA:b
                     {: 
-                        
-                   
-
+                        ArrayList tmp_continue= new ArrayList();
+                        tmp_continue.add(new Instruction_Continue(aright,aleft));
+                        RESULT = tmp_continue;    
                     :}
                      ;
 
@@ -1738,7 +1739,9 @@ funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CE
 
 funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
                     {:
-
+                        ArrayList tmp_gst= new ArrayList();
+                        tmp_gst.add(new Function_Print_AST(aright,aleft,c));
+                        RESULT = tmp_gst;    
 
                     :}
                   ;
@@ -1747,10 +1750,10 @@ funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CE
 funcion_getSymbolTable ::= GETSYMBOLTABLE:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_COMA:d
                     {:
 
-
+                        ArrayList tmp_gst= new ArrayList();
+                        tmp_gst.add(new Function_Get_Symbol_Table(aright,aleft));
+                        RESULT = tmp_gst;    
                         
-                        
-
                     :}
                      ;
 

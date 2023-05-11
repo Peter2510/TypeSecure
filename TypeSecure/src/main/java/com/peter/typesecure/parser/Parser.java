@@ -5716,9 +5716,9 @@ class CUP$Parser$actions {
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
-                                
-                   
-
+                        ArrayList tmp_BREAK = new ArrayList();
+                        tmp_BREAK.add(new Instruction_Break(aright,aleft));
+                        RESULT = tmp_BREAK;    
                     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("instruccion_break",47, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5735,9 +5735,9 @@ class CUP$Parser$actions {
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		 
-                        
-                   
-
+                        ArrayList tmp_continue= new ArrayList();
+                        tmp_continue.add(new Instruction_Continue(aright,aleft));
+                        RESULT = tmp_continue;    
                     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("instruccion_continue",48, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5975,7 +5975,9 @@ class CUP$Parser$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
+                        ArrayList tmp_gst= new ArrayList();
+                        tmp_gst.add(new Function_Print_AST(aright,aleft,c));
+                        RESULT = tmp_gst;    
 
                     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_printAst",53, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -6000,10 +6002,10 @@ class CUP$Parser$actions {
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
-
+                        ArrayList tmp_gst= new ArrayList();
+                        tmp_gst.add(new Function_Get_Symbol_Table(aright,aleft));
+                        RESULT = tmp_gst;    
                         
-                        
-
                     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_getSymbolTable",54, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
