@@ -11,33 +11,33 @@ import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
  *
  * @author GORDILLOG
  */
-public class Function_Increase extends Instruction{
+public class Function_Return_Instruction extends Instruction{
 
-    private String id;
-        
-    public Function_Increase(Object linea, Object columna, Object id) {
+    private Instruction instruction;
+    
+    public Function_Return_Instruction(Object linea, Object columna,Object instruction) {
         super(linea, columna);
-        this.id = (String)id;
+        this.instruction = (Instruction)instruction;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Function_Increase");
-        System.out.println(id);
+        System.out.println("Function_Return_Instruction");
+        System.out.println(instruction);
         return null;
     }
 
-    public String getId() {
-        return id;
+    public Instruction getInstruction() {
+        return instruction;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setInstruction(Instruction instruction) {
+        this.instruction = instruction;
     }
 
     @Override
     public String toString() {
-        return "Function_Increase{" + "id=" + id + '}';
+        return "Function_Return_Instruction{" + "instruction=" + instruction + '}';
     }
-        
+    
 }

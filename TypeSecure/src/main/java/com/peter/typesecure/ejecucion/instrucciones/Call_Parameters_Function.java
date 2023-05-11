@@ -2,56 +2,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.peter.typesecure.ejecucion.instrucciones.functions;
+package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
-import com.peter.typesecure.ejecucion.Genericos.VariableType;
 import java.util.ArrayList;
-
 
 /**
  *
  * @author GORDILLOG
  */
-public class Function_Without_Type_Simple extends Instruction {
+public class Call_Parameters_Function extends Instruction{
 
-    private String name;
-    private VariableType type;
+    private String id;
     private ArrayList<Instruction> instruccions;
     private Boolean simple;
     
-    public Function_Without_Type_Simple(Object linea, Object columna,Object name, VariableType type,ArrayList<Instruction> instructions) {
+    public Call_Parameters_Function(Object linea, Object columna,Object id,ArrayList<Instruction> instruccion) {
         super(linea, columna);
-        this.name = (String)name;
-        this.type = type;
-        this.instruccions = instructions;
-        this.simple =true;
+        this.id = (String)id;
+        this.instruccions = instruccion;
+        this.simple = false;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Function_Without_Type_Simple");
-        System.out.println(type);
+        System.out.println("Call_Parameters_Function");
+        System.out.println("id");
         System.out.println(instruccions);
-        System.out.println(name);
         return null;
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public VariableType getType() {
-        return type;
-    }
-
-    public void setType(VariableType type) {
-        this.type = type;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public ArrayList<Instruction> getInstruccions() {
@@ -72,7 +59,7 @@ public class Function_Without_Type_Simple extends Instruction {
     
     @Override
     public String toString() {
-        return "Function_Without_Type_Simple{" + "name=" + name + ", type=" + type + ", instruccions=" + instruccions + '}';
+        return "Call_Parameters_Function{" + "id=" + id + ", instruccions=" + instruccions + '}';
     }
     
 }

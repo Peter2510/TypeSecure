@@ -244,7 +244,8 @@ non terminal funcion_if, funcion_else, funcion_else_if, lista_else_if;
 non terminal ArrayList opciones_if;
 
 //llamada de funciones
-non terminal llamada_funcion_asignacion, parametros_funcion_asignacion;
+non terminal llamada_funcion_asignacion;
+non terminal ArrayList<Instruction> parametros_funcion_asignacion;
 non terminal ArrayList llamada_funcion_normal;
 
 //instruccion break
@@ -1543,13 +1544,18 @@ parametro_funcion_declaracion ::= ID:a DOS_PUNTOS:b tipo_dato_variable:c
 
 funcion_return ::= RETURN:a instruccion:b PUNTO_COMA:c
                     {:
-
-
+                        //return hola;
+                        ArrayList tmp_return = new ArrayList();
+                        tmp_return.add(new Function_Return_Instruction(aright,aleft,b));
+                        RESULT = tmp_return;    
 
                     :}
                 | RETURN:a PUNTO_COMA:b
                     {:
-                        
+
+                        ArrayList tmp_return = new ArrayList();
+                        tmp_return.add(new Function_Return_Simple(aright,aleft));
+                        RESULT = tmp_return;    
  
                     :}
                 ;
@@ -1557,13 +1563,14 @@ funcion_return ::= RETURN:a instruccion:b PUNTO_COMA:c
 llamada_funcion_asignacion ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
                               {:
 
-                              
+                              //id();
+                              RESULT =  new Call_Simple_Function(aright,aleft,a);
 
                               :}
                             |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d
                               {:
 
-                         
+                                RESULT = new Call_Parameters_Function(aright,aleft,a,c);
 
                               :}
                             ;
@@ -1571,11 +1578,12 @@ llamada_funcion_asignacion ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
 parametros_funcion_asignacion ::= parametros_funcion_asignacion:a COMA:b instruccion:c
                                {:
                                     
-                              
+                                    a.add((Instruction) c);
+                                    RESULT = a;           
                                :}
                                |  instruccion:a
                                {:
-                                   
+                                   RESULT = new ArrayList<>(); RESULT.add((Instruction) a);
                                :}
                                ;
 
@@ -1583,12 +1591,18 @@ parametros_funcion_asignacion ::= parametros_funcion_asignacion:a COMA:b instruc
 
 llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_COMA:d
                            {:
-    
+
+                                ArrayList tmp_function_normal = new ArrayList();
+                                tmp_function_normal.add(new Function_Call_Simple_Function(aright,aleft,a));
+                                RESULT = tmp_function_normal;    
 
                            :}
-                        |  ID:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
+                        |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
                            {:
-    
+                        
+                                ArrayList tmp_function_normal1 = new ArrayList();
+                                tmp_function_normal1.add(new Function_Call_Parameters_Function(aright,aleft,a,c));
+                                RESULT = tmp_function_normal1;    
 
                            :}
                         ;

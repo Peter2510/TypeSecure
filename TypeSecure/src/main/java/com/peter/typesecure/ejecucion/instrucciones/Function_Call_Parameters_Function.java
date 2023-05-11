@@ -6,38 +6,31 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import java.util.ArrayList;
 
 /**
  *
  * @author GORDILLOG
  */
-public class Function_Increase extends Instruction{
+public class Function_Call_Parameters_Function extends Instruction{
 
     private String id;
-        
-    public Function_Increase(Object linea, Object columna, Object id) {
+    private ArrayList<Instruction> instruccions;
+    private Boolean simple;
+    
+    public Function_Call_Parameters_Function(Object linea, Object columna,Object id,ArrayList<Instruction> instruccion) {
         super(linea, columna);
         this.id = (String)id;
+        this.instruccions = instruccion;
+        this.simple = false;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Function_Increase");
-        System.out.println(id);
+        System.out.println("Function_Call_Parameters_Function");
+        System.out.println("id");
+        System.out.println(instruccions);
         return null;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Function_Increase{" + "id=" + id + '}';
-    }
-        
+    
 }

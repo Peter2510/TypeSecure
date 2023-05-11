@@ -11,19 +11,21 @@ import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
  *
  * @author GORDILLOG
  */
-public class Function_Increase extends Instruction{
+public class Function_Call_Simple_Function extends Instruction{
 
     private String id;
-        
-    public Function_Increase(Object linea, Object columna, Object id) {
+    private Boolean simple;
+    
+    public Function_Call_Simple_Function(Object linea, Object columna,Object id) {
         super(linea, columna);
         this.id = (String)id;
+        this.simple = true;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Function_Increase");
-        System.out.println(id);
+        System.out.println("Function_Call_Simple_Function");
+        System.out.println("id");
         return null;
     }
 
@@ -35,9 +37,17 @@ public class Function_Increase extends Instruction{
         this.id = id;
     }
 
+    public Boolean getSimple() {
+        return simple;
+    }
+
+    public void setSimple(Boolean simple) {
+        this.simple = simple;
+    }
+
     @Override
     public String toString() {
-        return "Function_Increase{" + "id=" + id + '}';
+        return "Function_Call_Simple_Function{" + "id=" + id + ", simple=" + simple + '}';
     }
-        
+    
 }
