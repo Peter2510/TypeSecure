@@ -31,13 +31,11 @@ public class SymbolTable extends ArrayList<Variable> {
     }
 
     public Object getById(String id) {
-        System.out.println(this);
+        //System.out.println(this);
         for (int i = 0; i < this.size(); i++) {
             if (this.get(i).getId().equals(id)) {
-                System.out.println("existe el id " + this.get(i) );
+          //      System.out.println("existe el id " + this.get(i) );
                 return this.get(i);
-            } else {
-                return null;
             }
         }
         return null;

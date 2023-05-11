@@ -26,6 +26,7 @@ public class Declaration extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
+        //verificar repitencias
         Variable a = (Variable) operation.ejecutar(table);
         Variable ab = new Variable();
         ab.setId(this.id);

@@ -481,7 +481,7 @@ id_valor_variable_lista ::=  id_valor_variable_lista:a COMA:b id_valor_variable:
                             a.add(c);
                             RESULT = a;
                                                   
-                            :}
+                            :}  
                          |   id_valor_variable:a
                             {:
                             

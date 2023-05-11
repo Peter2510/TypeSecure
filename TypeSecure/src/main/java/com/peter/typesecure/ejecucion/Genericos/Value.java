@@ -30,27 +30,26 @@ public class Value extends Instruction {
                 return variable;
             case BIGINT:
                 variable.setType(VariableType.BIGINT);
-                variable.setValue(value);
+                variable.setValue((String)value);
                 return variable;
             case TEXTO:
                 variable.setType(VariableType.STRING);
-                variable.setValue(value);
+                variable.setValue((String)value);
                 return variable;               
             case TRUE:
                 variable.setType(VariableType.BOOLEAN);
-                variable.setValue(value);
+                variable.setValue((Boolean)value);
                 return variable;
             case FALSE:
                 variable.setType(VariableType.BOOLEAN);
-                variable.setValue(value);
+                variable.setValue((Boolean)value);
                 return variable;
             case UNDEFINED:
                 variable.setType(VariableType.PENDIENTE);
-                variable.setValue(value);
+                variable.setValue((String)value);
                 return variable;
             case ID:
                 Object tmp = table.getById((String)value);
-                System.out.println("Hallo " + tmp);
                 if(tmp!=null){
                     Variable var = (Variable)tmp;
                     variable.setId(var.getId());
