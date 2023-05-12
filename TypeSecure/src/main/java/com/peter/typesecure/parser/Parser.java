@@ -6,6 +6,7 @@
 package com.peter.typesecure.parser;
 
 import com.peter.typesecure.analisis.ejecucion.auxiliares.*;
+import com.peter.typesecure.ejecucion.Condicionales.*;
 import com.peter.typesecure.ejecucion.Genericos.*;
 import com.peter.typesecure.ejecucion.instrucciones.*;
 import com.peter.typesecure.ejecucion.instrucciones.functions.*;
@@ -5894,8 +5895,8 @@ class CUP$Parser$actions {
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+                    RESULT = new If(aright,aleft,c,f);
                          
-
               
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_if",39, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5918,7 +5919,8 @@ class CUP$Parser$actions {
 		int dright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
+        
+                    RESULT = new Else(aright,aleft,c);
 
               
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_else",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5955,7 +5957,7 @@ class CUP$Parser$actions {
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                     
-
+                RESULT = new ElseIf(aright,aleft,d,g);
                             
               
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_else_if",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -5965,15 +5967,18 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 207: // lista_else_if ::= lista_else_if funcion_else_if 
             {
-              Object RESULT =null;
+              ArrayList RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList a = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                      
+                     a.add(b);
+                     RESULT = a;
+
                   
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("lista_else_if",42, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -5982,12 +5987,14 @@ class CUP$Parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 208: // lista_else_if ::= funcion_else_if 
             {
-              Object RESULT =null;
+              ArrayList RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                           
+                          RESULT = new ArrayList(); RESULT.add(a);
+
                                   
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("lista_else_if",42, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -6001,7 +6008,9 @@ class CUP$Parser$actions {
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                
+                        ArrayList tmp = new ArrayList();
+                        tmp.add(new Function_If(aright,aleft,a,null,null));
+                        RESULT = tmp;    
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("opciones_if",43, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -6018,7 +6027,9 @@ class CUP$Parser$actions {
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                   
+                        ArrayList tmp = new ArrayList();
+                        tmp.add(new Function_If(aright,aleft,a,null,b));
+                        RESULT = tmp;    
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("opciones_if",43, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -6033,12 +6044,14 @@ class CUP$Parser$actions {
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		ArrayList b = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                 
+                        ArrayList tmp = new ArrayList();
+                        tmp.add(new Function_If(aright,aleft,a,b,c));
+                        RESULT = tmp;    
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("opciones_if",43, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -6053,9 +6066,11 @@ class CUP$Parser$actions {
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		ArrayList b = (ArrayList)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                  
+                        ArrayList tmp = new ArrayList();
+                        tmp.add(new Function_If(aright,aleft,a,b,null));
+                        RESULT = tmp;
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("opciones_if",43, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

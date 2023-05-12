@@ -6,6 +6,7 @@ package com.peter.typesecure.parser;
 
 
 import com.peter.typesecure.analisis.ejecucion.auxiliares.*;
+import com.peter.typesecure.ejecucion.Condicionales.*;
 import com.peter.typesecure.ejecucion.Genericos.*;
 import com.peter.typesecure.ejecucion.instrucciones.*;
 import com.peter.typesecure.ejecucion.instrucciones.functions.*;
@@ -240,7 +241,8 @@ non terminal ArrayList opciones_instrucciones_sin_return;
 non terminal ArrayList funcion_return;
 
 //funcion if
-non terminal funcion_if, funcion_else, funcion_else_if, lista_else_if;
+non terminal funcion_if, funcion_else, funcion_else_if;
+non terminal ArrayList lista_else_if;
 non terminal ArrayList opciones_if;
 
 //llamada de funciones
@@ -1658,14 +1660,15 @@ llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_
 funcion_if ::= IF:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
               {:
 
+                    RESULT = new If(aright,aleft,c,f);
                          
-
               :}
             ;
 
 funcion_else ::= ELSE:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERRADO:d
               {:
-
+        
+                    RESULT = new Else(aright,aleft,c);
 
               :}
               ;  
@@ -1674,7 +1677,7 @@ funcion_else ::= ELSE:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERR
 funcion_else_if ::= ELSE:a IF:b PARENTESIS_ABIERTO:c instruccion:d PARENTESIS_CERRADO:e CORCHETE_ABIERTO:f instrucciones_funcion:g CORCHETE_CERRADO:h
               {:
                     
-
+                RESULT = new ElseIf(aright,aleft,d,g);
                             
               :}
                 ;
@@ -1682,27 +1685,40 @@ funcion_else_if ::= ELSE:a IF:b PARENTESIS_ABIERTO:c instruccion:d PARENTESIS_CE
 lista_else_if ::= lista_else_if:a funcion_else_if:b
                   {:
                      
+                     a.add(b);
+                     RESULT = a;
+
                   :}
                 | funcion_else_if:a {:
                           
+                          RESULT = new ArrayList(); RESULT.add(a);
+
                                   :}
                 ;
 
 opciones_if ::=  funcion_if:a
                 {:
-                
+                        ArrayList tmp = new ArrayList();
+                        tmp.add(new Function_If(aright,aleft,a,null,null));
+                        RESULT = tmp;    
                 :}
                 | funcion_if:a funcion_else:b
                 {:
-                   
+                        ArrayList tmp = new ArrayList();
+                        tmp.add(new Function_If(aright,aleft,a,null,b));
+                        RESULT = tmp;    
                 :}
                 | funcion_if:a lista_else_if:b funcion_else:c
                 {:
-                 
+                        ArrayList tmp = new ArrayList();
+                        tmp.add(new Function_If(aright,aleft,a,b,c));
+                        RESULT = tmp;    
                 :}                
                 | funcion_if:a lista_else_if:b
                 {:
-                  
+                        ArrayList tmp = new ArrayList();
+                        tmp.add(new Function_If(aright,aleft,a,b,null));
+                        RESULT = tmp;
                 :}                                
                 ;
 
