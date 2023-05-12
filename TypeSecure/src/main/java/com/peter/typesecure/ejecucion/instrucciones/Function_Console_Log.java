@@ -27,7 +27,7 @@ public class Function_Console_Log extends Instruction{
 
     
     public void ejecutar_1(SymbolTable table) {
-        String tmp = "";
+    /*    String tmp = "";
         for(int i = 0; i< instruccions.size() ;i++){
             
             Variable v = (Variable) instruccions.get(i).ejecutar(table);
@@ -45,12 +45,13 @@ public class Function_Console_Log extends Instruction{
         
         if(contadorError==0){
             System.out.println(tmp);
-        }
+        }*/
+    
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        String tmp = "";
+    /*    String tmp = "";
         for(int i = 0; i< instruccions.size() ;i++){
             
             Variable v = (Variable) instruccions.get(i).ejecutar(table);
@@ -68,7 +69,9 @@ public class Function_Console_Log extends Instruction{
         
         if(contadorError==0){
             System.out.println(tmp);
-        }
+        }*/
+        System.out.println("console.log");
+        System.out.println(instruccions);
         return null;
     }
 

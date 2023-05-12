@@ -244,7 +244,7 @@ non terminal funcion_if, funcion_else, funcion_else_if, lista_else_if;
 non terminal ArrayList opciones_if;
 
 //llamada de funciones
-non terminal llamada_funcion_asignacion;
+
 non terminal ArrayList<Instruction> parametros_funcion_asignacion;
 non terminal ArrayList llamada_funcion_normal;
 
@@ -590,11 +590,7 @@ instruccion ::=  operaciones_matematicas:a {:
                                                 RESULT = a;
 
                                  :}
-                | llamada_funcion_asignacion:a {:
-
-                                                RESULT = a;
-                                                
-                                              :}
+                
                 | incremento:a {:
                                                 RESULT = a;
                              :}
@@ -685,6 +681,19 @@ operaciones_matematicas ::=
                                     RESULT = new Value(aright,aleft,a,ValueType.TEXTO);
                                         
                                   :}
+                       | ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
+                              {:
+
+                              //id();
+                              RESULT =  new Call_Simple_Function(aright,aleft,a);
+
+                              :}
+                        |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d
+                              {:
+
+                                RESULT = new Call_Parameters_Function(aright,aleft,a,c);
+
+                              :}
                         
                         ;
 
@@ -1137,18 +1146,30 @@ operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
 funcion_length ::= TEXTO:a PUNTO:b LENGTH:c
                             {:
                                 Value value = new Value(cright,cleft,c,ValueType.TEXTO);
-                                RESULT = new Function_Number(aright,aleft,value);
+                                RESULT = new Function_Length(aright,aleft,value);
                                 
                             :}
                 |  ID:a PUNTO:b LENGTH:c
                             {:
                                 Value value = new Value(aright,aleft,a,ValueType.ID);
-                                RESULT = new Function_Number(aright,aleft,value);
+                                RESULT = new Function_Length(aright,aleft,value);
                             :}
                 |  variables_string:a PUNTO:b LENGTH:c
                             {:
-                                RESULT = new Function_Number(aright,aleft,a);
+                                RESULT = new Function_Length(aright,aleft,a);
                             :}
+                | ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO:d LENGTH:e
+                    {:
+                      //id();
+                      Call_Simple_Function tm1 = new Call_Simple_Function(aright,aleft,a);
+                      RESULT = new Function_Length(aright,aleft,tm1);
+
+                    :}
+                |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d PUNTO:e LENGTH:f
+                    {:
+                        Call_Parameters_Function tm = new Call_Parameters_Function(aright,aleft,a,c);
+                        RESULT = new Function_Length(aright,aleft,tm);
+                    :}    
                 ;
 
 
@@ -1244,13 +1265,21 @@ funcion_char_at ::= ID:a PUNTO:b CHARAT:c PARENTESIS_ABIERTO:d index_char_at:e P
                             {:
                                 RESULT = new Function_Char_At(aright,aleft,a,e);
                             :}
+                | ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO:d CHARAT:e PARENTESIS_ABIERTO:f index_char_at:g PARENTESIS_CERRADO:h
+                    {:
+                      //id();
+                      Call_Simple_Function tm1 = new Call_Simple_Function(aright,aleft,a);
+                      RESULT = new Function_Char_At(aright,aleft,tm1,g);
+
+                    :}
+                |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d PUNTO:e CHARAT:f PARENTESIS_ABIERTO:g index_char_at:h PARENTESIS_CERRADO:i
+                    {:
+                        Call_Parameters_Function tm = new Call_Parameters_Function(aright,aleft,a,c);
+                        RESULT = new Function_Char_At(aright,aleft,tm,h);    
+                    :}    
                 ;
 
 index_char_at ::= operaciones_matematicas:a
-                {:
-                    RESULT = a;
-                :}
-                | llamada_funcion_asignacion:a
                 {:
                     RESULT = a;
                 :}
@@ -1272,6 +1301,19 @@ funcion_concat ::= variables_string:a PUNTO:b CONCAT:c PARENTESIS_ABIERTO:d inst
                         Value value = new Value(aright,aleft,a,ValueType.ID);
                         RESULT = new Function_Concat(aright,aleft,value,e);
                     :}
+                | ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO:d CONCAT:e PARENTESIS_ABIERTO:f instruccion:g PARENTESIS_CERRADO:h
+                    {:
+                      //id();
+                      Call_Simple_Function tm1 = new Call_Simple_Function(aright,aleft,a);
+                      RESULT = new Function_Concat(aright,aleft,tm1,g);
+
+                    :}
+                |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d PUNTO:e CONCAT:f PARENTESIS_ABIERTO:g instruccion:h PARENTESIS_CERRADO:i
+                    {:
+
+                        Call_Parameters_Function tm = new Call_Parameters_Function(aright,aleft,a,c);
+                        RESULT = new Function_Concat(aright,aleft,tm,h);
+                    :}    
                 ;
 
 variables_string ::= funcion_string:a
@@ -1294,10 +1336,6 @@ variables_string ::= funcion_string:a
                   {:
                     RESULT = a;
                   :}
-                 |  llamada_funcion_asignacion:a
-                  {:
-                    RESULT = a;
-                  :}
                  ;
 
 
@@ -1315,7 +1353,19 @@ funcion_to_lower_case ::= ID:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENT
                         {:
                             RESULT = new Function_Lower(aright,aleft,a);
                         :}
-                       ;
+                        | ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO:d TOLOWERCASE:e PARENTESIS_ABIERTO:f PARENTESIS_CERRADO:g
+                        {:
+                            //id();
+                            Call_Simple_Function tm1 = new Call_Simple_Function(aright,aleft,a);
+                            RESULT = new Function_Lower(aright,aleft,tm1);
+
+                        :}  
+                        |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d PUNTO:e TOLOWERCASE:f PARENTESIS_ABIERTO:g PARENTESIS_CERRADO:h
+                        {:
+                            Call_Parameters_Function tm = new Call_Parameters_Function(aright,aleft,a,c);
+                            RESULT = new Function_Lower(aright,aleft,tm);
+                        :}    
+                         ;
 
 funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
@@ -1332,6 +1382,18 @@ funcion_to_upper_case ::= ID:a PUNTO:b TOUPPERCASE:c PARENTESIS_ABIERTO:d PARENT
                             RESULT = new Function_Upper(aright,aleft,a);
                                                             
                         :}
+                        | ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO:d TOUPPERCASE:e PARENTESIS_ABIERTO:f PARENTESIS_CERRADO:g
+                        {:
+                            //id();
+                            Call_Simple_Function tm1 = new Call_Simple_Function(aright,aleft,a);
+                            RESULT = new Function_Upper(aright,aleft,tm1);
+
+                        :}  
+                        |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d PUNTO:e TOUPPERCASE:f PARENTESIS_ABIERTO:g PARENTESIS_CERRADO:h
+                        {:
+                            Call_Parameters_Function tm = new Call_Parameters_Function(aright,aleft,a,c);
+                            RESULT = new Function_Upper(aright,aleft,tm);
+                        :}                        
                        ;
 
 funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instrucciones_console:e PARENTESIS_CERRADO:f PUNTO_COMA:g
@@ -1560,21 +1622,6 @@ funcion_return ::= RETURN:a instruccion:b PUNTO_COMA:c
  
                     :}
                 ;
-
-llamada_funcion_asignacion ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c
-                              {:
-
-                              //id();
-                              RESULT =  new Call_Simple_Function(aright,aleft,a);
-
-                              :}
-                            |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d
-                              {:
-
-                                RESULT = new Call_Parameters_Function(aright,aleft,a,c);
-
-                              :}
-                            ;
 
 parametros_funcion_asignacion ::= parametros_funcion_asignacion:a COMA:b instruccion:c
                                {:

@@ -35,7 +35,7 @@ public class Function_Lower extends Instruction{
 
     @Override
     public String toString() {
-        return "Function_Lower{" + "operator=" + operator + '}';
+        return "Function_Lowerss{" + "operator=" + operator + '}';
     }
    
    
