@@ -1745,7 +1745,9 @@ funcion_for ::=
 FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_COMA:e accion_asignacion_for:f PARENTESIS_CERRADO:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
     {:
 
-
+/*for(let i = 0; i<2;i++){
+    console.log(i);
+}*/
  
 
     :}
@@ -1754,7 +1756,11 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
 |FOR:a PARENTESIS_ABIERTO:b asignacion:c operaciones_logicas:d PUNTO_COMA:e accion_asignacion_for:f PARENTESIS_CERRADO:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
     {:
 
+//let k = 0;
 
+//for(let i= k; i<3;i++){
+    //console.log(i);
+//}
 
 
     :}
@@ -1763,18 +1769,18 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
 
 accion_asignacion_for ::= incremento:a
                         {:
-                            
+                            //id++
                         :}
 
                        | decremento:a
                         {:
-                            
+                            //id--
                         :}                       
                         
                        | ID:a ASIGNACION:b instruccion:c
                         
                         {:
-
+                            //id = instruction;
 
                         :}
 
@@ -1783,8 +1789,9 @@ accion_asignacion_for ::= incremento:a
 
 funcion_while ::= WHILE:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d CORCHETE_ABIERTO:e instrucciones_funcion:f CORCHETE_CERRADO:g
                 {:
-
-                    
+                        ArrayList tmp_while= new ArrayList();
+                        tmp_while.add(new Function_While(aright,aleft,c,f));
+                        RESULT = tmp_while;
 
                 :}
               ;
@@ -1793,9 +1800,10 @@ funcion_while ::= WHILE:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:
 funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERRADO:d WHILE:e PARENTESIS_ABIERTO:f instruccion:g PARENTESIS_CERRADO:h PUNTO_COMA:i
                 {:
 
-                    
+                    ArrayList tmp_do_while= new ArrayList();
+                    tmp_do_while.add(new Function_Do_While(aright,aleft,c,g));
+                    RESULT = tmp_do_while;
       
-
                 :}
                  ;
 

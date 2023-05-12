@@ -6150,7 +6150,9 @@ class CUP$Parser$actions {
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
-
+/*for(let i = 0; i<2;i++){
+    console.log(i);
+}*/
  
 
     
@@ -6194,7 +6196,11 @@ class CUP$Parser$actions {
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
+//let k = 0;
 
+//for(let i= k; i<3;i++){
+    //console.log(i);
+//}
 
 
     
@@ -6210,7 +6216,7 @@ class CUP$Parser$actions {
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                            
+                            //id++
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("accion_asignacion_for",49, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -6224,7 +6230,7 @@ class CUP$Parser$actions {
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-                            
+                            //id--
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("accion_asignacion_for",49, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -6244,7 +6250,7 @@ class CUP$Parser$actions {
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
+                            //id = instruction;
 
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("accion_asignacion_for",49, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -6277,8 +6283,9 @@ class CUP$Parser$actions {
 		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
-                    
+                        ArrayList tmp_while= new ArrayList();
+                        tmp_while.add(new Function_While(aright,aleft,c,f));
+                        RESULT = tmp_while;
 
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_while",51, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -6318,9 +6325,10 @@ class CUP$Parser$actions {
 		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
-                    
+                    ArrayList tmp_do_while= new ArrayList();
+                    tmp_do_while.add(new Function_Do_While(aright,aleft,c,g));
+                    RESULT = tmp_do_while;
       
-
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_do_while",50, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-8)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
