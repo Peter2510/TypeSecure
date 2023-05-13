@@ -29,72 +29,82 @@ public class Declaration extends Instruction {
     public Object ejecutar(SymbolTable table) {
         //verificar repitencias
         Boolean existe_variable = table.contains(this.id);
-
+        
         if (existe_variable) {
             table.agrearErrores(new Error_analizadores("Semantico", this.id, this.getLinea(), this.getColumna(), "La variable ya fue declarada"));
             return null;
         } else {
-            Variable operacion = (Variable) operation.ejecutar(table);
+            Variable operacion_valor = (Variable) operation.ejecutar(table);
 
-            if (operacion != null) {
-
-                if(operacion.getType()==this.type){
+            if (operacion_valor != null) {
+                System.out.println("Son iguales declaracion");
+                System.out.println("tipo variable " +type);
+                System.out.println("tipo valor "+operacion_valor.getType());
+                System.out.println(operacion_valor.getType()==this.type);
+                
+                if(operacion_valor.getType()==this.type){
                     
                     Variable new_variable = new Variable();
                     new_variable.setAccess(this.access);
                     new_variable.setId(this.id);
                     new_variable.setType(this.type);
-                    new_variable.setValue(operacion.getValue());
+                    new_variable.setValue(operacion_valor.getValue());
                     table.add(new_variable);  
-                    System.out.println(new_variable.getId());
-                    System.out.println(new_variable.getType());
                     
                 }else{
-                    
+                    //inferencia de tipos
+                    System.out.println("No son iguales declaracion");
                     if(this.type==VariableType.PENDIENTE){
                         Variable new_variable = new Variable();
                         new_variable.setAccess(this.access);
                         new_variable.setId(this.id);
-                        new_variable.setValue(operacion.getValue());                        
+                        new_variable.setValue(operacion_valor.getValue());                        
                         
-                        if(operacion.getType()==VariableType.NUMBER){
+                        if(operacion_valor.getType()==VariableType.NUMBER){
                             new_variable.setType(VariableType.NUMBER);
                              table.add(new_variable);
                             
-                            System.out.println(new_variable.getId());
-                            System.out.println(new_variable.getType());
-                        }else if(operacion.getType()==VariableType.BIGINT){
+
+                        }else if(operacion_valor.getType()==VariableType.BIGINT){
                             new_variable.setType(VariableType.BIGINT);
                             table.add(new_variable);
-                            System.out.println(new_variable.getId());
-                            System.out.println(new_variable.getType());
-                        }else if(operacion.getType()==VariableType.BOOLEAN){
+
+                        }else if(operacion_valor.getType()==VariableType.BOOLEAN){
                             new_variable.setType(VariableType.BOOLEAN);
                             table.add(new_variable);
-                            System.out.println(new_variable.getId());
-                            System.out.println(new_variable.getType());
-                        }else if(operacion.getType()==VariableType.STRING){
+                            
+                        }else if(operacion_valor.getType()==VariableType.STRING){
                             new_variable.setType(VariableType.STRING);
                             table.add(new_variable);
-                            System.out.println(new_variable.getId());
-                            System.out.println(new_variable.getType());
-                        }else if(operacion.getType()==VariableType.PENDIENTE){
+                            
+                        }else if(operacion_valor.getType()==VariableType.PENDIENTE){
                             new_variable.setType(this.type);
                             table.add(new_variable);
-                            System.out.println(new_variable.getId());
-                            System.out.println(new_variable.getType());
+                            
                         }
                         
                     }else{
-                        System.out.println("El tipo de la variable y el valor ingresado no son del mismo tipo");
-                        table.agrearErrores(new Error_analizadores("Semantico", this.id,this.getLinea(), this.getColumna(), "El tipo de la variable y el valor ingresado no son del mismo tipo"));    
+                        
+                        //si es undefined el valor
+                        if((this.type == VariableType.NUMBER||this.type == VariableType.BIGINT||this.type == VariableType.BOOLEAN||this.type == VariableType.STRING)&&operacion_valor.getType()==VariableType.PENDIENTE){
+                                Variable new_variable = new Variable();
+                                new_variable.setAccess(this.access);
+                                new_variable.setId(this.id);
+                                new_variable.setValue(operacion_valor.getValue());
+                                new_variable.setType(this.type);
+                                table.add(new_variable);                                
+                        }else{
+                            System.out.println("El tipo de la variable y el valor ingresado no son del mismo tipo");
+                            table.agrearErrores(new Error_analizadores("Semantico", this.id,this.getLinea(), this.getColumna(), "El tipo de la variable y el valor ingresado no son del mismo tipo"));                                
+                        }
+                        
                     }
                         
                 }
                 
             } else {
-                System.out.println("La operacion de la declaracion no tiene un valor permitido");
-                table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La operacion de la declaracion no tiene un valor permitido"));
+                System.out.println("La operacion de la declaracion tiene un valor no permitido");
+                table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La operacion de la declaracion tiene un valor no permitido"));
             }
         }
         

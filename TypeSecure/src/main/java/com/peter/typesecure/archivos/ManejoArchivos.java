@@ -171,7 +171,7 @@ public class ManejoArchivos {
 "opper.min.js\"></script>");
                escribir.println("<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.\n" +
 "min.js\"></script>");
-               escribir.println("<title>Errores Lexico-Sintacticos</title>");
+               escribir.println("<title>Errores Semanticos</title>");
                escribir.println("</head>");
                escribir.println("<body>");
                escribir.println("<h2 class=\"text text-bg-danger mt-2 text-center\">Errores hallados</h2>");

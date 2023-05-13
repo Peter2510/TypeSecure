@@ -37,9 +37,10 @@ public class BinaryOperation extends Instruction {
 
             switch (type) {
                 case SUMA:
-                    //si los valores tiene el mismo tipo
+                    //si los valores tiene el mismo tipo  
                     if (left.getType() == right.getType()) {
-                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER) {
+
+                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER && right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
                             //suma number
                             variable.setValue((Double) left.getValue() + (Double) right.getValue());
                             variable.setType(VariableType.NUMBER);
@@ -59,7 +60,7 @@ public class BinaryOperation extends Instruction {
                             variable.setType(VariableType.BIGINT);
                             return variable;
                         }else{
-                            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La variables no pueden sumarse o concatenarse"));
+                            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La variables no pueden sumarse, no son de tipo number o bigint"));
                             return null;
                         }
 
@@ -69,18 +70,19 @@ public class BinaryOperation extends Instruction {
                             variable.setType(VariableType.STRING);
                             return variable;
                         }else{
-                            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La variables no pueden sumarse o concatenarse"));
+                            table.agrearErrores(new Error_analizadores("Semantico","",this.getLinea(), this.getColumna(), "La variables no pueden sumarse, no tienen el mismo tipo de dato"));
+                            table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "Las variables no pueden concatenarse"));                           
                             return null;
                         }
                     }
                 case RESTA:
                     if (left.getType() == right.getType()) {
-                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER) {
+                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
                             //resta number
                             variable.setValue((Double) left.getValue() - (Double) right.getValue());
                             variable.setType(VariableType.NUMBER);
                             return variable;
-                        } else if (left.getType() == VariableType.BIGINT && right.getType() == VariableType.BIGINT) {
+                        } else if (left.getType() == VariableType.BIGINT && right.getType() == VariableType.BIGINT&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
                             String value_tmp_left = (String) left.getValue();
                             String value_tmp_rigth = (String) right.getValue();
                             int value_left = Integer.parseInt(value_tmp_left.substring(0, value_tmp_left.length() - 1));
@@ -90,33 +92,33 @@ public class BinaryOperation extends Instruction {
                             variable.setType(VariableType.BIGINT);
                             return variable;
                         }else{
-                            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede realizarse la resta, los valores no son de tipo number o bigint"));
+                            table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede realizarse la resta, los valores no son de tipo number o bigint"));
                             return null;
                         }
 
                     } else {
-                        table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede realizarse la resta, los valores no son de tipo number o bigint"));
+                        table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede realizarse la resta, los valores no son de tipo number o bigint"));
                         return null;
                     }
                 case DIVISION:
                 if (left.getType() == right.getType()) {
-                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER) {
+                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
                             //resta number
                             if((Double)right.getValue()==0){
-                                table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede dividirse entre cero"));    
+                                table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede dividirse entre cero"));    
                             }else{
                                 variable.setValue((Double) left.getValue() / (Double) right.getValue());
                                 variable.setType(VariableType.NUMBER);
                                 return variable;                                
                             }
 
-                        } else if (left.getType() == VariableType.BIGINT && right.getType() == VariableType.BIGINT) {
+                        } else if (left.getType() == VariableType.BIGINT && right.getType() == VariableType.BIGINT&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
                             String value_tmp_left = (String) left.getValue();
                             String value_tmp_rigth = (String) right.getValue();
                             int value_left = Integer.parseInt(value_tmp_left.substring(0, value_tmp_left.length() - 1));
                             int value_right = Integer.parseInt(value_tmp_rigth.substring(0, value_tmp_rigth.length() - 1));
                             if(value_right == 0){
-                                table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede dividirse entre cero"));    
+                                table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede dividirse entre cero"));    
                             }else{
                                 String newvalue = value_left / value_right + "n";
                                 variable.setValue(newvalue);
@@ -125,17 +127,17 @@ public class BinaryOperation extends Instruction {
                             }
                             
                         }else{
-                            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede realizarse la division, los valores no son de tipo number o bigint"));
+                            table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede realizarse la division, los valores no son de tipo number o bigint"));
                             return null;
                         }
 
                     } else {
-                        table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede realizarse la division, los valores no son de tipo number o bigint"));
+                        table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede realizarse la division, los valores no son de tipo number o bigint"));
                         return null;
                     }
                 case MULTIPLICACION:
                     if (left.getType() == right.getType()) {
-                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER) {
+                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
                             //resta number
                             variable.setValue((Double) left.getValue() * (Double) right.getValue());
                             variable.setType(VariableType.NUMBER);
@@ -150,17 +152,17 @@ public class BinaryOperation extends Instruction {
                             variable.setType(VariableType.BIGINT);
                             return variable;
                         }else{
-                            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede realizarse la multiplicacion, los valores no son de tipo number o bigint"));
+                            table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede realizarse la multiplicacion, los valores no son de tipo number o bigint"));
                             return null;
                         }
 
                     } else {
-                        table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede realizarse la multiplicacion, los valores no son de tipo number o bigint"));
+                        table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede realizarse la multiplicacion, los valores no son de tipo number o bigint"));
                         return null;
                     }
                 case MOD:
                     if (left.getType() == right.getType()) {
-                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER) {
+                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
                             //resta number
                             variable.setValue((Double) left.getValue() % (Double) right.getValue());
                             variable.setType(VariableType.NUMBER);
@@ -175,18 +177,18 @@ public class BinaryOperation extends Instruction {
                             variable.setType(VariableType.BIGINT);
                             return variable;
                         }else{
-                        table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede calcularse MOD, los valores no son de tipo number o bigint"));
+                        table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede calcularse MOD, los valores no son de tipo number o bigint"));
                         return null;                            
                         }
 
                     } else {
-                        table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede calcularse MOD, los valores no son de tipo number o bigint"));
+                        table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede calcularse MOD, los valores no son de tipo number o bigint"));
                         return null;
                     }                    
             }
 
         } else {
-            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "No puede realizarse la operacion, verifica que los valores esten definidos"));
+            table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede realizarse la operacion, verifica que los valores esten definidos"));
             return null;
         }
         return null;

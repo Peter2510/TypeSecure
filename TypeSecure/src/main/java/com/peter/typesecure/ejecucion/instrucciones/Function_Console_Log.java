@@ -15,20 +15,18 @@ import com.peter.typesecure.vista.Vista;
  *
  * @author GORDILLOG
  */
-public class Function_Console_Log extends Instruction{
+public class Function_Console_Log extends Instruction {
 
     private ArrayList<Instruction> instruccions;
     int contadorError = 0;
-    
-    
-    public Function_Console_Log(int linea, int columna,ArrayList<Instruction> instruccion) {
+
+    public Function_Console_Log(int linea, int columna, ArrayList<Instruction> instruccion) {
         super(linea, columna);
         this.instruccions = instruccion;
     }
 
-    
     public void ejecutar_1(SymbolTable table) {
-    /*    String tmp = "";
+        /*    String tmp = "";
         for(int i = 0; i< instruccions.size() ;i++){
             
             Variable v = (Variable) instruccions.get(i).ejecutar(table);
@@ -47,28 +45,35 @@ public class Function_Console_Log extends Instruction{
         if(contadorError==0){
             System.out.println(tmp);
         }*/
-    
+
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
         String tmp = "";
-        for(int i = 0; i< instruccions.size() ;i++){
-            
+        for (int i = 0; i < instruccions.size(); i++) {
+
             Variable v = (Variable) instruccions.get(i).ejecutar(table);
-            
-            if(v.getValue()!=null){
-                tmp+= v.getValue() + " ";
-                
-            }else{
-                //contadorError++;
-                //table.agrearErrores(new Error_analizadores( "Semantico",instruccions.get(i).getLinea(),instruccion.get(i).getColumna(),"La variable " + v.getId() +" no tiene un valor asignado"));
-                
+
+            if (v != null) {
+                if (v.getValue() != null) {
+                    System.out.println("con " + v.toString());
+                    tmp += v.getValue() + " ";
+
+                } else {
+                    contadorError++;
+                    table.agrearErrores(new Error_analizadores("Semantico", instruccions.get(i).getLinea(), instruccions.get(i).getColumna(), "La variable " + v.getId() + " no tiene un valor asignado"));
+                    return null;
+                }
+            } else {
+                contadorError++;
+                //table.agrearErrores(new Error_analizadores("Semantico", instruccions.get(i).getLinea(), instruccions.get(i).getColumna(), "No se tiene un valor asignado"));
+                return null;
             }
-            
+
         }
-        
-        if(contadorError==0){
+
+        if (contadorError == 0) {
             System.out.println(tmp);
             Vista.consolaText.setText(tmp);
         }
@@ -81,5 +86,5 @@ public class Function_Console_Log extends Instruction{
     public String toString() {
         return "Function_Console_Log{" + "instruccions=" + instruccions + ", contadorError=" + contadorError + '}';
     }
-    
+
 }

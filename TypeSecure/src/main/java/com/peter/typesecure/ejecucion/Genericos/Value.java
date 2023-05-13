@@ -51,20 +51,22 @@ public class Value extends Instruction {
                 variable.setValue((String)value);
                 return variable;
             case ID:
-                Object tmp = table.getById((String)value);
+                Variable tmp = table.getById((String)value);
+                
                 if(tmp!=null){
-                    Variable var = (Variable)tmp;
+                    Variable var = tmp;
                     variable.setId(var.getId());
                     variable.setType(var.getType());
                     variable.setValue(var.getValue());
                     return variable;
                 }else{
-                    System.out.println("La variable" + this.value + " no esta definida");
+                    System.out.println("La variable " + this.value + " no esta definida");
                      table.agrearErrores(new Error_analizadores("Semantico", (String)value, this.getLinea(), this.getColumna(), "La variable no esta definida"));
+                     return null;
                 }
         }
         
-        return variable;
+        return null;
         
     }
 

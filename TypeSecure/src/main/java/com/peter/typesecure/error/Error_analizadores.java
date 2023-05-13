@@ -11,7 +11,7 @@ package com.peter.typesecure.error;
  */
 public class Error_analizadores {
     String tipo;
-    String lexema;
+    String lexema="";
     int fila;
     int columna;
     String descripcion;

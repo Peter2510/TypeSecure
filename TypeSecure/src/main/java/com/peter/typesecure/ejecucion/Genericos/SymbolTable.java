@@ -30,25 +30,34 @@ public class SymbolTable extends ArrayList<Variable> {
         this.add(variable);
     }
 
-    public Object getById(String id) {
-        //System.out.println(this);
+    public Variable getById(String id) {
+        boolean encotro_variable=false;
         for (int i = 0; i < this.size(); i++) {
             if (this.get(i).getId().equals(id)) {
           //      System.out.println("existe el id " + this.get(i) );
+                encotro_variable = true;
                 return this.get(i);
             }
+        }
+        if(encotro_variable==false){
+            return null;
         }
         return null;
     }
 
     public boolean contains(String id) {
+        boolean encontro_variable = false;
         for (int i = 0; i < this.size(); i++) {
-            if (this.get(i).getId() == id) {
+            if (this.get(i).getId().equals(id)) {
+                encontro_variable = true;
                 return true;
-            } else {
-                return false;
             }
         }
+        
+        if(encontro_variable==false){
+            return false;
+        }
+        
         return false;
     }
 
