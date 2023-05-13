@@ -6149,10 +6149,14 @@ class CUP$Parser$actions {
 		int jright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Object j = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
-
-/*for(let i = 0; i<2;i++){
-    console.log(i);
-}*/
+    //verificar que la variable declarada se let
+    Instruction assig = (Instruction)c.get(0);
+    ArrayList tmp_for = new ArrayList();
+    tmp_for.add(new Function_For(aright,aleft,assig,d,f,i));
+    RESULT = tmp_for;
+    /*for(let i = 0; i<2;i++){
+        console.log(i);
+    }*/
  
 
     
@@ -6201,7 +6205,10 @@ class CUP$Parser$actions {
 //for(let i= k; i<3;i++){
     //console.log(i);
 //}
-
+    Instruction assig = (Instruction)c.get(0);
+    ArrayList tmp_for = new ArrayList();
+    tmp_for.add(new Function_For(aright,aleft,assig,d,f,i));
+    RESULT = tmp_for;
 
     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funcion_for",48, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -6217,6 +6224,7 @@ class CUP$Parser$actions {
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                             //id++
+                            RESULT = a;
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("accion_asignacion_for",49, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -6231,6 +6239,7 @@ class CUP$Parser$actions {
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                             //id--
+                            RESULT = a;
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("accion_asignacion_for",49, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
@@ -6251,7 +6260,7 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                             //id = instruction;
-
+                            RESULT = new Assignment(a,aleft,a,c);
                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("accion_asignacion_for",49, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

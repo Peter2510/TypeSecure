@@ -134,16 +134,15 @@ public class Vista extends javax.swing.JFrame {
         PanelPrinicipalLayout.setHorizontalGroup(
             PanelPrinicipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelPrinicipalLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(PanelPrinicipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelPrinicipalLayout.createSequentialGroup()
-                        .addGap(447, 447, 447)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelPrinicipalLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(PanelPrinicipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrinicipalLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(448, 448, 448))
         );
         PanelPrinicipalLayout.setVerticalGroup(
             PanelPrinicipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
