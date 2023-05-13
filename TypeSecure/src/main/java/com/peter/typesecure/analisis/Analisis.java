@@ -42,7 +42,7 @@ public class Analisis {
             
             System.out.println("No hay errores en los analizadores");
             Logica a = new Logica();
-            a.hola(parser.instructions);
+            a.Ejecutar(parser.instructions);
             
                         
         }else{
@@ -62,10 +62,7 @@ public class Analisis {
             }
             
             parser.errores.clear();
-            
-            /*for(Error_analizadores errore : parser.errores){
-                System.out.println(errore);
-            }*/
+           
         }
         
     }

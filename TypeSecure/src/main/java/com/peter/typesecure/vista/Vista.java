@@ -78,7 +78,7 @@ public class Vista extends javax.swing.JFrame {
         TabbedPane = new javax.swing.JTabbedPane();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        consolaText = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         Archivo = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -125,9 +125,9 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        consolaText.setColumns(20);
+        consolaText.setRows(5);
+        jScrollPane1.setViewportView(consolaText);
 
         javax.swing.GroupLayout PanelPrinicipalLayout = new javax.swing.GroupLayout(PanelPrinicipal);
         PanelPrinicipal.setLayout(PanelPrinicipalLayout);
@@ -324,6 +324,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenu Archivo;
     private javax.swing.JPanel PanelPrinicipal;
     private javax.swing.JTabbedPane TabbedPane;
+    public static javax.swing.JTextArea consolaText;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -347,6 +348,5 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

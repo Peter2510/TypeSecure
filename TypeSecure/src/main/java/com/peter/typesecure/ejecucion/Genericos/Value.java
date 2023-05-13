@@ -4,6 +4,8 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.error.Error_analizadores;
+
 /**
  *
  * @author GORDILLOG
@@ -21,7 +23,7 @@ public class Value extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
-    /*    Variable variable = new Variable();
+        Variable variable = new Variable();
         
         switch (this.type) {
             case NUMBER:
@@ -38,11 +40,11 @@ public class Value extends Instruction {
                 return variable;               
             case TRUE:
                 variable.setType(VariableType.BOOLEAN);
-                variable.setValue((Boolean)value);
+                variable.setValue(Boolean.parseBoolean((String)value));
                 return variable;
             case FALSE:
                 variable.setType(VariableType.BOOLEAN);
-                variable.setValue((Boolean)value);
+                variable.setValue(Boolean.parseBoolean((String)value));
                 return variable;
             case UNDEFINED:
                 variable.setType(VariableType.PENDIENTE);
@@ -58,11 +60,12 @@ public class Value extends Instruction {
                     return variable;
                 }else{
                     System.out.println("La variable" + this.value + " no esta definida");
+                     table.agrearErrores(new Error_analizadores("Semantico", (String)value, this.getLinea(), this.getColumna(), "La variable no esta definida"));
                 }
         }
         
-        return variable;*/
-        return null;
+        return variable;
+        
     }
 
     public Object getValue() {

@@ -9,6 +9,7 @@ import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.Variable;
 import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
+import com.peter.typesecure.vista.Vista;
 
 /**
  *
@@ -51,7 +52,7 @@ public class Function_Console_Log extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-    /*    String tmp = "";
+        String tmp = "";
         for(int i = 0; i< instruccions.size() ;i++){
             
             Variable v = (Variable) instruccions.get(i).ejecutar(table);
@@ -69,9 +70,10 @@ public class Function_Console_Log extends Instruction{
         
         if(contadorError==0){
             System.out.println(tmp);
-        }*/
-        System.out.println("console.log");
-        System.out.println(instruccions);
+            Vista.consolaText.setText(tmp);
+        }
+        /*System.out.println("console.log");
+        System.out.println(instruccions);*/
         return null;
     }
 

@@ -4,6 +4,8 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.error.Error_analizadores;
+
 /**
  *
  * @author GORDILLOG
@@ -14,12 +16,11 @@ public class Declaration extends Instruction {
     private VariableType type;
     private String id;
     private Instruction operation;
-    
-    
-    public Declaration(Object linea, Object columna,Object access,Object type,String id, Object operation) {
+
+    public Declaration(Object linea, Object columna, Object access, Object type, String id, Object operation) {
         super(linea, columna);
-        this.access= (AccessType)access;
-        this.type = (VariableType)type;
+        this.access = (AccessType) access;
+        this.type = (VariableType) type;
         this.id = id;
         this.operation = (Instruction) operation;
     }
@@ -27,18 +28,78 @@ public class Declaration extends Instruction {
     @Override
     public Object ejecutar(SymbolTable table) {
         //verificar repitencias
-      /*  Variable a = (Variable) operation.ejecutar(table);
-        Variable ab = new Variable();
-        ab.setId(this.id);
-        ab.setType(type);
-        ab.setValue(a.getValue());
-        table.add(ab);*/
-        System.out.println("Declaration");
-        System.out.println(access);
-        System.out.println(type);
-        System.out.println(id);
-        System.out.println(operation);
+        Boolean existe_variable = table.contains(this.id);
+
+        if (existe_variable) {
+            table.agrearErrores(new Error_analizadores("Semantico", this.id, this.getLinea(), this.getColumna(), "La variable ya fue declarada"));
+            return null;
+        } else {
+            Variable operacion = (Variable) operation.ejecutar(table);
+
+            if (operacion != null) {
+
+                if(operacion.getType()==this.type){
+                    
+                    Variable new_variable = new Variable();
+                    new_variable.setAccess(this.access);
+                    new_variable.setId(this.id);
+                    new_variable.setType(this.type);
+                    new_variable.setValue(operacion.getValue());
+                    table.add(new_variable);  
+                    System.out.println(new_variable.getId());
+                    System.out.println(new_variable.getType());
+                    
+                }else{
+                    
+                    if(this.type==VariableType.PENDIENTE){
+                        Variable new_variable = new Variable();
+                        new_variable.setAccess(this.access);
+                        new_variable.setId(this.id);
+                        new_variable.setValue(operacion.getValue());                        
+                        
+                        if(operacion.getType()==VariableType.NUMBER){
+                            new_variable.setType(VariableType.NUMBER);
+                             table.add(new_variable);
+                            
+                            System.out.println(new_variable.getId());
+                            System.out.println(new_variable.getType());
+                        }else if(operacion.getType()==VariableType.BIGINT){
+                            new_variable.setType(VariableType.BIGINT);
+                            table.add(new_variable);
+                            System.out.println(new_variable.getId());
+                            System.out.println(new_variable.getType());
+                        }else if(operacion.getType()==VariableType.BOOLEAN){
+                            new_variable.setType(VariableType.BOOLEAN);
+                            table.add(new_variable);
+                            System.out.println(new_variable.getId());
+                            System.out.println(new_variable.getType());
+                        }else if(operacion.getType()==VariableType.STRING){
+                            new_variable.setType(VariableType.STRING);
+                            table.add(new_variable);
+                            System.out.println(new_variable.getId());
+                            System.out.println(new_variable.getType());
+                        }else if(operacion.getType()==VariableType.PENDIENTE){
+                            new_variable.setType(this.type);
+                            table.add(new_variable);
+                            System.out.println(new_variable.getId());
+                            System.out.println(new_variable.getType());
+                        }
+                        
+                    }else{
+                        System.out.println("El tipo de la variable y el valor ingresado no son del mismo tipo");
+                        table.agrearErrores(new Error_analizadores("Semantico", this.id,this.getLinea(), this.getColumna(), "El tipo de la variable y el valor ingresado no son del mismo tipo"));    
+                    }
+                        
+                }
+                
+            } else {
+                System.out.println("La operacion de la declaracion no tiene un valor permitido");
+                table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La operacion de la declaracion no tiene un valor permitido"));
+            }
+        }
+        
         return null;
+
     }
 
     public AccessType getAccess() {
@@ -72,10 +133,10 @@ public class Declaration extends Instruction {
     public void setOperation(Instruction operation) {
         this.operation = operation;
     }
-   
+
     @Override
     public String toString() {
         return "Declaration{" + "access=" + access + ", type=" + type + ", id=" + id + ", operation=" + operation + '}';
     }
-    
+
 }

@@ -5,6 +5,7 @@
 package com.peter.typesecure.logica;
 
 import com.peter.typesecure.arbol.Nodo;
+import com.peter.typesecure.archivos.ManejoArchivos;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import java.util.ArrayList;
@@ -15,12 +16,18 @@ import java.util.ArrayList;
  */
 public class Logica {
 
-    public void  hola(ArrayList<Instruction> instruciones) {
+    public void  Ejecutar(ArrayList<Instruction> instruciones) {
         SymbolTable tablaE = new SymbolTable();
         for (int i = 0; i < instruciones.size(); i++) {
             
             instruciones.get(i).ejecutar(tablaE);
         }
+        
+        if(tablaE.getErrores().isEmpty()==false){
+            ManejoArchivos ma = new ManejoArchivos();
+            ma.CrearErrorHTML("Semanticos", tablaE.getErrores());
+        }
+        
     }
     
     
