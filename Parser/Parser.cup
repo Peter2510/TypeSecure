@@ -750,24 +750,24 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                |  MATH:a PUNTO:b RANDOM:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:f
                                 {:
                                     
-                                    RESULT = new Value(aright,aleft,Math.random(),ValueType.NUMBER);    
+                                    RESULT = new Value(aright,aleft,Math.random()+"",ValueType.NUMBER);    
 
                                 :}
                                |  MATH:a PUNTO:b E:c
                                 {:
                                         
-                                    RESULT = new Value(aright,aleft,Math.E,ValueType.NUMBER);    
+                                    RESULT = new Value(aright,aleft,Math.E+"",ValueType.NUMBER);    
                                 :}
                                |  MATH:a PUNTO:b PI:c
                                 {:
 
-                                    RESULT = new Value(aright,aleft,Math.PI,ValueType.NUMBER);    
+                                    RESULT = new Value(aright,aleft,Math.PI+"",ValueType.NUMBER);    
 
                                 :}
                                |  MATH:a PUNTO:b SQRT2:c
                                 {:
                                     
-                                    RESULT = new Value(aright,aleft,Math.sqrt(2),ValueType.NUMBER);
+                                    RESULT = new Value(aright,aleft,Math.sqrt(2)+"",ValueType.NUMBER);
                                         
                                 :}
                               ;
