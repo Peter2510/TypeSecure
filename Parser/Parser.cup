@@ -606,8 +606,7 @@ operaciones_matematicas ::=
                           MENOS:a operaciones_matematicas:b       
                                         {:
                                              
-
-                                            RESULT = new BinaryOperation(aright,aleft,OperationType.UMINUS,null,b);
+                                           RESULT = new Minus(aright,aleft,b);
 
                                         :}%prec UMENOS 
                         | MAS:a operaciones_matematicas:b 
@@ -776,7 +775,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
 incremento ::= ID:id INCREMENTO:incremento
                 {:
                 //id++
-                    RESULT = new Increase(idright,idleft,id);
+                    RESULT = new Increase(idright,idleft,id); 
                 :}
 
            ;

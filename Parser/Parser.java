@@ -2261,8 +2261,7 @@ class CUP$Parser$actions {
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                                              
-
-                                            RESULT = new BinaryOperation(aright,aleft,OperationType.UMINUS,null,b);
+                                           RESULT = new Minus(aright,aleft,b);
 
                                         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("operaciones_matematicas",12, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -2972,7 +2971,7 @@ class CUP$Parser$actions {
 		Object incremento = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                 //id++
-                    RESULT = new Increase(idright,idleft,id);
+                    RESULT = new Increase(idright,idleft,id); 
                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("incremento",14, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }

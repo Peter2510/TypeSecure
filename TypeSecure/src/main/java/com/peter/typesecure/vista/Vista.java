@@ -278,10 +278,12 @@ public class Vista extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Compilar
+        consolaText.setText("");
        compilar();   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        consolaText.setText("");
         compilar();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 

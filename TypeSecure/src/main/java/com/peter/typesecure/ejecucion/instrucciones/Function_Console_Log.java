@@ -57,7 +57,7 @@ public class Function_Console_Log extends Instruction {
 
             if (v != null) {
                 if (v.getValue() != null) {
-                    System.out.println("con " + v.toString());
+                    
                     tmp += v.getValue() + " ";
 
                 } else {
@@ -74,8 +74,7 @@ public class Function_Console_Log extends Instruction {
         }
 
         if (contadorError == 0) {
-            System.out.println(tmp);
-            Vista.consolaText.setText(tmp);
+            Vista.consolaText.append(tmp+"\n");
         }
         /*System.out.println("console.log");
         System.out.println(instruccions);*/
