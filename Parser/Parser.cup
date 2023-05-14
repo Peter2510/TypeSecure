@@ -738,7 +738,7 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                |  MATH:a PUNTO:b POW:c    PARENTESIS_ABIERTO:d operaciones_matematicas:e COMA:f operaciones_matematicas:g PARENTESIS_CERRADO:h
                                 {:
 
-                                    RESULT = new Function_Math(aright,aleft,MathType.POW,e,f);
+                                    RESULT = new Function_Math(aright,aleft,MathType.POW,e,g);
 
                                 :}
                                |  MATH:a PUNTO:b SQRT:c   PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f

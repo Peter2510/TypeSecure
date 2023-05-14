@@ -2828,7 +2828,7 @@ class CUP$Parser$actions {
 		Object h = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
-                                    RESULT = new Function_Math(aright,aleft,MathType.POW,e,f);
+                                    RESULT = new Function_Math(aright,aleft,MathType.POW,e,g);
 
                                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("funciones_numericas_estaticas",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

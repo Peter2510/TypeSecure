@@ -125,7 +125,8 @@ public class BinaryOperation extends Instruction {
                             if(value_right == 0){
                                 table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede dividirse entre cero"));    
                             }else{
-                                String newvalue = value_left / value_right + "n";
+                                int value_int = (int) value_left / value_right;
+                                String newvalue = value_int + "n";
                                 variable.setValue(newvalue);
                                 variable.setType(VariableType.BIGINT);
                                 return variable;
