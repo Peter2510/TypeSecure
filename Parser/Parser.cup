@@ -1131,7 +1131,12 @@ operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                             :}
                     | NOT:a operaciones_logicas:b
                             {:
-                                RESULT = new BinaryOperation(aright,aleft,OperationType.NOT,null,b);
+                                RESULT = new Not(aright,aleft,b);
+                                
+                            :}
+                    | NOT:a operaciones_matematicas:b
+                            {:
+                                RESULT = new Not(aright,aleft,b);
                                 
                             :}
                     | PARENTESIS_ABIERTO:a operaciones_logicas:b PARENTESIS_CERRADO:c

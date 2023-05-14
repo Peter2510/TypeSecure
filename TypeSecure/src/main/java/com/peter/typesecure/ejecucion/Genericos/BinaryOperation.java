@@ -184,7 +184,48 @@ public class BinaryOperation extends Instruction {
                     } else {
                         table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede calcularse MOD, los valores no son de tipo number o bigint"));
                         return null;
-                    }                    
+                    }
+                case AND:
+                    if (left.getType() == right.getType()) {
+                        if (left.getType() == VariableType.BOOLEAN && right.getType() == VariableType.BOOLEAN&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
+                            //and
+                            variable.setValue((Boolean) left.getValue() && (Boolean) right.getValue());
+                            variable.setType(VariableType.BOOLEAN);
+                            return variable;
+                        } else{
+                        table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede calcularse AND, los dos valores no son de tipo Boolean"));
+                        return null;                            
+                        }
+
+                    } else {
+                        table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede calcularse AND, los dos valores no son de tipo Boolean"));
+                        return null;
+                    }
+                case OR:
+                    if (left.getType() == right.getType()) {
+                        if (left.getType() == VariableType.BOOLEAN && right.getType() == VariableType.BOOLEAN&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
+                            //or,p
+                            variable.setValue((Boolean) left.getValue() || (Boolean) right.getValue());
+                            variable.setType(VariableType.BOOLEAN);
+                            return variable;
+                        } else{
+                        table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede calcularse OR, los dos valores no son de tipo Boolean"));
+                        return null;                            
+                        }
+
+                    } else {
+                        table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede calcularse OR, los dos valores no son de tipo Boolean"));
+                        return null;
+                    }
+                    
+                /*case MAYOR_QUE:
+                case MENOR_QUE:
+                case MAYOR_IGUAL:
+                case MENOR_IGUAL:
+                case COMPARACION:
+                case DISTINTO:
+                */
+                    
             }
 
         } else {
