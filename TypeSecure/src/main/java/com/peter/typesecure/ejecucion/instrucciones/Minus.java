@@ -36,6 +36,15 @@ public class Minus extends Instruction {
                     new_variable.setType(VariableType.NUMBER);
                     new_variable.setValue((Double)valor_tmp.getValue()*-1);
                     return new_variable;
+                }else if(valor_tmp.getType()==VariableType.BIGINT){
+                    new_variable.setType(VariableType.BIGINT);
+                    String valor_String = valor_tmp.getValue().toString();
+                    int valor_int = Integer.parseInt(valor_String.substring(0, valor_String.length()-1));
+                    new_variable.setValue(valor_int*-1+"n");
+                    return new_variable;                    
+                }else{
+                    table.agrearErrores(new Error_analizadores("Semantico", valor_tmp.getId(),this.getLinea(), this.getColumna(), "No puede definirse como negativo un valor que no sea number o bigint"));
+                    return null;
                 }
                 
             }else{
@@ -47,7 +56,7 @@ public class Minus extends Instruction {
             table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede realizarse la operacion, verifica que los valores esten definidos"));
             return null;
         }
-        return null;
+        
     }
 
     public Instruction getInstruction() {
