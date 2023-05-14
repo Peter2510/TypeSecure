@@ -37,11 +37,7 @@ public class Declaration extends Instruction {
             Variable operacion_valor = (Variable) operation.ejecutar(table);
 
             if (operacion_valor != null) {
-                System.out.println("Son iguales declaracion");
-                System.out.println("tipo variable " +type);
-                System.out.println("tipo valor "+operacion_valor.getType());
-                System.out.println(operacion_valor.getType()==this.type);
-                
+                                
                 if(operacion_valor.getType()==this.type){
                     
                     Variable new_variable = new Variable();
@@ -53,7 +49,7 @@ public class Declaration extends Instruction {
                     
                 }else{
                     //inferencia de tipos
-                    System.out.println("No son iguales declaracion");
+                    
                     if(this.type==VariableType.PENDIENTE){
                         Variable new_variable = new Variable();
                         new_variable.setAccess(this.access);
@@ -94,7 +90,7 @@ public class Declaration extends Instruction {
                                 new_variable.setType(this.type);
                                 table.add(new_variable);                                
                         }else{
-                            System.out.println("El tipo de la variable y el valor ingresado no son del mismo tipo");
+                            //System.out.println("El tipo de la variable y el valor ingresado no son del mismo tipo");
                             table.agrearErrores(new Error_analizadores("Semantico", this.id,this.getLinea(), this.getColumna(), "El tipo de la variable y el valor ingresado no son del mismo tipo"));                                
                         }
                         
@@ -103,7 +99,7 @@ public class Declaration extends Instruction {
                 }
                 
             } else {
-                System.out.println("La operacion de la declaracion tiene un valor no permitido");
+                //System.out.println("La operacion de la declaracion tiene un valor no permitido");
                 table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La operacion de la declaracion tiene un valor no permitido"));
             }
         }
