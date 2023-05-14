@@ -4,6 +4,8 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.error.Error_analizadores;
+
 /**
  *
  * @author GORDILLOG
@@ -21,9 +23,32 @@ public class Assignment extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Asignacion");
-        System.out.println(id);
-        System.out.println(operation);
+        Variable variable = table.getById(this.id);
+        
+        if(variable!=null){
+            
+            Variable var_tmp = (Variable) this.operation.ejecutar(table);
+            
+            if(var_tmp!=null){
+                
+                if(variable.getType() == var_tmp.getType()&&variable.getAccess()==AccessType.LET){
+                    variable.setValue(var_tmp.getValue());
+                }else{
+                table.agrearErrores(new Error_analizadores("Semantico",this.id,this.getLinea(), this.getColumna(), "La variable '"+ this.id +"' no puede cambiar de valor al ser CONST "));        
+                return null;
+                }
+                
+            }else{
+                table.agrearErrores(new Error_analizadores("Semantico",this.id ,this.getLinea(), this.getColumna(), "La variable a asignar "+ this.id +" no esta definida "));    
+                return null;
+            }
+            
+            
+        }else{
+            table.agrearErrores(new Error_analizadores("Semantico",this.id ,this.getLinea(), this.getColumna(), "La variable no ha sido declarada"));
+            return null;
+        }
+        
         return null;
     }
 
