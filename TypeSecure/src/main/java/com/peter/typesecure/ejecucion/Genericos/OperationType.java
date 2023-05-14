@@ -17,14 +17,9 @@ public enum OperationType {
     MENOR_IGUAL,
     COMPARACION,
     DISTINTO,
-    NOT,
     SUMA,
     RESTA,
     MULTIPLICACION,
     DIVISION,
     MOD,
-    UMINUS,
-    CONCATENACION,
-    INCREMENTO,
-    DECREMENTO
 }
