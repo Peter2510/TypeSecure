@@ -218,8 +218,9 @@ public class BinaryOperation extends Instruction {
                         return null;
                     }
                     
-                /*case MAYOR_QUE:
-                case MENOR_QUE:
+                case MAYOR_QUE:
+                    
+                /*case MENOR_QUE:
                 case MAYOR_IGUAL:
                 case MENOR_IGUAL:
                 case COMPARACION:

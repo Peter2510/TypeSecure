@@ -34,6 +34,8 @@ public class Not extends Instruction{
                 tmp.setValue(!valor);
                 tmp.setType(VariableType.BOOLEAN);
                 return tmp;
+            }else{
+                table.agrearErrores(new Error_analizadores("Semantico",variable_temporal.getValue()+"", this.getLinea(), this.getColumna(), "No se puede negar un valor no Booleano"));
             }
         }else{
             table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La variable no tiene valor"));
