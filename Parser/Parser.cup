@@ -459,12 +459,6 @@ asignacion ::= ID:id ASIGNACION:igual variable_valor:value PUNTO_COMA:puntoComa 
             tmp_asignacion.add(new Assignment(idright,idleft,id,value));
             RESULT = tmp_asignacion;
                                                                                 :}
-            | ID:id ASIGNACION:igual variable_valor:value  {: 
-                                                                                    
-            ArrayList tmp_asignacion = new ArrayList();
-            tmp_asignacion.add(new Assignment(idright,idleft,id,value));
-            RESULT = tmp_asignacion;
-                                                                                :}                                                                            
             ;
 
 declaracion_variable ::= tipo_acceso_variable:a id_valor_variable_lista:b PUNTO_COMA:c
@@ -481,20 +475,7 @@ declaracion_variable ::= tipo_acceso_variable:a id_valor_variable_lista:b PUNTO_
                 RESULT = tmp_declaracion;
            
         :}
-            |           tipo_acceso_variable:a id_valor_variable_lista:b 
-        {: 
 
-                ArrayList tmp_declaracion = new ArrayList();
-
-                for(int i = 0;i<b.size();i++){
-
-                    Variable_Aux variable = (Variable_Aux) b.get(i);    
-                    tmp_declaracion.add(new Declaration(aright,aleft,a,variable.getType(),variable.getId(),variable.getValue()));
-                }
-
-                RESULT = tmp_declaracion;
-           
-        :}
                       ;
 
 id_valor_variable_lista ::=  id_valor_variable_lista:a COMA:b id_valor_variable:c
@@ -612,6 +593,12 @@ instruccion ::=  operaciones_matematicas:a {:
 
                                  :}
                 
+                | incremento:a {:
+                                                RESULT = a;
+                             :}
+                | decremento:a {:
+                                                RESULT = a;
+                             :}
                 ;
 
 
@@ -785,6 +772,21 @@ funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d oper
                                 :}
                               ;
 
+incremento ::= ID:id INCREMENTO:incremento
+                {:
+                //id++
+                    RESULT = new Increase(idright,idleft,id); 
+                :}
+
+           ;
+
+decremento ::= ID:id DECREMENTO:decremento
+                {:
+                     //id--
+                     RESULT = new Decrement(idright,idleft,id);
+                :}
+            ;
+
 funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
                 {:
                     //id++;
@@ -794,22 +796,6 @@ funcion_incremento_decremento ::= ID:a INCREMENTO:b PUNTO_COMA:c
                 :}
 
                |  ID:a DECREMENTO:b PUNTO_COMA:c
-               {:
-                    //id--;
-                    ArrayList tmp_function_decrement = new ArrayList();
-                    tmp_function_decrement.add(new Function_Decrement(aright,aleft,a));
-                    RESULT = tmp_function_decrement;
-
-                :}
-                | ID:a INCREMENTO:b 
-                {:
-                    //id++;
-                    ArrayList tmp_function_increase = new ArrayList();
-                    tmp_function_increase.add(new Function_Increase(aright,aleft,a));
-                    RESULT = tmp_function_increase;
-                :}
-
-               |  ID:a DECREMENTO:b 
                {:
                     //id--;
                     ArrayList tmp_function_decrement = new ArrayList();
@@ -1425,15 +1411,6 @@ funcion_console_log ::= CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instr
                         RESULT = tmp_console;
 
                     :}
-                    |CONSOLE:a PUNTO:b LOG:c PARENTESIS_ABIERTO:d lista_instrucciones_console:e PARENTESIS_CERRADO:f 
-                    {:
-                         
-                        
-                        ArrayList tmp_console = new ArrayList();
-                        tmp_console.add(new Function_Console_Log(aright,aleft,e));
-                        RESULT = tmp_console;
-
-                    :}
             ;
 
 lista_instrucciones_console ::= lista_instrucciones_console:a COMA:b instruccion:c
@@ -1642,7 +1619,7 @@ funcion_return ::= RETURN:a instruccion:b PUNTO_COMA:c
                         RESULT = tmp_return;    
 
                     :}
-                    | RETURN:a PUNTO_COMA:b
+                | RETURN:a PUNTO_COMA:b
                     {:
 
                         ArrayList tmp_return = new ArrayList();
@@ -1650,15 +1627,6 @@ funcion_return ::= RETURN:a instruccion:b PUNTO_COMA:c
                         RESULT = tmp_return;    
  
                     :}
-                    |RETURN:a instruccion:b 
-                    {:
-                        //return hola;
-                        ArrayList tmp_return = new ArrayList();
-                        tmp_return.add(new Function_Return_Instruction(aright,aleft,b));
-                        RESULT = tmp_return;    
-
-                    :}
-
                 ;
 
 parametros_funcion_asignacion ::= parametros_funcion_asignacion:a COMA:b instruccion:c
@@ -1684,22 +1652,6 @@ llamada_funcion_normal ::= ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c PUNTO_
 
                            :}
                         |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
-                           {:
-                        
-                                ArrayList tmp_function_normal1 = new ArrayList();
-                                tmp_function_normal1.add(new Function_Call_Parameters_Function(aright,aleft,a,c));
-                                RESULT = tmp_function_normal1;    
-
-                           :}
-                            |ID:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c 
-                           {:
-
-                                ArrayList tmp_function_normal = new ArrayList();
-                                tmp_function_normal.add(new Function_Call_Simple_Function(aright,aleft,a));
-                                RESULT = tmp_function_normal;    
-
-                           :}
-                        |  ID:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d 
                            {:
                         
                                 ArrayList tmp_function_normal1 = new ArrayList();
@@ -1781,22 +1733,10 @@ instruccion_break ::= BREAK:a PUNTO_COMA:b
                         tmp_BREAK.add(new Instruction_Break(aright,aleft));
                         RESULT = tmp_BREAK;    
                     :}
-|                    BREAK:a 
-                    {: 
-                        ArrayList tmp_BREAK = new ArrayList();
-                        tmp_BREAK.add(new Instruction_Break(aright,aleft));
-                        RESULT = tmp_BREAK;    
-                    :}
                   ;
 
 
 instruccion_continue ::= CONTINUE:a PUNTO_COMA:b
-                    {: 
-                        ArrayList tmp_continue= new ArrayList();
-                        tmp_continue.add(new Instruction_Continue(aright,aleft));
-                        RESULT = tmp_continue;    
-                    :}
-                |   CONTINUE:a 
                     {: 
                         ArrayList tmp_continue= new ArrayList();
                         tmp_continue.add(new Instruction_Continue(aright,aleft));
@@ -1838,19 +1778,17 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
             ;
 
 
-accion_asignacion_for ::= ID:id INCREMENTO:incremento
+accion_asignacion_for ::= incremento:a
                         {:
-                        //id++
-                            RESULT = new Increase(idright,idleft,id); 
+                            //id++
+                            RESULT = a;
                         :}
 
-                       | ID:id DECREMENTO:decremento
+                       | decremento:a
                         {:
-                     
-                        //id--
-                         RESULT = new Decrement(idright,idleft,id);
-
-                        :}                    
+                            //id--
+                            RESULT = a;
+                        :}                       
                         
                        | ID:a ASIGNACION:b instruccion:c
                         
@@ -1880,25 +1818,10 @@ funcion_do_while ::= DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CE
                     RESULT = tmp_do_while;
       
                 :}
-                |   DO:a CORCHETE_ABIERTO:b instrucciones_funcion:c CORCHETE_CERRADO:d WHILE:e PARENTESIS_ABIERTO:f instruccion:g PARENTESIS_CERRADO:h 
-                {:
-
-                    ArrayList tmp_do_while= new ArrayList();
-                    tmp_do_while.add(new Function_Do_While(aright,aleft,c,g));
-                    RESULT = tmp_do_while;
-      
-                :}
                  ;
 
 
 funcion_printAst ::= PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d PUNTO_COMA:e
-                    {:
-                        ArrayList tmp_gst= new ArrayList();
-                        tmp_gst.add(new Function_Print_AST(aright,aleft,c));
-                        RESULT = tmp_gst;    
-
-                    :}
-                | PRINTAST:a PARENTESIS_ABIERTO:b instruccion:c PARENTESIS_CERRADO:d 
                     {:
                         ArrayList tmp_gst= new ArrayList();
                         tmp_gst.add(new Function_Print_AST(aright,aleft,c));
@@ -1916,13 +1839,4 @@ funcion_getSymbolTable ::= GETSYMBOLTABLE:a PARENTESIS_ABIERTO:b PARENTESIS_CERR
                         RESULT = tmp_gst;    
                         
                     :}
-                    | GETSYMBOLTABLE:a PARENTESIS_ABIERTO:b PARENTESIS_CERRADO:c 
-                    {:
-
-                        ArrayList tmp_gst= new ArrayList();
-                        tmp_gst.add(new Function_Get_Symbol_Table(aright,aleft));
-                        RESULT = tmp_gst;    
-                        
-                    :}
                      ;
-
