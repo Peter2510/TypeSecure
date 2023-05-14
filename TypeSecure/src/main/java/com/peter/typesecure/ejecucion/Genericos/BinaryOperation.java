@@ -219,7 +219,29 @@ public class BinaryOperation extends Instruction {
                     }
                     
                 case MAYOR_QUE:
-                    
+                    if (left.getType() == right.getType()) {
+                        if (left.getType() == VariableType.NUMBER && right.getType() == VariableType.NUMBER&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
+                            //>
+                            variable.setValue((Double) left.getValue() > (Double) right.getValue());
+                            variable.setType(VariableType.BOOLEAN);
+                            return variable;
+                        } else if (left.getType() == VariableType.BIGINT && right.getType() == VariableType.BIGINT&&right.getValue().toString()!="undefined"&&left.getValue().toString()!="undefined") {
+                            String value_tmp_left = (String) left.getValue();
+                            String value_tmp_rigth = (String) right.getValue();
+                            int value_left = Integer.parseInt(value_tmp_left.substring(0, value_tmp_left.length() - 1));
+                            int value_right = Integer.parseInt(value_tmp_rigth.substring(0, value_tmp_rigth.length() - 1));
+                            variable.setValue(value_left > value_right);
+                            variable.setType(VariableType.BOOLEAN);
+                            return variable;
+                        }else{
+                            table.agrearErrores(new Error_analizadores("Semantico","", this.getLinea(), this.getColumna(), "No puede compararse los valores, no son de tipo number o bigint"));
+                            return null;
+                        }
+
+                    } else {
+                        table.agrearErrores(new Error_analizadores("Semantico", "",this.getLinea(), this.getColumna(), "No puede realizarse la resta, los valores no son de tipo number o bigint"));
+                        return null;
+                    }
                 /*case MENOR_QUE:
                 case MAYOR_IGUAL:
                 case MENOR_IGUAL:
