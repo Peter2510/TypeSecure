@@ -25,7 +25,7 @@ public class Function_Call_Simple_Function extends Instruction{
     @Override
     public Object ejecutar(SymbolTable table) {
         System.out.println("Function_Call_Simple_Function");
-        System.out.println("id");
+        System.out.println(id);
         return null;
     }
 
