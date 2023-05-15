@@ -1147,6 +1147,30 @@ operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                             {:
                              RESULT = a;   
                             :}
+                    | funcion_boolean:a AND funcion_boolean:c
+                    {:
+                        RESULT = new BinaryOperation(aright,aleft,OperationType.AND,a,c);
+                    :}
+                    | funcion_boolean:a OR funcion_boolean:c
+                    {:
+                        RESULT = new BinaryOperation(aright,aleft,OperationType.OR,a,c);
+                    :}
+                    | operaciones_logicas:a AND funcion_boolean:c
+                    {:
+                        RESULT = new BinaryOperation(aright,aleft,OperationType.AND,a,c);
+                    :}
+                    | funcion_boolean:a AND operaciones_logicas:c
+                    {:
+                        RESULT = new BinaryOperation(aright,aleft,OperationType.AND,a,c);
+                    :}
+                    | operaciones_logicas:a OR funcion_boolean:c
+                    {:
+                        RESULT = new BinaryOperation(aright,aleft,OperationType.OR,a,c);
+                    :}
+                    | funcion_boolean:a OR operaciones_logicas:c
+                    {:
+                        RESULT = new BinaryOperation(aright,aleft,OperationType.OR,a,c);
+                    :}
                     ;
 
 funcion_length ::= TEXTO:a PUNTO:b LENGTH:c
