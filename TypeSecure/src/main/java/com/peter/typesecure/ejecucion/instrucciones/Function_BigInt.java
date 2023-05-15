@@ -29,7 +29,7 @@ public class Function_BigInt extends Instruction{
 
         if (var != null) {
 
-            if (var.getValue() != null) {
+            if (var.getValue() != null&&!"undefined".equals(var.getValue().toString())) {
 
                 Variable new_Var = new Variable();
                 new_Var.setType(VariableType.BIGINT);
