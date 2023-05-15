@@ -59,7 +59,10 @@ public class Function_BigInt extends Instruction{
 
                         if (value_str.isBlank()==false) {
                             try {
-                                int value = Integer.parseInt(value_str);
+                               
+                                double value_tmp_double = Double.parseDouble(value_str);
+                                
+                                int value = (int) value_tmp_double;
                                 new_Var.setValue(value+"n");
                                 return new_Var;
                             } catch (Exception e) {
