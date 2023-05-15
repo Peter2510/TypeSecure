@@ -58,7 +58,7 @@ public class Function_Boolean extends Instruction {
                         }                       
                     case STRING:
                         String value_string = (String)var_tmp.getValue();
-                        if(value_string.isBlank()){
+                        if(value_string.isEmpty()){
                             var.setValue(val_f);
                             return var;                                                          
                         }else{
