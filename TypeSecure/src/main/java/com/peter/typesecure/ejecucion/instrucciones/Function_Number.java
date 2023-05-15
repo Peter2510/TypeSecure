@@ -47,10 +47,12 @@ public class Function_Number extends Instruction {
                         return new_Var;
                     case BOOLEAN:
                         if ((Boolean) var.getValue() == true) {
-                            new_Var.setValue(1.0);
+                            double value_boolean = 1.0;
+                            new_Var.setValue(value_boolean);
                             return new_Var;
                         } else {
-                            new_Var.setValue(0.0);
+                            double value_boolean = 0.0;
+                            new_Var.setValue(value_boolean);
                             return new_Var;
                         }
                     case STRING:
@@ -62,7 +64,7 @@ public class Function_Number extends Instruction {
                                 new_Var.setValue(value);
                                 return new_Var;
                             } catch (Exception e) {
-                                table.agrearErrores(new Error_analizadores("Semantico", var.getValue().toString(), this.getLinea(), this.getColumna(), "El argumento de la funcion puede convertirse a number, no contiene un valor numerico"));
+                                table.agrearErrores(new Error_analizadores("Semantico", var.getValue().toString(), this.getLinea(), this.getColumna(), "El argumento de la funcion puede no convertirse a number, no contiene un valor numerico"));
                                 return null;
                             }
                         } else {

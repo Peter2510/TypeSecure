@@ -99,7 +99,7 @@ public class Function_Math extends Instruction {
                                 return tmp;
                             case SQRT:
                                 if ((Double) var.getValue() < 0) {
-                                    table.agrearErrores(new Error_analizadores("Semantico", var.getValue() + "", this.getLinea(), this.getColumna(), this.type + " puede calcularse a valores negativos"));
+                                    table.agrearErrores(new Error_analizadores("Semantico", var.getValue() + "", this.getLinea(), this.getColumna(), this.type + " no puede calcularse a valores negativos"));
                                     return null;
                                 } else {
                                     tmp.setValue(Math.sqrt((Double) var.getValue()));
@@ -144,7 +144,7 @@ public class Function_Math extends Instruction {
                                 return tmp;
                             case SQRT:
                                 if ( value < 0) {
-                                    table.agrearErrores(new Error_analizadores("Semantico", var.getValue() + "", this.getLinea(), this.getColumna(), this.type + " puede calcularse a valores negativos"));
+                                    table.agrearErrores(new Error_analizadores("Semantico", var.getValue() + "", this.getLinea(), this.getColumna(), this.type + " no puede calcularse a valores negativos"));
                                     return null;
                                 } else {
                                     int value_int_sqrt = (int) Math.sqrt(value);
