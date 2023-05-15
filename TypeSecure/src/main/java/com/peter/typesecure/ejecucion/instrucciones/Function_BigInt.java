@@ -41,9 +41,15 @@ public class Function_BigInt extends Instruction{
 
                     case NUMBER:
                         double value_double = (Double) var.getValue();
-                        int value_int = (int) value_double;
-                        new_Var.setValue(value_int+"n");
-                        return new_Var;
+                        if(value_double%1>0){
+                            table.agrearErrores(new Error_analizadores("Semantico", var.getValue().toString(), this.getLinea(), this.getColumna(), "El argumento de la funcion no puede convertirse a bigint, esto perderia la precision del valor"));    
+                            return null;                            
+                        }else{
+                            int value_int = (int) value_double;
+                            new_Var.setValue(value_int+"n");
+                            return new_Var;
+                        }
+                        
                     case BOOLEAN:
                         if ((Boolean) var.getValue() == true) {
                             int value_boolean = 1;
@@ -62,9 +68,16 @@ public class Function_BigInt extends Instruction{
                                
                                 double value_tmp_double = Double.parseDouble(value_str);
                                 
-                                int value = (int) value_tmp_double;
-                                new_Var.setValue(value+"n");
-                                return new_Var;
+                                if(value_tmp_double%1>0){
+                                    table.agrearErrores(new Error_analizadores("Semantico", var.getValue().toString(), this.getLinea(), this.getColumna(), "El argumento de la funcion no puede convertirse a bigint, esto perderia la precision del valor"));    
+                                    return null;
+                                }else{
+                                    int value = (int) value_tmp_double;
+                                    new_Var.setValue(value+"n");
+                                    return new_Var;
+                                }
+                                
+                                
                             } catch (Exception e) {
                                 table.agrearErrores(new Error_analizadores("Semantico", var.getValue().toString(), this.getLinea(), this.getColumna(), "El argumento de la funcion no puede convertirse a bigint, no contiene un valor numerico"));
                                 return null;
