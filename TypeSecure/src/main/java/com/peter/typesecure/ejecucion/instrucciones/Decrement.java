@@ -26,7 +26,7 @@ public class Decrement extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        Variable var = (Variable)table.getById(id);
+ Variable var = (Variable)table.getById(id);
         if(var!=null){
             
             if(var.getValue()!=null && !"undefined".equals(var.getValue().toString())){
@@ -37,16 +37,23 @@ public class Decrement extends Instruction{
                         
                         if(var.getType()==VariableType.NUMBER){
                             
+                            Variable newV = new Variable();
                             double val_d = (double) var.getValue();
                             double val_n = val_d - 1.0;
                             var.setValue(val_n);
+                            newV.setType(VariableType.NUMBER);
+                            newV.setValue(val_n);
+                            return newV;
                             
                         }else{
-
+                            Variable newV = new Variable();
                             String val_1 = (String)var.getValue();
                             int val_int = Integer.parseInt(val_1.substring(0, val_1.length()-1))-1;
                             String newVal = val_int+"n";
-                            var.setValue(newVal);
+                            var.setValue(newV);
+                            newV.setType(VariableType.BIGINT);
+                            newV.setValue(newVal);
+                            return newV;                            
                             
                         }
                         
@@ -66,11 +73,9 @@ public class Decrement extends Instruction{
             }
             
         }else{
-            table.agrearErrores(new Error_analizadores("Semantico", id, this.getLinea(), this.getColumna(), "La variable '"+ id +"' no esta definida, por lo tanto no puede decrementar su valor"));
+            table.agrearErrores(new Error_analizadores("Semantico", id, this.getLinea(), this.getColumna(), "La variable '"+ id +"' no esta definida, por lo tanto no puede decrementarse su valor"));
             return null;                    
         }
-        
-        return null;
     }
 
     public String getId() {

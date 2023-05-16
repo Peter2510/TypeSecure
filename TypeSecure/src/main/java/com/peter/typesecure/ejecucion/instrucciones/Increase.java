@@ -37,16 +37,23 @@ public class Increase extends Instruction{
                         
                         if(var.getType()==VariableType.NUMBER){
                             
+                            Variable newV = new Variable();
                             double val_d = (double) var.getValue();
                             double val_n = val_d + 1.0;
                             var.setValue(val_n);
+                            newV.setType(VariableType.NUMBER);
+                            newV.setValue(val_n);
+                            return newV;
                             
                         }else{
-
+                            Variable newV = new Variable();
                             String val_1 = (String)var.getValue();
                             int val_int = Integer.parseInt(val_1.substring(0, val_1.length()-1))+1;
                             String newVal = val_int+"n";
-                            var.setValue(newVal);
+                            var.setValue(newV);
+                            newV.setType(VariableType.BIGINT);
+                            newV.setValue(newVal);
+                            return newV;                            
                             
                         }
                         
@@ -70,7 +77,7 @@ public class Increase extends Instruction{
             return null;                    
         }
         
-        return null;
+        
     }
 
     public String getId() {
