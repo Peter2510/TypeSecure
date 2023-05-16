@@ -1214,7 +1214,7 @@ variables_string ::= funcion_string:a
                  ;
 
 
-funcion_to_lower_case ::=  operaciones_matematicas:a PARENTESIS_ABIERTO:b parametros_funcion_asignacion:c PARENTESIS_CERRADO:d PUNTO:e TOLOWERCASE:f PARENTESIS_ABIERTO:g PARENTESIS_CERRADO:h
+funcion_to_lower_case ::=  operaciones_matematicas:a PUNTO:b TOLOWERCASE:c PARENTESIS_ABIERTO:d PARENTESIS_CERRADO:e
                         {:
                             RESULT = new Function_Lower(aright,aleft,a);
                         :}    

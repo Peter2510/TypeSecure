@@ -6,6 +6,9 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
+import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import com.peter.typesecure.error.Error_analizadores;
 
 /**
  *
@@ -22,7 +25,34 @@ public class Function_Upper extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Variable var_tmp = (Variable) operator.ejecutar(table);
+        
+        if(var_tmp!=null){
+            
+            if(var_tmp.getValue()!=null){
+                
+                if(var_tmp.getType()==VariableType.STRING){
+                    
+                    Variable var = new Variable();
+                    var.setType(VariableType.STRING);
+                    String val_string = (String) var_tmp.getValue();
+                    var.setValue(val_string.toUpperCase());
+                    return var;
+                    
+                }else{
+                    table.agrearErrores(new Error_analizadores("Semantico", var_tmp.getValue() + "", this.getLinea(), this.getColumna(), "La funcion toUpperCase puede calcularse solamente a valores de tipo string"));
+                    return null;                                    
+                }
+                
+            }else{
+                table.agrearErrores(new Error_analizadores("Semantico", var_tmp.getValue() + "", this.getLinea(), this.getColumna(), "La funcion toUpperCase no puede calcularse a valores no definidos"));
+                return null;                
+            }
+            
+        }else{
+            table.agrearErrores(new Error_analizadores("Semantico", var_tmp.getValue() + "", this.getLinea(), this.getColumna(), "El valor no esta definido"));
+            return null;
+        }    
     }
 
     public Instruction getOperator() {
