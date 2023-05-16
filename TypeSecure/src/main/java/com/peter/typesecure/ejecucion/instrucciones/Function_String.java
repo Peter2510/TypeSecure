@@ -27,7 +27,6 @@ public class Function_String extends Instruction {
     public Object ejecutar(SymbolTable table) {
 
         Variable var_tmp = (Variable)operator.ejecutar(table);
-        System.out.println(var_tmp);
         Variable var = new Variable();
         var.setType(VariableType.STRING);
         

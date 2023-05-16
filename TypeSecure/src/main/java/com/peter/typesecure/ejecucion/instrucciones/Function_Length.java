@@ -6,6 +6,9 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
+import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import com.peter.typesecure.error.Error_analizadores;
 
 /**
  *
@@ -22,7 +25,38 @@ public class Function_Length extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        return null;
+        
+        Variable var_tmp = (Variable) operator.ejecutar(table);
+        
+        if(var_tmp!=null){
+
+            if(var_tmp.getValue()!=null){
+                
+                if(var_tmp.getType()==VariableType.STRING){
+                    Variable var = new Variable();
+                    var.setType(VariableType.NUMBER);
+                    String value_string = (String) var_tmp.getValue();
+
+                    double value_double = (double) value_string.length();
+                    var.setValue(value_double);
+                    return var;
+                    
+                }else{
+                    table.agrearErrores(new Error_analizadores("Semantico", var_tmp.getValue()+"", this.getLinea(), this.getColumna(), "La funcion length es aplicable unicamente a valores de tipo string"));
+                    return null;                                    
+                }
+                
+            }else{
+                table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La variable no tiene valor"));
+                return null;                
+            }
+            
+        }else{
+            table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "El valor para calcular la longitud de la cadena no esta definido"));
+            return null;
+            
+        }
+        
     }
 
     public Instruction getOperator() {
