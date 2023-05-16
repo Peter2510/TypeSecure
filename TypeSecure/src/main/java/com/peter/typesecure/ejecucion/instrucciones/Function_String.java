@@ -59,8 +59,9 @@ public class Function_String extends Instruction {
             var.setValue("undefined");
             return var;
         }
+        var.setValue("undefined");
+        return var;        
         
-        return null;
         
     }
 

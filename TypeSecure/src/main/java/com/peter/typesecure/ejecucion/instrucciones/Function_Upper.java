@@ -31,7 +31,7 @@ public class Function_Upper extends Instruction {
             
             if(var_tmp.getValue()!=null){
                 
-                if(var_tmp.getType()==VariableType.STRING){
+                if(var_tmp.getType()==VariableType.STRING&&!"undefined".equals(var_tmp.getValue().toString())){
                     
                     Variable var = new Variable();
                     var.setType(VariableType.STRING);
