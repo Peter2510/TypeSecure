@@ -23,8 +23,10 @@ public class Else extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Parte else");
-        System.out.println(instructions);
+
+        for (int i = 0; i < instructions.size(); i++) {
+            instructions.get(i).ejecutar(table);
+        }
         return null;
     }
 

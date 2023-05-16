@@ -4,8 +4,12 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.ejecucion.Genericos.AccessType;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
+import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import com.peter.typesecure.error.Error_analizadores;
 
 /**
  *
@@ -22,8 +26,51 @@ public class Function_Increase extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Function_Increase");
-        System.out.println(id);
+        
+        Variable var = (Variable)table.getById(id);
+        if(var!=null){
+            
+            if(var.getValue()!=null && !"undefined".equals(var.getValue().toString())){
+                
+                if(var.getType()==VariableType.BIGINT || var.getType() == VariableType.NUMBER){
+                    
+                    if(var.getAccess()==AccessType.LET){
+                        
+                        if(var.getType()==VariableType.NUMBER){
+                            
+                            double val_d = (double) var.getValue();
+                            double val_n = val_d + 1.0;
+                            var.setValue(val_n);
+                            
+                        }else{
+
+                            String val_1 = (String)var.getValue();
+                            int val_int = Integer.parseInt(val_1.substring(0, val_1.length()-1))+1;
+                            String newVal = val_int+"n";
+                            var.setValue(newVal);
+                            
+                        }
+                        
+                    }else{
+                        table.agrearErrores(new Error_analizadores("Semantico", id, this.getLinea(), this.getColumna(), "Las variables declaradas como 'const' no pueden cambiar de valor"));
+                        return null;                                                                                
+                    }
+                    
+                }else{
+                    table.agrearErrores(new Error_analizadores("Semantico", id, this.getLinea(), this.getColumna(), "Para incrementar el valor de la variable '"+ id +"', esta debe ser de tipo number o bigint"));
+                    return null;                                                        
+                }
+                
+            }else{
+                table.agrearErrores(new Error_analizadores("Semantico", id, this.getLinea(), this.getColumna(), "La variable '"+ id +"' no ha sido inicializada"));
+                return null;                                    
+            }
+            
+        }else{
+            table.agrearErrores(new Error_analizadores("Semantico", id, this.getLinea(), this.getColumna(), "La variable '"+ id +"' no esta definida, por lo tanto no puede incrementarse su valor"));
+            return null;                    
+        }
+        
         return null;
     }
 

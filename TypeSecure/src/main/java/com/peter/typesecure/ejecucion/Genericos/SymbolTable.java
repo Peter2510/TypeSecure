@@ -14,15 +14,17 @@ import java.util.ArrayList;
 public class SymbolTable extends ArrayList<Variable> {
 
     private ArrayList<Error_analizadores> errores = new ArrayList();
-
-    public SymbolTable() {
-
+    
+    public SymbolTable(){
+        super();
     }
 
     public SymbolTable(SymbolTable padre) {
         super();
         if (padre != null) {
-            this.addAll(padre);
+            for (int i = 0; i < padre.size(); i++) {
+                this.add(padre.get(i));
+            }
         }
     }
 
