@@ -6,28 +6,61 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
+import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
 
 /**
  *
  * @author GORDILLOG
  */
-public class Function_Do_While extends Instruction{
+public class Function_Do_While extends Instruction {
 
     private ArrayList<Instruction> instructions;
     private Instruction conditional;
-    
-    public Function_Do_While(Object linea, Object columna,ArrayList<Instruction> instructions, Object conditional ) {
+
+    public Function_Do_While(Object linea, Object columna, ArrayList<Instruction> instructions, Object conditional) {
         super(linea, columna);
         this.instructions = instructions;
-        this.conditional = (Instruction)conditional;
+        this.conditional = (Instruction) conditional;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
         System.out.println("Do_While");
-        System.out.println(instructions);
-        System.out.println(conditional);
+
+        Variable condition = (Variable) conditional.ejecutar(table);
+        if (condition != null) {
+
+            if (condition.getValue() != null && !"undefined".equals(condition.getValue().toString())) {
+
+                if(condition.getType()==VariableType.BOOLEAN){
+                    SymbolTable child = new SymbolTable(table);
+
+                    do{
+                        for (int i = 0; i < instructions.size(); i++) {
+                        Object vr = instructions.get(i).ejecutar(child);
+                        condition = (Variable) conditional.ejecutar(child);
+                    }
+                    }while((Boolean)condition.getValue());
+                    
+                    
+                }else{
+                    table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de do while debe ser de tipo boolean"));
+                    return null;                    
+                }
+                
+            } else {
+                table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de do while no contiene valor"));
+                return null;
+            }
+
+        } else {
+            table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de do while no esta definida"));
+            return null;
+        }
+
         return null;
     }
 
@@ -51,5 +84,5 @@ public class Function_Do_While extends Instruction{
     public String toString() {
         return "Function_Do_While{" + "instructions=" + instructions + ", conditional=" + conditional + '}';
     }
-    
+
 }
