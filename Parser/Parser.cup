@@ -804,7 +804,7 @@ operaciones_relacionales ::= operaciones_matematicas:a MAYOR_QUE:b operaciones_m
                            | operaciones_matematicas:a MENOR_IGUAL:b operaciones_matematicas:c
                             {:
 
-                                RESULT = new BinaryOperation(aright,aleft,OperationType.MENOR_QUE,a,c);
+                                RESULT = new BinaryOperation(aright,aleft,OperationType.MENOR_IGUAL,a,c);
                                 
                             :}
                            | operaciones_matematicas:a COMPARACION:b operaciones_matematicas:c
@@ -1579,7 +1579,7 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
     {:
     //verificar que la variable declarada se let
     ArrayList tmp_for = new ArrayList();    
-    tmp_for.add(new Function_For_declaration(aright,aleft,c,d,f,i));
+    tmp_for.add(new Function_For_declaration(aright,aleft,c,d, (ArrayList<Instruction>) f,i));
     RESULT = tmp_for;
     /*for(let i = 0; i<2;i++){
         console.log(i);
@@ -1599,7 +1599,7 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
 //}
     Instruction assig = (Instruction)c.get(0);
     ArrayList tmp_for = new ArrayList();
-    tmp_for.add(new Function_For_assig(aright,aleft,assig,d,f,i));
+    tmp_for.add(new Function_For_declaration(aright,aleft,c,d, (ArrayList<Instruction>) f,i));
     RESULT = tmp_for;
 
     :}
@@ -1609,11 +1609,33 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
 accion_asignacion_for ::= instruccion:a
                         {:
                             //id++
-                            RESULT = a;
+                            ArrayList tmp = new ArrayList();
+                            tmp.add(a);
+                            RESULT = tmp;
+                        :}
+                        | ID:id ASIGNACION:igual variable_valor:value
+                        
+                        {:                                                       
+                            ArrayList tmp_asignacion = new ArrayList();
+                            tmp_asignacion.add(new Assignment(idright,idleft,id,value));
+                            RESULT = tmp_asignacion;
                         :}
 
-                       
+                        | tipo_acceso_variable:a id_valor_variable_lista:b
+                        
+                        {: 
 
+                            ArrayList tmp_declaracion = new ArrayList();
+
+                            for(int i = 0;i<b.size();i++){
+
+                                Variable_Aux variable = (Variable_Aux) b.get(i);    
+                                tmp_declaracion.add(new Declaration(aright,aleft,a,variable.getType(),variable.getId(),variable.getValue()));
+                            }
+
+                            RESULT = tmp_declaracion;
+           
+                        :}
                        ;
 
 
