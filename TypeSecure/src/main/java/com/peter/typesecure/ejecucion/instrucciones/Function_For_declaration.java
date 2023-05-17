@@ -6,6 +6,7 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
 import java.util.ArrayList;
 
 /**
@@ -14,14 +15,14 @@ import java.util.ArrayList;
  */
 public class Function_For_declaration extends Instruction{
 
-    private ArrayList<Instruction> declaration;
+    private ArrayList<Instruction> declarations;
     private Instruction conditional;
     private Instruction action;
     private ArrayList<Instruction> instructions;
     
     public Function_For_declaration(Object linea, Object columna,ArrayList<Instruction> declaration,Object conditional,Object action,ArrayList<Instruction> instructions) {
         super(linea, columna);
-        this.declaration = declaration;
+        this.declarations = declaration;
         this.conditional = (Instruction)conditional;
         this.action = (Instruction) action;
         this.instructions = instructions;
@@ -30,20 +31,25 @@ public class Function_For_declaration extends Instruction{
     @Override
     public Object ejecutar(SymbolTable table) {
         //verificar que la variable declarada se let
-        System.out.println("For_declaration");
-        System.out.println(declaration);
-        System.out.println(conditional);
-        System.out.println(action);
-        System.out.println(instructions);
+        SymbolTable child = new SymbolTable(table);
+        for (int i = 0; i < declarations.size(); i++) {
+            declarations.get(i).ejecutar(child);
+        }
+        
+        Variable condi = (Variable)conditional.ejecutar(child);
+        
+        
+        
+        
         return null;
     }
 
     public ArrayList<Instruction> getDeclaration() {
-        return declaration;
+        return declarations;
     }
 
     public void setDeclaration(ArrayList<Instruction> declaration) {
-        this.declaration = declaration;
+        this.declarations = declaration;
     }
 
     public Instruction getConditional() {
@@ -72,7 +78,7 @@ public class Function_For_declaration extends Instruction{
 
     @Override
     public String toString() {
-        return "Function_For{" + "declaration=" + declaration + ", conditional=" + conditional + ", action=" + action + ", instructions=" + instructions + '}';
+        return "Function_For{" + "declaration=" + declarations + ", conditional=" + conditional + ", action=" + action + ", instructions=" + instructions + '}';
     }
     
 }

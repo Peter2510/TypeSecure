@@ -6,6 +6,8 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
+import com.peter.typesecure.error.Error_analizadores;
 
 /**
  *
@@ -23,8 +25,16 @@ public class Function_Return_Instruction extends Instruction{
     @Override
     public Object ejecutar(SymbolTable table) {
         System.out.println("Function_Return_Instruction");
-        System.out.println(instruction);
-        return null;
+        Variable var = (Variable)instruction.ejecutar(table);
+        if(var!=null){
+            
+            return this;
+            
+        }else{
+            table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La instruccion de return no esta definida"));
+            return null;
+        }
+        
     }
 
     public Instruction getInstruction() {

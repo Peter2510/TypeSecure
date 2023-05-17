@@ -20,7 +20,7 @@ public class Instruction_Break extends Instruction{
     @Override
     public Object ejecutar(SymbolTable table) {
         System.out.println("Instruction_Break");
-        return null;
+        return this;
     }
 
     @Override

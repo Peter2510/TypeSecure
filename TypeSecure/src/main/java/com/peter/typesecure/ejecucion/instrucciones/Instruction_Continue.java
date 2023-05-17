@@ -19,8 +19,7 @@ public class Instruction_Continue extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Instruction_Continue");
-        return null;
+        return this;
     }
 
     @Override

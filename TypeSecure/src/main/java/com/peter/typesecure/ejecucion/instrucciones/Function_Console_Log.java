@@ -75,6 +75,7 @@ public class Function_Console_Log extends Instruction {
 
         if (contadorError == 0) {
             Vista.consolaText.append(tmp+"\n");
+            return this;
         }
         /*System.out.println("console.log");
         System.out.println(instruccions);*/

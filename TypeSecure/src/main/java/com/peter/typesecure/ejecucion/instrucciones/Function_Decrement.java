@@ -40,14 +40,14 @@ public class Function_Decrement extends Instruction{
                             double val_d = (double) var.getValue();
                             double val_n = val_d - 1.0;
                             var.setValue(val_n);
-                            
+                            return this;
                         }else{
 
                             String val_1 = (String)var.getValue();
                             int val_int = Integer.parseInt(val_1.substring(0, val_1.length()-1))-1;
                             String newVal = val_int+"n";
                             var.setValue(newVal);
-                            
+                            return this;
                         }
                         
                     }else{
@@ -70,7 +70,7 @@ public class Function_Decrement extends Instruction{
             return null;                    
         }
         
-        return null;
+
     }
 
     public String getId() {

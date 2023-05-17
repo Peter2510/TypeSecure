@@ -20,7 +20,7 @@ public class Function_Return_Simple extends Instruction {
     @Override
     public Object ejecutar(SymbolTable table) {
         System.out.println("Function_Return_Simple");
-        return null;
+        return this;
     }
     
 }
