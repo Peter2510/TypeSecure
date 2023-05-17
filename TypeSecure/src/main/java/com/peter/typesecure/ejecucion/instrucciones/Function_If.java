@@ -46,16 +46,7 @@ public class Function_If extends Instruction {
                     for (int i = 0; i < _if.getInstructions().size(); i++) {
 
                         Object vr = _if.getInstructions().get(i).ejecutar(child);
-
-                        if (vr instanceof Function_Return_Instruction) {
-                            return ((Function_Return_Instruction) vr).ejecutar(child);
-                        } else if (vr instanceof Instruction_Break) {
-                            break;
-                        } else if (vr instanceof Instruction_Continue) {
-                            return vr;
-                        } else {
-                            return this;
-                        }
+                        
 
                     }
                     //agregando errores
@@ -84,17 +75,7 @@ public class Function_If extends Instruction {
 
                     for (int i = 0; i < _if.getInstructions().size(); i++) {
 
-                        Object vr = _if.getInstructions().get(i).ejecutar(child);
-
-                        if (vr instanceof Function_Return_Instruction) {
-                            return ((Function_Return_Instruction) vr).ejecutar(child);
-                        } else if (vr instanceof Instruction_Break) {
-                            break;
-                        } else if (vr instanceof Instruction_Continue) {
-                            return vr;
-                        } else {
-                            return this;
-                        }
+                       Object vr = _if.getInstructions().get(i).ejecutar(child);
 
                     }
                     //agregando errores
@@ -102,12 +83,11 @@ public class Function_If extends Instruction {
                         table.agrearErrores(child.getErrores().get(i));
                     }
 
-                } else {
-
+                }else{
+                    
                     SymbolTable child = new SymbolTable(table);
-
-                    Object vs = _else.ejecutar(child);
-                    return vs;
+                    
+                      Object vr = _else.ejecutar(child);
 
                 }
 
@@ -116,30 +96,21 @@ public class Function_If extends Instruction {
                 return null;
             }
 
+
             //if else_if   
-        } else if (_if != null && else_if != null && _else == null) {
+        } else if (_if != null && else_if!=null && _else == null) {
             System.out.println("if else_if");
             Variable val_if = (Variable) _if.ejecutar(table);
 
             if (val_if != null) {
 
-                if ((Boolean) val_if.getValue() == true) {
+                if ((Boolean) val_if.getValue()==true) {
 
                     SymbolTable child = new SymbolTable(table);
 
                     for (int i = 0; i < _if.getInstructions().size(); i++) {
 
-                        Object vr = _if.getInstructions().get(i).ejecutar(child);
-
-                        if (vr instanceof Function_Return_Instruction) {
-                            return ((Function_Return_Instruction) vr).ejecutar(child);
-                        } else if (vr instanceof Instruction_Break) {
-                            break;
-                        } else if (vr instanceof Instruction_Continue) {
-                            return vr;
-                        } else {
-                            return this;
-                        }
+                      Object vr = _if.getInstructions().get(i).ejecutar(child);
 
                     }
                     //agregando errores
@@ -147,39 +118,28 @@ public class Function_If extends Instruction {
                         table.agrearErrores(child.getErrores().get(i));
                     }
 
-                } else {
-
-                    if (!else_if.isEmpty()) {
-
+                }else{
+                    
+                    if(!else_if.isEmpty()){
+                        
                         for (int i = 0; i < else_if.size(); i++) {
-                            Variable tmp = (Variable) else_if.get(i).ejecutar(table);
-                            if (tmp != null) {
-
-                                if ((Boolean) tmp.getValue() == true) {
+                            Variable tmp = (Variable)else_if.get(i).ejecutar(table);
+                            if(tmp!=null){
+                                
+                                if((Boolean)tmp.getValue()==true){
                                     SymbolTable child = new SymbolTable(table);
                                     for (int j = 0; j < else_if.get(i).getInstructions().size(); j++) {
-
-                                        Object vr = else_if.get(i).getInstructions().get(j).ejecutar(child);
-
-                                        if (vr instanceof Function_Return_Instruction) {
-                                            return ((Function_Return_Instruction) vr).ejecutar(child);
-                                        } else if (vr instanceof Instruction_Break) {
-                                            break;
-                                        } else if (vr instanceof Instruction_Continue) {
-                                            return vr;
-                                        } else {
-                                            return this;
-                                        }
+                                     Object vr =  else_if.get(i).getInstructions().get(j).ejecutar(child);
                                     }
                                     break;
                                 }
-
-                            } else {
+                                
+                            }else{
                                 table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "No fue posible ejecutar la instruccion else if"));
-                                return null;
+                                return null;                                
                             }
                         }
-
+                        
                     }
 
                 }
@@ -188,6 +148,7 @@ public class Function_If extends Instruction {
                 table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "No fue posible ejecutar la instruccion if"));
                 return null;
             }
+            
 
             return null;
 
@@ -198,23 +159,13 @@ public class Function_If extends Instruction {
 
             if (val_if != null) {
 
-                if ((Boolean) val_if.getValue() == true) {
+                if ((Boolean) val_if.getValue()==true) {
 
                     SymbolTable child = new SymbolTable(table);
 
                     for (int i = 0; i < _if.getInstructions().size(); i++) {
 
-                        Object vr = _if.getInstructions().get(i).ejecutar(child);
-
-                        if (vr instanceof Function_Return_Instruction) {
-                            return ((Function_Return_Instruction) vr).ejecutar(child);
-                        } else if (vr instanceof Instruction_Break) {
-                            break;
-                        } else if (vr instanceof Instruction_Continue) {
-                            return vr;
-                        } else {
-                            return this;
-                        }
+                     Object vr =  _if.getInstructions().get(i).ejecutar(child);
 
                     }
                     //agregando errores
@@ -222,44 +173,33 @@ public class Function_If extends Instruction {
                         table.agrearErrores(child.getErrores().get(i));
                     }
 
-                } else {
-
-                    if (!else_if.isEmpty()) {
-                        int countTrueElseIf = 0;
+                }else{
+                    
+                    if(!else_if.isEmpty()){
+                        int countTrueElseIf =0;
                         for (int i = 0; i < else_if.size(); i++) {
-                            Variable tmp = (Variable) else_if.get(i).ejecutar(table);
-                            if (tmp != null) {
-
-                                if ((Boolean) tmp.getValue() == true) {
+                            Variable tmp = (Variable)else_if.get(i).ejecutar(table);
+                            if(tmp!=null){
+                                
+                                if((Boolean)tmp.getValue()==true){
                                     countTrueElseIf++;
                                     SymbolTable child = new SymbolTable(table);
                                     for (int j = 0; j < else_if.get(i).getInstructions().size(); j++) {
-
-                                        Object vr = else_if.get(i).getInstructions().get(j).ejecutar(child);
-
-                                        if (vr instanceof Function_Return_Instruction) {
-                                            return ((Function_Return_Instruction) vr).ejecutar(child);
-                                        } else if (vr instanceof Instruction_Break) {
-                                            break;
-                                        } else if (vr instanceof Instruction_Continue) {
-                                            return vr;
-                                        } else {
-                                            return this;
-                                        }
+                                     Object vr =   else_if.get(i).getInstructions().get(j).ejecutar(child);
                                     }
                                     break;
                                 }
-
-                            } else {
+                                
+                            }else{
                                 table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "No fue posible ejecutar la instruccion else if"));
-                                return null;
+                                return null;                                
                             }
                         }
-
-                        if (countTrueElseIf == 0) {
-                            _else.ejecutar(table);
+                        
+                        if(countTrueElseIf==0){
+                           Object vr = _else.ejecutar(table);
                         }
-
+                        
                     }
 
                 }
