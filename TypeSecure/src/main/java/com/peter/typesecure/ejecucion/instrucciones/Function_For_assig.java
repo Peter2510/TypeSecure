@@ -6,6 +6,9 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
+import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
 
 /**
@@ -16,24 +19,74 @@ public class Function_For_assig extends Instruction {
 
     private Instruction declaration;
     private Instruction conditional;
-    private Instruction action;
+    private ArrayList<Instruction> action;
     private ArrayList<Instruction> instructions;
-    
-    public Function_For_assig(Object linea, Object columna,Instruction declaration,Object conditional,Object action,ArrayList<Instruction> instructions) {
+
+    public Function_For_assig(Object linea, Object columna, Instruction declaration, Object conditional, ArrayList<Instruction> action, ArrayList<Instruction> instructions) {
         super(linea, columna);
         this.declaration = declaration;
-        this.conditional = (Instruction)conditional;
-        this.action = (Instruction) action;
+        this.conditional = (Instruction) conditional;
+        this.action = action;
         this.instructions = instructions;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("For_assigment");
-        System.out.println(declaration);
-        System.out.println(conditional);
-        System.out.println(action);
-        System.out.println(instructions);
+        //verificar que la variable declarada se let
+
+        if (declaration != null) {
+
+            if (conditional != null) {
+
+                if (action != null) {
+
+                    SymbolTable contextAsignacion = new SymbolTable(table);
+
+                    declaration.ejecutar(contextAsignacion);
+
+                    Variable condi = (Variable) conditional.ejecutar(contextAsignacion);
+
+                    if (condi != null && !"undefined".equals(condi.getValue().toString()) && condi.getType() == VariableType.BOOLEAN) {
+
+                        while ((Boolean) condi.getValue()) {
+                            SymbolTable contextFor = new SymbolTable(contextAsignacion);
+                            for (int i = 0; i < instructions.size(); i++) {
+                                Object vr = instructions.get(i).ejecutar(contextFor);
+                            }
+
+                            for (int i = 0; i < action.size(); i++) {
+                                action.get(i).ejecutar(contextAsignacion);
+
+                            }
+
+                            condi = (Variable) conditional.ejecutar(contextAsignacion);
+                            contextAsignacion.setErrores(contextFor.getErrores());
+                        }
+
+                        for (int j = 0; j < contextAsignacion.getErrores().size(); j++) {
+                            table.agrearErrores(contextAsignacion.getErrores().get(j));
+                        }
+
+                    } else {
+                        table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de la instruccion for debe estar definida y ser de tipo boolean"));
+                        return null;
+                    }
+
+                } else {
+                    table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "No se hallaron acciones a relizar en la instruccion for"));
+                    return null;
+                }
+
+            } else {
+                table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "No se hallo una condicion a evaluar en la instruccion for"));
+                return null;
+            }
+
+        } else {
+            table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "No se hallaron declaraciones a relizar en la instruccion for"));
+            return null;
+        }
+
         return null;
     }
 
@@ -53,11 +106,11 @@ public class Function_For_assig extends Instruction {
         this.conditional = conditional;
     }
 
-    public Instruction getAction() {
+    public ArrayList<Instruction> getAction() {
         return action;
     }
 
-    public void setAction(Instruction action) {
+    public void setAction(ArrayList<Instruction> action) {
         this.action = action;
     }
 
@@ -73,5 +126,5 @@ public class Function_For_assig extends Instruction {
     public String toString() {
         return "Function_For_assig{" + "declaration=" + declaration + ", conditional=" + conditional + ", action=" + action + ", instructions=" + instructions + '}';
     }
-    
+
 }

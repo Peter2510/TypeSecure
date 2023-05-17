@@ -70,4 +70,8 @@ public class SymbolTable extends ArrayList<Variable> {
     public ArrayList<Error_analizadores> getErrores() {
         return this.errores;
     }
+    
+    public void setErrores(ArrayList<Error_analizadores> err){
+        this.errores = err;
+    }
 }

@@ -34,6 +34,7 @@ public class Function_Void_Parameters extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
+        //guardar en la tabla de simbolos
         System.out.println("Function_void_parameters");
         System.out.println(name);
         System.out.println(type);

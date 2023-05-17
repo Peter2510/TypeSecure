@@ -35,22 +35,27 @@ public class Function_Do_While extends Instruction {
 
             if (condition.getValue() != null && !"undefined".equals(condition.getValue().toString())) {
 
-                if(condition.getType()==VariableType.BOOLEAN){
+                if (condition.getType() == VariableType.BOOLEAN) {
                     SymbolTable child = new SymbolTable(table);
 
-                    do{
+                    do {
                         for (int i = 0; i < instructions.size(); i++) {
-                        Object vr = instructions.get(i).ejecutar(child);
-                        condition = (Variable) conditional.ejecutar(child);
+                            Object vr = instructions.get(i).ejecutar(child);
+                            condition = (Variable) conditional.ejecutar(child);
+
+                        }
+
+                    } while ((Boolean) condition.getValue());
+
+                    for (int j = 0; j < child.getErrores().size(); j++) {
+                        table.agrearErrores(child.getErrores().get(j));
                     }
-                    }while((Boolean)condition.getValue());
-                    
-                    
-                }else{
+
+                } else {
                     table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de do while debe ser de tipo boolean"));
-                    return null;                    
+                    return null;
                 }
-                
+
             } else {
                 table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de do while no contiene valor"));
                 return null;
