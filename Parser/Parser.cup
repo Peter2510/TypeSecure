@@ -568,12 +568,6 @@ instruccion ::=  operaciones_matematicas:a {:
                                           RESULT = a;      
                                     :}
                 
-                | incremento:a {:
-                                                RESULT = a;
-                             :}
-                | decremento:a {:
-                                                RESULT = a;
-                             :}
                 ;
 
 
@@ -676,6 +670,15 @@ operaciones_matematicas ::=
                                 RESULT = a;                        
                         :}
 
+                        | incremento:a
+                        {:
+                                RESULT = a;                        
+                        :}
+
+                        | decremento:a
+                        {:
+                                RESULT = a;                        
+                        :}
                         ;
 
 funciones_numericas_estaticas ::= MATH:a PUNTO:b ABS:c PARENTESIS_ABIERTO:d operaciones_matematicas:e PARENTESIS_CERRADO:f

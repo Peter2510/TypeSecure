@@ -6,6 +6,9 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
+import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
 
 /**
@@ -25,9 +28,39 @@ public class Function_While extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("While");
-        System.out.println(conditional);
-        System.out.println(instructions);
+        
+        Variable condition = (Variable)conditional.ejecutar(table);
+        
+        if(condition!=null){
+
+            if(condition.getValue()!=null&&"undefined"!=condition.getValue()){
+                
+                if(condition.getType()==VariableType.BOOLEAN){
+                
+                    while((Boolean)condition.getValue()){
+                        SymbolTable child = new SymbolTable(table);
+                        for (int i = 0; i < instructions.size(); i++) {
+                            Object vr = instructions.get(i).ejecutar(child);
+                        }
+                      condition = (Variable)conditional.ejecutar(child);
+                    }
+                    
+                }else{
+                    table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de la instruccion while debe ser de tipo boolean"));
+                    return null;                     
+                }
+                
+            }else{
+                table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de la instruccion while no tiene valor ser nula"));
+                return null; 
+            }
+            
+        }else{
+            table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La condicion de la instruccion while no puede ser nula"));
+            return null; 
+        }
+        
+        
         return null;
     }
 
