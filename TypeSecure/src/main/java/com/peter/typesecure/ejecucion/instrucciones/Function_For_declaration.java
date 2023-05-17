@@ -12,16 +12,16 @@ import java.util.ArrayList;
  *
  * @author GORDILLOG
  */
-public class Function_For extends Instruction{
+public class Function_For_declaration extends Instruction{
 
-    private Instruction declaration;
+    private ArrayList<Instruction> declaration;
     private Instruction conditional;
     private Instruction action;
     private ArrayList<Instruction> instructions;
     
-    public Function_For(Object linea, Object columna,Object declaration,Object conditional,Object action,ArrayList<Instruction> instructions) {
+    public Function_For_declaration(Object linea, Object columna,ArrayList<Instruction> declaration,Object conditional,Object action,ArrayList<Instruction> instructions) {
         super(linea, columna);
-        this.declaration = (Instruction)declaration;
+        this.declaration = declaration;
         this.conditional = (Instruction)conditional;
         this.action = (Instruction) action;
         this.instructions = instructions;
@@ -30,7 +30,7 @@ public class Function_For extends Instruction{
     @Override
     public Object ejecutar(SymbolTable table) {
         //verificar que la variable declarada se let
-        System.out.println("For");
+        System.out.println("For_declaration");
         System.out.println(declaration);
         System.out.println(conditional);
         System.out.println(action);
@@ -38,11 +38,11 @@ public class Function_For extends Instruction{
         return null;
     }
 
-    public Instruction getDeclaration() {
+    public ArrayList<Instruction> getDeclaration() {
         return declaration;
     }
 
-    public void setDeclaration(Instruction declaration) {
+    public void setDeclaration(ArrayList<Instruction> declaration) {
         this.declaration = declaration;
     }
 

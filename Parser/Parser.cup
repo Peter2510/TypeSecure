@@ -1572,12 +1572,11 @@ instruccion_continue ::= CONTINUE:a PUNTO_COMA:b
 
 
 funcion_for ::= 
-FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_COMA:e accion_asignacion_for:f PARENTESIS_CERRADO:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
+FOR:a declaracion_variable:b operaciones_logicas:d PUNTO_COMA:e accion_asignacion_for:f PARENTESIS_CERRADO:g CORCHETE_ABIERTO:h instrucciones_funcion:i CORCHETE_CERRADO:j
     {:
     //verificar que la variable declarada se let
-    Instruction assig = (Instruction)c.get(0);
-    ArrayList tmp_for = new ArrayList();
-    tmp_for.add(new Function_For(aright,aleft,assig,d,f,i));
+    ArrayList tmp_for = new ArrayList();    
+    tmp_for.add(new Function_For_declaration(aright,aleft,b,d,f,i));
     RESULT = tmp_for;
     /*for(let i = 0; i<2;i++){
         console.log(i);
@@ -1597,7 +1596,7 @@ FOR:a PARENTESIS_ABIERTO:b declaracion_variable:c operaciones_logicas:d PUNTO_CO
 //}
     Instruction assig = (Instruction)c.get(0);
     ArrayList tmp_for = new ArrayList();
-    tmp_for.add(new Function_For(aright,aleft,assig,d,f,i));
+    tmp_for.add(new Function_For_assig(aright,aleft,assig,d,f,i));
     RESULT = tmp_for;
 
     :}
