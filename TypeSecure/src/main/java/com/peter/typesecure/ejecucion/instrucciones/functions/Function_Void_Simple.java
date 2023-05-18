@@ -39,7 +39,7 @@ public class Function_Void_Simple extends Instruction{
             
         if(table.existeFuncion(name)==false){
             
-            table.agregarFuncion(name, new Function(name,type,null,instruccions));
+            table.agregarFuncion(name, new Function(this.getLinea(),this.getColumna(),name,type,null,instruccions));
             return this;            
             
         }else{

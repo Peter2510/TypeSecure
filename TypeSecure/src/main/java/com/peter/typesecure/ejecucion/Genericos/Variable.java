@@ -14,6 +14,8 @@ public class Variable {
     private VariableType type;
     private Object value;
     private AccessType access;
+    private int linea;
+    private int columna;
 
     public Variable() {
 
@@ -51,12 +53,25 @@ public class Variable {
         this.value = value;
     }
 
+    public int getLinea() {
+        return linea;
+    }
+
+    public void setLinea(int linea) {
+        this.linea = linea;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
 
     @Override
     public String toString() {
-        return "Variable{" + "id=" + id + ", type=" + type + ", value=" + value +'}';
+        return "Variable{" + "id=" + id + ", type=" + type + ", value=" + value + ", access=" + access + ", linea=" + linea + ", columna=" + columna + '}';
     }
-
-    
     
 }

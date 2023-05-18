@@ -17,8 +17,12 @@ public class Function {
     private VariableType type;
     private ArrayList<Parameter> parameters;
     private ArrayList<Instruction> instructions;
+    private int linea;
+    private int columna;
 
-    public Function(String id, VariableType type, ArrayList<Parameter> parameters,ArrayList<Instruction> instructions ) {
+    public Function(int linea, int columna,String id, VariableType type, ArrayList<Parameter> parameters,ArrayList<Instruction> instructions ) {
+        this.linea = linea;
+        this.columna = columna;
         this.id = id;
         this.type = type;
         this.parameters = parameters;
@@ -81,9 +85,25 @@ public class Function {
         this.parameters = parameters;
     }
 
+    public int getLinea() {
+        return linea;
+    }
+
+    public void setLinea(int linea) {
+        this.linea = linea;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
+
     @Override
     public String toString() {
-        return "Function{" + "id=" + id + ", type=" + type + ", parameters=" + parameters + ", instructions=" + instructions + '}';
+        return "Function{" + "id=" + id + ", type=" + type + ", parameters=" + parameters + ", instructions=" + instructions + ", linea=" + linea + ", columna=" + columna + '}';
     }
     
 }

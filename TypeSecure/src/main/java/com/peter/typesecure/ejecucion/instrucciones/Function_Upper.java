@@ -40,17 +40,17 @@ public class Function_Upper extends Instruction {
                     return var;
                     
                 }else{
-                    table.agrearErrores(new Error_analizadores("Semantico", var_tmp.getValue() + "", this.getLinea(), this.getColumna(), "La funcion toUpperCase puede calcularse solamente a valores de tipo string"));
+                    table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La funcion toUpperCase puede calcularse solamente a valores de tipo string"));
                     return null;                                    
                 }
                 
             }else{
-                table.agrearErrores(new Error_analizadores("Semantico", var_tmp.getValue() + "", this.getLinea(), this.getColumna(), "La funcion toUpperCase no puede calcularse a valores no definidos"));
+                table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La funcion toUpperCase no puede calcularse a valores no definidos"));
                 return null;                
             }
             
         }else{
-            table.agrearErrores(new Error_analizadores("Semantico", var_tmp.getValue() + "", this.getLinea(), this.getColumna(), "El valor no esta definido"));
+            table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "El valor para calcular toUpperCase no esta definido"));
             return null;
         }    
     }

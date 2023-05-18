@@ -45,6 +45,8 @@ public class Declaration extends Instruction {
                     new_variable.setId(this.id);
                     new_variable.setType(this.type);
                     new_variable.setValue(operacion_valor.getValue());
+                    new_variable.setLinea(this.getLinea());
+                    new_variable.setColumna(this.getColumna());
                     table.add(new_variable);  
                     
                 }else{

@@ -52,11 +52,6 @@ public class Function_Call_Parameters_Function extends Instruction{
                         SymbolTable head = new SymbolTable(table);
                         ArrayList<Instruction> param = new ArrayList();
                         
-                        System.out.println("id "  + table.getFuncion(id).getParameters().get(0).getId());
-                        System.out.println("acces " + AccessType.LET);
-                        System.out.println("type " + table.getFuncion(id).getParameters().get(0).getType());
-                        System.out.println("Istructio " + parameters_in.get(0));
-                        
                         for (int i = 0; i < parameters_in.size(); i++) {
                             
                             param.add(new Declaration(
