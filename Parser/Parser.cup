@@ -1389,7 +1389,7 @@ parametros_funcion_declaracion ::= parametros_funcion_declaracion:a COMA:b param
 parametro_funcion_declaracion ::= ID:a DOS_PUNTOS:b tipo_dato_variable:c
                                 {:
 
-                                    RESULT = new Parameter((String) a,(VariableType)c);
+                                    RESULT = new Parameter(aright,aleft,(String) a,(VariableType)c);
                                     
                                 :}
                                 ;

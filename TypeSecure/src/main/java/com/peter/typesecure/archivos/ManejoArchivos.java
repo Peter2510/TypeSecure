@@ -179,7 +179,7 @@ public class ManejoArchivos {
                escribir.println("<thead>");
                escribir.println("<tr>");
                escribir.println("<th scope=\"col\">Tipo de Error</th>");
-               escribir.println("<th scope=\"col\">Lexema</th>");
+               escribir.println("<th scope=\"col\">Error</th>");
                escribir.println("<th scope=\"col\">Linea</th>");
                escribir.println("<th scope=\"col\">Columna</th>");
                escribir.println("<th scope=\"col\">Descripcion</th>");

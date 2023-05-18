@@ -12,36 +12,43 @@ import com.peter.typesecure.error.Error_analizadores;
  *
  * @author GORDILLOG
  */
-public class Function_Call_Simple_Function extends Instruction{
+public class Function_Call_Simple_Function extends Instruction {
 
     private String id;
     private Boolean simple;
-    
-    public Function_Call_Simple_Function(Object linea, Object columna,Object id) {
+
+    public Function_Call_Simple_Function(Object linea, Object columna, Object id) {
         super(linea, columna);
-        this.id = (String)id;
+        this.id = (String) id;
         this.simple = true;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        
-        if(table.existeFuncion(id)){
-     
-            SymbolTable child = new SymbolTable(table);
-            
-            for (int i = 0; i < table.getFuncion(id).getInstructions().size(); i++) {
-                Object vr = table.getFuncion(id).getInstructions().get(i).ejecutar(child);
+
+        if (table.existeFuncion(id)) {
+
+            if (table.getFuncion(id).hasParameters() == false) {
+
+                SymbolTable child = new SymbolTable(table);
+
+                for (int i = 0; i < table.getFuncion(id).getInstructions().size(); i++) {
+                    Object vr = table.getFuncion(id).getInstructions().get(i).ejecutar(child);
+                }
+
+                for (int i = 0; i < child.getErrores().size(); i++) {
+                    table.agrearErrores(child.getErrores().get(i));
+                }
+
+            } else {
+                table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '" + id + "' necesita parametros para poder ejecutarse "));
+                return null;
             }
-            
-            for(int i=0; i<child.getErrores().size();i++){
-                table.agrearErrores(child.getErrores().get(i));
-            }
-            
+
             return this;
-            
-        }else{
-            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '"+ id +"' no ha sido definida "));
+
+        } else {
+            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '" + id + "' no ha sido definida "));
             return null;
         }
     }
@@ -66,5 +73,5 @@ public class Function_Call_Simple_Function extends Instruction{
     public String toString() {
         return "Function_Call_Simple_Function{" + "id=" + id + ", simple=" + simple + '}';
     }
-    
+
 }

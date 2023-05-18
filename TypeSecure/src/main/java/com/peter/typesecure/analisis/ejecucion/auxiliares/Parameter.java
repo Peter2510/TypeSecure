@@ -14,8 +14,10 @@ public class Parameter {
 
     private String id;
     private VariableType type;
+    private int linea;
+    private int columna;
 
-    public Parameter(String id, VariableType type) {
+    public Parameter(int linea, int columna,String id, VariableType type) {
         this.id = id;
         this.type = type;
     }
@@ -36,9 +38,25 @@ public class Parameter {
         this.type = type;
     }
 
+    public int getLinea() {
+        return linea;
+    }
+
+    public void setLinea(int linea) {
+        this.linea = linea;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
+
     @Override
     public String toString() {
-        return "Parameter{" + "id=" + id + ", type=" + type + '}';
+        return "Parameter{" + "id=" + id + ", type=" + type + ", linea=" + linea + ", columna=" + columna + '}';
     }
     
 }

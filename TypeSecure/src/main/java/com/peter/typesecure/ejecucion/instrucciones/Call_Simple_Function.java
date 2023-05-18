@@ -19,21 +19,13 @@ public class Call_Simple_Function extends Instruction{
     public Call_Simple_Function(Object linea, Object columna,Object id) {
         super(linea, columna);
         this.id = (String)id;
-        this.simple = true;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
         
 
-        if(table.existeFuncion(id)){
-            System.out.println("La funcion existe" + table.getFuncion(id));
-            return this;
-        }else{
-            System.out.println("No existe la funcion " + id);
-            return null;
-        }
-        
+        return null;
         
     }
 

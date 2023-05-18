@@ -39,8 +39,7 @@ public class Function_Void_Simple extends Instruction{
             
         if(table.existeFuncion(name)==false){
             
-            Function function = new Function(name,type,null,instruccions);
-            table.agregarFuncion(name, function);
+            table.agregarFuncion(name, new Function(name,type,null,instruccions));
             return this;            
             
         }else{

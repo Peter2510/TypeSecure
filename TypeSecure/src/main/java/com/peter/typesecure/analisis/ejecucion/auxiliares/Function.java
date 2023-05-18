@@ -42,7 +42,7 @@ public class Function {
     }
     
     public int getSizeParameters(){
-        if(parameters!=null){
+        if(parameters==null){
             return 0;
         }else{
             return parameters.size();

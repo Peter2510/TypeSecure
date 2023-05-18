@@ -4809,7 +4809,7 @@ class CUP$Parser$actions {
 		Object c = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
 
-                                    RESULT = new Parameter((String) a,(VariableType)c);
+                                    RESULT = new Parameter(aright,aleft,(String) a,(VariableType)c);
                                     
                                 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("parametro_funcion_declaracion",33, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);

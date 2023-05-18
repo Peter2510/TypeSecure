@@ -16,13 +16,11 @@ public class Call_Parameters_Function extends Instruction{
 
     private String id;
     private ArrayList<Instruction> instruccions;
-    private Boolean simple;
     
     public Call_Parameters_Function(Object linea, Object columna,Object id,ArrayList<Instruction> instruccion) {
         super(linea, columna);
         this.id = (String)id;
         this.instruccions = instruccion;
-        this.simple = false;
     }
 
     @Override
@@ -47,14 +45,6 @@ public class Call_Parameters_Function extends Instruction{
 
     public void setInstruccions(ArrayList<Instruction> instruccions) {
         this.instruccions = instruccions;
-    }
-
-    public Boolean getSimple() {
-        return simple;
-    }
-
-    public void setSimple(Boolean simple) {
-        this.simple = simple;
     }
     
     @Override

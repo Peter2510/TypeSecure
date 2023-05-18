@@ -29,6 +29,7 @@ public class SymbolTable extends ArrayList<Variable> {
             for (int i = 0; i < padre.size(); i++) {
                 this.add(padre.get(i));
             }
+            this.setFunciones(padre.getFunciones());
         }
     }
 
