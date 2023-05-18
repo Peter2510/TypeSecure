@@ -8,6 +8,7 @@ import com.peter.typesecure.analisis.ejecucion.auxiliares.Function;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
 
 /**
@@ -35,10 +36,19 @@ public class Function_Void_Simple extends Instruction{
         //verificar que los nombres de las varialbles no se repitan
         //verificar que el metodo no haya sido ya definido en el documento
         //verificar que la funcion pueda tener el mismo nombre pero distintos parametros
+            
+        if(table.existeFuncion(name)==false){
+            
+            Function function = new Function(name,type,null,instruccions);
+            table.agregarFuncion(name, function);
+            return this;            
+            
+        }else{
+            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '"+ name +"' ya esta definida "));
+            return null;
+        }
+        
 
-        Function function = new Function(name,type,null,instruccions);
-        table.agregarFuncion(name, function);
-        return this;
         
     }
 

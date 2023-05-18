@@ -6,6 +6,7 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.error.Error_analizadores;
 
 /**
  *
@@ -24,16 +25,23 @@ public class Function_Call_Simple_Function extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
+        
         if(table.existeFuncion(id)){
-            System.out.println("La funcion existe" + table.getFuncion(id).toString());
+     
+            SymbolTable child = new SymbolTable(table);
             
             for (int i = 0; i < table.getFuncion(id).getInstructions().size(); i++) {
-                Object vr = table.getFuncion(id).getInstructions().get(i).ejecutar(table);
+                Object vr = table.getFuncion(id).getInstructions().get(i).ejecutar(child);
             }
+            
+            for(int i=0; i<child.getErrores().size();i++){
+                table.agrearErrores(child.getErrores().get(i));
+            }
+            
             return this;
             
         }else{
-            System.out.println("No existe la funcion " + id);
+            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '"+ id +"' no ha sido definida "));
             return null;
         }
     }
