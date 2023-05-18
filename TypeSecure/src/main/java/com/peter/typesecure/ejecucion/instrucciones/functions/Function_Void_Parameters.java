@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones.functions;
 
+import com.peter.typesecure.analisis.ejecucion.auxiliares.Parameter;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.VariableType;
@@ -18,18 +19,18 @@ public class Function_Void_Parameters extends Instruction {
     
     private String name;
     private VariableType type;
-    private Map<String, VariableType> parameters;
+    private ArrayList<Parameter> parameters;
     private ArrayList<Instruction> instruccions;
-    private Boolean simple;
     
     
-    public Function_Void_Parameters(Object linea, Object columna,Object name,VariableType type,Map<String, VariableType> parameters,ArrayList<Instruction> instructions) {
+    
+    public Function_Void_Parameters(Object linea, Object columna,Object name,VariableType type,ArrayList<Parameter> parameters,ArrayList<Instruction> instructions) {
         super(linea, columna);
         this.name = (String)name;
         this.type = type;
         this.parameters = parameters;
         this.instruccions = instructions;
-        this.simple = false;
+    
     }
 
     @Override
@@ -59,11 +60,11 @@ public class Function_Void_Parameters extends Instruction {
         this.type = type;
     }
 
-    public Map<String, VariableType> getParameters() {
+    public ArrayList<Parameter> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Map<String, VariableType> parameters) {
+    public void setParameters(ArrayList<Parameter> parameters) {
         this.parameters = parameters;
     }
 
@@ -75,14 +76,6 @@ public class Function_Void_Parameters extends Instruction {
         this.instruccions = instruccions;
     }
 
-    public Boolean getSimple() {
-        return simple;
-    }
-
-    public void setSimple(Boolean simple) {
-        this.simple = simple;
-    }
-    
     @Override
     public String toString() {
         return "Function_Void_Parameters{" + "name=" + name + ", type=" + type + ", parameters=" + parameters + ", instruccions=" + instruccions + '}';

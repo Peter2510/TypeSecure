@@ -24,9 +24,17 @@ public class Call_Simple_Function extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Call_Simple_Function");
-        System.out.println("id");
-        return null;
+        
+
+        if(table.existeFuncion(id)){
+            System.out.println("La funcion existe" + table.getFuncion(id));
+            return this;
+        }else{
+            System.out.println("No existe la funcion " + id);
+            return null;
+        }
+        
+        
     }
 
     public String getId() {

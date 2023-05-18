@@ -1272,26 +1272,12 @@ declaracion_funcion ::=
     //function id (parametros):void{parametros}
     /* verificar que los nombres de los parametros no se repitan, si hay repetidos lanzar errro semantico*/
     /*Function_Void_Parameters*/
-    Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
+    
 
-    parametros.put(d.get(0).getId(),d.get(0).getType());
-    for(int p = 1; p<d.size();p++){
-
-        if(parametros.containsKey(d.get(p).getId())){
-            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
-            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
-            contador_errores_semanticos++;
-        }else{
-            parametros.put(d.get(p).getId(),d.get(p).getType());
-        }
-
-    }
-
-    if(contador_errores_semanticos==0){
             ArrayList tmp_function = new ArrayList();
-            tmp_function.add(new Function_Void_Parameters(aright,aleft,b,VariableType.VOID,parametros,i));
+            tmp_function.add(new Function_Void_Parameters(aright,aleft,b,VariableType.VOID,d,i));
             RESULT = tmp_function;
-    }
+
     
     
  :}
@@ -1312,26 +1298,10 @@ declaracion_funcion ::=
         //function id (parametros){parametros}
         //Function_Without_Type_Parameters
         /* verificar que los nombres de los parametros no se repitan, si hay repetidos lanzar errro semantico*/
-        Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
 
-    parametros.put(d.get(0).getId(),d.get(0).getType());
-    for(int p = 1; p<d.size();p++){
-
-        if(parametros.containsKey(d.get(p).getId())){
-            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
-            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
-            contador_errores_semanticos++;
-        }else{
-            parametros.put(d.get(p).getId(),d.get(p).getType());
-        }
-
-    }
-
-    if(contador_errores_semanticos==0){
             ArrayList tmp_function = new ArrayList();
-            tmp_function.add(new Function_Without_Type_Parameters(aright,aleft,b,VariableType.PENDIENTE,parametros,g));
+            tmp_function.add(new Function_Without_Type_Parameters(aright,aleft,b,VariableType.PENDIENTE,d,g));
             RESULT = tmp_function;
-    }
         
 :}
 
@@ -1348,26 +1318,11 @@ declaracion_funcion ::=
 {:
         //function id (parametros):tipoDato{parametros}
         //Function_With_Type_Parameters
-    Map<String, VariableType> parametros = new LinkedHashMap<String, VariableType>();
 
-    parametros.put(d.get(0).getId(),d.get(0).getType());
-    for(int p = 1; p<d.size();p++){
-
-        if(parametros.containsKey(d.get(p).getId())){
-            System.out.println("El nombre del parametro " +d.get(p).getId()+ " ya ha sido utilizado ");
-            erroresSemanticos.add( new Error_analizadores("Semantico",d.get(p).getId(),dright,dleft, "El nombre del parametro '" +d.get(p).getId()+ "' ya ha sido utilizado en la misma funcion"));
-            contador_errores_semanticos++;
-        }else{
-            parametros.put(d.get(p).getId(),d.get(p).getType());
-        }
-
-    }
-
-    if(contador_errores_semanticos==0){
             ArrayList tmp_function = new ArrayList();
-            tmp_function.add(new Function_With_Type_Parameters(aright,aleft,b,(VariableType) g,parametros,i));
+            tmp_function.add(new Function_With_Type_Parameters(aright,aleft,b,(VariableType) g,d,i));
             RESULT = tmp_function;
-    }
+
 :}        
                     ;
 

@@ -4,8 +4,11 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.analisis.ejecucion.auxiliares.Function;
 import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  *
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 public class SymbolTable extends ArrayList<Variable> {
 
     private ArrayList<Error_analizadores> errores = new ArrayList();
+    Map<String, Function> funciones = new LinkedHashMap<>();
     
     public SymbolTable(){
         super();
@@ -74,4 +78,33 @@ public class SymbolTable extends ArrayList<Variable> {
     public void setErrores(ArrayList<Error_analizadores> err){
         this.errores = err;
     }
+
+    public Map<String, Function> getFunciones() {
+        return funciones;
+    }
+
+    public void setFunciones(Map<String, Function> funciones) {
+        this.funciones = funciones;
+    }
+
+    public void agregarFuncion(String name, Function funcion){
+        funciones.put(name, funcion);
+    }
+    
+    public boolean existeFuncion(String name){
+        return funciones.containsKey(name);
+    }
+    
+    public int cantidadParametros(String name){
+        return funciones.get(name).getSizeParameters();
+    }
+    
+    public VariableType tipoFuncion(String name){
+        return funciones.get(name).getType();
+    }
+    
+    public Function getFuncion(String name){
+        return funciones.get(name);
+    }
+    
 }
