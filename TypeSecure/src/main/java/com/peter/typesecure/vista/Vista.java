@@ -5,19 +5,11 @@
 package com.peter.typesecure.vista;
 
 import com.peter.typesecure.analisis.Analisis;
-import java.awt.Panel;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.swing.JFileChooser;
+import java.awt.Color;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
+
 
 /**
  *
@@ -74,11 +66,15 @@ public class Vista extends javax.swing.JFrame {
         jMenuBar4 = new javax.swing.JMenuBar();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
+        jMenuBar5 = new javax.swing.JMenuBar();
+        jMenu11 = new javax.swing.JMenu();
+        jMenu12 = new javax.swing.JMenu();
         PanelPrinicipal = new javax.swing.JPanel();
         TabbedPane = new javax.swing.JTabbedPane();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         consolaText = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         Archivo = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -114,10 +110,24 @@ public class Vista extends javax.swing.JFrame {
         jMenu8.setText("Edit");
         jMenuBar4.add(jMenu8);
 
+        jMenu11.setText("File");
+        jMenuBar5.add(jMenu11);
+
+        jMenu12.setText("Edit");
+        jMenuBar5.add(jMenu12);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 51, 51));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
+        PanelPrinicipal.setBackground(new java.awt.Color(51, 51, 51));
+        PanelPrinicipal.setForeground(new java.awt.Color(51, 51, 51));
+
+        TabbedPane.setForeground(new java.awt.Color(0, 0, 0));
+
+        jButton1.setBackground(new java.awt.Color(51, 102, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Compilar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,24 +135,35 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        consolaText.setEditable(false);
+        consolaText.setBackground(new java.awt.Color(51, 51, 51));
         consolaText.setColumns(20);
+        consolaText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        consolaText.setForeground(new java.awt.Color(255, 255, 255));
         consolaText.setRows(5);
+        consolaText.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane1.setViewportView(consolaText);
+
+        jLabel1.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Output");
 
         javax.swing.GroupLayout PanelPrinicipalLayout = new javax.swing.GroupLayout(PanelPrinicipal);
         PanelPrinicipal.setLayout(PanelPrinicipalLayout);
         PanelPrinicipalLayout.setHorizontalGroup(
             PanelPrinicipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelPrinicipalLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(PanelPrinicipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPrinicipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(448, 448, 448))
+            .addGroup(PanelPrinicipalLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(PanelPrinicipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         PanelPrinicipalLayout.setVerticalGroup(
             PanelPrinicipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,13 +172,21 @@ public class Vista extends javax.swing.JFrame {
                 .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
+        jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
+
+        Archivo.setForeground(new java.awt.Color(255, 255, 255));
         Archivo.setText("Archivo");
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem5.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuItem5.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem5.setText("Nuevo archivo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +196,8 @@ public class Vista extends javax.swing.JFrame {
         Archivo.add(jMenuItem5);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuItem2.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem2.setText("Abrir archivo");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,6 +207,8 @@ public class Vista extends javax.swing.JFrame {
         Archivo.add(jMenuItem2);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuItem1.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem1.setText("Guardar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +218,8 @@ public class Vista extends javax.swing.JFrame {
         Archivo.add(jMenuItem1);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem3.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuItem3.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem3.setText("Guardar como");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,6 +229,8 @@ public class Vista extends javax.swing.JFrame {
         Archivo.add(jMenuItem3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem4.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuItem4.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem4.setText("Cerrar Archivo");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,9 +241,12 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(Archivo);
 
+        jMenu9.setForeground(new java.awt.Color(255, 255, 255));
         jMenu9.setText("Opciones");
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem7.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuItem7.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem7.setText("Seleccionar Todo");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,6 +256,8 @@ public class Vista extends javax.swing.JFrame {
         jMenu9.add(jMenuItem7);
 
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem8.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuItem8.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem8.setText("Compilar");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,9 +280,7 @@ public class Vista extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelPrinicipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 44, Short.MAX_VALUE))
+            .addComponent(PanelPrinicipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -328,7 +368,10 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JTabbedPane TabbedPane;
     public static javax.swing.JTextArea consolaText;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -341,6 +384,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
+    private javax.swing.JMenuBar jMenuBar5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

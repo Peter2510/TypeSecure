@@ -6,13 +6,13 @@ package com.peter.typesecure.vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -22,6 +22,8 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -31,10 +33,11 @@ public class Archivos {
 
     private boolean PanelExistente = false;
     private JTabbedPane TabbedPane;
+    private int numeroPanel = 0;
     private ArrayList<File> listaDeFiles = new ArrayList<File>();
     private ArrayList<JScrollPane> listaDeScroll = new ArrayList<JScrollPane>();
     private ArrayList<JTextPane> listaAreaDeTexto = new ArrayList<JTextPane>();
-    private int numeroPanel = 0;
+    
     
     public Archivos(JTabbedPane TabbedPane) {
         this.TabbedPane = TabbedPane;
@@ -45,6 +48,18 @@ public class Archivos {
         panelInterno.setLayout(new BorderLayout());
         listaDeFiles.add(new File(""));
         listaAreaDeTexto.add(new JTextPane());
+        
+        for (int i = 0; i < listaAreaDeTexto.size(); i++) {
+            listaAreaDeTexto.get(i).setBackground(Color.darkGray);
+            listaAreaDeTexto.get(i).setForeground(Color.white);
+            listaAreaDeTexto.get(i).setFont( new Font( "Dialog", Font.TYPE1_FONT, 12 ) );
+            Style indicatorStyle = listaAreaDeTexto.get(i).addStyle("IndicatorStyle", null);
+            
+            // Establecer el estilo de texto del indicador de posición
+            listaAreaDeTexto.get(i).setCaretColor(Color.white);
+            listaAreaDeTexto.get(i).setCaretPosition(0);
+            listaAreaDeTexto.get(i).setCharacterAttributes(indicatorStyle, true);
+        }
        
         NumeroLinea numeroLinea = new NumeroLinea(listaAreaDeTexto.get(numeroPanel));    
         listaDeScroll.add(new JScrollPane(listaAreaDeTexto.get(numeroPanel)));
@@ -215,10 +230,6 @@ public class Archivos {
         } catch (Exception e) {
             System.out.println("");
         }
-            
-            
-        
-        
         
     }
     
@@ -235,7 +246,5 @@ public class Archivos {
             return false;
         }
     }
-    
-    
 
 }
