@@ -48,6 +48,7 @@ public class Declaration extends Instruction {
                     new_variable.setLinea(this.getLinea());
                     new_variable.setColumna(this.getColumna());
                     table.add(new_variable);  
+                    return this;
                     
                 }else{
                     //inferencia de tipos
@@ -57,28 +58,31 @@ public class Declaration extends Instruction {
                         new_variable.setAccess(this.access);
                         new_variable.setId(this.id);
                         new_variable.setValue(operacion_valor.getValue());                        
+                        new_variable.setLinea(this.getLinea());
+                        new_variable.setColumna(this.getColumna());
                         
                         if(operacion_valor.getType()==VariableType.NUMBER){
                             new_variable.setType(VariableType.NUMBER);
-                             table.add(new_variable);
-                            
-
+                             
+                            table.add(new_variable);
+                             
+                            return this;
                         }else if(operacion_valor.getType()==VariableType.BIGINT){
                             new_variable.setType(VariableType.BIGINT);
                             table.add(new_variable);
-
+                            return this;
                         }else if(operacion_valor.getType()==VariableType.BOOLEAN){
                             new_variable.setType(VariableType.BOOLEAN);
                             table.add(new_variable);
-                            
+                            return this;
                         }else if(operacion_valor.getType()==VariableType.STRING){
                             new_variable.setType(VariableType.STRING);
                             table.add(new_variable);
-                            
+                            return this;
                         }else if(operacion_valor.getType()==VariableType.PENDIENTE){
                             new_variable.setType(this.type);
                             table.add(new_variable);
-                            
+                            return this;
                         }
                         
                     }else{
@@ -90,7 +94,10 @@ public class Declaration extends Instruction {
                                 new_variable.setId(this.id);
                                 new_variable.setValue(operacion_valor.getValue());
                                 new_variable.setType(this.type);
+                                new_variable.setLinea(this.getLinea());
+                                new_variable.setColumna(this.getColumna());
                                 table.add(new_variable);                                
+                                return this;
                         }else{
                             //System.out.println("El tipo de la variable y el valor ingresado no son del mismo tipo");
                             table.agrearErrores(new Error_analizadores("Semantico", this.id,this.getLinea(), this.getColumna(), "El tipo de la variable y el valor ingresado no son del mismo tipo"));                                
@@ -151,6 +158,5 @@ public class Declaration extends Instruction {
     public String convertGraphviz() {
         return "";
     }
-    
     
 }

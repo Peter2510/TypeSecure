@@ -85,7 +85,12 @@ public class Function_Call_Parameters_Function extends Instruction {
                         }
                         
                         if(countReturn==0){
-                            head.agrearErrores(new Error_analizadores("Semantico","",head.getFuncion(id).getLinea(),head.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + head.getFuncion(id).getType()));
+
+                            if(head.getFuncion(id).getType()!=VariableType.VOID){
+                                head.agrearErrores(new Error_analizadores("Semantico","",head.getFuncion(id).getLinea(),head.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + head.getFuncion(id).getType()));
+                            }
+                                
+                            
                         }
 
                         if(!head.getErrores().isEmpty()){

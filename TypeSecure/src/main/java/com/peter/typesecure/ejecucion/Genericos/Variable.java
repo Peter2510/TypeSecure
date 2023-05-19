@@ -57,16 +57,16 @@ public class Variable {
         return linea;
     }
 
-    public void setLinea(int linea) {
-        this.linea = linea;
+    public void setLinea(Object linea) {
+        this.linea = (int) linea;
     }
 
     public int getColumna() {
         return columna;
     }
 
-    public void setColumna(int columna) {
-        this.columna = columna;
+    public void setColumna(Object columna) {
+        this.columna = (int) columna;
     }
 
     @Override

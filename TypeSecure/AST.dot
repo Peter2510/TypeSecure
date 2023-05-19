@@ -5,5 +5,10 @@ digraph G
     node[fillcolor = "#FFFF00"]
     node[color = "#FF7F00"]
     edge[color = "#000000",arrowhead=none]
+"asignacion" -> "a"
+"asignacion" -> "="
+"asignacion" -> "4"
+
+"asignacion" -> ";"
 
  label="\n\nAST funcion 'id'\n\n"}
