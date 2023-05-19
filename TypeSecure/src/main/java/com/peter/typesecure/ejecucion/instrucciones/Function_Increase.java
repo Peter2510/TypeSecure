@@ -86,5 +86,9 @@ public class Function_Increase extends Instruction{
     public String toString() {
         return "Function_Increase{" + "id=" + id + '}';
     }
+        @Override
+    public String convertGraphviz() {
+        return "";
+    }
         
 }

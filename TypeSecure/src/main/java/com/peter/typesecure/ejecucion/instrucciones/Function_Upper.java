@@ -67,5 +67,8 @@ public class Function_Upper extends Instruction {
     public String toString() {
         return "Function_Upper{" + "operator=" + operator + '}';
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

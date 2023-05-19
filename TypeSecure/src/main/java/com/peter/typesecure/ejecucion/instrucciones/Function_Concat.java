@@ -82,5 +82,8 @@ public class Function_Concat extends Instruction{
     public String toString() {
         return "Function_Concat{" + "firstOperator=" + firstOperator + ", secondOperator=" + secondOperator + '}';
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

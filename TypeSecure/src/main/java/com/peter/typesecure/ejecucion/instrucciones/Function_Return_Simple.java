@@ -22,5 +22,8 @@ public class Function_Return_Simple extends Instruction {
         System.out.println("Function_Return_Simple");
         return this;
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

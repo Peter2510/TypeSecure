@@ -44,4 +44,8 @@ public class Else extends Instruction {
         return "Else{" + "instructions=" + instructions + '}';
     }
    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

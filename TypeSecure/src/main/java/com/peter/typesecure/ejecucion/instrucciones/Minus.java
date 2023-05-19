@@ -71,5 +71,8 @@ public class Minus extends Instruction {
     public String toString() {
         return "Minus{" + "instruction=" + instruction + '}';
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

@@ -6,6 +6,8 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.archivos.GenerateDot;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
 
 /**
  *
@@ -23,8 +25,32 @@ public class Function_Print_AST extends Instruction{
     @Override
     public Object ejecutar(SymbolTable table) {
         //verificar que la instruction sea de tipo string o texto
-        System.out.println("Function_Print_AST");
-        System.out.println(instruction);
+        
+        
+        if(table!=null && instruction!=null){
+            
+            Variable v = (Variable) instruction.ejecutar(table);
+
+            if(v!=null){
+    
+                if(table.existeFuncion((String)v.getValue())==true){
+                    GenerateDot d = new GenerateDot();
+                    d.ejecutarCodigoGraphviz(table, (String)v.getValue());                
+                }else{
+                    System.out.println(table.getFunciones());
+                    System.out.println("no existe");
+                }
+                
+                
+            }else{
+             System.out.println("asegurase de que las dos enstanbine");   
+            }
+            
+
+        }else{
+            System.out.println("asegurase de que las dos enstanbine");
+        }
+        
         return null;
     }
 
@@ -39,6 +65,11 @@ public class Function_Print_AST extends Instruction{
     @Override
     public String toString() {
         return "Function_Print_AST{" + "instruction=" + instruction + '}';
+    }
+    
+        @Override
+    public String convertGraphviz() {
+        return "";
     }
     
 }

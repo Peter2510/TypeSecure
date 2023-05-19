@@ -50,4 +50,8 @@ public class Call_Simple_Function extends Instruction{
         return "Call_Simple_Function{" + "id=" + id + ", simple=" + simple + '}';
     }
     
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

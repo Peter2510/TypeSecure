@@ -86,5 +86,8 @@ public class Function_Console_Log extends Instruction {
     public String toString() {
         return "Function_Console_Log{" + "instruccions=" + instruccions + ", contadorError=" + contadorError + '}';
     }
-
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

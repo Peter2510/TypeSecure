@@ -95,5 +95,10 @@ public class Function_Boolean extends Instruction {
     public String toString() {
         return "Function_Boolean{" + "operator=" + operator + '}';
     }
+    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
         
 }

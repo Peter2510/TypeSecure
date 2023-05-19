@@ -249,5 +249,9 @@ public class Function_Math extends Instruction {
     public String toString() {
         return "Math{" + "type=" + type + ", operation=" + operation + ", operation1=" + operation1 + '}';
     }
+       @Override
+    public String convertGraphviz() {
+        return "";
+    }
 
 }

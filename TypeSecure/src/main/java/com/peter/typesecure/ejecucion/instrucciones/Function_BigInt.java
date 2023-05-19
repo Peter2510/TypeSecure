@@ -114,5 +114,9 @@ public class Function_BigInt extends Instruction{
     public String toString() {
         return "Function_BigInt{" + "operator=" + operator + '}';
     }
-      
+ 
+        @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

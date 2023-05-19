@@ -27,5 +27,10 @@ public class Instruction_Break extends Instruction{
     public String toString() {
         return "Instruction_Break{" + '}';
     }
+
+        @Override
+    public String convertGraphviz() {
+        return "";
+    }
     
 }

@@ -90,5 +90,9 @@ public class Decrement extends Instruction{
     public String toString() {
         return "Decrement{" + "id=" + id + '}';
     }
-        
+
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

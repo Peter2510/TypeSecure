@@ -20,6 +20,8 @@ public class Logica {
         SymbolTable tablaE = new SymbolTable(null);
         for (int i = 0; i < instruciones.size(); i++) {
             
+            //System.out.println(instruciones.get(i).getClass());
+            //agregar primero funciones
             instruciones.get(i).ejecutar(tablaE);
         }
         

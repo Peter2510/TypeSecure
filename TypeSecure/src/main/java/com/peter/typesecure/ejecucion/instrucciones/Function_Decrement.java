@@ -85,5 +85,8 @@ public class Function_Decrement extends Instruction{
     public String toString() {
         return "Function_Decrement{" + "id=" + id + '}';
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

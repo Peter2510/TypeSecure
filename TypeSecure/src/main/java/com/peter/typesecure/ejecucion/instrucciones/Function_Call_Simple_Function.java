@@ -73,5 +73,8 @@ public class Function_Call_Simple_Function extends Instruction {
     public String toString() {
         return "Function_Call_Simple_Function{" + "id=" + id + ", simple=" + simple + '}';
     }
-
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

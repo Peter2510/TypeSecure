@@ -72,5 +72,17 @@ public class Assignment extends Instruction{
     public String toString() {
         return "Assignment{" + "id=" + id + ", operation=" + operation + '}';
     }
+
+    @Override
+    public String convertGraphviz() {
+        String datos ="";
+        
+        datos += "\""+ "asignacion" + "\"" + " -> " + "\"" + id + "\"" + "\n";
+        datos += "\""+ "asignacion" + "\"" + " -> " + "\"" + "=" + "\"" + "\n";
+        datos += operation.convertGraphviz() + "\n";
+        datos += "\""+ "asignacion" + "\"" + " -> " + "\"" + ";" + "\"" + "\n";
+        
+        return datos;
+    }
     
 }

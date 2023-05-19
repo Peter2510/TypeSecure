@@ -77,5 +77,8 @@ public class Function_String extends Instruction {
     public String toString() {
         return "Function_String{" + "operator=" + operator + '}';
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

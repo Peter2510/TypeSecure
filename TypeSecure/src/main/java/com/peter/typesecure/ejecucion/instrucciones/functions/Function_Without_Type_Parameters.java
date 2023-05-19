@@ -76,5 +76,8 @@ public class Function_Without_Type_Parameters extends Instruction {
     public String toString() {
         return "Function_Without_Type_Parameters{" + "name=" + name + ", type=" + type + ", parameters=" + parameters + ", instruccions=" + instruccions + '}';
     }
-        
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }        
 }

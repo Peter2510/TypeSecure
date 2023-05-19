@@ -80,5 +80,8 @@ public class Function_With_Type_Parameters extends Instruction{
     public String toString() {
         return "Function_With_Type_Parameters{" + "name=" + name + ", type=" + type + ", parameters=" + parameters + ", instruccions=" + instruccions + '}';
     }
-
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

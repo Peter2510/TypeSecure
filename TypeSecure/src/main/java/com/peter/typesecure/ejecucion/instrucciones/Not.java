@@ -56,5 +56,9 @@ public class Not extends Instruction{
     public String toString() {
         return "Not{" + "instruction=" + instruction + '}';
     }
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 
 }

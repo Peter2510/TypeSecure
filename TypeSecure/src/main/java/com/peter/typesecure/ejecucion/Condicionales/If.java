@@ -82,5 +82,10 @@ public class If extends Instruction {
     public String toString() {
         return "If{" + "conditional=" + conditional + ", instructions=" + instructions + '}';
     }
+    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 
 }

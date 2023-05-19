@@ -35,5 +35,7 @@ public abstract class Instruction {
         this.columna = columna;
     }
     
+    public abstract String convertGraphviz();
+    
     
 }

@@ -27,4 +27,9 @@ public class Instruction_Continue extends Instruction{
         return "Instruction_Continue{" + '}';
     }
     
+        @Override
+    public String convertGraphviz() {
+        return "";
+    }
+    
 }

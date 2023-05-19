@@ -88,4 +88,9 @@ public class Function_Void_Parameters extends Instruction {
         return "Function_Void_Parameters{" + "name=" + name + ", type=" + type + ", parameters=" + parameters + ", instruccions=" + instruccions + '}';
     }
     
+        @Override
+    public String convertGraphviz() {
+        return "";
+    }
+    
 }

@@ -83,4 +83,9 @@ public class ElseIf extends Instruction{
         return "ElseIf{" + "conditional=" + conditional + ", instructions=" + instructions + '}';
     }
     
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
+    
 }

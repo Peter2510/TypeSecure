@@ -76,5 +76,8 @@ public class Function_Void_Simple extends Instruction{
     public String toString() {
         return "Function_Void_Simple{" + "type=" + type + ", name=" + name + ", instruccions=" + instruccions + '}';
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

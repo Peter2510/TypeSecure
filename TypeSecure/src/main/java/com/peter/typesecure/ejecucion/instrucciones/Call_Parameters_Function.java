@@ -54,5 +54,10 @@ public class Call_Parameters_Function extends Instruction{
     public String toString() {
         return "Call_Parameters_Function{" + "id=" + id + ", instruccions=" + instruccions + '}';
     }
+
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
     
 }

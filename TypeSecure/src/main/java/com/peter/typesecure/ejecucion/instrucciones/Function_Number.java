@@ -99,5 +99,8 @@ public class Function_Number extends Instruction {
     public String toString() {
         return "Function_Number{" + "operator=" + operator + '}';
     }
-
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

@@ -141,10 +141,16 @@ public class Declaration extends Instruction {
     public void setOperation(Instruction operation) {
         this.operation = operation;
     }
-
+    
     @Override
     public String toString() {
         return "Declaration{" + "access=" + access + ", type=" + type + ", id=" + id + ", operation=" + operation + '}';
     }
 
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
+    
+    
 }

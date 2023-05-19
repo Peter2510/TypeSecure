@@ -72,5 +72,8 @@ public class Function_Length extends Instruction{
         return "Function_Length{" + "operator=" + operator + '}';
     }
     
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

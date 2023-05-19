@@ -88,5 +88,8 @@ public class Function_While extends Instruction {
     public String toString() {
         return "While{" + "conditional=" + conditional + ", instructions=" + instructions + '}';
     }
-
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

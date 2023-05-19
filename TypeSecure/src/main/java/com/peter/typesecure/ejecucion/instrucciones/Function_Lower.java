@@ -70,6 +70,9 @@ public class Function_Lower extends Instruction{
     public String toString() {
         return "Function_Lowerss{" + "operator=" + operator + '}';
     }
-   
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }   
    
 }

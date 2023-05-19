@@ -40,5 +40,8 @@ public class Function_Return_Instruction extends Instruction{
     public String toString() {
         return "Function_Return_Instruction{" + "instruction=" + instruction + '}';
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

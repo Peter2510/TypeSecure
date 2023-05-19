@@ -92,5 +92,9 @@ public class Increase extends Instruction{
     public String toString() {
         return "Increase{" + "id=" + id + '}';
     }
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
     
 }

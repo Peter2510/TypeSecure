@@ -256,5 +256,8 @@ public class Function_If extends Instruction {
     public String toString() {
         return "Function_If{" + "_if=" + _if + ", _else=" + _else + ", else_if=" + else_if + '}';
     }
-
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

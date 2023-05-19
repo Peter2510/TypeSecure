@@ -91,4 +91,11 @@ public class Value extends Instruction {
         return "Value{" + "value=" + value + ", type=" + type + '}';
     }
 
+    @Override
+    public String convertGraphviz() {
+        String datos ="";
+        datos += "\""+ "asignacion" + "\"" + " -> " + "\"" + value + "\"" + "\n";
+        return datos;
+    }
+
 }

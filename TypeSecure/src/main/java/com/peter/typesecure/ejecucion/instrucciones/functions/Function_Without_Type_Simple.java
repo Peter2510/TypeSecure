@@ -65,5 +65,8 @@ public class Function_Without_Type_Simple extends Instruction {
     public String toString() {
         return "Function_Without_Type_Simple{" + "name=" + name + ", type=" + type + ", instruccions=" + instruccions + '}';
     }
-    
+        @Override
+    public String convertGraphviz() {
+        return "";
+    }
 }

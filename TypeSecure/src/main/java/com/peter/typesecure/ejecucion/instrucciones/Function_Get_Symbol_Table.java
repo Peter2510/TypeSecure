@@ -33,5 +33,8 @@ public class Function_Get_Symbol_Table extends Instruction{
     public String toString() {
         return "Function_Get_Symbol_Table{" + '}';
     }
-    
+    @Override
+    public String convertGraphviz() {
+        return "";
+    }    
 }

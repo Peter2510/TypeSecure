@@ -408,6 +408,13 @@ public class BinaryOperation extends Instruction {
     public void setRightOperator(Instruction rightOperator) {
         this.rightOperator = rightOperator;
     }
+    
+        @Override
+    public String convertGraphviz() {
+        String datos ="";
+        datos = "\""+ leftOperator.convertGraphviz() + "\"" + " -> " + rightOperator.convertGraphviz() + "\n";
+        return datos;
+    }
 
     @Override
     public String toString() {
