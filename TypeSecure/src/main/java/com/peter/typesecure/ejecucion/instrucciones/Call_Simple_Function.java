@@ -26,7 +26,7 @@ public class Call_Simple_Function extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-
+        System.out.println("Call simple funciton");
         if (table.existeFuncion(id)) {
 
             if (table.getFuncion(id).hasParameters() == false) {
@@ -44,6 +44,11 @@ public class Call_Simple_Function extends Instruction{
                                 Variable v = (Variable) ((Function_Return_Instruction) vr).getInstruction().ejecutar(child);
                                 System.out.println(v);
 
+                                if(v==null){
+                                child.agrearErrores(new Error_analizadores("Semantico", child.getFuncion(id).getInstructions().get(i).getLinea(), child.getFuncion(id).getInstructions().get(i).getColumna(), "La instruccion return de la funcion '" + id + "'no esta definida"));    
+                                return null;
+                                }
+                                
                                 if (v.getType() == child.getFuncion(id).getType()) {
                                     countReturn++;
                                     return v;

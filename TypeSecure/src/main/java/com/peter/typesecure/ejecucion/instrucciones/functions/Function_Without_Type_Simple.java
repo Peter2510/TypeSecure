@@ -39,7 +39,9 @@ public class Function_Without_Type_Simple extends Instruction {
         if (!table.existeFuncion(name)) {
             ArrayList<Variable> returns = new ArrayList();
             for (int i = 0; i < instruccions.size(); i++) {
-                if (instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Console_Log.class) {
+                                if (instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Console_Log.class 
+                        &&instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Get_Symbol_Table.class
+                        &&instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Print_AST.class ) {
                     Object tr = instruccions.get(i).ejecutar(table);
                     System.out.println("EJECUTO " + tr);
                     if (tr != null) {
@@ -52,7 +54,12 @@ public class Function_Without_Type_Simple extends Instruction {
                                 System.out.println(((Function_Return_Instruction) tr).getInstruction().ejecutar(table));
                                 System.out.println(table.getErrores());
                                 Variable v = (Variable) ((Function_Return_Instruction) tr).getInstruction().ejecutar(table);
-                                returns.add(v);
+                                if(v!=null){
+                                    returns.add(v);
+                                }else{
+                        table.agrearErrores(new Error_analizadores("Semantico", 0, 0, "Las instrucciones return de la funcion " + name + " no esta definida"));                
+                                }
+                                
                             }
                         }
                     }
@@ -89,10 +96,17 @@ public class Function_Without_Type_Simple extends Instruction {
 
                     
                     type = returns.get(0).getType();
-                    original.agregarFuncion(name, new Function(this.getLinea(), this.getColumna(), name, type, null, instruccions));
+                    
+                    if(type!=null){
+                        original.agregarFuncion(name, new Function(this.getLinea(), this.getColumna(), name, type, null, instruccions));
                     table = original;
                     System.out.println(table.getFunciones());
                     return this;
+                    }else{
+                        table.agrearErrores(new Error_analizadores("Semantico", 0, 0, "Las instrucciones return de la funcion " + name + " no esta definida"));    
+                        return null;
+                    }
+                    
 
                 } else {
                     table.agrearErrores(new Error_analizadores("Semantico", 0, 0, "Las instrucciones return de la funcion " + name + " deben retornar un mismo tipo de dato"));

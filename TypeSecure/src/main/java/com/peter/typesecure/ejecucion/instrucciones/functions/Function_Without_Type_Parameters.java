@@ -6,6 +6,8 @@ package com.peter.typesecure.ejecucion.instrucciones.functions;
 
 import com.peter.typesecure.analisis.ejecucion.auxiliares.Function;
 import com.peter.typesecure.analisis.ejecucion.auxiliares.Parameter;
+import com.peter.typesecure.ejecucion.Genericos.AccessType;
+import com.peter.typesecure.ejecucion.Genericos.Declaration;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.Variable;
@@ -22,16 +24,16 @@ import java.util.Map;
  */
 public class Function_Without_Type_Parameters extends Instruction {
 
-    private String name;
+    private String id;
     private VariableType type;
-    private ArrayList<Parameter> parameters;
+    private ArrayList<Parameter> parameters_in;
     private ArrayList<Instruction> instruccions;
     
     public Function_Without_Type_Parameters(Object linea, Object columna,Object name, VariableType type,ArrayList<Parameter> parameters,ArrayList<Instruction> instructions) {
         super(linea, columna);
-        this.name = (String) name;
+        this.id = (String) name;
         this.type = type;
-        this.parameters = parameters;
+        this.parameters_in = parameters;
         this.instruccions = instructions;
     }
 
@@ -40,10 +42,14 @@ public class Function_Without_Type_Parameters extends Instruction {
         //ejecutar solo instrucciones de tipo returns
         SymbolTable original = new SymbolTable(table);
 
-        if (!table.existeFuncion(name)) {
+        if (!table.existeFuncion(id)) {
+            
             ArrayList<Variable> returns = new ArrayList();
             for (int i = 0; i < instruccions.size(); i++) {
-                if (instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Console_Log.class) {
+                if (instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Console_Log.class 
+                        &&instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Get_Symbol_Table.class
+                        &&instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Print_AST.class ) {
+                    System.out.println(instruccions.get(i).getClass());
                     Object tr = instruccions.get(i).ejecutar(table);
                     if (tr != null) {
                         if (tr instanceof Function_Return_Instruction || tr instanceof Function_Return_Simple) {
@@ -60,6 +66,7 @@ public class Function_Without_Type_Parameters extends Instruction {
                 }
 
             }
+                    System.out.println("------"+table.getErrores());
 
             for (int i = 0; i < table.getErrores().size(); i++) {
                 original.agrearErrores(table.getErrores().get(i));
@@ -68,7 +75,7 @@ public class Function_Without_Type_Parameters extends Instruction {
             if (returns.isEmpty()) {
                 type = VariableType.VOID;
 
-                original.agregarFuncion(name, new Function(this.getLinea(), this.getColumna(), name, type, parameters, instruccions));
+                original.agregarFuncion(id, new Function(this.getLinea(), this.getColumna(), id, type, parameters_in, instruccions));
                 table = original;
                 return this;
             } else {
@@ -85,14 +92,16 @@ public class Function_Without_Type_Parameters extends Instruction {
 
                 if (count_error == 0) {
 
+                    //para el tipo de funcion, verifivadr los parametros y sacar los tipos y poner el tipo de dato; 
+
                     type = returns.get(0).getType();
-                    original.agregarFuncion(name, new Function(this.getLinea(), this.getColumna(), name, type, parameters, instruccions));
+                    original.agregarFuncion(id, new Function(this.getLinea(), this.getColumna(), id, type, parameters_in, instruccions));
                     table = original;
                     System.out.println(table.getFunciones());
                     return this;
 
                 } else {
-                    table.agrearErrores(new Error_analizadores("Semantico", 0, 0, "Las instrucciones return de la funcion " + name + " deben retornar un mismo tipo de dato"));
+                    table.agrearErrores(new Error_analizadores("Semantico", 0, 0, "Las instrucciones return de la funcion " + id + " deben retornar un mismo tipo de dato"));
                     for (int i = 0; i < table.getErrores().size(); i++) {
                         original.agrearErrores(table.getErrores().get(i));
                     }
@@ -102,7 +111,7 @@ public class Function_Without_Type_Parameters extends Instruction {
             }
 
         } else {
-            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '" + name + "' ya ha sido definida "));
+            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '" + id + "' ya ha sido definida "));
             for (int i = 0; i < table.getErrores().size(); i++) {
                 original.agrearErrores(table.getErrores().get(i));
             }
@@ -111,11 +120,11 @@ public class Function_Without_Type_Parameters extends Instruction {
     }
 
     public String getName() {
-        return name;
+        return id;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.id = name;
     }
 
     public VariableType getType() {
@@ -127,11 +136,11 @@ public class Function_Without_Type_Parameters extends Instruction {
     }
 
     public ArrayList<Parameter> getParameters() {
-        return parameters;
+        return parameters_in;
     }
 
     public void setParameters(ArrayList<Parameter> parameters) {
-        this.parameters = parameters;
+        this.parameters_in = parameters;
     }
 
     public ArrayList<Instruction> getInstruccions() {
@@ -144,7 +153,7 @@ public class Function_Without_Type_Parameters extends Instruction {
      
     @Override
     public String toString() {
-        return "Function_Without_Type_Parameters{" + "name=" + name + ", type=" + type + ", parameters=" + parameters + ", instruccions=" + instruccions + '}';
+        return "Function_Without_Type_Parameters{" + "name=" + id + ", type=" + type + ", parameters=" + parameters_in + ", instruccions=" + instruccions + '}';
     }
     @Override
     public String convertGraphviz() {
