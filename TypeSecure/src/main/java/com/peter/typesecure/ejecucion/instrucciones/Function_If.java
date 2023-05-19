@@ -34,7 +34,7 @@ public class Function_If extends Instruction {
         //if
         if (_if != null && else_if == null && _else == null) {
 
-            System.out.println("if");
+           // System.out.println("if");
             Variable var_if = (Variable) _if.ejecutar(table);
 
             if (var_if != null) {
@@ -46,7 +46,9 @@ public class Function_If extends Instruction {
                     for (int i = 0; i < _if.getInstructions().size(); i++) {
 
                         Object vr = _if.getInstructions().get(i).ejecutar(child);
-                        
+                        if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction || vr instanceof Instruction_Break || vr instanceof Instruction_Continue){
+                            return vr;
+                        }
 
                     }
                     //agregando errores
@@ -63,7 +65,7 @@ public class Function_If extends Instruction {
 
             //if else   
         } else if (_if != null && else_if == null && _else != null) {
-            System.out.println("if else");
+           // System.out.println("if else");
 
             Variable val_if = (Variable) _if.ejecutar(table);
 
@@ -76,7 +78,9 @@ public class Function_If extends Instruction {
                     for (int i = 0; i < _if.getInstructions().size(); i++) {
 
                        Object vr = _if.getInstructions().get(i).ejecutar(child);
-
+                        if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction){
+                            return vr;
+                        }
                     }
                     //agregando errores
                     for (int i = 0; i < child.getErrores().size(); i++) {
@@ -88,6 +92,7 @@ public class Function_If extends Instruction {
                     SymbolTable child = new SymbolTable(table);
                     
                       Object vr = _else.ejecutar(child);
+                      return vr;
 
                 }
 
@@ -99,7 +104,7 @@ public class Function_If extends Instruction {
 
             //if else_if   
         } else if (_if != null && else_if!=null && _else == null) {
-            System.out.println("if else_if");
+            //System.out.println("if else_if");
             Variable val_if = (Variable) _if.ejecutar(table);
 
             if (val_if != null) {
@@ -111,7 +116,9 @@ public class Function_If extends Instruction {
                     for (int i = 0; i < _if.getInstructions().size(); i++) {
 
                       Object vr = _if.getInstructions().get(i).ejecutar(child);
-
+                        if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction){
+                            return vr;
+                        }
                     }
                     //agregando errores
                     for (int i = 0; i < child.getErrores().size(); i++) {
@@ -154,7 +161,7 @@ public class Function_If extends Instruction {
 
             //if else_if else   
         } else if (_if != null && !else_if.isEmpty() && _else != null) {
-            System.out.println("if else_if else");
+            //System.out.println("if else_if else");
             Variable val_if = (Variable) _if.ejecutar(table);
 
             if (val_if != null) {
@@ -166,7 +173,9 @@ public class Function_If extends Instruction {
                     for (int i = 0; i < _if.getInstructions().size(); i++) {
 
                      Object vr =  _if.getInstructions().get(i).ejecutar(child);
-
+                        if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction){
+                            return vr;
+                        }
                     }
                     //agregando errores
                     for (int i = 0; i < child.getErrores().size(); i++) {
@@ -186,6 +195,9 @@ public class Function_If extends Instruction {
                                     SymbolTable child = new SymbolTable(table);
                                     for (int j = 0; j < else_if.get(i).getInstructions().size(); j++) {
                                      Object vr =   else_if.get(i).getInstructions().get(j).ejecutar(child);
+                                        if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction){
+                                            return vr;
+                                        }
                                     }
                                     break;
                                 }
@@ -198,6 +210,7 @@ public class Function_If extends Instruction {
                         
                         if(countTrueElseIf==0){
                            Object vr = _else.ejecutar(table);
+                            return vr;
                         }
                         
                     }

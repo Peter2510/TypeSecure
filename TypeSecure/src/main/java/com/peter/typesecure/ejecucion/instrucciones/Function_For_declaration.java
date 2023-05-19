@@ -53,6 +53,9 @@ public class Function_For_declaration extends Instruction {
                             SymbolTable contextFor = new SymbolTable(contextAsignacion);
                             for (int i = 0; i < instructions.size(); i++) {
                                 Object vr = instructions.get(i).ejecutar(contextFor);
+                                    if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction){
+                                        return vr;
+                                    }       
                             }
 
                             for (int i = 0; i < action.size(); i++) {

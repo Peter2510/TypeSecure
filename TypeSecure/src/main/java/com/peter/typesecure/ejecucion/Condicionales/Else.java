@@ -25,9 +25,10 @@ public class Else extends Instruction {
     public Object ejecutar(SymbolTable table) {
 
         for (int i = 0; i < instructions.size(); i++) {
-            instructions.get(i).ejecutar(table);
+            Object vr = instructions.get(i).ejecutar(table);
+            return vr;
         }
-        return null;
+        return this;
     }
 
     public ArrayList<Instruction> getInstructions() {

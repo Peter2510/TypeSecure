@@ -4,12 +4,13 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones.functions;
 
+import com.peter.typesecure.analisis.ejecucion.auxiliares.Function;
 import com.peter.typesecure.analisis.ejecucion.auxiliares.Parameter;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.VariableType;
+import com.peter.typesecure.error.Error_analizadores;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  *
@@ -32,12 +33,15 @@ public class Function_With_Type_Parameters extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Function_With_Type_Parameters");
-        System.out.println(name);
-        System.out.println(type);
-        System.out.println(parameters);
-        System.out.println(instruccions);
-        return null;
+        if (table.existeFuncion(name) == false) {
+
+            table.agregarFuncion(name, new Function(this.getLinea(),this.getColumna(),name, type, parameters, instruccions));
+            return this;
+
+        } else {
+            table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '" + name + "' ya esta definida "));
+            return null;
+        }
     }
 
     public String getName() {

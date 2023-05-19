@@ -25,10 +25,13 @@ public class Call_Parameters_Function extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Call_Parameters_Function");
-        System.out.println("id");
-        System.out.println(instruccions);
+
+        for (int i = 0; i < instruccions.size(); i++) {
+                    return instruccions.get(i).ejecutar(table);
+
+        }
         return null;
+               
     }
 
     public String getId() {

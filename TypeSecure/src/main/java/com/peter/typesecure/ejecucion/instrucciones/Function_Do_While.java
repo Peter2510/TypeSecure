@@ -28,7 +28,7 @@ public class Function_Do_While extends Instruction {
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        System.out.println("Do_While");
+        
 
         Variable condition = (Variable) conditional.ejecutar(table);
         if (condition != null) {
@@ -41,6 +41,9 @@ public class Function_Do_While extends Instruction {
                     do {
                         for (int i = 0; i < instructions.size(); i++) {
                             Object vr = instructions.get(i).ejecutar(child);
+                               if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction){
+                                    return vr;
+                                }
                             condition = (Variable) conditional.ejecutar(child);
 
                         }

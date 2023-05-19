@@ -25,16 +25,7 @@ public class Function_Return_Instruction extends Instruction{
     @Override
     public Object ejecutar(SymbolTable table) {
         System.out.println("Function_Return_Instruction");
-        Variable var = (Variable)instruction.ejecutar(table);
-        if(var!=null){
-            
             return this;
-            
-        }else{
-            table.agrearErrores(new Error_analizadores("Semantico", "", this.getLinea(), this.getColumna(), "La instruccion de return no esta definida"));
-            return null;
-        }
-        
     }
 
     public Instruction getInstruction() {

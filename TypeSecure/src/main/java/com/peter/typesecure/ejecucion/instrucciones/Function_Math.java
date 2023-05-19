@@ -185,8 +185,6 @@ public class Function_Math extends Instruction {
                         if(var.getType()==VariableType.NUMBER){
                             Variable tmp = new Variable();
                             tmp.setType(VariableType.NUMBER);
-                            System.out.println(var.getValue()+" var");
-                            System.out.println(var2.getValue()+" var2");
                             tmp.setValue(Math.pow((Double)var.getValue(),(Double)var2.getValue()));
                             return tmp;
                         }else{
@@ -194,8 +192,6 @@ public class Function_Math extends Instruction {
                             tmp.setType(VariableType.BIGINT);
                             String value_string = (String) var.getValue();
                             String value_string2 = (String) var2.getValue();
-                            System.out.println(var.getValue()+" var");
-                            System.out.println(var2.getValue()+" var2");
                             int value = Integer.parseInt(value_string.substring(0, value_string.length() - 1));
                             int value2 = Integer.parseInt(value_string2.substring(0, value_string.length() - 1));
                             tmp.setValue((int)Math.pow(value,value2) + "n");

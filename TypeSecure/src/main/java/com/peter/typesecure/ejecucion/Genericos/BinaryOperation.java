@@ -48,8 +48,6 @@ public class BinaryOperation extends Instruction {
                             return variable;
                         } else if (left.getType() == VariableType.STRING || right.getType() == VariableType.STRING) {
                             //concatenacion
-                            System.out.println(left.getValue());
-                            System.out.println(right.getValue());
                             variable.setValue(left.getValue().toString() + right.getValue().toString() + "");
                             variable.setType(VariableType.STRING);
                             return variable;
@@ -70,8 +68,6 @@ public class BinaryOperation extends Instruction {
                     } else {
                         if (left.getType() == VariableType.STRING || right.getType() == VariableType.STRING) {
                             variable.setValue(left.getValue().toString() + right.getValue().toString() + "");
-                            System.out.println(left.getValue());
-                            System.out.println("s "+right.getValue());
                             variable.setType(VariableType.STRING);
                             return variable;
                         }else{

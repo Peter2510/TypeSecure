@@ -33,9 +33,6 @@ public class Function_Void_Simple extends Instruction{
 
     @Override
     public Object ejecutar(SymbolTable table) {
-        //verificar que los nombres de las varialbles no se repitan
-        //verificar que el metodo no haya sido ya definido en el documento
-        //verificar que la funcion pueda tener el mismo nombre pero distintos parametros
             
         if(table.existeFuncion(name)==false){
             

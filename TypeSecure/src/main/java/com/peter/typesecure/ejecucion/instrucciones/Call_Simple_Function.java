@@ -25,7 +25,7 @@ public class Call_Simple_Function extends Instruction{
     public Object ejecutar(SymbolTable table) {
         
 
-        return null;
+        return this;
         
     }
 
