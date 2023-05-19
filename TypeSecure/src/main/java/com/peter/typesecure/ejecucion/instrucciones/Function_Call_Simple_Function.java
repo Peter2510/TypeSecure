@@ -6,6 +6,8 @@ package com.peter.typesecure.ejecucion.instrucciones;
 
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
+import com.peter.typesecure.ejecucion.Genericos.Variable;
+import com.peter.typesecure.ejecucion.Genericos.VariableType;
 import com.peter.typesecure.error.Error_analizadores;
 
 /**
@@ -32,12 +34,51 @@ public class Function_Call_Simple_Function extends Instruction {
 
                 SymbolTable child = new SymbolTable(table);
 
-                for (int i = 0; i < table.getFuncion(id).getInstructions().size(); i++) {
-                    Object vr = table.getFuncion(id).getInstructions().get(i).ejecutar(child);
+                int countReturn = 0;
+                for (int i = 0; i < child.getFuncion(id).getInstructions().size(); i++) {
+                    Object vr = child.getFuncion(id).getInstructions().get(i).ejecutar(child);
+
+                    if (vr != null) {
+                        if (vr instanceof Function_Return_Instruction 
+                                || vr instanceof Function_Return_Simple || vr instanceof Instruction_Break 
+                                || vr instanceof Instruction_Continue) {
+                            if (vr instanceof Function_Return_Instruction) {
+                                //verificar que el tipo de dato retornado sea igual a la funcion
+                                Variable v = (Variable) ((Function_Return_Instruction) vr).getInstruction().ejecutar(child);
+
+                                if (v.getType() == child.getFuncion(id).getType()) {
+                                    countReturn++;
+                                    return v;
+
+                                } else if (vr instanceof Instruction_Break || vr instanceof Instruction_Continue) {
+                                    return v;
+                                } else {
+                                    child.agrearErrores(new Error_analizadores("Semantico", child.getFuncion(id).getInstructions().get(i).getLinea(), child.getFuncion(id).getInstructions().get(i).getColumna(), "La instruccion return de la funcion '" + id + "' no cumple con el tipo de dato de la funcion"));
+                                }
+                            } else if (vr instanceof Function_Return_Simple) {
+                                child.agrearErrores(new Error_analizadores("Semantico", child.getFuncion(id).getInstructions().get(i).getLinea(), child.getFuncion(id).getInstructions().get(i).getColumna(), "La instruccion return de la funcion '" + id + "' debe retornar un valor u operacion"));
+                            }
+
+                        }
+                    } else {
+                        child.agrearErrores(new Error_analizadores("Semantico", child.getFuncion(id).getInstructions().get(i).getLinea(), child.getFuncion(id).getInstructions().get(i).getColumna(), "Error en la ejecucion en las instrucciones de la funcion '" + id + "'"));
+                    }
+
                 }
 
-                for (int i = 0; i < child.getErrores().size(); i++) {
-                    table.agrearErrores(child.getErrores().get(i));
+                if (countReturn == 0) {
+
+                    if (child.getFuncion(id).getType() != VariableType.VOID) {
+                        child.agrearErrores(new Error_analizadores("Semantico", "", child.getFuncion(id).getLinea(), child.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + child.getFuncion(id).getType()));
+                    }
+                    
+                }else
+
+                if (!child.getErrores().isEmpty()) {
+                    for (int i = 0; i < child.getErrores().size(); i++) {
+                        table.agrearErrores(child.getErrores().get(i));
+                    }
+                    return null;
                 }
 
             } else {
@@ -73,6 +114,7 @@ public class Function_Call_Simple_Function extends Instruction {
     public String toString() {
         return "Function_Call_Simple_Function{" + "id=" + id + ", simple=" + simple + '}';
     }
+
     @Override
     public String convertGraphviz() {
         return "";

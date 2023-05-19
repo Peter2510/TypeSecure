@@ -1104,6 +1104,15 @@ operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                     {:
                         RESULT = new BinaryOperation(aright,aleft,OperationType.OR,a,c);
                     :}
+                    | operaciones_matematicas:a OR operaciones_logicas:c
+                    {:
+                        RESULT = new BinaryOperation(aright,aleft,OperationType.OR,a,c);
+                    :}
+
+                    | operaciones_matematicas:a AND operaciones_logicas:c
+                                        {:
+                        RESULT = new BinaryOperation(aright,aleft,OperationType.AND,a,c);
+                    :}
                     ;
 
 funcion_length ::= operaciones_matematicas:a PUNTO:b LENGTH:c

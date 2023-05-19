@@ -43,7 +43,7 @@ public class Function_Without_Type_Parameters extends Instruction {
         if (!table.existeFuncion(name)) {
             ArrayList<Variable> returns = new ArrayList();
             for (int i = 0; i < instruccions.size(); i++) {
-                if (instruccions.get(i).getClass() == com.peter.typesecure.ejecucion.instrucciones.Function_Return_Instruction.class || instruccions.get(i).getClass() == com.peter.typesecure.ejecucion.instrucciones.Function_Return_Simple.class) {
+                if (instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Console_Log.class) {
                     Object tr = instruccions.get(i).ejecutar(table);
                     if (tr != null) {
                         if (tr instanceof Function_Return_Instruction || tr instanceof Function_Return_Simple) {

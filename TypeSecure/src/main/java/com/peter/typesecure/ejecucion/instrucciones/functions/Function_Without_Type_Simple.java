@@ -39,20 +39,26 @@ public class Function_Without_Type_Simple extends Instruction {
         if (!table.existeFuncion(name)) {
             ArrayList<Variable> returns = new ArrayList();
             for (int i = 0; i < instruccions.size(); i++) {
-                if (instruccions.get(i).getClass() == com.peter.typesecure.ejecucion.instrucciones.Function_Return_Instruction.class || instruccions.get(i).getClass() == com.peter.typesecure.ejecucion.instrucciones.Function_Return_Simple.class) {
+                if (instruccions.get(i).getClass() != com.peter.typesecure.ejecucion.instrucciones.Function_Console_Log.class) {
                     Object tr = instruccions.get(i).ejecutar(table);
+                    System.out.println("EJECUTO " + tr);
                     if (tr != null) {
                         if (tr instanceof Function_Return_Instruction || tr instanceof Function_Return_Simple) {
                             if (tr instanceof Function_Return_Simple) {
                                 table.agrearErrores(new Error_analizadores("Semantico", instruccions.get(i).getLinea(), instruccions.get(i).getColumna(), "La instruccion Return debe retornar un valor o instruccion"));
                                 return null;
                             } else if (tr instanceof Function_Return_Instruction) {
-
+                                System.out.println("que tre value "+tr);
+                                System.out.println(((Function_Return_Instruction) tr).getInstruction().ejecutar(table));
+                                System.out.println(table.getErrores());
                                 Variable v = (Variable) ((Function_Return_Instruction) tr).getInstruction().ejecutar(table);
                                 returns.add(v);
                             }
                         }
                     }
+                }else{
+                   // System.out.println("hola " + i + instruccions.get(i).ejecutar(table));
+                    //instruccions.get(i).ejecutar(table);
                 }
 
             }
@@ -78,9 +84,10 @@ public class Function_Without_Type_Simple extends Instruction {
 
                     }
                 }
-
+                
                 if (count_error == 0) {
 
+                    
                     type = returns.get(0).getType();
                     original.agregarFuncion(name, new Function(this.getLinea(), this.getColumna(), name, type, null, instruccions));
                     table = original;
