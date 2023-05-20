@@ -6,6 +6,7 @@ package com.peter.typesecure.ejecucion.instrucciones.functions;
 
 import com.peter.typesecure.analisis.ejecucion.auxiliares.Function;
 import com.peter.typesecure.analisis.ejecucion.auxiliares.Parameter;
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.VariableType;
@@ -81,7 +82,7 @@ public class Function_With_Type_Parameters extends Instruction{
         return "Function_With_Type_Parameters{" + "name=" + name + ", type=" + type + ", parameters=" + parameters + ", instruccions=" + instruccions + '}';
     }
     @Override
-    public String convertGraphviz() {
+    public String convertGraphviz(Dot dot) {
         return "";
     }
 }

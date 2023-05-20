@@ -24,19 +24,22 @@ public class GenerateDot {
         // shape forma
         // color color
         // edge flecha
-        String datos = "digraph G\n" + "{\n" + "    node[shape = circle]\n" + "    node[style = filled]\n" + ""
-                + "    node[fillcolor = \"#FFFF00\"]\n" + "    node[color = \"#FF7F00\"]\n"
+        String datos = "digraph G\n" 
+                + "{\n" + ""
+                + "node[shape = circle]\n" 
+                + "    node[style = filled]\n" + ""
+                + "    node[fillcolor = \"#FFFF00\"]\n" + " "
+                + "   node[color = \"#FF7F00\"]\n"
                 + "    edge[color = \"#000000\",arrowhead=none]\n";
 
 
+                datos += table.getFuncion(id).generarDot();
+                System.out.println(datos);
         
-                    for (int i = 0; i < table.getFuncion(id).getInstructions().size(); i++) {
-                        datos += table.getFuncion(id).getInstructions().get(i).convertGraphviz();
-                    }
                     datos += "\n label=\"\\n\\nAST funcion '"+ id +"'\\n\\n\"}";
 
-                    return datos;
-
+                    
+return datos;
 
     }
 

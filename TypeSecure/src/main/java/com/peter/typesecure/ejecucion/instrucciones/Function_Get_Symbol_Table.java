@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.archivos.ManejoArchivos;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
@@ -33,8 +34,9 @@ public class Function_Get_Symbol_Table extends Instruction{
     public String toString() {
         return "Function_Get_Symbol_Table{" + '}';
     }
-    @Override
-    public String convertGraphviz() {
+
+        @Override
+    public String convertGraphviz(Dot dot) {
         return "";
-    }    
+    }
 }

@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 
@@ -27,8 +28,8 @@ public class Instruction_Continue extends Instruction{
         return "Instruction_Continue{" + '}';
     }
     
-        @Override
-    public String convertGraphviz() {
+    @Override
+    public String convertGraphviz(Dot dot) {
         return "";
     }
     

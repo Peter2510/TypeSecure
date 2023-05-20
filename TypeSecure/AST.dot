@@ -1,14 +1,26 @@
 digraph G
 {
-    node[shape = circle]
+node[shape = circle]
     node[style = filled]
     node[fillcolor = "#FFFF00"]
     node[color = "#FF7F00"]
     edge[color = "#000000",arrowhead=none]
-"asignacion" -> "a"
-"asignacion" -> "="
-"asignacion" -> "4"
+node5[label="number"]
+node6[label="45"]
+node4->node5
+node9[label="Asignacion"]
+node10[label="Id"]
+node11[label="f"]
+node12[label="="]
+node5[label="number"]
+node6[label="45"]
+node4->node5
+node13[label="number"]
+node14[label="4"]
+node12->node13
+node9->node10
+node10->node11
+node9->node12
+node9->node16
 
-"asignacion" -> ";"
-
- label="\n\nAST funcion 'id'\n\n"}
+ label="\n\nAST funcion 'ha'\n\n"}

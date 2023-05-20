@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.Variable;
@@ -130,8 +131,9 @@ public class Function_For_declaration extends Instruction {
     public String toString() {
         return "Function_For{" + "declaration=" + declarations + ", conditional=" + conditional + ", action=" + action + ", instructions=" + instructions + '}';
     }
-    @Override
-    public String convertGraphviz() {
+
+        @Override
+    public String convertGraphviz(Dot dot) {
         return "";
     }
 }

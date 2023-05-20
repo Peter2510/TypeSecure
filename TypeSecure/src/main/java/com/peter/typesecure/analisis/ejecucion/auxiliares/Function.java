@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.analisis.ejecucion.auxiliares;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.VariableType;
 import java.util.ArrayList;
@@ -104,6 +105,17 @@ public class Function {
     @Override
     public String toString() {
         return "Function{" + "id=" + id + ", type=" + type + ", parameters=" + parameters + ", instructions=" + instructions + ", linea=" + linea + ", columna=" + columna + '}';
+    }
+    
+    public String generarDot(){
+        String dat = "";
+        Dot d = new Dot();
+        for (int i = 0; i < this.instructions.size(); i++) {
+            dat = this.instructions.get(i).convertGraphviz(d);
+        }
+        
+        
+        return dat;
     }
     
 }

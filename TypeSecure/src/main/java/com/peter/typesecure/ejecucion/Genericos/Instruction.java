@@ -4,6 +4,8 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.archivos.Dot;
+
 /**
  *
  * @author GORDILLOG
@@ -35,7 +37,7 @@ public abstract class Instruction {
         this.columna = columna;
     }
     
-    public abstract String convertGraphviz();
+    public abstract String convertGraphviz(Dot dot);
     
     
 }

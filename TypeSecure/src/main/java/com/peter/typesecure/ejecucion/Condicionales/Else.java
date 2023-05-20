@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.Condicionales;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class Else extends Instruction {
     }
    
     @Override
-    public String convertGraphviz() {
+    public String convertGraphviz(Dot dot) {
         return "";
     }
 }

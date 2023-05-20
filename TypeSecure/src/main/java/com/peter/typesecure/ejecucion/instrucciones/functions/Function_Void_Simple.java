@@ -5,6 +5,7 @@
 package com.peter.typesecure.ejecucion.instrucciones.functions;
 
 import com.peter.typesecure.analisis.ejecucion.auxiliares.Function;
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.VariableType;
@@ -76,8 +77,9 @@ public class Function_Void_Simple extends Instruction{
     public String toString() {
         return "Function_Void_Simple{" + "type=" + type + ", name=" + name + ", instruccions=" + instruccions + '}';
     }
-    @Override
-    public String convertGraphviz() {
+
+        @Override
+    public String convertGraphviz(Dot dot) {
         return "";
-    }    
+    }
 }

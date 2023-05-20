@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 
@@ -22,8 +23,10 @@ public class Function_Return_Simple extends Instruction {
         System.out.println("Function_Return_Simple");
         return this;
     }
-    @Override
-    public String convertGraphviz() {
+
+        @Override
+    public String convertGraphviz(Dot dot) {
         return "";
-    }    
+    }
+    
 }

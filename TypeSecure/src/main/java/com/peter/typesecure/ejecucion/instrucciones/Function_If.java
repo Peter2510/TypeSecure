@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Condicionales.*;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
@@ -256,8 +257,9 @@ public class Function_If extends Instruction {
     public String toString() {
         return "Function_If{" + "_if=" + _if + ", _else=" + _else + ", else_if=" + else_if + '}';
     }
+
     @Override
-    public String convertGraphviz() {
+    public String convertGraphviz(Dot dot) {
         return "";
     }
 }

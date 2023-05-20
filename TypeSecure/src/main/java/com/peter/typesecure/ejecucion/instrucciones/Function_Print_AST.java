@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.archivos.GenerateDot;
@@ -67,8 +68,8 @@ public class Function_Print_AST extends Instruction{
         return "Function_Print_AST{" + "instruction=" + instruction + '}';
     }
     
-        @Override
-    public String convertGraphviz() {
+    @Override
+    public String convertGraphviz(Dot dot) {
         return "";
     }
     

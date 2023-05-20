@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.*;
 import com.peter.typesecure.ejecucion.instrucciones.*;
 import com.peter.typesecure.error.Error_analizadores;
@@ -150,7 +151,7 @@ public class Function_Call_Parameters_Function extends Instruction {
     }
 
     @Override
-    public String convertGraphviz() {
+    public String convertGraphviz(Dot dot) {
         return "";
     }
 }

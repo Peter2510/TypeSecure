@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.error.Error_analizadores;
 import java.util.Objects;
 
@@ -408,17 +409,15 @@ public class BinaryOperation extends Instruction {
     public void setRightOperator(Instruction rightOperator) {
         this.rightOperator = rightOperator;
     }
-    
-        @Override
-    public String convertGraphviz() {
-        String datos ="";
-        datos = "\""+ leftOperator.convertGraphviz() + "\"" + " -> " + rightOperator.convertGraphviz() + "\n";
-        return datos;
-    }
 
     @Override
     public String toString() {
         return "BinaryOperation{" + "type=" + type + ", leftOperator=" + leftOperator + ", rightOperator=" + rightOperator + '}';
+    }
+    
+    @Override
+    public String convertGraphviz(Dot dot) {
+        return "";
     }
 
 }

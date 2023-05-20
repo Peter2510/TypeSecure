@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.error.Error_analizadores;
 
 /**
@@ -92,10 +93,78 @@ public class Value extends Instruction {
     }
 
     @Override
-    public String convertGraphviz() {
-        String datos ="";
-        datos += "\""+ "asignacion" + "\"" + " -> " + "\"" + value + "\"" + "\n";
-        return datos;
+    public String convertGraphviz(Dot dot) {
+        String data = dot.getDatos();
+        //data = "node"+dot.getContador()+"[label=\"asignacion\"]";
+        int contador = dot.getContador();
+
+        switch (type) {
+            case NUMBER:
+                data += "node"+dot.getContador()+"[label=\"number\"]" +"\n";
+                dot.sumarContador();
+                data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+ "\n";
+                dot.sumarContador();
+                data += "node"+(contador-1) + "->" + "node" + contador +"\n";
+                dot.setDatos(data);
+                dot.sumarContador();
+            return data;
+            case BIGINT:
+                data += "node"+dot.getContador()+"[label=\"bigint\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                dot.setDatos(data);
+                dot.sumarContador();
+            return data;
+            case FALSE:
+                data += "node"+dot.getContador()+"[label=\"boolean\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                dot.setDatos(data);
+                dot.sumarContador();
+            return data;
+            case TRUE:
+                data += "node"+dot.getContador()+"[label=\"boolean\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                dot.setDatos(data);
+                dot.sumarContador();
+            return data;
+            case ID:
+                data = "node"+dot.getContador()+"[label=\"id\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                dot.setDatos(data);
+                dot.sumarContador();
+            return data;
+            case TEXTO:
+                data += "node"+dot.getContador()+"[label=\"string\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                dot.setDatos(data);
+                dot.sumarContador();
+            return data;
+            case UNDEFINED:
+                data += "node"+dot.getContador()+"[label=\"undefined\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+dot.getContador()+"[label=\""+"undefined"+"\"]"+"\n";
+                dot.sumarContador();
+                data += "node"+(contador-1) + "->" + "node" + contador;
+                dot.sumarContador();
+                dot.setDatos(data);
+            return data;
+        }
+        return dot.getDatos();
+        
     }
 
 }

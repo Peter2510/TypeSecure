@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.error.Error_analizadores;
 
 /**
@@ -155,7 +156,7 @@ public class Declaration extends Instruction {
     }
 
     @Override
-    public String convertGraphviz() {
+    public String convertGraphviz(Dot dot) {
         return "";
     }
     

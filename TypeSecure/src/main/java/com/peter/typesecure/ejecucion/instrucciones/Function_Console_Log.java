@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.instrucciones;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;
 import com.peter.typesecure.ejecucion.Genericos.Variable;
@@ -86,8 +87,10 @@ public class Function_Console_Log extends Instruction {
     public String toString() {
         return "Function_Console_Log{" + "instruccions=" + instruccions + ", contadorError=" + contadorError + '}';
     }
-    @Override
-    public String convertGraphviz() {
+
+
+        @Override
+    public String convertGraphviz(Dot dot) {
         return "";
     }
 }

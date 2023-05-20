@@ -6,6 +6,7 @@ package com.peter.typesecure.ejecucion.instrucciones.functions;
 
 import com.peter.typesecure.analisis.ejecucion.auxiliares.Function;
 import com.peter.typesecure.analisis.ejecucion.auxiliares.Parameter;
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.ejecucion.Genericos.AccessType;
 import com.peter.typesecure.ejecucion.Genericos.Declaration;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
@@ -155,8 +156,9 @@ public class Function_Without_Type_Parameters extends Instruction {
     public String toString() {
         return "Function_Without_Type_Parameters{" + "name=" + id + ", type=" + type + ", parameters=" + parameters_in + ", instruccions=" + instruccions + '}';
     }
-    @Override
-    public String convertGraphviz() {
+
+        @Override
+    public String convertGraphviz(Dot dot) {
         return "";
-    }        
+    }
 }

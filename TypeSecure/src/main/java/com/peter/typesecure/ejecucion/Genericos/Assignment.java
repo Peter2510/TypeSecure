@@ -4,6 +4,7 @@
  */
 package com.peter.typesecure.ejecucion.Genericos;
 
+import com.peter.typesecure.archivos.Dot;
 import com.peter.typesecure.error.Error_analizadores;
 
 /**
@@ -74,15 +75,39 @@ public class Assignment extends Instruction{
     }
 
     @Override
-    public String convertGraphviz() {
-        String datos ="";
+    public String convertGraphviz(Dot dot) {
+        String data = dot.getDatos();
+        int contador = dot.getContador();
+        data += "node"+dot.getContador()+"[label=\"Asignacion\"]\n";
         
-        datos += "\""+ "asignacion" + "\"" + " -> " + "\"" + id + "\"" + "\n";
-        datos += "\""+ "asignacion" + "\"" + " -> " + "\"" + "=" + "\"" + "\n";
-        datos += operation.convertGraphviz() + "\n";
-        datos += "\""+ "asignacion" + "\"" + " -> " + "\"" + ";" + "\"" + "\n";
+        dot.agregarEncabezado("node"+dot.getContador());
+        int nodoEncabezado = dot.getContador();
+        dot.sumarContador();
         
-        return datos;
+        data += "node"+dot.getContador()+"[label=\"Id\"]\n";
+        int nodoId = dot.getContador();
+        dot.sumarContador();
+        
+        data += "node"+dot.getContador()+"[label=\""+this.getId()+"\"]\n";
+        int nodoNombre = dot.getContador();
+        dot.sumarContador();
+        
+        
+        data += "node"+dot.getContador()+"[label=\"=\"]\n";
+        int nodoIgual = dot.getContador();
+        dot.sumarContador();
+        
+        data += this.getOperation().convertGraphviz(dot);
+        
+        data += "node"+(nodoEncabezado) + "->" + "node" + nodoId + "\n";
+        data += "node"+(nodoId) + "->" + "node" + nodoNombre+"\n";
+        
+        data += "node"+(nodoEncabezado) + "->" + "node" + nodoIgual+ "\n";
+        
+        data += "node"+(nodoEncabezado) + "->" + "node" + (dot.getContador())+ "\n";
+        dot.sumarContador();
+        
+        return data;
     }
     
 }
