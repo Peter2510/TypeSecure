@@ -231,7 +231,7 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem4.setBackground(new java.awt.Color(51, 51, 51));
         jMenuItem4.setForeground(new java.awt.Color(255, 255, 255));
-        jMenuItem4.setText("Cerrar Archivo");
+        jMenuItem4.setText("Cerrar archivo");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
