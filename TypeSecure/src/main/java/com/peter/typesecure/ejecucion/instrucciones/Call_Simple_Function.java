@@ -58,27 +58,31 @@ public class Call_Simple_Function extends Instruction{
                                     return v;
                                 } else {
                                     child.agrearErrores(new Error_analizadores("Semantico", child.getFuncion(id).getInstructions().get(i).getLinea(), child.getFuncion(id).getInstructions().get(i).getColumna(), "La instruccion return de la funcion '" + id + "' no cumple con el tipo de dato de la funcion"));
+                                    
                                 }
                             } else if (vr instanceof Function_Return_Simple) {
                                 child.agrearErrores(new Error_analizadores("Semantico", child.getFuncion(id).getInstructions().get(i).getLinea(), child.getFuncion(id).getInstructions().get(i).getColumna(), "La instruccion return de la funcion '" + id + "' debe retornar un valor u operacion"));
+                                
                             }
 
                         }
                     } else {
                         child.agrearErrores(new Error_analizadores("Semantico", child.getFuncion(id).getInstructions().get(i).getLinea(), child.getFuncion(id).getInstructions().get(i).getColumna(), "Error en la ejecucion en las instrucciones de la funcion '" + id + "'"));
+                        
                     }
 
                 }
-
+                    System.out.println("count return "+countReturn);
                 if (countReturn == 0) {
 
                     if (child.getFuncion(id).getType() != VariableType.VOID) {
-                        child.agrearErrores(new Error_analizadores("Semantico", "", child.getFuncion(id).getLinea(), child.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + child.getFuncion(id).getType()));
+                        table.agrearErrores(new Error_analizadores("Semantico", "", child.getFuncion(id).getLinea(), child.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + child.getFuncion(id).getType()));
+                        return null;
                     }
                     
                 }else
 
-                if (!child.getErrores().isEmpty()) {
+                if (child.getErrores().isEmpty()==false) {
                     for (int i = 0; i < child.getErrores().size(); i++) {
                         table.agrearErrores(child.getErrores().get(i));
                     }

@@ -98,7 +98,8 @@ public class Call_Parameters_Function extends Instruction{
                         if (countReturn == 0) {
 
                             if (head.getFuncion(id).getType() != VariableType.VOID) {
-                                head.agrearErrores(new Error_analizadores("Semantico", "", head.getFuncion(id).getLinea(), head.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + head.getFuncion(id).getType()));
+                                table.agrearErrores(new Error_analizadores("Semantico", "", head.getFuncion(id).getLinea(), head.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + head.getFuncion(id).getType()));
+                                return null;
                             }
 
                         }

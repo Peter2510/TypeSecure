@@ -73,7 +73,8 @@ public class Function_Call_Simple_Function extends Instruction {
                 if (countReturn == 0) {
 
                     if (child.getFuncion(id).getType() != VariableType.VOID) {
-                        child.agrearErrores(new Error_analizadores("Semantico", "", child.getFuncion(id).getLinea(), child.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + child.getFuncion(id).getType()));
+                        table.agrearErrores(new Error_analizadores("Semantico", "", table.getFuncion(id).getLinea(), table.getFuncion(id).getColumna(), "La funcion '" + id + "' debe devolver un valor de tipo " + table.getFuncion(id).getType()));
+                        return null;
                     }
 
                 } else if (!child.getErrores().isEmpty()) {
