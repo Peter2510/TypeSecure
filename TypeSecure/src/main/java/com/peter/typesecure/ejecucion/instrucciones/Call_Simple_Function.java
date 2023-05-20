@@ -89,14 +89,14 @@ public class Call_Simple_Function extends Instruction{
                 return null;
             }
 
-            return this;
+            
 
         } else {
             table.agrearErrores(new Error_analizadores("Semantico", this.getLinea(), this.getColumna(), "La funcion '" + id + "' no ha sido definida "));
             return null;
         }        
 
-        
+        return null;
     }
 
     public String getId() {
