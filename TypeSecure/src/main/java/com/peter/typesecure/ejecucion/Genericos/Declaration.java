@@ -53,6 +53,16 @@ public class Declaration extends Instruction {
                     
                 }else{
                     //inferencia de tipos
+                    System.out.println(this.type);
+                    System.out.println(this.access);
+                    System.out.println(this.id);
+                    System.out.println(operacion_valor.getValue().toString());
+                    System.out.println(operacion_valor.getType());
+                    if(this.access == AccessType.CONST && operacion_valor.getValue().toString().equals("undefined")&&operacion_valor.getType()==VariableType.PENDIENTE){
+                        table.agrearErrores(new Error_analizadores("Semantico", this.id,this.getLinea(), this.getColumna(), "La variable '"+ this.id+"' definida como const debe tener un valor definido en la declaracion"));
+                        return null;
+                    }
+                    
                     
                     if(this.type==VariableType.PENDIENTE){
                         Variable new_variable = new Variable();
@@ -63,10 +73,8 @@ public class Declaration extends Instruction {
                         new_variable.setColumna(this.getColumna());
                         
                         if(operacion_valor.getType()==VariableType.NUMBER){
-                            new_variable.setType(VariableType.NUMBER);
-                             
+                            new_variable.setType(VariableType.NUMBER);        
                             table.add(new_variable);
-                             
                             return this;
                         }else if(operacion_valor.getType()==VariableType.BIGINT){
                             new_variable.setType(VariableType.BIGINT);
