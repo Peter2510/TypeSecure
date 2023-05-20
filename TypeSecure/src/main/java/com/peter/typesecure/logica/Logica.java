@@ -4,7 +4,6 @@
  */
 package com.peter.typesecure.logica;
 
-import com.peter.typesecure.arbol.Nodo;
 import com.peter.typesecure.archivos.ManejoArchivos;
 import com.peter.typesecure.ejecucion.Genericos.Instruction;
 import com.peter.typesecure.ejecucion.Genericos.SymbolTable;

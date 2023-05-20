@@ -1113,6 +1113,11 @@ operaciones_logicas ::= operaciones_logicas:a AND:b operaciones_logicas:c
                                         {:
                         RESULT = new BinaryOperation(aright,aleft,OperationType.AND,a,c);
                     :}
+                    | NOT:a funcion_boolean:b
+                    {:
+                            RESULT = new Not(aright,aleft,b);
+                    :}
+                    
                     ;
 
 funcion_length ::= operaciones_matematicas:a PUNTO:b LENGTH:c
