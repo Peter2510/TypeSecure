@@ -54,9 +54,27 @@ public class Function_For_declaration extends Instruction {
                             SymbolTable contextFor = new SymbolTable(contextAsignacion);
                             for (int i = 0; i < instructions.size(); i++) {
                                 Object vr = instructions.get(i).ejecutar(contextFor);
-                                    if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction){
-                                        return vr;
-                                    }       
+                                if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction || vr instanceof Instruction_Break || vr instanceof Instruction_Continue){
+                                
+                                
+                                    if(vr instanceof Instruction_Break){
+                                        break;
+                                    }
+                                    
+                                    if(vr instanceof Instruction_Continue){
+                                        break;
+                                    }
+                                    
+                                    if(vr instanceof Function_Return_Instruction){
+                                        return ((Function_Return_Instruction) vr).getInstruction();
+                                    }
+                                    
+                                    if(vr instanceof Function_Return_Simple){
+                                        table.agrearErrores(new Error_analizadores("Semantico", "", ((Function_Return_Simple) vr).getLinea(), ((Function_Return_Simple) vr).getColumna(), "La instruccion return debe retornar un valor o una instruccion"));
+                                        return null;
+                                    }
+                                    
+                                }
                             }
 
                             for (int i = 0; i < action.size(); i++) {

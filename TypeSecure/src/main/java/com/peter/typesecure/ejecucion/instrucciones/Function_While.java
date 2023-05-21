@@ -42,6 +42,26 @@ public class Function_While extends Instruction {
                         SymbolTable child = new SymbolTable(table);
                         for (int i = 0; i < instructions.size(); i++) {
                             Object vr = instructions.get(i).ejecutar(child);
+                            if (vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction || vr instanceof Instruction_Break || vr instanceof Instruction_Continue) {
+
+                                if (vr instanceof Instruction_Break) {
+                                    break;
+                                }
+
+                                if (vr instanceof Instruction_Continue) {
+                                    break;
+                                }
+
+                                if (vr instanceof Function_Return_Instruction) {
+                                    return ((Function_Return_Instruction) vr).getInstruction();
+                                }
+
+                                if (vr instanceof Function_Return_Simple) {
+                                    table.agrearErrores(new Error_analizadores("Semantico", "", ((Function_Return_Simple) vr).getLinea(), ((Function_Return_Simple) vr).getColumna(), "La instruccion return debe retornar un valor o una instruccion"));
+                                    return null;
+                                }
+
+                            }
                         }
                         condition = (Variable) conditional.ejecutar(child);
 
@@ -90,7 +110,7 @@ public class Function_While extends Instruction {
         return "While{" + "conditional=" + conditional + ", instructions=" + instructions + '}';
     }
 
-        @Override
+    @Override
     public String convertGraphviz(Dot dot) {
         return "";
     }

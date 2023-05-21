@@ -48,7 +48,16 @@ public class Function_If extends Instruction {
 
                         Object vr = _if.getInstructions().get(i).ejecutar(child);
                         if(vr instanceof Function_Return_Simple || vr instanceof Function_Return_Instruction || vr instanceof Instruction_Break || vr instanceof Instruction_Continue){
-                            return vr;
+                        
+                            if(vr instanceof Function_Return_Simple){
+                                table.agrearErrores(new Error_analizadores("Semantico", "", ((Function_Return_Simple) vr).getLinea(), ((Function_Return_Simple) vr).getColumna(), "La instruccion return debe retornar un valor o una instuccion"));
+                                return null;                                
+                            }else{
+                                return vr;
+                            }
+                            
+
+                            
                         }
 
                     }
