@@ -11,56 +11,59 @@ import com.peter.typesecure.error.Error_analizadores;
  *
  * @author GORDILLOG
  */
-public class Assignment extends Instruction{
+public class Assignment extends Instruction {
 
     private String id;
     private Instruction operation;
-        
-    public Assignment(Object linea, Object columna,Object id,Object operation) {
+
+    public Assignment(Object linea, Object columna, Object id, Object operation) {
         super(linea, columna);
-        this.id = (String)id;
+        this.id = (String) id;
         this.operation = (Instruction) operation;
     }
 
     @Override
     public Object ejecutar(SymbolTable table) {
         Variable variable = table.getById(this.id);
-        
-        if(variable!=null){
-            
+
+        if (variable != null) {
+
             Variable var_tmp = (Variable) this.operation.ejecutar(table);
-            
-            if(var_tmp!=null){
-                
-                if(variable.getType() == var_tmp.getType()&&variable.getAccess()==AccessType.LET){
+
+            if (var_tmp != null) {
+
+                if (variable.getType() == VariableType.PENDIENTE && variable.getAccess() == AccessType.LET) {
+                    variable.setValue(var_tmp.getValue());
+                    variable.setType(var_tmp.getType());
+                    return this;
+                }
+
+                if (variable.getType() == var_tmp.getType() && variable.getAccess() == AccessType.LET) {
                     variable.setValue(var_tmp.getValue());
                     return this;
-                }else{
-                    
-                    if(variable.getType()==VariableType.PENDIENTE && variable.getAccess()==AccessType.LET){
-                        variable.setValue(var_tmp.getValue());
-                        variable.setType(var_tmp.getType());
-                        return this;
-                    }else{
-                        table.agrearErrores(new Error_analizadores("Semantico",this.id,this.getLinea(), this.getColumna(), "La variable '"+ this.id +"' no puede cambiar de valor al ser CONST "));        
+                } else {
+
+                    if(variable.getType() != var_tmp.getType()){
+                        table.agrearErrores(new Error_analizadores("Semantico", this.id, this.getLinea(), this.getColumna(), "La variable '" + this.id + "' y el valor a asignar no tiene el mismo tipo "));
                         return null;                        
+                    }else if(variable.getType() == var_tmp.getType() && variable.getAccess() == AccessType.CONST){
+                        table.agrearErrores(new Error_analizadores("Semantico", this.id, this.getLinea(), this.getColumna(), "La variable '" + this.id + "' no puede cambiar de valor al ser CONST "));
+                        return null;    
                     }
                     
-
                 }
-                
-            }else{
-                table.agrearErrores(new Error_analizadores("Semantico",this.id ,this.getLinea(), this.getColumna(), "La variable a asignar "+ this.id +" no esta definida "));    
+
+            } else {
+                table.agrearErrores(new Error_analizadores("Semantico", this.id, this.getLinea(), this.getColumna(), "La variable a asignar " + this.id + " no esta definida "));
                 return null;
             }
-            
-            
-        }else{
-            table.agrearErrores(new Error_analizadores("Semantico",this.id ,this.getLinea(), this.getColumna(), "La variable no ha sido declarada"));
+
+        } else {
+            table.agrearErrores(new Error_analizadores("Semantico", this.id, this.getLinea(), this.getColumna(), "La variable no ha sido declarada"));
             return null;
         }
-        
 
+        return null;
     }
 
     public String getId() {
@@ -88,36 +91,35 @@ public class Assignment extends Instruction{
     public String convertGraphviz(Dot dot) {
         String data = dot.getDatos();
         int contador = dot.getContador();
-        data += "node"+dot.getContador()+"[label=\"Asignacion\"]\n";
-        
-        dot.agregarEncabezado("node"+dot.getContador());
+        data += "node" + dot.getContador() + "[label=\"Asignacion\"]\n";
+
+        dot.agregarEncabezado("node" + dot.getContador());
         int nodoEncabezado = dot.getContador();
         dot.sumarContador();
-        
-        data += "node"+dot.getContador()+"[label=\"Id\"]\n";
+
+        data += "node" + dot.getContador() + "[label=\"Id\"]\n";
         int nodoId = dot.getContador();
         dot.sumarContador();
-        
-        data += "node"+dot.getContador()+"[label=\""+this.getId()+"\"]\n";
+
+        data += "node" + dot.getContador() + "[label=\"" + this.getId() + "\"]\n";
         int nodoNombre = dot.getContador();
         dot.sumarContador();
-        
-        
-        data += "node"+dot.getContador()+"[label=\"=\"]\n";
+
+        data += "node" + dot.getContador() + "[label=\"=\"]\n";
         int nodoIgual = dot.getContador();
         dot.sumarContador();
-        
+
         data += this.getOperation().convertGraphviz(dot);
-        
-        data += "node"+(nodoEncabezado) + "->" + "node" + nodoId + "\n";
-        data += "node"+(nodoId) + "->" + "node" + nodoNombre+"\n";
-        
-        data += "node"+(nodoEncabezado) + "->" + "node" + nodoIgual+ "\n";
-        
-        data += "node"+(nodoEncabezado) + "->" + "node" + (dot.getContador())+ "\n";
+
+        data += "node" + (nodoEncabezado) + "->" + "node" + nodoId + "\n";
+        data += "node" + (nodoId) + "->" + "node" + nodoNombre + "\n";
+
+        data += "node" + (nodoEncabezado) + "->" + "node" + nodoIgual + "\n";
+
+        data += "node" + (nodoEncabezado) + "->" + "node" + (dot.getContador()) + "\n";
         dot.sumarContador();
-        
+
         return data;
     }
-    
+
 }
