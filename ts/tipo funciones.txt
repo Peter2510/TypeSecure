@@ -1,0 +1,56 @@
+AGERGAR EL RETURN A OPERACIONES MATEMATCIAS
+
+
+/*/*/*/*/*/*/*/*/*/*/*/*/
+function hola():void{
+ //lo que sea
+}
+
+/*/*/*/*/*/*/*/*/*/*/*/*/
+function hola(hola:number):void{
+ //lo que sea
+}
+
+/*/*/*/*/*/*/*/*/*/*/*/*/
+function hola(){
+ //lo que sea
+}
+
+/*/*/*/*/*/*/*/*/*/*/*/*/
+function hola(){
+ //lo que sea
+     return kk;
+ //lo que sea
+}
+
+/*/*/*/*/*/*/*/*/*/*/*/*/
+function hola():type{
+ //lo que sea
+}
+
+/*/*/*/*/*/*/*/*/*/*/*/*/
+function hola(hola:number):type{
+ //lo que sea
+}
+
+/*/*/*/*/*/*/*/*/*/*/*/*/
+function hola():type{
+ //lo que sea
+ return kk;
+ //lo que sea
+}
+
+/*/*/*/*/*/*/*/*/*/*/*/*/
+function hola(hola:number):type{
+ //lo que sea
+ return kk;
+ //lo que sea
+}
+
+
+
+
+
+
+
+

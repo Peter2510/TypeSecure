@@ -1,0 +1,27 @@
+//if
+if(a<b){
+    console.log("2");
+}
+
+//if else
+if(a<b){
+    console.log("2");
+}else{
+    console.log("2");
+}
+
+//if else_if
+if(a<b){
+     console.log("a");
+}else if(a==b){
+     console.log("b");
+}
+
+//if else_if else
+if(a<b){
+      console.log("a");
+}else if(a==b){
+     console.log("b");
+}else{
+     console.log("b");
+}

@@ -11,23 +11,9 @@ node3[label="Id"]
 node4[label="LET"]
 node5[label="a"]
 node6[label="="]
-node7[label="Operacion Binaria"]
-node8[label="operacion1"]
-node9[label="operacion2"]
-node10[label="SUMA"]
-node11[label="number"]
-node12[label="34"]
-node11->node12
-node11[label="number"]
-node12[label="34"]
-node11->node12
-node13[label="number"]
-node14[label="34"]
-node13->node14
+node7[label="number"]
+node8[label="34"]
 node7->node8
-node8->node12
-node7->node9
-node9->node14
 node1->node2
 node2->node4
 node1->node3
