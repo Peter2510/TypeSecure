@@ -179,7 +179,50 @@ public class Declaration extends Instruction {
 
     @Override
     public String convertGraphviz(Dot dot) {
-        return "";
+        String data = dot.getDatos();
+        int contador = dot.getContador();
+        data += "node" + dot.getContador() + "[label=\"Declaracion\"]\n";
+
+        dot.agregarEncabezado("node" + dot.getContador());
+        int nodoEncabezado = dot.getContador();
+        dot.sumarContador();
+        
+        data += "node" + dot.getContador() + "[label=\"acceso\"]\n";
+        int acces = dot.getContador();
+        dot.sumarContador();
+
+        data += "node" + dot.getContador() + "[label=\"Id\"]\n";
+        int nodoId = dot.getContador();
+        dot.sumarContador();
+
+        data += "node" + dot.getContador() + "[label=\"" + this.getAccess() + "\"]\n";
+        int nodoAcces = dot.getContador();
+        dot.sumarContador();
+        
+        data += "node" + dot.getContador() + "[label=\"" + this.getId() + "\"]\n";
+        int nodoNombre = dot.getContador();
+        dot.sumarContador();
+
+        data += "node" + dot.getContador() + "[label=\"=\"]\n";
+        int nodoIgual = dot.getContador();
+        dot.sumarContador();
+
+        int nodoActual = dot.getContador();
+        
+        data += this.getOperation().convertGraphviz(dot);
+
+        data += "node" + (nodoEncabezado) + "->" + "node" + acces + "\n";
+        data += "node" + acces + "->" + "node" + nodoAcces + "\n";
+        
+        data += "node" + (nodoEncabezado) + "->" + "node" + nodoId + "\n";
+        
+        data += "node" + (nodoId) + "->" + "node" + nodoNombre + "\n";
+
+        data += "node" + (nodoEncabezado) + "->" + "node" + nodoIgual + "\n";
+
+        data += "node" + (nodoEncabezado) + "->" + "node" + nodoActual + "\n";
+
+        return data;
     }
     
 }

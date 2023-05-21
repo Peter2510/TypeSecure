@@ -109,16 +109,21 @@ public class Assignment extends Instruction {
         int nodoIgual = dot.getContador();
         dot.sumarContador();
 
+        int nodoActual = dot.getContador();
+        
         data += this.getOperation().convertGraphviz(dot);
+
 
         data += "node" + (nodoEncabezado) + "->" + "node" + nodoId + "\n";
         data += "node" + (nodoId) + "->" + "node" + nodoNombre + "\n";
 
         data += "node" + (nodoEncabezado) + "->" + "node" + nodoIgual + "\n";
 
-        data += "node" + (nodoEncabezado) + "->" + "node" + (dot.getContador()) + "\n";
-        dot.sumarContador();
+        data += "node" + (nodoEncabezado) + "->" + "node" + nodoActual + "\n";
 
+
+
+        
         return data;
     }
 

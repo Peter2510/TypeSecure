@@ -110,11 +110,18 @@ public class Function {
     public String generarDot(){
         String dat = "";
         Dot d = new Dot();
+        
+        
         for (int i = 0; i < this.instructions.size(); i++) {
             dat = this.instructions.get(i).convertGraphviz(d);
         }
+
+        dat += "node" + "0" + "[label=\""+ this.getId()+"\"]\n";
+        dat += "node" + "1" + "[label=\""+ "instrucciones" +"\"]\n";
+        dat += "node" + "0" + "->" + "node" + "1" + "\n";
         
         
+        d.setDatos(dat);
         return dat;
     }
     

@@ -417,7 +417,44 @@ public class BinaryOperation extends Instruction {
     
     @Override
     public String convertGraphviz(Dot dot) {
-        return "";
+        String data = dot.getDatos();
+        int contador = dot.getContador();
+        data += "node" + dot.getContador() + "[label=\"Operacion Binaria\"]\n";
+
+        dot.agregarEncabezado("node" + dot.getContador());
+        int nodoEncabezado = dot.getContador();
+        dot.sumarContador();
+        
+        data += "node" + dot.getContador() + "[label=\"operacion1\"]\n";
+        int op1 = dot.getContador();
+        dot.sumarContador();
+
+        data += "node" + dot.getContador() + "[label=\"operacion2\"]\n";
+        int op2 = dot.getContador();
+        dot.sumarContador();
+
+        data += "node" + dot.getContador() + "[label=\"" + this.type.toString() + "\"]\n";
+        int tipo = dot.getContador();
+        dot.sumarContador();
+        
+        data += this.leftOperator.convertGraphviz(dot);
+        int op1dot = dot.getContador();
+        dot.sumarContador();
+        
+        data +=  this.rightOperator.convertGraphviz(dot);
+        int op2dot = dot.getContador();
+        dot.sumarContador();
+
+        
+        data += "node" + (nodoEncabezado) + "->" + "node" + op1 + "\n";
+        data += "node" + op1 + "->" + "node" + op1dot + "\n";
+
+        data += "node" + (nodoEncabezado) + "->" + "node" + op2 + "\n";
+        data += "node" + op2 + "->" + "node" + op2dot + "\n";        
+
+        System.out.println(data);
+        
+        return data;
     }
 
 }

@@ -103,66 +103,63 @@ public class Value extends Instruction {
                 data += "node"+dot.getContador()+"[label=\"number\"]" +"\n";
                 dot.sumarContador();
                 data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+ "\n";
-                dot.sumarContador();
-                data += "node"+(contador-1) + "->" + "node" + contador +"\n";
+                data += "node"+(contador) + "->" + "node" + (contador+1) +"\n";
                 dot.setDatos(data);
-                dot.sumarContador();
             return data;
             case BIGINT:
                 data += "node"+dot.getContador()+"[label=\"bigint\"]"+"\n";
                 dot.sumarContador();
                 data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
                 dot.sumarContador();
-                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                data += "node"+(contador) + "->" + "node" + (contador+1)+"\n";
                 dot.setDatos(data);
-                dot.sumarContador();
             return data;
             case FALSE:
                 data += "node"+dot.getContador()+"[label=\"boolean\"]"+"\n";
                 dot.sumarContador();
                 data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
                 dot.sumarContador();
-                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                data += "node"+(contador) + "->" + "node" + (contador+1)+"\n";
                 dot.setDatos(data);
-                dot.sumarContador();
+
             return data;
             case TRUE:
                 data += "node"+dot.getContador()+"[label=\"boolean\"]"+"\n";
                 dot.sumarContador();
                 data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
                 dot.sumarContador();
-                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                data += "node"+(contador) + "->" + "node" + (contador+1)+"\n";
                 dot.setDatos(data);
-                dot.sumarContador();
+
             return data;
             case ID:
                 data = "node"+dot.getContador()+"[label=\"id\"]"+"\n";
                 dot.sumarContador();
                 data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
                 dot.sumarContador();
-                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                data += "node"+(contador) + "->" + "node" + (contador+1)+"\n";
                 dot.setDatos(data);
-                dot.sumarContador();
+
             return data;
             case TEXTO:
                 data += "node"+dot.getContador()+"[label=\"string\"]"+"\n";
                 dot.sumarContador();
                 data += "node"+dot.getContador()+"[label=\""+getValue()+"\"]"+"\n";
                 dot.sumarContador();
-                data += "node"+(contador-1) + "->" + "node" + contador+"\n";
+                data += "node"+(contador) + "->" + "node" + (contador+1)+"\n";
                 dot.setDatos(data);
-                dot.sumarContador();
+
             return data;
             case UNDEFINED:
                 data += "node"+dot.getContador()+"[label=\"undefined\"]"+"\n";
                 dot.sumarContador();
                 data += "node"+dot.getContador()+"[label=\""+"undefined"+"\"]"+"\n";
                 dot.sumarContador();
-                data += "node"+(contador-1) + "->" + "node" + contador;
-                dot.sumarContador();
+                data += "node"+(contador) + "->" + "node" + (contador+1);
                 dot.setDatos(data);
             return data;
         }
+
         return dot.getDatos();
         
     }

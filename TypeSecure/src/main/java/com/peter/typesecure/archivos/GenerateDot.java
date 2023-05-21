@@ -33,6 +33,8 @@ public class GenerateDot {
                 + "    edge[color = \"#000000\",arrowhead=none]\n";
 
 
+                
+        
                 datos += table.getFuncion(id).generarDot();
                 System.out.println(datos);
         
