@@ -514,6 +514,14 @@ id_valor_variable ::= ID:id DOS_PUNTOS:b tipo_dato_variable:tipoDato ASIGNACION:
                         RESULT = new Variable_Aux(id,tipoDato,value);                        
                         
                     :}
+
+                    | ID:id 
+                    {:  // let x;
+                        Value value = new Value(idright,idleft,"undefined",ValueType.UNDEFINED);
+                        RESULT = new Variable_Aux(id,VariableType.PENDIENTE,value);                        
+
+                    :}
+
                    ;
 
 

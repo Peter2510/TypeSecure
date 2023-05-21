@@ -60,6 +60,19 @@ public class Declaration extends Instruction {
                     
                     
                     if(this.type==VariableType.PENDIENTE){
+                        
+                        if(this.type==VariableType.PENDIENTE&&operacion_valor.getValue().toString().equals("undefined")){
+                            Variable new_variable = new Variable();
+                            new_variable.setAccess(this.access);
+                            new_variable.setId(this.id);
+                            new_variable.setValue(operacion_valor.getValue());
+                            new_variable.setLinea(this.getLinea());
+                            new_variable.setColumna(this.getColumna());
+                            new_variable.setType(VariableType.PENDIENTE);        
+                            table.add(new_variable);
+                            return this;
+                        }
+                        
                         Variable new_variable = new Variable();
                         new_variable.setAccess(this.access);
                         new_variable.setId(this.id);

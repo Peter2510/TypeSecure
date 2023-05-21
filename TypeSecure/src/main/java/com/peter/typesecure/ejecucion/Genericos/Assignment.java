@@ -34,9 +34,19 @@ public class Assignment extends Instruction{
                 
                 if(variable.getType() == var_tmp.getType()&&variable.getAccess()==AccessType.LET){
                     variable.setValue(var_tmp.getValue());
+                    return this;
                 }else{
-                table.agrearErrores(new Error_analizadores("Semantico",this.id,this.getLinea(), this.getColumna(), "La variable '"+ this.id +"' no puede cambiar de valor al ser CONST "));        
-                return null;
+                    
+                    if(variable.getType()==VariableType.PENDIENTE && variable.getAccess()==AccessType.LET){
+                        variable.setValue(var_tmp.getValue());
+                        variable.setType(var_tmp.getType());
+                        return this;
+                    }else{
+                        table.agrearErrores(new Error_analizadores("Semantico",this.id,this.getLinea(), this.getColumna(), "La variable '"+ this.id +"' no puede cambiar de valor al ser CONST "));        
+                        return null;                        
+                    }
+                    
+
                 }
                 
             }else{
@@ -50,7 +60,7 @@ public class Assignment extends Instruction{
             return null;
         }
         
-        return null;
+
     }
 
     public String getId() {
