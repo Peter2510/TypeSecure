@@ -37,10 +37,20 @@ public class Declaration extends Instruction {
         } else {
             Variable operacion_valor = (Variable) operation.ejecutar(table);
 
+                                System.out.println(this.type);
+                    System.out.println(this.access);
+                    System.out.println(this.id);
+                    System.out.println(this.operation);
+            
             if (operacion_valor != null) {
+                
+                if(operacion_valor.getType() == VariableType.PENDIENTE && this.type == VariableType.PENDIENTE && operacion_valor.getValue().toString().equals("undefined") && this.access==AccessType.CONST){
+                    table.agrearErrores(new Error_analizadores("Semantico", this.id,this.getLinea(), this.getColumna(), "La variable '"+ this.id+"' definida como const debe tener un valor definido en la declaracion"));
+                    return null;                    
+                }
                                 
                 if(operacion_valor.getType()==this.type){
-                    
+
                     Variable new_variable = new Variable();
                     new_variable.setAccess(this.access);
                     new_variable.setId(this.id);
@@ -52,12 +62,14 @@ public class Declaration extends Instruction {
                     return this;
                     
                 }else{
+                    
+                    System.out.println("entro a else");
+                    
                     //inferencia de tipos
                     if(this.access == AccessType.CONST && operacion_valor.getValue().toString().equals("undefined")&&operacion_valor.getType()==VariableType.PENDIENTE){
                         table.agrearErrores(new Error_analizadores("Semantico", this.id,this.getLinea(), this.getColumna(), "La variable '"+ this.id+"' definida como const debe tener un valor definido en la declaracion"));
                         return null;
                     }
-                    
                     
                     if(this.type==VariableType.PENDIENTE){
                         

@@ -280,8 +280,8 @@ public class ManejoArchivos {
             escribir.println("<thead>");
             escribir.println("<tr>");
             escribir.println("<th scope=\"col\">Funcion</th>");
-            escribir.println("<th scope=\"col\">Id</th>");
             escribir.println("<th scope=\"col\">Tipo de Acceso</th>");
+            escribir.println("<th scope=\"col\">Id</th>");
             escribir.println("<th scope=\"col\">Tipo de dato</th>");
             escribir.println("<th scope=\"col\">Valor</th>");
             escribir.println("<th scope=\"col\">Linea de declaracion</th>");
@@ -293,8 +293,8 @@ public class ManejoArchivos {
             for (int i = 0; i < table.size(); i++) {
                 Variable v = table.get(i);
                 escribir.println("<th>" + "NO"+ "</th>");
-                escribir.println("<th>" + v.getId()+ "</th>");
                 escribir.println("<th>" + v.getAccess()+ "</th>");
+                escribir.println("<th>" + v.getId()+ "</th>");
                 escribir.println("<th>" + v.getType()+ "</th>");
                 escribir.println("<th>" + v.getValue()+ "</th>");
                 escribir.println("<th>" + v.getLinea()+ "</th>");
@@ -308,8 +308,8 @@ public class ManejoArchivos {
                 while(it.hasNext()){
                 String key = (String) it.next();
                 escribir.println("<th>" + "SI"+ "</th>");
-                escribir.println("<th>" + table.getFunciones().get(key).getId()+ "</th>");
                 escribir.println("<th>" + "</th>");
+                escribir.println("<th>" + table.getFunciones().get(key).getId()+ "</th>");
                 escribir.println("<th>" + table.getFunciones().get(key).getType()+ "</th>");
                 escribir.println("<th>" + "</th>");
                 escribir.println("<th>" + table.getFunciones().get(key).getLinea()+ "</th>");
